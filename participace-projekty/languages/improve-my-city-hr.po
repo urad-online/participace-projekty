@@ -1,0 +1,1595 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Participace na projektech\n"
+"POT-Creation-Date: 2017-03-15 12:27+0200\n"
+"PO-Revision-Date: 2017-03-15 12:27+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: functions\n"
+"X-Poedit-SearchPath-1: js/imc-scripts.js\n"
+"X-Poedit-SearchPath-2: improve-my-city.php\n"
+
+#: functions/imc-core-functions.php:22
+#, php-format
+msgctxt "relative date"
+msgid "%s ago"
+msgstr "Prije %s"
+
+#: functions/imc-core-functions.php:79
+msgid "Select a category"
+msgstr "Odaberite kategoriju"
+
+#: functions/imc-core-functions.php:123
+msgid "Issue Image"
+msgstr "Fotografija"
+
+#: functions/imc-core-functions.php:318
+msgid "You cannot longer edit your issue because its status has changed"
+msgstr "Ne možete uređivati prijavu jer se promijenio njezin status"
+
+#: functions/imc-core-functions.php:319
+msgid "This issue is under moderation and is not yet published"
+msgstr "Prijava još nije objavljena jer ju nije odobrio administrator"
+
+#: functions/imc-core-issues-col.php:17 functions/imc-page-logs.php:26
+msgid "Issue ID"
+msgstr "ID prijave"
+
+#: functions/imc-core-issues-col.php:18
+msgid "Issue"
+msgstr "Problem"
+
+#: functions/imc-core-issues-col.php:19 functions/imc-core-taxcategory.php:441
+msgid "Issue Category"
+msgstr "Kategorija problema"
+
+#: functions/imc-core-issues-col.php:20 functions/imc-core-taxstatus.php:73
+msgid "Issue Status"
+msgstr "Status prijave"
+
+#: functions/imc-core-issues-col.php:21
+msgid "Author"
+msgstr "Autor"
+
+#: functions/imc-core-issues-col.php:22
+#: functions/templates/single-imc_issues.php:237
+msgid "Comments"
+msgstr "Komentari"
+
+#: functions/imc-core-issues-col.php:23 functions/imc-core-logs.php:33
+#: functions/imc-page-logs.php:28 functions/templates/archive-imc_issues.php:44
+#: functions/templates/archive-imc_issues.php:187
+msgid "Date"
+msgstr "Datum"
+
+#: functions/imc-core-issues-col.php:45
+msgid "Unknown Category"
+msgstr "Nepoznata kategorija"
+
+#: functions/imc-core-issues-col.php:81
+msgid "Unknown Status"
+msgstr "Nepoznati status"
+
+#: functions/imc-core-issues-col.php:158
+msgid "Show All Categories"
+msgstr "Prikaži sve kategorije"
+
+#: functions/imc-core-issues-col.php:197
+msgid "Show All Statuses"
+msgstr "Prikaži sve statuse"
+
+#: functions/imc-core-issues-col.php:235
+msgid "Show All Authors"
+msgstr "Prikaži sve autore"
+
+#: functions/imc-core-issues-info.php:54
+msgid "Issue Location"
+msgstr "Lokacija problema"
+
+#: functions/imc-core-issues-info.php:112
+msgid "Enter an address"
+msgstr "Unesite adresu"
+
+#: functions/imc-core-issues-info.php:116 functions/imc-page-settings.php:247
+msgid "Locate address"
+msgstr "Potraži adresu"
+
+#: functions/imc-core-issues.php:15
+msgctxt "post type general name"
+msgid "Issues"
+msgstr "Prijave"
+
+#: functions/imc-core-issues.php:16
+msgctxt "post type singular name"
+msgid "Issue"
+msgstr "Problem"
+
+#: functions/imc-core-issues.php:17
+msgctxt "admin menu"
+msgid "Participace na projektech"
+msgstr "Poboljšaj Moj Grad"
+
+#: functions/imc-core-issues.php:18
+msgctxt "add new on admin bar"
+msgid "Issue"
+msgstr "Problem"
+
+#: functions/imc-core-issues.php:19
+msgctxt "add new on menu"
+msgid "Add New"
+msgstr "Dodaj novo"
+
+#: functions/imc-core-issues.php:20
+msgid "Add New Issue"
+msgstr "Dodajte novu prijavu"
+
+#: functions/imc-core-issues.php:21
+msgid "New Issue"
+msgstr "Nova prijava"
+
+#: functions/imc-core-issues.php:22
+msgid "Edit "
+msgstr "Uredi"
+
+#: functions/imc-core-issues.php:23
+msgid "Edit Issue"
+msgstr "Uredite prijavu"
+
+#: functions/imc-core-issues.php:24
+msgid "View"
+msgstr "Prikaz"
+
+#: functions/imc-core-issues.php:25
+msgid "View Issue"
+msgstr "Pogledajte prijavu"
+
+#: functions/imc-core-issues.php:26
+msgid "All Issues"
+msgstr "Sve prijave"
+
+#: functions/imc-core-issues.php:27
+msgid "Search Issues"
+msgstr "Pretražite prijave"
+
+#: functions/imc-core-issues.php:28
+msgid "Parent Issues:"
+msgstr "Grupa problema:"
+
+#: functions/imc-core-issues.php:29
+msgid "Parent Issue"
+msgstr "Pripada grupi"
+
+#: functions/imc-core-issues.php:30
+msgid "No issues found."
+msgstr "Nema prijava."
+
+#: functions/imc-core-issues.php:31
+msgid "No issues found in Trash."
+msgstr "Nema obrisanih prijava."
+
+#: functions/imc-core-issues.php:36
+msgid "Description."
+msgstr "Opis."
+
+#: functions/imc-core-logs.php:14 functions/imc-page-logs.php:14
+#: functions/imc-page-logs.php:19
+msgid "Logs"
+msgstr "Logovi"
+
+#: functions/imc-core-logs.php:34 functions/imc-page-logs.php:29
+msgid "Activity"
+msgstr "Aktivnost"
+
+#: functions/imc-core-logs.php:35 functions/imc-page-logs.php:30
+msgid "User"
+msgstr "Korisnik"
+
+#: functions/imc-core-logs.php:36 functions/imc-page-logs.php:31
+msgid "Reason"
+msgstr "Razlog"
+
+#: functions/imc-core-logs.php:83 functions/imc-core-logs.php:145
+#: functions/imc-core-logs.php:216
+msgid "Issue published as "
+msgstr "Prijava objavljena"
+
+#: functions/imc-core-logs.php:84 functions/imc-core-logs.php:146
+#: functions/imc-core-logs.php:217
+msgid "Issue reported and published"
+msgstr "Prijava podnesena i objavljena"
+
+#: functions/imc-core-notifications.php:39
+msgid "New issue submitted by: "
+msgstr "Nova prijava od:"
+
+#: functions/imc-core-notifications.php:42
+msgid "You submitted a new issue to IMC with title: "
+msgstr "Prijavili ste novi problem sa naslovom:"
+
+#: functions/imc-core-notifications.php:44
+msgid "New issue submitted, classified as: "
+msgstr "Novi problem prijavljen, u kategoriji:"
+
+#: functions/imc-core-notifications.php:47
+msgid "The issue"
+msgstr "Prijavljeni problem"
+
+#: functions/imc-core-notifications.php:49
+msgid "located at: "
+msgstr "na lokaciji:"
+
+#: functions/imc-core-notifications.php:52
+msgid "See the issue at: "
+msgstr "Pogledajte prijavu na:"
+
+#: functions/imc-core-notifications.php:57
+msgid "You submitted a new issue, classified as: "
+msgstr "Prijavili ste novi problem u kategoriji:"
+
+#: functions/imc-core-notifications.php:60
+#: functions/imc-core-notifications.php:151
+#: functions/imc-core-notifications.php:244
+msgid "You can see your issue at: "
+msgstr "Možete vidjeti svoju prijavu na:"
+
+#: functions/imc-core-notifications.php:133
+msgid "Issue status has been modified to: "
+msgstr "Status prijave je promijenjen u:"
+
+#: functions/imc-core-notifications.php:136
+msgid "Your submitted issue status has been modified to: "
+msgstr "Status Vaše prijave je promijenjen u:"
+
+#: functions/imc-core-notifications.php:139
+msgid "Issue status has changed to "
+msgstr "Status prijave je promijenjen u"
+
+#: functions/imc-core-notifications.php:141
+msgid "Status was modified by "
+msgstr "Status je promijenio"
+
+#: functions/imc-core-notifications.php:143
+#: functions/imc-core-notifications.php:236
+msgid "You can see the issue at: "
+msgstr "Možete vidjeti prijavu na:"
+
+#: functions/imc-core-notifications.php:147
+#: functions/imc-core-notifications.php:240
+msgid "Your issue"
+msgstr "Vaša prijava"
+
+#: functions/imc-core-notifications.php:149
+msgid "has changed status to "
+msgstr "ima status promijenjen u"
+
+#: functions/imc-core-notifications.php:226
+msgid "Issue category has been modified to: "
+msgstr "Kategorija prijavljenog problema je promijenjena u:"
+
+#: functions/imc-core-notifications.php:229
+msgid "Your submitted issue category has been changed to: "
+msgstr "Kategorija Vašeg prijavljenog problema je promijenjena u:"
+
+#: functions/imc-core-notifications.php:232
+msgid "Issue updated with new category: "
+msgstr "Kategorija prijavljenog problema je promijenjena u:"
+
+#: functions/imc-core-notifications.php:234
+msgid "Category is modified by "
+msgstr "Kategoriju je promijenio"
+
+#: functions/imc-core-notifications.php:242
+msgid "has changed category to "
+msgstr "je premještena u kategoriju"
+
+#: functions/imc-core-notifications.php:303
+msgid "New Comment on Issue: "
+msgstr "Novi komentar na prijavljeni problem:"
+
+#: functions/imc-core-notifications.php:308
+msgid "New comment on issue "
+msgstr "Novi komentar na prijavljeni problem"
+
+#: functions/imc-core-notifications.php:310
+msgid "from user: "
+msgstr "od korisnika:"
+
+#: functions/imc-core-notifications.php:311
+msgid "See comment here: "
+msgstr "Komentar pogledajte na:"
+
+#: functions/imc-core-notifications.php:338
+msgid "Participace na projektech"
+msgstr "Poboljšaj Moj Grad"
+
+#: functions/imc-core-taxcategory.php:13
+msgctxt "taxonomy general name"
+msgid "Categories"
+msgstr "Kategorije"
+
+#: functions/imc-core-taxcategory.php:14
+msgctxt "taxonomy singular name"
+msgid "Category"
+msgstr "Kategorija"
+
+#: functions/imc-core-taxcategory.php:15
+msgctxt "admin menu"
+msgid "Issue Categories"
+msgstr "Kategorije problema"
+
+#: functions/imc-core-taxcategory.php:16
+msgid "Search Categories"
+msgstr "Pretražite kategorije"
+
+#: functions/imc-core-taxcategory.php:17
+msgid "All Categories"
+msgstr "Sve kategorije"
+
+#: functions/imc-core-taxcategory.php:18
+msgid "Parent Category"
+msgstr "Grupa problema:"
+
+#: functions/imc-core-taxcategory.php:19
+msgid "Parent Category:"
+msgstr "Grupa problema:"
+
+#: functions/imc-core-taxcategory.php:20
+msgid "Edit Category"
+msgstr "Uredi kategoriju"
+
+#: functions/imc-core-taxcategory.php:21
+msgid "Update Category"
+msgstr "Ažuriraj kategoriju"
+
+#: functions/imc-core-taxcategory.php:22
+msgid "Add new Category"
+msgstr "Dodaj novu kategoriju"
+
+#: functions/imc-core-taxcategory.php:23
+msgid "New Category Name"
+msgstr "Naziv nove kategorije"
+
+#: functions/imc-core-taxcategory.php:79 functions/imc-core-taxcategory.php:94
+msgid "E-mail for Notifications"
+msgstr "Adresa e-pošte za obavijesti"
+
+#: functions/imc-core-taxcategory.php:81 functions/imc-core-taxcategory.php:97
+msgid ""
+"The e-mail address that will receive all notifications. You can use more "
+"than one if you like, by separating them with comma."
+msgstr ""
+"Adresa e-pošte na koju će stizati obavijesti. Možete ih koristiti više, "
+"odvojene zarezom."
+
+#: functions/imc-core-taxcategory.php:272
+msgid "Select Image"
+msgstr "Odaberite fotografiju/sliku"
+
+#: functions/imc-core-taxcategory.php:273
+msgid "Remove"
+msgstr "Ukloni"
+
+#: functions/imc-core-taxcategory.php:275
+msgid ""
+"Select which image should represent this category. Images should have at "
+"least 100 x 100 size."
+msgstr ""
+"Odaberite fotografiju/sliku za kategoriju. Najmanja preporučena veličina je "
+"100x100 piksela."
+
+#: functions/imc-core-taxcategory.php:293
+#: functions/imc-core-taxcategory.php:316
+msgid "Category Image"
+msgstr "Fotografija/slika kategorije"
+
+#: functions/imc-core-taxcategory.php:459
+msgid "Select category for current Issue"
+msgstr "Odaberite kategoriju za trenutni problem"
+
+#: functions/imc-core-taxcategory.php:467
+msgid "Select Category"
+msgstr "Odaberite kategoriju"
+
+#: functions/imc-core-taxcategory.php:487
+msgid "Select category"
+msgstr "Odaberite kategoriju"
+
+#: functions/imc-core-taxcategory.php:500
+#: functions/imc-core-taxcategory.php:501 functions/imc-core-taxstatus.php:126
+#: functions/imc-core-taxstatus.php:127
+msgid "Add a reason"
+msgstr "Dodajte razlog"
+
+#: functions/imc-core-taxcategory.php:503 functions/imc-core-taxstatus.php:129
+msgid "Selected date"
+msgstr "Odabrani datum"
+
+#: functions/imc-core-taxcategory.php:618
+msgid "Category changed: "
+msgstr "Promjenjena kategorija:"
+
+#: functions/imc-core-taxcategory.php:676
+msgid "Image"
+msgstr "Fotografija/slika"
+
+#: functions/imc-core-taxcategory.php:725
+msgid "Email"
+msgstr "E-pošta"
+
+#: functions/imc-core-taxcategory.php:803
+msgid "Go back to Issue Categories"
+msgstr "Povratak na kategorije problema"
+
+#: functions/imc-core-taxstatus.php:14
+msgctxt "taxonomy general name"
+msgid "Statuses"
+msgstr "Statusi"
+
+#: functions/imc-core-taxstatus.php:15
+msgctxt "taxonomy singular name"
+msgid "Status"
+msgstr "Status"
+
+#: functions/imc-core-taxstatus.php:16
+msgctxt "taxonomy menu name"
+msgid "Issue Statuses"
+msgstr "Statusi prijava"
+
+#: functions/imc-core-taxstatus.php:17
+msgid "Search Statuses"
+msgstr "Pretraži statuse"
+
+#: functions/imc-core-taxstatus.php:18
+msgid "All Statuses"
+msgstr "Svi statusi"
+
+#: functions/imc-core-taxstatus.php:19
+msgid "Parent Status"
+msgstr "Grupa statusa"
+
+#: functions/imc-core-taxstatus.php:20
+msgid "Parent Status:"
+msgstr "Grupa statusa:"
+
+#: functions/imc-core-taxstatus.php:21
+msgid "Edit Status"
+msgstr "Uredi status"
+
+#: functions/imc-core-taxstatus.php:22
+msgid "Update Status"
+msgstr "Ažuriraj status"
+
+#: functions/imc-core-taxstatus.php:23
+msgid "Add New Status"
+msgstr "Dodajte novi status"
+
+#: functions/imc-core-taxstatus.php:24
+msgid "New Status Name"
+msgstr "Naziv novog statusa"
+
+#: functions/imc-core-taxstatus.php:90
+msgid "Select status for current Issue"
+msgstr "Odaberite status za trenutnu prijavu"
+
+#: functions/imc-core-taxstatus.php:97
+msgid "Select Status"
+msgstr "Odaberite status"
+
+#: functions/imc-core-taxstatus.php:117
+msgid "Select status"
+msgstr "Odaberite status"
+
+#: functions/imc-core-taxstatus.php:228
+msgid "Status changed: "
+msgstr "Status promijenjen:"
+
+#: functions/imc-core-taxstatus.php:293 functions/imc-core-taxstatus.php:339
+msgid "Status Color"
+msgstr "Boja statusa"
+
+#: functions/imc-core-taxstatus.php:326 functions/imc-core-taxstatus.php:377
+msgid "Pick a color that identifies the Issue's Status."
+msgstr "Odaberite boju za status prijave."
+
+#: functions/imc-core-taxstatus.php:424
+msgid "Color"
+msgstr "Boja"
+
+#: functions/imc-core-taxstatus.php:469
+msgid "Order"
+msgstr "Poredak"
+
+#: functions/imc-core-taxstatus.php:523
+msgid "Go back to Issue Statuses"
+msgstr "Povratak na statuse prijava"
+
+#: functions/imc-page-logs.php:27
+msgid "Issue Title"
+msgstr "Naslov prijave"
+
+#: functions/imc-page-settings.php:108
+msgid "Google Map"
+msgstr "Google Map"
+
+#: functions/imc-page-settings.php:111
+msgid "Google Map Settings"
+msgstr "Google Map postavke"
+
+#: functions/imc-page-settings.php:113
+msgid "Google Maps API KEY"
+msgstr "Google Map API ključ"
+
+#: functions/imc-page-settings.php:115
+msgid "Initial Address"
+msgstr "Početna adresa"
+
+#: functions/imc-page-settings.php:117
+msgid "Search for Boundaries"
+msgstr ""
+
+#: functions/imc-page-settings.php:119
+msgid "Boundaries"
+msgstr "Granice"
+
+#: functions/imc-page-settings.php:121
+msgid "Initial Latitude"
+msgstr "Početna zemljopisna širina"
+
+#: functions/imc-page-settings.php:123
+msgid "Initial Longitude"
+msgstr "Početna zemljopisna dužina"
+
+#: functions/imc-page-settings.php:125
+msgid "Initial Map Zoom"
+msgstr "Početno uvećanje karte"
+
+#: functions/imc-page-settings.php:127
+msgid "Map Language"
+msgstr "Jezik za Google Map"
+
+#: functions/imc-page-settings.php:129
+msgid "Map Region"
+msgstr "Regija karte"
+
+#: functions/imc-page-settings.php:131
+msgid "Allow zooming with mouse scroll wheel"
+msgstr "Dozvoli zumiranje pomoću kotačića na mišu"
+
+#: functions/imc-page-settings.php:144 functions/imc-page-settings.php:147
+msgid "Mail Notifications"
+msgstr "Obavijesti e-pošte"
+
+#: functions/imc-page-settings.php:149
+msgid "On new issue to user"
+msgstr "Kod nove prijave korisniku"
+
+#: functions/imc-page-settings.php:151
+msgid "On new issue to admins"
+msgstr "Kod nove prijave administratoru"
+
+#: functions/imc-page-settings.php:153
+msgid "On change category to user"
+msgstr "Kod promjene kategorije korisniku"
+
+#: functions/imc-page-settings.php:155
+msgid "On change category to admins"
+msgstr "Kod promjene kategorije administratoru"
+
+#: functions/imc-page-settings.php:157
+msgid "On change status to user"
+msgstr "Kod promjene statusa korisniku"
+
+#: functions/imc-page-settings.php:159
+msgid "On change status to admins"
+msgstr "Kod promjene statusa administratoru"
+
+#: functions/imc-page-settings.php:161
+msgid "On new comment to admins"
+msgstr "Kod novog komentara administratoru"
+
+#: functions/imc-page-settings.php:171
+msgid "General"
+msgstr "Općenito"
+
+#: functions/imc-page-settings.php:174
+msgid "General Settings"
+msgstr "Općenite postavke"
+
+#: functions/imc-page-settings.php:176
+msgid "Moderate new issues"
+msgstr "Odobriti nove prijave"
+
+#: functions/imc-page-settings.php:178
+msgid "Enable Social Login"
+msgstr "Omogući logiranje putem socijalnih mreža"
+
+#: functions/imc-page-settings.php:180
+msgid "Default Issues View"
+msgstr ""
+
+#: functions/imc-page-settings.php:182
+msgid "Add a custom slug for the issues page"
+msgstr "Dodajte vlastiti naziv za stranice prijava"
+
+#: functions/imc-page-settings.php:187
+msgid "API"
+msgstr "API"
+
+#: functions/imc-page-settings.php:190
+msgid "API Settings"
+msgstr "API postavke"
+
+#: functions/imc-page-settings.php:191
+msgid "API keys"
+msgstr "API ključevi"
+
+#: functions/imc-page-settings.php:194
+msgid "Add new API key"
+msgstr "Dodajte novi API ključ"
+
+#: functions/imc-page-settings.php:201
+msgid "Mobile Notifications"
+msgstr "Obavijesti na mobitel"
+
+#: functions/imc-page-settings.php:204
+msgid "Mobile Notifications - Google Firebase Settings"
+msgstr "Obavijesti na mobilni telefon - Google Firebase postavke"
+
+#: functions/imc-page-settings.php:206
+msgid "Enable mobile notifications"
+msgstr "Uključi obavijesti na mobile uređaje"
+
+#: functions/imc-page-settings.php:208
+msgid "Google Firebase API access key"
+msgstr "Google Firebase API ključ"
+
+#: functions/imc-page-settings.php:210
+msgid "When the category of a user's issue has changed"
+msgstr "Kod promjene kategorije"
+
+#: functions/imc-page-settings.php:212
+msgid "When the status of a user's issue has changed"
+msgstr "Kod promjene statusa"
+
+#: functions/imc-page-settings.php:214
+msgid "When a new comment is added to a user's issue"
+msgstr "Kada je dodan novi komentar"
+
+#: functions/imc-page-settings.php:223
+msgid "Settings regarding the map and its initial settings."
+msgstr "Početne postavke karte"
+
+#: functions/imc-page-settings.php:224
+msgid ""
+"Settings about mail notifications sent to users and administrators, when a "
+"new issue or comment is available."
+msgstr ""
+"Postavke obavijesti putem e-pošte za korisnike i admine, pri novoj prijavi "
+"ili komentaru."
+
+#: functions/imc-page-settings.php:225
+msgid "Settings concerning the functionality of the application"
+msgstr "Postavke vezane uz funkcionalnosti aplikacije"
+
+#: functions/imc-page-settings.php:226
+msgid "Settings concerning the functionality of API"
+msgstr "Postavke vezane uz funkcionalnosti API-ja"
+
+#: functions/imc-page-settings.php:227
+msgid ""
+"Settings concerning the functionality of mobile notifications through Google "
+"Firebase"
+msgstr ""
+"Postavke vezane uz obavijesti na mobilne uređaje pomoću Google Firebase"
+
+#: functions/imc-page-settings.php:237
+msgid "Google Maps API Key"
+msgstr "Google Maps API ključ"
+
+#: functions/imc-page-settings.php:243
+msgid "Initial address"
+msgstr "Početna adresa"
+
+#: functions/imc-page-settings.php:309 functions/imc-page-settings.php:321
+msgid "Couldn't find city"
+msgstr ""
+
+#: functions/imc-page-settings.php:339
+msgid "The service is not available, try again later"
+msgstr ""
+
+#: functions/imc-page-settings.php:349
+msgid "Could not connect to geocoding service"
+msgstr ""
+
+#: functions/imc-page-settings.php:360
+msgid "Latitude"
+msgstr "Zemljopisna širina"
+
+#: functions/imc-page-settings.php:366
+msgid "Longitude"
+msgstr "Zemljopisna dužina"
+
+#: functions/imc-page-settings.php:372
+msgid "Insert zoom value"
+msgstr "Upišite vrijednost za uvećanje"
+
+#: functions/imc-page-settings.php:378
+msgid "Insert language 'e.g.: en'"
+msgstr "Upišite oznaku jezika 'npr.: hr'"
+
+#: functions/imc-page-settings.php:384
+msgid "Insert region 'e.g.: GB'"
+msgstr "Upišite oznaku regije  'npr.: HR'"
+
+#: functions/imc-page-settings.php:390 functions/imc-page-settings.php:398
+#: functions/imc-page-settings.php:443 functions/imc-page-settings.php:451
+#: functions/imc-page-settings.php:459 functions/imc-page-settings.php:467
+#: functions/imc-page-settings.php:475 functions/imc-page-settings.php:483
+#: functions/imc-page-settings.php:491 functions/imc-page-settings.php:503
+#: functions/imc-page-settings.php:511 functions/imc-page-settings.php:543
+#: functions/imc-page-settings.php:558 functions/imc-page-settings.php:566
+#: functions/imc-page-settings.php:574
+msgid "YES"
+msgstr "DA"
+
+#: functions/imc-page-settings.php:392 functions/imc-page-settings.php:400
+#: functions/imc-page-settings.php:445 functions/imc-page-settings.php:453
+#: functions/imc-page-settings.php:461 functions/imc-page-settings.php:469
+#: functions/imc-page-settings.php:477 functions/imc-page-settings.php:485
+#: functions/imc-page-settings.php:493 functions/imc-page-settings.php:505
+#: functions/imc-page-settings.php:513 functions/imc-page-settings.php:545
+#: functions/imc-page-settings.php:560 functions/imc-page-settings.php:568
+#: functions/imc-page-settings.php:576
+msgid "ΝΟ"
+msgstr "NE"
+
+#: functions/imc-page-settings.php:406
+msgid "Add city"
+msgstr ""
+
+#: functions/imc-page-settings.php:409
+#: functions/templates/archive-imc_issues.php:239
+msgid "Search"
+msgstr "Traži"
+
+#: functions/imc-page-settings.php:519
+msgid "List"
+msgstr ""
+
+#: functions/imc-page-settings.php:521
+msgid "Grid"
+msgstr ""
+
+#: functions/imc-page-settings.php:527
+msgid "Custom slug, eg: issues"
+msgstr "Vlastita skraćenica, npr. problemi"
+
+#: functions/imc-page-settings.php:529
+msgid "Use only one word - no spaces."
+msgstr "Koristite samo jednu riječ, bez razmaka."
+
+#: functions/imc-page-settings.php:531
+msgid ""
+"Save changes and go to Settings -> Permalinks and click on \"Save Permalinks"
+"\" to enable the custom slug."
+msgstr ""
+"Save changes and go to Settings -> Permalinks and click on \"Save Permalinks"
+"\" to enable the custom slug."
+
+#: functions/imc-page-settings.php:532
+msgid "Default: imc_issues"
+msgstr "Zadano: imc_issues"
+
+#: functions/imc-page-settings.php:552
+msgid "Insert API_ACCESS_KEY"
+msgstr "Upišite API_ACCESS_KEY"
+
+#: functions/imc-page-settings.php:591 functions/imc-page-settings.php:636
+msgid "API key title"
+msgstr "Naziv API ključa"
+
+#: functions/imc-page-settings.php:592
+msgid "Key"
+msgstr "Ključ"
+
+#: functions/imc-page-settings.php:593
+msgid "Created by"
+msgstr "Napravio"
+
+#: functions/imc-page-settings.php:594
+msgid "ID"
+msgstr "ID"
+
+#: functions/imc-page-settings.php:640
+msgid "API key"
+msgstr "API ključ"
+
+#: functions/imc-page-settings.php:643
+msgid "Generate key"
+msgstr "Generiraj ključ"
+
+#: functions/imc-page-settings.php:685
+msgid "IMC Plugin Settings"
+msgstr "Postavke IMC dodatka"
+
+#: functions/imc-page-settings.php:685
+msgid "IMC Settings"
+msgstr "IMC postavke"
+
+#: functions/imc-user-groups.php:119
+msgid "Users"
+msgstr ""
+
+#: functions/imc-user-groups.php:222
+msgctxt "Taxonomy General Name"
+msgid "User Groups"
+msgstr ""
+
+#: functions/imc-user-groups.php:223
+msgctxt "Taxonomy Singular Name"
+msgid "User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:224
+msgid "User Groups"
+msgstr ""
+
+#: functions/imc-user-groups.php:225
+msgid "All User Groups"
+msgstr ""
+
+#: functions/imc-user-groups.php:226
+msgid "Parent User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:227
+msgid "Parent User Group:"
+msgstr ""
+
+#: functions/imc-user-groups.php:228
+msgid "New User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:229
+msgid "Add New User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:230
+msgid "Edit User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:231
+msgid "Update User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:232
+msgid "View User Group"
+msgstr ""
+
+#: functions/imc-user-groups.php:233
+msgid "Separate User Groups with commas"
+msgstr ""
+
+#: functions/imc-user-groups.php:234
+msgid "Add or remove User Groups"
+msgstr ""
+
+#: functions/imc-user-groups.php:235
+msgid "Choose from the most used"
+msgstr ""
+
+#: functions/imc-user-groups.php:237
+msgid "Search User Groups"
+msgstr ""
+
+#: functions/imc-user-groups.php:238
+msgid "Not Found"
+msgstr ""
+
+#: functions/imc-user-groups.php:239
+msgid "No items"
+msgstr ""
+
+#: functions/imc-user-groups.php:240
+msgid "Items list"
+msgstr ""
+
+#: functions/imc-user-groups.php:241
+msgid "Items list navigation"
+msgstr ""
+
+#: functions/templates/archive-imc_issues.php:45
+#: functions/templates/archive-imc_issues.php:188
+msgid "Votes"
+msgstr "Glasovi"
+
+#: functions/templates/archive-imc_issues.php:172
+msgid "Display: "
+msgstr "Prikaži:"
+
+#: functions/templates/archive-imc_issues.php:177
+msgid "All"
+msgstr "Sve"
+
+#: functions/templates/archive-imc_issues.php:185
+msgid "Order: "
+msgstr "Poredak:"
+
+#: functions/templates/archive-imc_issues.php:211
+#: functions/templates/single-imc_issues.php:66
+msgid "Report an issue"
+msgstr "Prijavite problem"
+
+#: functions/templates/archive-imc_issues.php:225
+msgid "Search &amp; Filtering"
+msgstr "Traženje &amp; Filtriranje"
+
+#: functions/templates/archive-imc_issues.php:226
+#: functions/templates/edit-imc_issues.php:155
+#: functions/templates/insert-imc_issues.php:135
+msgid "Category"
+msgstr "Kategorija"
+
+#: functions/templates/archive-imc_issues.php:227
+msgid "Status"
+msgstr "Status"
+
+#: functions/templates/archive-imc_issues.php:228
+msgid "Keyword"
+msgstr "Ključna riječ"
+
+#: functions/templates/archive-imc_issues.php:241
+msgid "Keyword search"
+msgstr "Pretraga ključne riječi"
+
+#: functions/templates/archive-imc_issues.php:244
+msgid "Issue status"
+msgstr "Status prijave"
+
+#: functions/templates/archive-imc_issues.php:265
+msgid "Categories"
+msgstr "Kategorije"
+
+#: functions/templates/archive-imc_issues.php:329
+msgid "Apply filters"
+msgstr "Primijeni filtere"
+
+#: functions/templates/archive-imc_issues.php:330
+#: functions/templates/archive-imc_issues.php:454
+msgid "Reset filters"
+msgstr "Obriši filtere"
+
+#: functions/templates/archive-imc_issues.php:446
+msgid "There are no issues"
+msgstr "Nema prijava"
+
+#: functions/templates/archive-imc_issues.php:451
+msgid "Add a new issue"
+msgstr "Prijavite problem"
+
+#: functions/templates/archive-imc_issues.php:476
+msgid "Showing"
+msgstr "Prikaz"
+
+#: functions/templates/archive-imc_issues.php:476
+msgid "of"
+msgstr "od"
+
+#: functions/templates/archive-imc_issues.php:476
+msgid "issues"
+msgstr "prijave"
+
+#: functions/templates/edit-imc_issues.php:116
+#: functions/templates/edit-imc_issues.php:430
+#: functions/templates/insert-imc_issues.php:106
+#: functions/templates/insert-imc_issues.php:373
+#: functions/templates/single-imc_issues.php:61
+msgid "Return to overview"
+msgstr "Povratak na pregled"
+
+#: functions/templates/edit-imc_issues.php:132
+#: functions/templates/single-imc_issues.php:72
+msgid "Edit issue"
+msgstr "Uredite prijavu"
+
+#: functions/templates/edit-imc_issues.php:148
+#: functions/templates/insert-imc_issues.php:128
+msgid "Title"
+msgstr "Naslov"
+
+#: functions/templates/edit-imc_issues.php:149
+#: functions/templates/insert-imc_issues.php:129
+msgid "Add a short title for the issue"
+msgstr "Upišite kratki naslov prijave"
+
+#: functions/templates/edit-imc_issues.php:184
+#: functions/templates/insert-imc_issues.php:147
+#: functions/templates/single-imc_issues.php:211
+msgid "Description"
+msgstr "Opis"
+
+#: functions/templates/edit-imc_issues.php:184
+#: functions/templates/edit-imc_issues.php:211
+#: functions/templates/insert-imc_issues.php:147
+#: functions/templates/insert-imc_issues.php:173
+msgid " (optional)"
+msgstr "(neobavezno)"
+
+#: functions/templates/edit-imc_issues.php:185
+#: functions/templates/insert-imc_issues.php:148
+msgid "Add a thorough description of the issue"
+msgstr "Upišite opsežniji opis problema"
+
+#: functions/templates/edit-imc_issues.php:190
+#: functions/templates/insert-imc_issues.php:153
+msgid "Address"
+msgstr "Unesite adresu"
+
+#: functions/templates/edit-imc_issues.php:193
+#: functions/templates/insert-imc_issues.php:156
+msgid "Locate"
+msgstr "Potraži adresu"
+
+#: functions/templates/edit-imc_issues.php:197
+#: functions/templates/insert-imc_issues.php:160
+msgid "Add an address"
+msgstr "Dodajte adresu"
+
+#: functions/templates/edit-imc_issues.php:211
+#: functions/templates/insert-imc_issues.php:173
+msgid "Photo"
+msgstr "Fotografija"
+
+#: functions/templates/edit-imc_issues.php:219
+#: functions/templates/edit-imc_issues.php:241
+#: functions/templates/insert-imc_issues.php:179
+msgid "Add photo"
+msgstr "Dodaj fotografiju"
+
+#: functions/templates/edit-imc_issues.php:222
+#: functions/templates/edit-imc_issues.php:244
+#: functions/templates/insert-imc_issues.php:182
+msgid "Delete Photo"
+msgstr "Obriši fotografiju"
+
+#: functions/templates/edit-imc_issues.php:225
+#: functions/templates/edit-imc_issues.php:247
+#: functions/templates/insert-imc_issues.php:185
+msgid "No photo attached"
+msgstr "Nema pridružene fotografije"
+
+#: functions/templates/edit-imc_issues.php:226
+#: functions/templates/edit-imc_issues.php:249
+msgid ""
+"Photo size must be less than 2MB, please resize it or select a smaller one!"
+msgstr ""
+"Najveća dopuštena veličina datoteke je 2MB! Molimo odaberite manju "
+"fotografiju."
+
+#: functions/templates/edit-imc_issues.php:227
+#: functions/templates/edit-imc_issues.php:248
+#: functions/templates/insert-imc_issues.php:187
+msgid "A photo has been selected:"
+msgstr "Odabrana fotografija:"
+
+#: functions/templates/edit-imc_issues.php:265
+msgid "Save changes"
+msgstr "Snimi promjene"
+
+#: functions/templates/edit-imc_issues.php:449
+msgid "You are not authorised to edit an issue"
+msgstr "Ne možete uređivati ovu prijavu"
+
+#: functions/templates/edit-imc_issues.php:453
+#: functions/templates/insert-imc_issues.php:396
+msgid "Please login!"
+msgstr "Molimo Vas da se logirate!"
+
+#: functions/templates/imc-part-archive-grid.php:20
+#: functions/templates/imc-part-archive-list.php:138
+#: functions/templates/single-imc_issues.php:452
+msgid "My Issue"
+msgstr "Moja prijava"
+
+#: functions/templates/imc-part-archive-grid.php:24
+#: functions/templates/imc-part-archive-list.php:142
+msgid "Edit"
+msgstr "Uredi"
+
+#: functions/templates/imc-part-archive-grid.php:39
+#: functions/templates/imc-part-archive-list.php:129
+msgid "No photo submitted"
+msgstr "Nema pridružene fotografije"
+
+#: functions/templates/imc-part-archive-grid.php:101
+#: functions/templates/imc-part-archive-list.php:87
+msgid "Under moderation"
+msgstr "Čeka odobrenje administratora"
+
+#: functions/templates/imc-part-archive-grid.php:121
+#: functions/templates/imc-part-archive-list.php:105
+#, php-format
+msgctxt "comments number"
+msgid "1 Comment"
+msgid_plural "%1$s Comments"
+msgstr[0] "%1$s komentar"
+msgstr[1] "%1$s komentara"
+msgstr[2] "%1$s komentara"
+
+#: functions/templates/insert-imc_issues.php:120
+msgid "Report a new issue"
+msgstr "Prijavite novi problem"
+
+#: functions/templates/insert-imc_issues.php:186
+msgid ""
+"Photo size must be smaller in size, please resize it or select a smaller one!"
+msgstr ""
+"Najveća dopuštena veličina datoteke je 2MB! Molimo odaberite manju "
+"fotografiju."
+
+#: functions/templates/insert-imc_issues.php:202
+msgid "Submit"
+msgstr "Dodaj"
+
+#: functions/templates/insert-imc_issues.php:392
+msgid "You are not authorised to report an issue"
+msgstr "Ne možete prijaviti problem ukoliko niste logirani"
+
+#: functions/templates/single-imc_issues.php:82
+msgid "Under Moderation"
+msgstr "Čeka odobrenje administratora"
+
+#: functions/templates/single-imc_issues.php:219
+msgid "Photos"
+msgstr "Fotografije"
+
+#: functions/templates/single-imc_issues.php:226
+msgid "No photos submitted"
+msgstr "Nema pridružene fotografije"
+
+#: functions/templates/single-imc_issues.php:250
+msgid "No Comments"
+msgstr "Nema komentara"
+
+#: functions/templates/single-imc_issues.php:252
+msgid " Comments"
+msgstr " komentara"
+
+#: functions/templates/single-imc_issues.php:254
+msgid "1 Comment"
+msgstr "1 komentar"
+
+#: functions/templates/single-imc_issues.php:264
+msgid "Post Comment"
+msgstr "Objavi komentar"
+
+#: functions/templates/single-imc_issues.php:267
+msgid "Add a comment"
+msgstr "Napišite komentar"
+
+#: functions/templates/single-imc_issues.php:271
+#, php-format
+msgid ""
+"You must be <a class=\"imc-LinkStyle\" href=\"%s\">logged in</a> to post a "
+"comment."
+msgstr ""
+"Morate biti <a class=\"imc-LinkStyle\" href=\"%s\">logirani</a> za prijavu "
+"problema."
+
+#: functions/templates/single-imc_issues.php:276
+#, php-format
+msgid ""
+"Logged in as <span class=\"imc-TextColorPrimary\">%2$s</span>. <a class="
+"\"imc-LinkStyle\" href=\"%3$s\" title=\"Log out of this account\">Log out?</"
+"a>"
+msgstr ""
+"Logirani ste kao <span class=\"imc-TextColorPrimary\">%2$s</span>. <a class="
+"\"imc-LinkStyle\" href=\"%3$s\" title=\"Odjavi se sa ovog računa\">Odjava?</"
+"a>"
+
+#: functions/templates/single-imc_issues.php:295
+msgid "No comments submitted"
+msgstr "Nema komentara"
+
+#: functions/templates/single-imc_issues.php:300
+msgid "comments"
+msgstr "komentara"
+
+#: functions/templates/single-imc_issues.php:335
+msgid "Pending"
+msgstr "U tijeku"
+
+#: functions/templates/single-imc_issues.php:356
+msgid "Administrator"
+msgstr "Administrator"
+
+#: functions/templates/single-imc_issues.php:361
+msgid "Issue author"
+msgstr "Prijavio korisnik"
+
+#: functions/templates/single-imc_issues.php:403
+msgid "Comments are disabled"
+msgstr "Komentari su onemogućeni"
+
+#: functions/templates/single-imc_issues.php:420
+msgid "Messages"
+msgstr "Poruke"
+
+#: functions/templates/single-imc_issues.php:427
+msgid "Location"
+msgstr "Lokacija"
+
+#: functions/templates/single-imc_issues.php:455
+msgid "My issue"
+msgstr "Moja prijava"
+
+#: functions/templates/single-imc_issues.php:473
+msgid "Voted"
+msgstr "Već ste dodali glas"
+
+#: functions/templates/single-imc_issues.php:481
+msgid "Vote"
+msgstr "Glasujte"
+
+#: functions/templates/single-imc_issues.php:491
+msgid "Timeline"
+msgstr "Vremenska crta"
+
+#: functions/templates/single-imc_issues.php:509
+#: functions/templates/single-imc_issues.php:526
+#: functions/templates/single-imc_issues.php:541
+#: functions/templates/single-imc_issues.php:553
+msgid "by"
+msgstr "od"
+
+#: improve-my-city.php:261
+msgid "Please provide a location inside municipality limits"
+msgstr "Prijavljeni problem je izvan granica nadležnosti lokane samouprave"
+
+#: improve-my-city.php:262
+msgid "Couldn't find an address"
+msgstr "Ne može se pronaći adresa"
+
+#: improve-my-city.php:263
+msgid "No results found"
+msgstr "Nema rezultata"
+
+#: improve-my-city.php:264
+msgid "Geocoder failed"
+msgstr "Geocoder pogreška"
+
+#: improve-my-city.php:315
+msgctxt "For color picker"
+msgid "Choose"
+msgstr "Izaberi"
+
+#: improve-my-city.php:316
+msgctxt "For color picker"
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: improve-my-city.php:321
+msgctxt "For category image"
+msgid "Select or upload an image for this category"
+msgstr ""
+
+#: improve-my-city.php:322
+msgctxt "For category image"
+msgid "Attach"
+msgstr ""
+
+#: improve-my-city.php:338
+msgid "Please make sure that you have selected a Category."
+msgstr "Izaberite kategoriju."
+
+#: improve-my-city.php:339
+msgid "Please make sure that you have selected a Status."
+msgstr "Izaberite status."
+
+#: improve-my-city.php:340
+msgid "Please make sure that you have entered a reason!"
+msgstr "Upišite razlog."
+
+#~ msgctxt "post type general name"
+#~ msgid "Notifications"
+#~ msgstr "Obavijesti"
+
+#~ msgctxt "post type singular name"
+#~ msgid "Notification"
+#~ msgstr "Obavijest"
+
+#~ msgctxt "add new on admin bar"
+#~ msgid "Notification"
+#~ msgstr "Obavijest"
+
+#~ msgctxt "notification"
+#~ msgid "Add New"
+#~ msgstr "Dodaj novo"
+
+#~ msgid "Add New Notification"
+#~ msgstr "Dodaj novu obavijest"
+
+#~ msgid "New Notification"
+#~ msgstr "Nova obavijest"
+
+#~ msgid "Edit Notification"
+#~ msgstr "Uredi obavijest"
+
+#~ msgid "View Notification"
+#~ msgstr "Pogledajte obavijest"
+
+#~ msgid "Notifications"
+#~ msgstr "Obavijesti"
+
+#~ msgid "Search Notifications"
+#~ msgstr "Pretraži obavijesti"
+
+#~ msgid "Parent Notifications:"
+#~ msgstr "Grupa obavijesti:"
+
+#~ msgid "Parent Notifications"
+#~ msgstr "Grupa obavijesti"
+
+#~ msgid "No notifications found."
+#~ msgstr "Nema obavijseti."
+
+#~ msgid "No notifications found in Trash."
+#~ msgstr "Nema obrisanih obavijesti."
+
+#~ msgctxt "mobile notification"
+#~ msgid "Issue status has been modified"
+#~ msgstr "Status prijave je promijenjen"
+
+#~ msgctxt "mobile notification"
+#~ msgid "Issue category has been modified"
+#~ msgstr "Kategorija prijavljenog problema je promijenjena"
+
+#~ msgctxt "mobile notification"
+#~ msgid "New comment posted on your issue"
+#~ msgstr "Novi komentar na prijavljeni problem"
+
+#~ msgid "Select or upload an image for this category"
+#~ msgstr "Odaberite ili dodajte fotografiju/sliku za ovu kategoriju"
+
+#~ msgid "Attach"
+#~ msgstr "Dodajte"
+
+#~ msgid "Insert a GeoJSON object from the OpenStreetMaps page"
+#~ msgstr "Upišite GeoJson referencu sa stranica OpenStreetMaps"
+
+#~ msgid "%s ago"
+#~ msgstr "%s πριν"
+
+#~ msgid "Issues"
+#~ msgstr "Issues"
+
+#~ msgid "Add New"
+#~ msgstr "Add New"
+
+#~ msgid "Notification"
+#~ msgstr "Notification"
+
+#~ msgid "Issue status has been modified"
+#~ msgstr "Issue status has been modified"
+
+#~ msgid "Issue category has been modified"
+#~ msgstr "Issue category has been modified"
+
+#~ msgid "New comment posted on your issue"
+#~ msgstr "New comment posted on your issue"
+
+#~ msgid "Issue Categories"
+#~ msgstr "Issue Categories"
+
+#~ msgid "Statuses"
+#~ msgstr "Statuses"
+
+#~ msgid "Issue Statuses"
+#~ msgstr "Issue Statuses"
+
+#~ msgid "Choose"
+#~ msgstr "Choose"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
+
+#~ msgid "Add your custom slug for issues"
+#~ msgstr "Add your custom slug for issues"
+
+#~ msgid "Custom slug"
+#~ msgstr "Custom slug"
+
+#~ msgid "Clustering markers"
+#~ msgstr "Clustering markers"
+
+#~ msgid "Skey"
+#~ msgstr "Κλειδί"
+
+#~ msgid "API Keys"
+#~ msgstr "Κλειδιά API"
+
+#~ msgid "Add New API Key"
+#~ msgstr "Καταχώρηση νέου API κλειδιού"
+
+#~ msgid "New issue by: "
+#~ msgstr "Νέο αίτημα από τον χρήστη: "
+
+#~ msgid "You submitted a new issue at IMC with title:"
+#~ msgstr "Υποβάλατε ένα νέο αίτημα στο IMC με τίτλο:"
+
+#~ msgid "New issue is submitted on category:"
+#~ msgstr ""
+#~ "Ένα νέο αίτημα καταχωρήθηκε στο σύστημα που σχετίζεται με την κατηγορία:"
+
+#~ msgid "located at address:"
+#~ msgstr "είναι σχετικό με τη διεύθυνση:"
+
+#~ msgid "See the issue at:"
+#~ msgstr "Δείτε το αίτημα εδώ:"
+
+#~ msgid "You submitted a new issue on category:"
+#~ msgstr "Υποβάλατε αίτημα στην κατηγορία:"
+
+#~ msgid "You can see your issue at:"
+#~ msgstr "Μπορείτε να δείτε το αίτημα σας εδώ:"
+
+#~ msgid "Issue status modified:"
+#~ msgstr "Η κατάσταση του αιτήματος άλλαξε:"
+
+#~ msgid "Your submitted issue status is modified:"
+#~ msgstr "Το αίτημα σας άλλαξε κατάσταση:"
+
+#~ msgid "Issue status has changed to"
+#~ msgstr "Η κατάσταση του αιτήματος άλλαξε σε"
+
+#~ msgid "Status was modified by"
+#~ msgstr "Η Κατάσταση τροποποιήθηκε από"
+
+#~ msgid "You can see the issue at:"
+#~ msgstr "Μπορείτε να δείτε το Αίτημα στο:"
+
+#~ msgid "has changed status to"
+#~ msgstr "άλλαξε την κατάσταση σε"
+
+#~ msgid "Category of issue is modified:"
+#~ msgstr "Η κατηγορία του αιτήματος άλλαξε:"
+
+#~ msgid "Your submitted issue category has changed:"
+#~ msgstr "Το αίτημα σας με αριθμό άλλαξε κατηγορία:"
+
+#~ msgid "Issue is now belong to category"
+#~ msgstr "To αίτημα ανήκει πλέον στην κατηγορία"
+
+#~ msgid "Category is modified by"
+#~ msgstr "Η αλλαγή έγινε από:"
+
+#~ msgid "has changed category to"
+#~ msgstr "άλλαξε κατηγορία σε"
+
+#~ msgid "New Comment on Issue:"
+#~ msgstr "Νέο Σχόλιο στο Αίτημα:"
+
+#~ msgid "New comment on issue"
+#~ msgstr "Νέο σχόλιο στο αίτημα"
+
+#~ msgid "See comment here:"
+#~ msgstr "Δείτε το σχόλιο εδώ:"
+
+#~ msgid ""
+#~ "The e-mail address that will receive all notifications. You can use more "
+#~ "than one if you like."
+#~ msgstr ""
+#~ "Διεύθυνση e-mail που λαμβάνει όλες τις ειδοποιήσεις. Μπορείτε να "
+#~ "χρησιμοποιήσετε περισσότερες από μία."
+
+#~ msgid "Pick specific date"
+#~ msgstr "Επιλέξτε ημερομηνία"
+
+#~ msgid "Search Issue Statuses"
+#~ msgstr "Αναζήτηση σε Καταστάσεις Αιτημάτων"
+
+#~ msgid "All Issue Statuses"
+#~ msgstr "Όλες οι Καταστάσεις Αιτημάτων"
+
+#~ msgid "Parent Issue Statuses"
+#~ msgstr "Γονικές Καταστάσεις Αιτήματος"
+
+#~ msgid "Parent Issue Statuses:"
+#~ msgstr "Γονικές Καταστάσεις Αιτήματος:"
+
+#~ msgid "Edit Issue Status"
+#~ msgstr "Επεξεργασίας Κατάστασης Αιτήματος"
+
+#~ msgid "Update Issue Status"
+#~ msgstr "Ενημέρωση Κατάστασης Αιτήματος"
+
+#~ msgid "Add New Issue Status"
+#~ msgstr "Προσθήκη νέας Κατάστασης Αιτήματος"
+
+#~ msgid "New Issue Status Name"
+#~ msgstr "Νέο όνομα Κατάστασης Αιτήματος"
+
+#~ msgid "No Issues found"
+#~ msgstr "Δεν βρέθηκαν Αιτήματα"
+
+#~ msgid "No Issues found in trash"
+#~ msgstr "Δε βρέθηκαν Αιτήματα στον κάδο απορριμάτων"
+
+#~ msgid "Status is modified by"
+#~ msgstr "Η αλλαγή της κατάστασης έγινε από:"
+
+#~ msgid "Email for Notifications"
+#~ msgstr "E-mail για Ειδοποιήσεις"
+
+#~ msgid "When"
+#~ msgstr "Πότε"
+
+#~ msgid "Transition"
+#~ msgstr "Μετατροπή"
+
+#~ msgid "Why"
+#~ msgstr "Γιατί"
+
+#~ msgid "Settings about Google Map and the initial center position"
+#~ msgstr "Ρυθμίσεις σχετικά με το χάρτη Google Map και την αρχική θέση"
+
+#~ msgid ""
+#~ "Settings about mail notifications on users and administrators on new "
+#~ "issues and new comments"
+#~ msgstr "Ρυθμίσεις σχετικές με την αποστολή ενημερωτικών emails"
+
+#~ msgid "Locate Address on Map"
+#~ msgstr "Εντοπισμός διεύθυνσης στον χάρτη"
+
+#~ msgid "You can see your issue at"
+#~ msgstr "Μπορείτε να δείτε το αίτημα σας εδώ"
+
+#~ msgid "See the issue at"
+#~ msgstr "Δείτε το αίτημα εδώ:"
+
+#~ msgid "My Custom Settings"
+#~ msgstr "Οι ρυθμίσεις μου"
+
+#~ msgid "ID Number"
+#~ msgstr "ID Νούμερο"
+
+#~ msgid "Enter your settings below:"
+#~ msgstr "Συμπληρώστε παρακάτω:"
+
+#~ msgid "New issue is submitted on category: "
+#~ msgstr ""
+#~ "Ένα νέο αίτημα καταχωρήθηκε στο σύστημα που σχετίζεται με την κατηγορία: "
+
+#~ msgid " located at address: "
+#~ msgstr " είναι σχετικό με τη διεύθυνση: "
+
+#~ msgid "See the issue at "
+#~ msgstr "Δείτε το αίτημα εδώ: "
+
+#~ msgid "Admin Email"
+#~ msgstr "Email Διαχειριστή"
+
+#~ msgid "Edit the issue at "
+#~ msgstr "Επεξεργαστείτε το αίτημα εδώ: "
+
+#~ msgid "issue"
+#~ msgstr "αίτημα"
+
+#~ msgid "All Settings about Participace na projektech"
+#~ msgstr "Όλες οι ρυθμίσεις που αφορούv το Βελτιώνω την Πόλη μου"
+
+#~ msgid "My Settings"
+#~ msgstr "Οι Ρυθμίσεις μου"

@@ -1,0 +1,1592 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Participace na projektech\n"
+"POT-Creation-Date: 2017-03-15 12:22+0200\n"
+"PO-Revision-Date: 2017-03-15 12:22+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: functions\n"
+"X-Poedit-SearchPath-1: js/imc-scripts.js\n"
+"X-Poedit-SearchPath-2: improve-my-city.php\n"
+
+#: functions/imc-core-functions.php:22
+#, php-format
+msgctxt "relative date"
+msgid "%s ago"
+msgstr "%s ago"
+
+#: functions/imc-core-functions.php:79
+msgid "Select a category"
+msgstr "Select a category"
+
+#: functions/imc-core-functions.php:123
+msgid "Issue Image"
+msgstr "Issue Image"
+
+#: functions/imc-core-functions.php:318
+msgid "You cannot longer edit your issue because its status has changed"
+msgstr "You cannot longer edit your issue because its status has changed"
+
+#: functions/imc-core-functions.php:319
+msgid "This issue is under moderation and is not yet published"
+msgstr "This issue is under moderation and is not yet published"
+
+#: functions/imc-core-issues-col.php:17 functions/imc-page-logs.php:26
+msgid "Issue ID"
+msgstr "Issue ID"
+
+#: functions/imc-core-issues-col.php:18
+msgid "Issue"
+msgstr "Issue"
+
+#: functions/imc-core-issues-col.php:19 functions/imc-core-taxcategory.php:441
+msgid "Issue Category"
+msgstr "Issue Category"
+
+#: functions/imc-core-issues-col.php:20 functions/imc-core-taxstatus.php:73
+msgid "Issue Status"
+msgstr "Issue Status"
+
+#: functions/imc-core-issues-col.php:21
+msgid "Author"
+msgstr "Author"
+
+#: functions/imc-core-issues-col.php:22
+#: functions/templates/single-imc_issues.php:237
+msgid "Comments"
+msgstr "Comments"
+
+#: functions/imc-core-issues-col.php:23 functions/imc-core-logs.php:33
+#: functions/imc-page-logs.php:28 functions/templates/archive-imc_issues.php:44
+#: functions/templates/archive-imc_issues.php:187
+msgid "Date"
+msgstr "Date"
+
+#: functions/imc-core-issues-col.php:45
+msgid "Unknown Category"
+msgstr "Unknown Category"
+
+#: functions/imc-core-issues-col.php:81
+msgid "Unknown Status"
+msgstr "Unknown Status"
+
+#: functions/imc-core-issues-col.php:158
+msgid "Show All Categories"
+msgstr "Show All Categories"
+
+#: functions/imc-core-issues-col.php:197
+msgid "Show All Statuses"
+msgstr "Show All Statuses"
+
+#: functions/imc-core-issues-col.php:235
+msgid "Show All Authors"
+msgstr "Show All Authors"
+
+#: functions/imc-core-issues-info.php:54
+msgid "Issue Location"
+msgstr "Issue Location"
+
+#: functions/imc-core-issues-info.php:112
+msgid "Enter an address"
+msgstr "Enter an address"
+
+#: functions/imc-core-issues-info.php:116 functions/imc-page-settings.php:247
+msgid "Locate address"
+msgstr "Locate address"
+
+#: functions/imc-core-issues.php:15
+msgctxt "post type general name"
+msgid "Issues"
+msgstr "Issues"
+
+#: functions/imc-core-issues.php:16
+msgctxt "post type singular name"
+msgid "Issue"
+msgstr "Issue"
+
+#: functions/imc-core-issues.php:17
+msgctxt "admin menu"
+msgid "Participace na projektech"
+msgstr "Participace na projektech"
+
+#: functions/imc-core-issues.php:18
+msgctxt "add new on admin bar"
+msgid "Issue"
+msgstr "Issue"
+
+#: functions/imc-core-issues.php:19
+msgctxt "add new on menu"
+msgid "Add New"
+msgstr "Add New"
+
+#: functions/imc-core-issues.php:20
+msgid "Add New Issue"
+msgstr "Add New Issue"
+
+#: functions/imc-core-issues.php:21
+msgid "New Issue"
+msgstr "New Issue"
+
+#: functions/imc-core-issues.php:22
+msgid "Edit "
+msgstr "Edit "
+
+#: functions/imc-core-issues.php:23
+msgid "Edit Issue"
+msgstr "Edit Issue"
+
+#: functions/imc-core-issues.php:24
+msgid "View"
+msgstr "View"
+
+#: functions/imc-core-issues.php:25
+msgid "View Issue"
+msgstr "View Issue"
+
+#: functions/imc-core-issues.php:26
+msgid "All Issues"
+msgstr "All Issues"
+
+#: functions/imc-core-issues.php:27
+msgid "Search Issues"
+msgstr "Search Issues"
+
+#: functions/imc-core-issues.php:28
+msgid "Parent Issues:"
+msgstr "Parent Issues:"
+
+#: functions/imc-core-issues.php:29
+msgid "Parent Issue"
+msgstr "Parent Issue"
+
+#: functions/imc-core-issues.php:30
+msgid "No issues found."
+msgstr "No issues found."
+
+#: functions/imc-core-issues.php:31
+msgid "No issues found in Trash."
+msgstr "No issues found in Trash."
+
+#: functions/imc-core-issues.php:36
+msgid "Description."
+msgstr "Description."
+
+#: functions/imc-core-logs.php:14 functions/imc-page-logs.php:14
+#: functions/imc-page-logs.php:19
+msgid "Logs"
+msgstr "Logs"
+
+#: functions/imc-core-logs.php:34 functions/imc-page-logs.php:29
+msgid "Activity"
+msgstr "Activity"
+
+#: functions/imc-core-logs.php:35 functions/imc-page-logs.php:30
+msgid "User"
+msgstr "User"
+
+#: functions/imc-core-logs.php:36 functions/imc-page-logs.php:31
+msgid "Reason"
+msgstr "Reason"
+
+#: functions/imc-core-logs.php:83 functions/imc-core-logs.php:145
+#: functions/imc-core-logs.php:216
+msgid "Issue published as "
+msgstr "Issue published as "
+
+#: functions/imc-core-logs.php:84 functions/imc-core-logs.php:146
+#: functions/imc-core-logs.php:217
+msgid "Issue reported and published"
+msgstr "Issue reported and published"
+
+#: functions/imc-core-notifications.php:39
+msgid "New issue submitted by: "
+msgstr "New issue submitted by: "
+
+#: functions/imc-core-notifications.php:42
+msgid "You submitted a new issue to IMC with title: "
+msgstr "You submitted a new issue to IMC with title: "
+
+#: functions/imc-core-notifications.php:44
+msgid "New issue submitted, classified as: "
+msgstr "New issue submitted, classified as: "
+
+#: functions/imc-core-notifications.php:47
+msgid "The issue"
+msgstr "The issue"
+
+#: functions/imc-core-notifications.php:49
+msgid "located at: "
+msgstr "located at: "
+
+#: functions/imc-core-notifications.php:52
+msgid "See the issue at: "
+msgstr "See the issue at: "
+
+#: functions/imc-core-notifications.php:57
+msgid "You submitted a new issue, classified as: "
+msgstr "You submitted a new issue, classified as: "
+
+#: functions/imc-core-notifications.php:60
+#: functions/imc-core-notifications.php:151
+#: functions/imc-core-notifications.php:244
+msgid "You can see your issue at: "
+msgstr "You can see your issue at: "
+
+#: functions/imc-core-notifications.php:133
+msgid "Issue status has been modified to: "
+msgstr "Issue status has been modified to: "
+
+#: functions/imc-core-notifications.php:136
+msgid "Your submitted issue status has been modified to: "
+msgstr "Your submitted issue status has been modified to: "
+
+#: functions/imc-core-notifications.php:139
+msgid "Issue status has changed to "
+msgstr "Issue status has changed to "
+
+#: functions/imc-core-notifications.php:141
+msgid "Status was modified by "
+msgstr "Status was modified by "
+
+#: functions/imc-core-notifications.php:143
+#: functions/imc-core-notifications.php:236
+msgid "You can see the issue at: "
+msgstr "You can see the issue at: "
+
+#: functions/imc-core-notifications.php:147
+#: functions/imc-core-notifications.php:240
+msgid "Your issue"
+msgstr "Your issue"
+
+#: functions/imc-core-notifications.php:149
+msgid "has changed status to "
+msgstr "has changed status to "
+
+#: functions/imc-core-notifications.php:226
+msgid "Issue category has been modified to: "
+msgstr "Issue category has been modified to: "
+
+#: functions/imc-core-notifications.php:229
+msgid "Your submitted issue category has been changed to: "
+msgstr "Your submitted issue category has been changed to: "
+
+#: functions/imc-core-notifications.php:232
+msgid "Issue updated with new category: "
+msgstr "Issue updated with new category: "
+
+#: functions/imc-core-notifications.php:234
+msgid "Category is modified by "
+msgstr "Category is modified by "
+
+#: functions/imc-core-notifications.php:242
+msgid "has changed category to "
+msgstr "has changed category to "
+
+#: functions/imc-core-notifications.php:303
+msgid "New Comment on Issue: "
+msgstr "New Comment on Issue: "
+
+#: functions/imc-core-notifications.php:308
+msgid "New comment on issue "
+msgstr "New comment on issue "
+
+#: functions/imc-core-notifications.php:310
+msgid "from user: "
+msgstr "from user: "
+
+#: functions/imc-core-notifications.php:311
+msgid "See comment here: "
+msgstr "See comment here: "
+
+#: functions/imc-core-notifications.php:338
+msgid "Participace na projektech"
+msgstr "Participace na projektech"
+
+#: functions/imc-core-taxcategory.php:13
+msgctxt "taxonomy general name"
+msgid "Categories"
+msgstr "Categories"
+
+#: functions/imc-core-taxcategory.php:14
+msgctxt "taxonomy singular name"
+msgid "Category"
+msgstr "Category"
+
+#: functions/imc-core-taxcategory.php:15
+msgctxt "admin menu"
+msgid "Issue Categories"
+msgstr "Issue Categories"
+
+#: functions/imc-core-taxcategory.php:16
+msgid "Search Categories"
+msgstr "Search Categories"
+
+#: functions/imc-core-taxcategory.php:17
+msgid "All Categories"
+msgstr "All Categories"
+
+#: functions/imc-core-taxcategory.php:18
+msgid "Parent Category"
+msgstr "Parent Category"
+
+#: functions/imc-core-taxcategory.php:19
+msgid "Parent Category:"
+msgstr "Parent Category:"
+
+#: functions/imc-core-taxcategory.php:20
+msgid "Edit Category"
+msgstr "Edit Category"
+
+#: functions/imc-core-taxcategory.php:21
+msgid "Update Category"
+msgstr "Update Category"
+
+#: functions/imc-core-taxcategory.php:22
+msgid "Add new Category"
+msgstr "Add new Category"
+
+#: functions/imc-core-taxcategory.php:23
+msgid "New Category Name"
+msgstr "New Category Name"
+
+#: functions/imc-core-taxcategory.php:79 functions/imc-core-taxcategory.php:94
+msgid "E-mail for Notifications"
+msgstr "E-mail for Notifications"
+
+#: functions/imc-core-taxcategory.php:81 functions/imc-core-taxcategory.php:97
+msgid ""
+"The e-mail address that will receive all notifications. You can use more "
+"than one if you like, by separating them with comma."
+msgstr ""
+"The e-mail address that will receive all notifications. You can use more "
+"than one if you like, by separating them with comma."
+
+#: functions/imc-core-taxcategory.php:272
+msgid "Select Image"
+msgstr "Select Image"
+
+#: functions/imc-core-taxcategory.php:273
+msgid "Remove"
+msgstr "Remove"
+
+#: functions/imc-core-taxcategory.php:275
+msgid ""
+"Select which image should represent this category. Images should have at "
+"least 100 x 100 size."
+msgstr ""
+"Select which image should represent this category. Images should have at "
+"least 100 x 100 size."
+
+#: functions/imc-core-taxcategory.php:293
+#: functions/imc-core-taxcategory.php:316
+msgid "Category Image"
+msgstr "Category Image"
+
+#: functions/imc-core-taxcategory.php:459
+msgid "Select category for current Issue"
+msgstr "Select category for current Issue"
+
+#: functions/imc-core-taxcategory.php:467
+msgid "Select Category"
+msgstr "Select Category"
+
+#: functions/imc-core-taxcategory.php:487
+msgid "Select category"
+msgstr "Select category"
+
+#: functions/imc-core-taxcategory.php:500
+#: functions/imc-core-taxcategory.php:501 functions/imc-core-taxstatus.php:126
+#: functions/imc-core-taxstatus.php:127
+msgid "Add a reason"
+msgstr "Add a reason"
+
+#: functions/imc-core-taxcategory.php:503 functions/imc-core-taxstatus.php:129
+msgid "Selected date"
+msgstr "Selected date"
+
+#: functions/imc-core-taxcategory.php:618
+msgid "Category changed: "
+msgstr "Category changed: "
+
+#: functions/imc-core-taxcategory.php:676
+msgid "Image"
+msgstr "Image"
+
+#: functions/imc-core-taxcategory.php:725
+msgid "Email"
+msgstr "Email"
+
+#: functions/imc-core-taxcategory.php:803
+msgid "Go back to Issue Categories"
+msgstr "Go back to Issue Categories"
+
+#: functions/imc-core-taxstatus.php:14
+msgctxt "taxonomy general name"
+msgid "Statuses"
+msgstr "Statuses"
+
+#: functions/imc-core-taxstatus.php:15
+msgctxt "taxonomy singular name"
+msgid "Status"
+msgstr "Status"
+
+#: functions/imc-core-taxstatus.php:16
+msgctxt "taxonomy menu name"
+msgid "Issue Statuses"
+msgstr "Issue Statuses"
+
+#: functions/imc-core-taxstatus.php:17
+msgid "Search Statuses"
+msgstr "Search Statuses"
+
+#: functions/imc-core-taxstatus.php:18
+msgid "All Statuses"
+msgstr "All Statuses"
+
+#: functions/imc-core-taxstatus.php:19
+msgid "Parent Status"
+msgstr "Parent Status"
+
+#: functions/imc-core-taxstatus.php:20
+msgid "Parent Status:"
+msgstr "Parent Status:"
+
+#: functions/imc-core-taxstatus.php:21
+msgid "Edit Status"
+msgstr "Edit Status"
+
+#: functions/imc-core-taxstatus.php:22
+msgid "Update Status"
+msgstr "Update Status"
+
+#: functions/imc-core-taxstatus.php:23
+msgid "Add New Status"
+msgstr "Add New Status"
+
+#: functions/imc-core-taxstatus.php:24
+msgid "New Status Name"
+msgstr "New Status Name"
+
+#: functions/imc-core-taxstatus.php:90
+msgid "Select status for current Issue"
+msgstr "Select status for current Issue"
+
+#: functions/imc-core-taxstatus.php:97
+msgid "Select Status"
+msgstr "Select Status"
+
+#: functions/imc-core-taxstatus.php:117
+msgid "Select status"
+msgstr "Select status"
+
+#: functions/imc-core-taxstatus.php:228
+msgid "Status changed: "
+msgstr "Status changed: "
+
+#: functions/imc-core-taxstatus.php:293 functions/imc-core-taxstatus.php:339
+msgid "Status Color"
+msgstr "Status Color"
+
+#: functions/imc-core-taxstatus.php:326 functions/imc-core-taxstatus.php:377
+msgid "Pick a color that identifies the Issue's Status."
+msgstr "Pick a color that identifies the Issue's Status."
+
+#: functions/imc-core-taxstatus.php:424
+msgid "Color"
+msgstr "Color"
+
+#: functions/imc-core-taxstatus.php:469
+msgid "Order"
+msgstr "Order"
+
+#: functions/imc-core-taxstatus.php:523
+msgid "Go back to Issue Statuses"
+msgstr "Go back to Issue Statuses"
+
+#: functions/imc-page-logs.php:27
+msgid "Issue Title"
+msgstr "Issue Title"
+
+#: functions/imc-page-settings.php:108
+msgid "Google Map"
+msgstr "Google Map"
+
+#: functions/imc-page-settings.php:111
+msgid "Google Map Settings"
+msgstr "Google Map Settings"
+
+#: functions/imc-page-settings.php:113
+msgid "Google Maps API KEY"
+msgstr "Google Maps API KEY"
+
+#: functions/imc-page-settings.php:115
+msgid "Initial Address"
+msgstr "Initial Address"
+
+#: functions/imc-page-settings.php:117
+msgid "Search for Boundaries"
+msgstr "Search for Boundaries"
+
+#: functions/imc-page-settings.php:119
+msgid "Boundaries"
+msgstr "Boundaries"
+
+#: functions/imc-page-settings.php:121
+msgid "Initial Latitude"
+msgstr "Initial Latitude"
+
+#: functions/imc-page-settings.php:123
+msgid "Initial Longitude"
+msgstr "Initial Longitude"
+
+#: functions/imc-page-settings.php:125
+msgid "Initial Map Zoom"
+msgstr "Initial Map Zoom"
+
+#: functions/imc-page-settings.php:127
+msgid "Map Language"
+msgstr "Map Language"
+
+#: functions/imc-page-settings.php:129
+msgid "Map Region"
+msgstr "Map Region"
+
+#: functions/imc-page-settings.php:131
+msgid "Allow zooming with mouse scroll wheel"
+msgstr "Allow zooming with mouse scroll wheel"
+
+#: functions/imc-page-settings.php:144 functions/imc-page-settings.php:147
+msgid "Mail Notifications"
+msgstr "Mail Notifications"
+
+#: functions/imc-page-settings.php:149
+msgid "On new issue to user"
+msgstr "On new issue to user"
+
+#: functions/imc-page-settings.php:151
+msgid "On new issue to admins"
+msgstr "On new issue to admins"
+
+#: functions/imc-page-settings.php:153
+msgid "On change category to user"
+msgstr "On change category to user"
+
+#: functions/imc-page-settings.php:155
+msgid "On change category to admins"
+msgstr "On change category to admins"
+
+#: functions/imc-page-settings.php:157
+msgid "On change status to user"
+msgstr "On change status to user"
+
+#: functions/imc-page-settings.php:159
+msgid "On change status to admins"
+msgstr "On change status to admins"
+
+#: functions/imc-page-settings.php:161
+msgid "On new comment to admins"
+msgstr "On new comment to admins"
+
+#: functions/imc-page-settings.php:171
+msgid "General"
+msgstr "General"
+
+#: functions/imc-page-settings.php:174
+msgid "General Settings"
+msgstr "General Settings"
+
+#: functions/imc-page-settings.php:176
+msgid "Moderate new issues"
+msgstr "Moderate new issues"
+
+#: functions/imc-page-settings.php:178
+msgid "Enable Social Login"
+msgstr "Enable Social Login"
+
+#: functions/imc-page-settings.php:180
+msgid "Default Issues View"
+msgstr "Default Issues View"
+
+#: functions/imc-page-settings.php:182
+msgid "Add a custom slug for the issues page"
+msgstr "Add a custom slug for the issues page"
+
+#: functions/imc-page-settings.php:187
+msgid "API"
+msgstr "API"
+
+#: functions/imc-page-settings.php:190
+msgid "API Settings"
+msgstr "API Settings"
+
+#: functions/imc-page-settings.php:191
+msgid "API keys"
+msgstr "API keys"
+
+#: functions/imc-page-settings.php:194
+msgid "Add new API key"
+msgstr "Add new API key"
+
+#: functions/imc-page-settings.php:201
+msgid "Mobile Notifications"
+msgstr "Mobile Notifications"
+
+#: functions/imc-page-settings.php:204
+msgid "Mobile Notifications - Google Firebase Settings"
+msgstr "Mobile Notifications - Google Firebase Settings"
+
+#: functions/imc-page-settings.php:206
+msgid "Enable mobile notifications"
+msgstr "Enable mobile notifications"
+
+#: functions/imc-page-settings.php:208
+msgid "Google Firebase API access key"
+msgstr "Google Firebase API access key"
+
+#: functions/imc-page-settings.php:210
+msgid "When the category of a user's issue has changed"
+msgstr "When the category of a user's issue has changed"
+
+#: functions/imc-page-settings.php:212
+msgid "When the status of a user's issue has changed"
+msgstr "When the status of a user's issue has changed"
+
+#: functions/imc-page-settings.php:214
+msgid "When a new comment is added to a user's issue"
+msgstr "When a new comment is added to a user's issue"
+
+#: functions/imc-page-settings.php:223
+msgid "Settings regarding the map and its initial settings."
+msgstr "Settings regarding the map and its initial settings."
+
+#: functions/imc-page-settings.php:224
+msgid ""
+"Settings about mail notifications sent to users and administrators, when a "
+"new issue or comment is available."
+msgstr ""
+"Settings about mail notifications sent to users and administrators, when a "
+"new issue or comment is available."
+
+#: functions/imc-page-settings.php:225
+msgid "Settings concerning the functionality of the application"
+msgstr "Settings concerning the functionality of the application"
+
+#: functions/imc-page-settings.php:226
+msgid "Settings concerning the functionality of API"
+msgstr "Settings concerning the functionality of API"
+
+#: functions/imc-page-settings.php:227
+msgid ""
+"Settings concerning the functionality of mobile notifications through Google "
+"Firebase"
+msgstr ""
+"Settings concerning the functionality of mobile notifications through Google "
+"Firebase"
+
+#: functions/imc-page-settings.php:237
+msgid "Google Maps API Key"
+msgstr "Google Maps API Key"
+
+#: functions/imc-page-settings.php:243
+msgid "Initial address"
+msgstr "Initial address"
+
+#: functions/imc-page-settings.php:309 functions/imc-page-settings.php:321
+msgid "Couldn't find city"
+msgstr "Couldn't find city"
+
+#: functions/imc-page-settings.php:339
+msgid "The service is not available, try again later"
+msgstr "The service is not available, try again later"
+
+#: functions/imc-page-settings.php:349
+msgid "Could not connect to geocoding service"
+msgstr "Could not connect to geocoding service"
+
+#: functions/imc-page-settings.php:360
+msgid "Latitude"
+msgstr "Latitude"
+
+#: functions/imc-page-settings.php:366
+msgid "Longitude"
+msgstr "Longitude"
+
+#: functions/imc-page-settings.php:372
+msgid "Insert zoom value"
+msgstr "Insert zoom value"
+
+#: functions/imc-page-settings.php:378
+msgid "Insert language 'e.g.: en'"
+msgstr "Insert language 'e.g.: en'"
+
+#: functions/imc-page-settings.php:384
+msgid "Insert region 'e.g.: GB'"
+msgstr "Insert region 'e.g.: GB'"
+
+#: functions/imc-page-settings.php:390 functions/imc-page-settings.php:398
+#: functions/imc-page-settings.php:443 functions/imc-page-settings.php:451
+#: functions/imc-page-settings.php:459 functions/imc-page-settings.php:467
+#: functions/imc-page-settings.php:475 functions/imc-page-settings.php:483
+#: functions/imc-page-settings.php:491 functions/imc-page-settings.php:503
+#: functions/imc-page-settings.php:511 functions/imc-page-settings.php:543
+#: functions/imc-page-settings.php:558 functions/imc-page-settings.php:566
+#: functions/imc-page-settings.php:574
+msgid "YES"
+msgstr "YES"
+
+#: functions/imc-page-settings.php:392 functions/imc-page-settings.php:400
+#: functions/imc-page-settings.php:445 functions/imc-page-settings.php:453
+#: functions/imc-page-settings.php:461 functions/imc-page-settings.php:469
+#: functions/imc-page-settings.php:477 functions/imc-page-settings.php:485
+#: functions/imc-page-settings.php:493 functions/imc-page-settings.php:505
+#: functions/imc-page-settings.php:513 functions/imc-page-settings.php:545
+#: functions/imc-page-settings.php:560 functions/imc-page-settings.php:568
+#: functions/imc-page-settings.php:576
+msgid "ΝΟ"
+msgstr "ΝΟ"
+
+#: functions/imc-page-settings.php:406
+msgid "Add city"
+msgstr "Add city"
+
+#: functions/imc-page-settings.php:409
+#: functions/templates/archive-imc_issues.php:239
+msgid "Search"
+msgstr "Search"
+
+#: functions/imc-page-settings.php:519
+msgid "List"
+msgstr "List"
+
+#: functions/imc-page-settings.php:521
+msgid "Grid"
+msgstr "Grid"
+
+#: functions/imc-page-settings.php:527
+msgid "Custom slug, eg: issues"
+msgstr "Custom slug, eg: issues"
+
+#: functions/imc-page-settings.php:529
+msgid "Use only one word - no spaces."
+msgstr "Use only one word - no spaces."
+
+#: functions/imc-page-settings.php:531
+msgid ""
+"Save changes and go to Settings -> Permalinks and click on \"Save Permalinks"
+"\" to enable the custom slug."
+msgstr ""
+"Save changes and go to Settings -> Permalinks and click on \"Save Permalinks"
+"\" to enable the custom slug."
+
+#: functions/imc-page-settings.php:532
+msgid "Default: imc_issues"
+msgstr "Default: imc_issues"
+
+#: functions/imc-page-settings.php:552
+msgid "Insert API_ACCESS_KEY"
+msgstr "Insert API_ACCESS_KEY"
+
+#: functions/imc-page-settings.php:591 functions/imc-page-settings.php:636
+msgid "API key title"
+msgstr "API key title"
+
+#: functions/imc-page-settings.php:592
+msgid "Key"
+msgstr "Key"
+
+#: functions/imc-page-settings.php:593
+msgid "Created by"
+msgstr "Created by"
+
+#: functions/imc-page-settings.php:594
+msgid "ID"
+msgstr "ID"
+
+#: functions/imc-page-settings.php:640
+msgid "API key"
+msgstr "API key"
+
+#: functions/imc-page-settings.php:643
+msgid "Generate key"
+msgstr "Generate key"
+
+#: functions/imc-page-settings.php:685
+msgid "IMC Plugin Settings"
+msgstr "IMC Plugin Settings"
+
+#: functions/imc-page-settings.php:685
+msgid "IMC Settings"
+msgstr "IMC Settings"
+
+#: functions/imc-user-groups.php:119
+msgid "Users"
+msgstr "Users"
+
+#: functions/imc-user-groups.php:222
+msgctxt "Taxonomy General Name"
+msgid "User Groups"
+msgstr "User Groups"
+
+#: functions/imc-user-groups.php:223
+msgctxt "Taxonomy Singular Name"
+msgid "User Group"
+msgstr "User Group"
+
+#: functions/imc-user-groups.php:224
+msgid "User Groups"
+msgstr "User Groups"
+
+#: functions/imc-user-groups.php:225
+msgid "All User Groups"
+msgstr "All User Groups"
+
+#: functions/imc-user-groups.php:226
+msgid "Parent User Group"
+msgstr "Parent User Group"
+
+#: functions/imc-user-groups.php:227
+msgid "Parent User Group:"
+msgstr "Parent User Group:"
+
+#: functions/imc-user-groups.php:228
+msgid "New User Group"
+msgstr "New User Group"
+
+#: functions/imc-user-groups.php:229
+msgid "Add New User Group"
+msgstr "Add New User Group"
+
+#: functions/imc-user-groups.php:230
+msgid "Edit User Group"
+msgstr "Edit User Group"
+
+#: functions/imc-user-groups.php:231
+msgid "Update User Group"
+msgstr "Update User Group"
+
+#: functions/imc-user-groups.php:232
+msgid "View User Group"
+msgstr "View User Group"
+
+#: functions/imc-user-groups.php:233
+msgid "Separate User Groups with commas"
+msgstr "Separate User Groups with commas"
+
+#: functions/imc-user-groups.php:234
+msgid "Add or remove User Groups"
+msgstr "Add or remove User Groups"
+
+#: functions/imc-user-groups.php:235
+msgid "Choose from the most used"
+msgstr "Choose from the most used"
+
+#: functions/imc-user-groups.php:237
+msgid "Search User Groups"
+msgstr "Search User Groups"
+
+#: functions/imc-user-groups.php:238
+msgid "Not Found"
+msgstr "Not Found"
+
+#: functions/imc-user-groups.php:239
+msgid "No items"
+msgstr "No items"
+
+#: functions/imc-user-groups.php:240
+msgid "Items list"
+msgstr "Items list"
+
+#: functions/imc-user-groups.php:241
+msgid "Items list navigation"
+msgstr "Items list navigation"
+
+#: functions/templates/archive-imc_issues.php:45
+#: functions/templates/archive-imc_issues.php:188
+msgid "Votes"
+msgstr "Votes"
+
+#: functions/templates/archive-imc_issues.php:172
+msgid "Display: "
+msgstr "Display: "
+
+#: functions/templates/archive-imc_issues.php:177
+msgid "All"
+msgstr "All"
+
+#: functions/templates/archive-imc_issues.php:185
+msgid "Order: "
+msgstr "Order: "
+
+#: functions/templates/archive-imc_issues.php:211
+#: functions/templates/single-imc_issues.php:66
+msgid "Report an issue"
+msgstr "Report an issue"
+
+#: functions/templates/archive-imc_issues.php:225
+msgid "Search &amp; Filtering"
+msgstr "Search &amp; Filtering"
+
+#: functions/templates/archive-imc_issues.php:226
+#: functions/templates/edit-imc_issues.php:155
+#: functions/templates/insert-imc_issues.php:135
+msgid "Category"
+msgstr "Category"
+
+#: functions/templates/archive-imc_issues.php:227
+msgid "Status"
+msgstr "Status"
+
+#: functions/templates/archive-imc_issues.php:228
+msgid "Keyword"
+msgstr "Keyword"
+
+#: functions/templates/archive-imc_issues.php:241
+msgid "Keyword search"
+msgstr "Keyword search"
+
+#: functions/templates/archive-imc_issues.php:244
+msgid "Issue status"
+msgstr "Issue status"
+
+#: functions/templates/archive-imc_issues.php:265
+msgid "Categories"
+msgstr "Categories"
+
+#: functions/templates/archive-imc_issues.php:329
+msgid "Apply filters"
+msgstr "Apply filters"
+
+#: functions/templates/archive-imc_issues.php:330
+#: functions/templates/archive-imc_issues.php:454
+msgid "Reset filters"
+msgstr "Reset filters"
+
+#: functions/templates/archive-imc_issues.php:446
+msgid "There are no issues"
+msgstr "There are no issues"
+
+#: functions/templates/archive-imc_issues.php:451
+msgid "Add a new issue"
+msgstr "Add a new issue"
+
+#: functions/templates/archive-imc_issues.php:476
+msgid "Showing"
+msgstr "Showing"
+
+#: functions/templates/archive-imc_issues.php:476
+msgid "of"
+msgstr "of"
+
+#: functions/templates/archive-imc_issues.php:476
+msgid "issues"
+msgstr "issues"
+
+#: functions/templates/edit-imc_issues.php:116
+#: functions/templates/edit-imc_issues.php:430
+#: functions/templates/insert-imc_issues.php:106
+#: functions/templates/insert-imc_issues.php:373
+#: functions/templates/single-imc_issues.php:61
+msgid "Return to overview"
+msgstr "Return to overview"
+
+#: functions/templates/edit-imc_issues.php:132
+#: functions/templates/single-imc_issues.php:72
+msgid "Edit issue"
+msgstr "Edit issue"
+
+#: functions/templates/edit-imc_issues.php:148
+#: functions/templates/insert-imc_issues.php:128
+msgid "Title"
+msgstr "Title"
+
+#: functions/templates/edit-imc_issues.php:149
+#: functions/templates/insert-imc_issues.php:129
+msgid "Add a short title for the issue"
+msgstr "Add a short title for the issue"
+
+#: functions/templates/edit-imc_issues.php:184
+#: functions/templates/insert-imc_issues.php:147
+#: functions/templates/single-imc_issues.php:211
+msgid "Description"
+msgstr "Description"
+
+#: functions/templates/edit-imc_issues.php:184
+#: functions/templates/edit-imc_issues.php:211
+#: functions/templates/insert-imc_issues.php:147
+#: functions/templates/insert-imc_issues.php:173
+msgid " (optional)"
+msgstr " (optional)"
+
+#: functions/templates/edit-imc_issues.php:185
+#: functions/templates/insert-imc_issues.php:148
+msgid "Add a thorough description of the issue"
+msgstr "Add a thorough description of the issue"
+
+#: functions/templates/edit-imc_issues.php:190
+#: functions/templates/insert-imc_issues.php:153
+msgid "Address"
+msgstr "Address"
+
+#: functions/templates/edit-imc_issues.php:193
+#: functions/templates/insert-imc_issues.php:156
+msgid "Locate"
+msgstr "Locate"
+
+#: functions/templates/edit-imc_issues.php:197
+#: functions/templates/insert-imc_issues.php:160
+msgid "Add an address"
+msgstr "Add an address"
+
+#: functions/templates/edit-imc_issues.php:211
+#: functions/templates/insert-imc_issues.php:173
+msgid "Photo"
+msgstr "Photo"
+
+#: functions/templates/edit-imc_issues.php:219
+#: functions/templates/edit-imc_issues.php:241
+#: functions/templates/insert-imc_issues.php:179
+msgid "Add photo"
+msgstr "Add photo"
+
+#: functions/templates/edit-imc_issues.php:222
+#: functions/templates/edit-imc_issues.php:244
+#: functions/templates/insert-imc_issues.php:182
+msgid "Delete Photo"
+msgstr "Delete Photo"
+
+#: functions/templates/edit-imc_issues.php:225
+#: functions/templates/edit-imc_issues.php:247
+#: functions/templates/insert-imc_issues.php:185
+msgid "No photo attached"
+msgstr "No photo attached"
+
+#: functions/templates/edit-imc_issues.php:226
+#: functions/templates/edit-imc_issues.php:249
+msgid ""
+"Photo size must be less than 2MB, please resize it or select a smaller one!"
+msgstr ""
+"Photo size must be less than 2MB, please resize it or select a smaller one!"
+
+#: functions/templates/edit-imc_issues.php:227
+#: functions/templates/edit-imc_issues.php:248
+#: functions/templates/insert-imc_issues.php:187
+msgid "A photo has been selected:"
+msgstr "A photo has been selected:"
+
+#: functions/templates/edit-imc_issues.php:265
+msgid "Save changes"
+msgstr "Save changes"
+
+#: functions/templates/edit-imc_issues.php:449
+msgid "You are not authorised to edit an issue"
+msgstr "You are not authorised to edit an issue"
+
+#: functions/templates/edit-imc_issues.php:453
+#: functions/templates/insert-imc_issues.php:396
+msgid "Please login!"
+msgstr "Please login!"
+
+#: functions/templates/imc-part-archive-grid.php:20
+#: functions/templates/imc-part-archive-list.php:138
+#: functions/templates/single-imc_issues.php:452
+msgid "My Issue"
+msgstr "My Issue"
+
+#: functions/templates/imc-part-archive-grid.php:24
+#: functions/templates/imc-part-archive-list.php:142
+msgid "Edit"
+msgstr "Edit"
+
+#: functions/templates/imc-part-archive-grid.php:39
+#: functions/templates/imc-part-archive-list.php:129
+msgid "No photo submitted"
+msgstr "No photo submitted"
+
+#: functions/templates/imc-part-archive-grid.php:101
+#: functions/templates/imc-part-archive-list.php:87
+msgid "Under moderation"
+msgstr "Under moderation"
+
+#: functions/templates/imc-part-archive-grid.php:121
+#: functions/templates/imc-part-archive-list.php:105
+#, php-format
+msgctxt "comments number"
+msgid "1 Comment"
+msgid_plural "%1$s Comments"
+msgstr[0] "1 Comment"
+msgstr[1] "%1$s Comments"
+
+#: functions/templates/insert-imc_issues.php:120
+msgid "Report a new issue"
+msgstr "Report a new issue"
+
+#: functions/templates/insert-imc_issues.php:186
+msgid ""
+"Photo size must be smaller in size, please resize it or select a smaller one!"
+msgstr ""
+"Photo size must be smaller in size, please resize it or select a smaller one!"
+
+#: functions/templates/insert-imc_issues.php:202
+msgid "Submit"
+msgstr "Submit"
+
+#: functions/templates/insert-imc_issues.php:392
+msgid "You are not authorised to report an issue"
+msgstr "You are not authorised to report an issue"
+
+#: functions/templates/single-imc_issues.php:82
+msgid "Under Moderation"
+msgstr "Under Moderation"
+
+#: functions/templates/single-imc_issues.php:219
+msgid "Photos"
+msgstr "Photos"
+
+#: functions/templates/single-imc_issues.php:226
+msgid "No photos submitted"
+msgstr "No photos submitted"
+
+#: functions/templates/single-imc_issues.php:250
+msgid "No Comments"
+msgstr "No Comments"
+
+#: functions/templates/single-imc_issues.php:252
+msgid " Comments"
+msgstr " Comments"
+
+#: functions/templates/single-imc_issues.php:254
+msgid "1 Comment"
+msgstr "1 Comment"
+
+#: functions/templates/single-imc_issues.php:264
+msgid "Post Comment"
+msgstr "Post Comment"
+
+#: functions/templates/single-imc_issues.php:267
+msgid "Add a comment"
+msgstr "Add a comment"
+
+#: functions/templates/single-imc_issues.php:271
+#, php-format
+msgid ""
+"You must be <a class=\"imc-LinkStyle\" href=\"%s\">logged in</a> to post a "
+"comment."
+msgstr ""
+"You must be <a class=\"imc-LinkStyle\" href=\"%s\">logged in</a> to post a "
+"comment."
+
+#: functions/templates/single-imc_issues.php:276
+#, php-format
+msgid ""
+"Logged in as <span class=\"imc-TextColorPrimary\">%2$s</span>. <a class="
+"\"imc-LinkStyle\" href=\"%3$s\" title=\"Log out of this account\">Log out?</"
+"a>"
+msgstr ""
+"Logged in as <span class=\"imc-TextColorPrimary\">%2$s</span>. <a class="
+"\"imc-LinkStyle\" href=\"%3$s\" title=\"Log out of this account\">Log out?</"
+"a>"
+
+#: functions/templates/single-imc_issues.php:295
+msgid "No comments submitted"
+msgstr "No comments submitted"
+
+#: functions/templates/single-imc_issues.php:300
+msgid "comments"
+msgstr "comments"
+
+#: functions/templates/single-imc_issues.php:335
+msgid "Pending"
+msgstr "Pending"
+
+#: functions/templates/single-imc_issues.php:356
+msgid "Administrator"
+msgstr "Administrator"
+
+#: functions/templates/single-imc_issues.php:361
+msgid "Issue author"
+msgstr "Issue author"
+
+#: functions/templates/single-imc_issues.php:403
+msgid "Comments are disabled"
+msgstr "Comments are disabled"
+
+#: functions/templates/single-imc_issues.php:420
+msgid "Messages"
+msgstr "Messages"
+
+#: functions/templates/single-imc_issues.php:427
+msgid "Location"
+msgstr "Location"
+
+#: functions/templates/single-imc_issues.php:455
+msgid "My issue"
+msgstr "My issue"
+
+#: functions/templates/single-imc_issues.php:473
+msgid "Voted"
+msgstr "Voted"
+
+#: functions/templates/single-imc_issues.php:481
+msgid "Vote"
+msgstr "Vote"
+
+#: functions/templates/single-imc_issues.php:491
+msgid "Timeline"
+msgstr "Timeline"
+
+#: functions/templates/single-imc_issues.php:509
+#: functions/templates/single-imc_issues.php:526
+#: functions/templates/single-imc_issues.php:541
+#: functions/templates/single-imc_issues.php:553
+msgid "by"
+msgstr "by"
+
+#: improve-my-city.php:261
+msgid "Please provide a location inside municipality limits"
+msgstr "Please provide a location inside municipality limits"
+
+#: improve-my-city.php:262
+msgid "Couldn't find an address"
+msgstr "Couldn't find an address"
+
+#: improve-my-city.php:263
+msgid "No results found"
+msgstr "No results found"
+
+#: improve-my-city.php:264
+msgid "Geocoder failed"
+msgstr "Geocoder failed"
+
+#: improve-my-city.php:315
+msgctxt "For color picker"
+msgid "Choose"
+msgstr "Choose"
+
+#: improve-my-city.php:316
+msgctxt "For color picker"
+msgid "Cancel"
+msgstr "Cancel"
+
+#: improve-my-city.php:321
+msgctxt "For category image"
+msgid "Select or upload an image for this category"
+msgstr "Select or upload an image for this category"
+
+#: improve-my-city.php:322
+msgctxt "For category image"
+msgid "Attach"
+msgstr "Attach"
+
+#: improve-my-city.php:338
+msgid "Please make sure that you have selected a Category."
+msgstr "Please make sure that you have selected a Category."
+
+#: improve-my-city.php:339
+msgid "Please make sure that you have selected a Status."
+msgstr "Please make sure that you have selected a Status."
+
+#: improve-my-city.php:340
+msgid "Please make sure that you have entered a reason!"
+msgstr "Please make sure that you have entered a reason!"
+
+#~ msgctxt "post type general name"
+#~ msgid "Notifications"
+#~ msgstr "Notifications"
+
+#~ msgctxt "post type singular name"
+#~ msgid "Notification"
+#~ msgstr "Notification"
+
+#~ msgctxt "add new on admin bar"
+#~ msgid "Notification"
+#~ msgstr "Notification"
+
+#~ msgctxt "notification"
+#~ msgid "Add New"
+#~ msgstr "Add New"
+
+#~ msgid "Add New Notification"
+#~ msgstr "Add New Notification"
+
+#~ msgid "New Notification"
+#~ msgstr "New Notification"
+
+#~ msgid "Edit Notification"
+#~ msgstr "Edit Notification"
+
+#~ msgid "View Notification"
+#~ msgstr "View Notification"
+
+#~ msgid "Notifications"
+#~ msgstr "Notifications"
+
+#~ msgid "Search Notifications"
+#~ msgstr "Search Notifications"
+
+#~ msgid "Parent Notifications:"
+#~ msgstr "Parent Notifications:"
+
+#~ msgid "Parent Notifications"
+#~ msgstr "Parent Notifications"
+
+#~ msgid "No notifications found."
+#~ msgstr "No notifications found."
+
+#~ msgid "No notifications found in Trash."
+#~ msgstr "No notifications found in Trash."
+
+#~ msgctxt "mobile notification"
+#~ msgid "Issue status has been modified"
+#~ msgstr "Issue status has been modified"
+
+#~ msgctxt "mobile notification"
+#~ msgid "Issue category has been modified"
+#~ msgstr "Issue category has been modified"
+
+#~ msgctxt "mobile notification"
+#~ msgid "New comment posted on your issue"
+#~ msgstr "New comment posted on your issue"
+
+#~ msgid "Select or upload an image for this category"
+#~ msgstr "Select or upload an image for this category"
+
+#~ msgid "Attach"
+#~ msgstr "Attach"
+
+#~ msgid "Insert a GeoJSON object from the OpenStreetMaps page"
+#~ msgstr "Insert a GeoJSON object from the OpenStreetMaps page"
+
+#~ msgid "%s ago"
+#~ msgstr "%s πριν"
+
+#~ msgid "Issues"
+#~ msgstr "Issues"
+
+#~ msgid "Add New"
+#~ msgstr "Add New"
+
+#~ msgid "Notification"
+#~ msgstr "Notification"
+
+#~ msgid "Issue status has been modified"
+#~ msgstr "Issue status has been modified"
+
+#~ msgid "Issue category has been modified"
+#~ msgstr "Issue category has been modified"
+
+#~ msgid "New comment posted on your issue"
+#~ msgstr "New comment posted on your issue"
+
+#~ msgid "Issue Categories"
+#~ msgstr "Issue Categories"
+
+#~ msgid "Statuses"
+#~ msgstr "Statuses"
+
+#~ msgid "Issue Statuses"
+#~ msgstr "Issue Statuses"
+
+#~ msgid "Choose"
+#~ msgstr "Choose"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
+
+#~ msgid "Add your custom slug for issues"
+#~ msgstr "Add your custom slug for issues"
+
+#~ msgid "Custom slug"
+#~ msgstr "Custom slug"
+
+#~ msgid "Clustering markers"
+#~ msgstr "Clustering markers"
+
+#~ msgid "Skey"
+#~ msgstr "Κλειδί"
+
+#~ msgid "API Keys"
+#~ msgstr "Κλειδιά API"
+
+#~ msgid "Add New API Key"
+#~ msgstr "Καταχώρηση νέου API κλειδιού"
+
+#~ msgid "New issue by: "
+#~ msgstr "Νέο αίτημα από τον χρήστη: "
+
+#~ msgid "You submitted a new issue at IMC with title:"
+#~ msgstr "Υποβάλατε ένα νέο αίτημα στο IMC με τίτλο:"
+
+#~ msgid "New issue is submitted on category:"
+#~ msgstr ""
+#~ "Ένα νέο αίτημα καταχωρήθηκε στο σύστημα που σχετίζεται με την κατηγορία:"
+
+#~ msgid "located at address:"
+#~ msgstr "είναι σχετικό με τη διεύθυνση:"
+
+#~ msgid "See the issue at:"
+#~ msgstr "Δείτε το αίτημα εδώ:"
+
+#~ msgid "You submitted a new issue on category:"
+#~ msgstr "Υποβάλατε αίτημα στην κατηγορία:"
+
+#~ msgid "You can see your issue at:"
+#~ msgstr "Μπορείτε να δείτε το αίτημα σας εδώ:"
+
+#~ msgid "Issue status modified:"
+#~ msgstr "Η κατάσταση του αιτήματος άλλαξε:"
+
+#~ msgid "Your submitted issue status is modified:"
+#~ msgstr "Το αίτημα σας άλλαξε κατάσταση:"
+
+#~ msgid "Issue status has changed to"
+#~ msgstr "Η κατάσταση του αιτήματος άλλαξε σε"
+
+#~ msgid "Status was modified by"
+#~ msgstr "Η Κατάσταση τροποποιήθηκε από"
+
+#~ msgid "You can see the issue at:"
+#~ msgstr "Μπορείτε να δείτε το Αίτημα στο:"
+
+#~ msgid "has changed status to"
+#~ msgstr "άλλαξε την κατάσταση σε"
+
+#~ msgid "Category of issue is modified:"
+#~ msgstr "Η κατηγορία του αιτήματος άλλαξε:"
+
+#~ msgid "Your submitted issue category has changed:"
+#~ msgstr "Το αίτημα σας με αριθμό άλλαξε κατηγορία:"
+
+#~ msgid "Issue is now belong to category"
+#~ msgstr "To αίτημα ανήκει πλέον στην κατηγορία"
+
+#~ msgid "Category is modified by"
+#~ msgstr "Η αλλαγή έγινε από:"
+
+#~ msgid "has changed category to"
+#~ msgstr "άλλαξε κατηγορία σε"
+
+#~ msgid "New Comment on Issue:"
+#~ msgstr "Νέο Σχόλιο στο Αίτημα:"
+
+#~ msgid "New comment on issue"
+#~ msgstr "Νέο σχόλιο στο αίτημα"
+
+#~ msgid "See comment here:"
+#~ msgstr "Δείτε το σχόλιο εδώ:"
+
+#~ msgid ""
+#~ "The e-mail address that will receive all notifications. You can use more "
+#~ "than one if you like."
+#~ msgstr ""
+#~ "Διεύθυνση e-mail που λαμβάνει όλες τις ειδοποιήσεις. Μπορείτε να "
+#~ "χρησιμοποιήσετε περισσότερες από μία."
+
+#~ msgid "Pick specific date"
+#~ msgstr "Επιλέξτε ημερομηνία"
+
+#~ msgid "Search Issue Statuses"
+#~ msgstr "Αναζήτηση σε Καταστάσεις Αιτημάτων"
+
+#~ msgid "All Issue Statuses"
+#~ msgstr "Όλες οι Καταστάσεις Αιτημάτων"
+
+#~ msgid "Parent Issue Statuses"
+#~ msgstr "Γονικές Καταστάσεις Αιτήματος"
+
+#~ msgid "Parent Issue Statuses:"
+#~ msgstr "Γονικές Καταστάσεις Αιτήματος:"
+
+#~ msgid "Edit Issue Status"
+#~ msgstr "Επεξεργασίας Κατάστασης Αιτήματος"
+
+#~ msgid "Update Issue Status"
+#~ msgstr "Ενημέρωση Κατάστασης Αιτήματος"
+
+#~ msgid "Add New Issue Status"
+#~ msgstr "Προσθήκη νέας Κατάστασης Αιτήματος"
+
+#~ msgid "New Issue Status Name"
+#~ msgstr "Νέο όνομα Κατάστασης Αιτήματος"
+
+#~ msgid "No Issues found"
+#~ msgstr "Δεν βρέθηκαν Αιτήματα"
+
+#~ msgid "No Issues found in trash"
+#~ msgstr "Δε βρέθηκαν Αιτήματα στον κάδο απορριμάτων"
+
+#~ msgid "Status is modified by"
+#~ msgstr "Η αλλαγή της κατάστασης έγινε από:"
+
+#~ msgid "Email for Notifications"
+#~ msgstr "E-mail για Ειδοποιήσεις"
+
+#~ msgid "When"
+#~ msgstr "Πότε"
+
+#~ msgid "Transition"
+#~ msgstr "Μετατροπή"
+
+#~ msgid "Why"
+#~ msgstr "Γιατί"
+
+#~ msgid "Settings about Google Map and the initial center position"
+#~ msgstr "Ρυθμίσεις σχετικά με το χάρτη Google Map και την αρχική θέση"
+
+#~ msgid ""
+#~ "Settings about mail notifications on users and administrators on new "
+#~ "issues and new comments"
+#~ msgstr "Ρυθμίσεις σχετικές με την αποστολή ενημερωτικών emails"
+
+#~ msgid "Locate Address on Map"
+#~ msgstr "Εντοπισμός διεύθυνσης στον χάρτη"
+
+#~ msgid "You can see your issue at"
+#~ msgstr "Μπορείτε να δείτε το αίτημα σας εδώ"
+
+#~ msgid "See the issue at"
+#~ msgstr "Δείτε το αίτημα εδώ:"
+
+#~ msgid "My Custom Settings"
+#~ msgstr "Οι ρυθμίσεις μου"
+
+#~ msgid "ID Number"
+#~ msgstr "ID Νούμερο"
+
+#~ msgid "Enter your settings below:"
+#~ msgstr "Συμπληρώστε παρακάτω:"
+
+#~ msgid "New issue is submitted on category: "
+#~ msgstr ""
+#~ "Ένα νέο αίτημα καταχωρήθηκε στο σύστημα που σχετίζεται με την κατηγορία: "
+
+#~ msgid " located at address: "
+#~ msgstr " είναι σχετικό με τη διεύθυνση: "
+
+#~ msgid "See the issue at "
+#~ msgstr "Δείτε το αίτημα εδώ: "
+
+#~ msgid "Admin Email"
+#~ msgstr "Email Διαχειριστή"
+
+#~ msgid "Edit the issue at "
+#~ msgstr "Επεξεργαστείτε το αίτημα εδώ: "
+
+#~ msgid "issue"
+#~ msgstr "αίτημα"
+
+#~ msgid "All Settings about Participace na projektech"
+#~ msgstr "Όλες οι ρυθμίσεις που αφορούv το Βελτιώνω την Πόλη μου"
+
+#~ msgid "My Settings"
+#~ msgstr "Οι Ρυθμίσεις μου"
