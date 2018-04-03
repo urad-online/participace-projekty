@@ -188,6 +188,11 @@ include_once( plugin_dir_path( __FILE__ ) . 'functions/imc-core-taxstatus-orderi
 // 19.01
 include_once( plugin_dir_path( __FILE__ ) . 'functions/imc-user-groups.php' );
 
+// 20.01 Add additional fields to imc_issues
+include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-additional-fields.php' );
+
+
+
 
 /*******************************            SETTINGS LINK ON PLUGINS PAGE           **********************************/
 
