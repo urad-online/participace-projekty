@@ -65,6 +65,20 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	);
 
 
+	$post_meta	= array(
+		'imc_lat'		=> esc_attr(strip_tags($_POST['imcLatValue'])),
+		'imc_lng'		=> esc_attr(strip_tags($_POST['imcLngValue'])),
+		'imc_address'	=> esc_attr(strip_tags($_POST['postAddress'])),
+		'imc_likes'		=> '0',
+		'modality'		=> '0',
+		'pb_project_navrhovatel_jmeno' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_jmeno'])),
+		'pb_project_navrhovatel_adresa' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_adresa'])),
+		'pb_project_navrhovatel_telefon' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_telefon'])),
+		'pb_project_navrhovatel_email' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_email'])),
+			// 'cgbm_zaznam_lgbm_alternate_labels' => sanitize_textarea_field( $input['cgbm_zaznam_lgbm_alternate_labels']['data'] ),
+		);
+
+	$post_information['meta_input'] = $post_meta;
 
 	$post_id = wp_insert_post($post_information);
 
@@ -74,15 +88,15 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	//we now use $post id to help add out post meta data
 
-	add_post_meta($post_id, 'imc_lat', $lat, true);
-
-	add_post_meta($post_id, 'imc_lng', $lng, true);
-
-	add_post_meta($post_id, 'imc_address', $address, true);
-
-	add_post_meta($post_id, 'imc_likes', '0', true); // Initial vote value
-
-	add_post_meta($post_id, 'modality', '0', true);
+	// add_post_meta($post_id, 'imc_lat', $lat, true);
+	//
+	// add_post_meta($post_id, 'imc_lng', $lng, true);
+	//
+	// add_post_meta($post_id, 'imc_address', $address, true);
+	//
+	// add_post_meta($post_id, 'imc_likes', '0', true); // Initial vote value
+	//
+	// add_post_meta($post_id, 'modality', '0', true);
 
 
 
@@ -326,6 +340,46 @@ if( is_user_logged_in() ) {
 
                         </div>
 
+						<div class="imc-row">
+							<div class="imc-grid-6 imc-columns">
+								<h3 class="imc-SectionTitleTextStyle"><?php echo __("Proposer's full name",'participace-projekty'); ?></h3>
+
+								<input required autocomplete="off" placeholder="<?php echo __('Fill a name and surname','participace-projekty'); ?>" type="text" name="pb_project_navrhovatel_jmeno" id="pb_project_navrhovatel_jmeno" class="imc-InputStyle" />
+
+								<label id="pb_project_navrhovatel_jmenoLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
+
+							</div>
+
+							<div class="imc-grid-3 imc-columns">
+								<h3 class="imc-SectionTitleTextStyle"><?php echo __("Phone",'participace-projekty'); ?></h3>
+
+								<input required autocomplete="off" placeholder="<?php echo __("Enter proposer's phone number",'participace-projekty'); ?>" type="text" name="pb_project_navrhovatel_telefon" id="pb_project_navrhovatel_telefon" class="imc-InputStyle" />
+
+								<label id="pb_project_navrhovatel_telefonLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
+							</div>
+
+							<div class="imc-grid-3 imc-columns">
+								<h3 class="imc-SectionTitleTextStyle"><?php echo __("E-mail",'participace-projekty'); ?></h3>
+
+								<input required autocomplete="off" placeholder="<?php echo __("Enter proposer's e-mail",'participace-projekty'); ?>" type="text" name="pb_project_navrhovatel_email" id="pb_project_navrhovatel_email" class="imc-InputStyle" />
+
+								<label id="pb_project_navrhovatel_emailLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
+							</div>
+
+						</div>
+
+						<div class="imc-row">
+
+							<h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Address','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
+
+							<textarea  placeholder="<?php echo __('Fill street, number, City district','participace-projekty'); ?>" rows="2"
+								class="imc-InputStyle" title="Address" name="pb_project_navrhovatel_adresa"
+								id="pb_project_navrhovatel_adresa"><?php if(isset($_POST['postContent'])) {
+									if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); }
+									else { echo esc_html($_POST['postContent']); } } ?>
+							</textarea>
+
+						</div>
 
 
                         <!-- Issue's Image -->

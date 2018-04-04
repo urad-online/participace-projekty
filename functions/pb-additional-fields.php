@@ -17,7 +17,7 @@
  			'label' => 'Jméno a příjmení navrhovatele',
  			'id' => 'pb_project_navrhovatel_jmeno',
  			'type' => 'text',
-            'default' => 'mila',
+            'default' => '',
  		),
  		array(
  			'label' => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
