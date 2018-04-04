@@ -17,6 +17,7 @@
  			'label' => 'Jméno a příjmení navrhovatele',
  			'id' => 'pb_project_navrhovatel_jmeno',
  			'type' => 'text',
+            'default' => 'mila',
  		),
  		array(
  			'label' => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
@@ -166,7 +167,7 @@
  		foreach ( $this->meta_fields as $meta_field ) {
  			$label = '<label for="' . $meta_field['id'] . '">' . $meta_field['label'] . '</label>';
  			$meta_value = get_post_meta( $post->ID, $meta_field['id'], true );
- 			if ( empty( $meta_value ) ) {
+ 			if ( empty( $meta_value )  && ! empty( $meta_field[ 'default'] )) {
  				$meta_value = $meta_field['default']; }
  			switch ( $meta_field['type'] ) {
  				case 'media':
