@@ -325,7 +325,7 @@ function pb_template_part_new_project( $data = null)
     $fields = $pb_project_meta_fields->get_fields();
 
     ob_start();
-    pb_render_field( $fields['goals'] );
+    pb_render_field( $fields['goals'], pb_render_field_get_value( $fields['goals']['id'], $data ));
     pb_render_field( $fields['actions'] );
     pb_render_field( $fields['profits'] );
     pb_render_field( $fields['parcel'] );
@@ -362,7 +362,16 @@ function pb_template_part_new_project( $data = null)
 
      <?php
      return ob_get_clean();
- }
+}
+function pb_render_field_get_value( $id, $values)
+{
+    if (! empty($values[ $id][0])) {
+        return $values[ $id][0];
+    } else {
+        return '';
+    }
+}
+
 function pb_render_field( $field, $value = '' )
 {
     switch ( $field['type'] ) {

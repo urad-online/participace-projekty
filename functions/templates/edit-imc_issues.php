@@ -89,14 +89,17 @@ $user = wp_get_current_user();
 
 $safe_inserted_id = intval( $_GET['myparam'] );
 $safe_inserted_id = sanitize_text_field( $safe_inserted_id );
+
 $given_issue_id = $safe_inserted_id;
 
 $issue_for_edit = get_post($given_issue_id);
 $issue_title = get_the_title($given_issue_id);
 $issue_content = $issue_for_edit->post_content;
+$issue_image = wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
+
+$project_meta = get_post_meta($safe_inserted_id);
 $issue_address = get_post_meta($given_issue_id, "imc_address", true);
 
-$issue_image = wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
 
 $issue_lat = get_post_meta($given_issue_id, "imc_lat", true);
 $issue_lng = get_post_meta($given_issue_id,"imc_lng",true);
@@ -248,6 +251,8 @@ if(imc_user_can_edit($given_issue_id, $user->ID)) { ?>
 							<?php } ?>
 
                         </div>
+
+						<?php echo pb_template_part_new_project( $project_meta ) ;?>
 
                         <div class="imc-row">
                             <span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
