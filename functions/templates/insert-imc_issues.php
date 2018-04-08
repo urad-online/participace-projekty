@@ -12,8 +12,6 @@
 
 wp_enqueue_script('imc-gmap');
 
-
-
 $listpage = getIMCArchivePage();
 
 $postTitleError = '';
@@ -22,83 +20,34 @@ $postTitleError = '';
 
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 
-
-
-	$lat = esc_attr(strip_tags($_POST['imcLatValue']));
-
-	$lng = esc_attr(strip_tags($_POST['imcLngValue']));
-
-	$address = esc_attr(strip_tags($_POST['postAddress']));
-
-
-
 	$imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
-
-
 
 	// Check options if the status of new issue is pending or publish
 
 	$generaloptions = get_option( 'general_settings' );
-
 	$moderateOption = $generaloptions["moderate_new"];
-
-	$mypost_status = 'pending';
+	$mypost_status 	= 'pending';
 
 	if($moderateOption == 2){$mypost_status = 'publish';}
-
-
 
 	//CREATE THE ISSUE TO DB
 
 	$post_information = array(
-
 		'post_title' => esc_attr(strip_tags($_POST['postTitle'])),
-
 		'post_content' => esc_attr(strip_tags($_POST['postContent'])),
-
 		'post_type' => 'imc_issues',
-
 		'post_status' => $mypost_status,
-
 		'tax_input' => array( 'imccategory' => $imccategory_id ),
-
 	);
 
+	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
 
-	$post_meta	= array(
-		'imc_lat'		=> esc_attr(strip_tags($_POST['imcLatValue'])),
-		'imc_lng'		=> esc_attr(strip_tags($_POST['imcLngValue'])),
-		'imc_address'	=> esc_attr(strip_tags($_POST['postAddress'])),
-		'imc_likes'		=> '0',
-		'modality'		=> '0',
-		'pb_project_navrhovatel_jmeno' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_jmeno'])),
-		'pb_project_navrhovatel_adresa' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_adresa'])),
-		'pb_project_navrhovatel_telefon' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_telefon'])),
-		'pb_project_navrhovatel_email' => esc_attr(strip_tags($_POST['pb_project_navrhovatel_email'])),
-			// 'cgbm_zaznam_lgbm_alternate_labels' => sanitize_textarea_field( $input['cgbm_zaznam_lgbm_alternate_labels']['data'] ),
-		);
-
-	$post_information['meta_input'] = $post_meta;
 
 	$post_id = wp_insert_post($post_information);
 
-
-
-
-
-	//we now use $post id to help add out post meta data
-
-	// add_post_meta($post_id, 'imc_lat', $lat, true);
-	//
-	// add_post_meta($post_id, 'imc_lng', $lng, true);
-	//
-	// add_post_meta($post_id, 'imc_address', $address, true);
-	//
-	// add_post_meta($post_id, 'imc_likes', '0', true); // Initial vote value
-	//
-	// add_post_meta($post_id, 'modality', '0', true);
-
-
+	if ( $post_id && ( ! is_wp_error($post_id)) ) {
+		pb_new_project_insert_attachments( $post_id, $_FILES);
+	}
 
 	// Choose the imcstatus with smaller id
 
@@ -106,11 +55,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	$first_status = $all_status_terms[0];
 
-
-
 	wp_set_object_terms($post_id, $first_status->name, 'imcstatus');
-
-
 
 	//Create Log if moderate is OFF
 
@@ -119,8 +64,6 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 		imcplus_crelog_frontend_nomoder($post_id, $first_status->term_id, get_current_user_id());
 
 	}
-
-
 
 	/************************ ABOUT FEATURED IMAGE  ***********************************/
 
@@ -148,7 +91,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 
 
-	imcplus_mailnotify_4submit($post_id,$imccategory_id, $address);
+	imcplus_mailnotify_4submit($post_id,$imccategory_id, $post_information['meta_input']['imc_address']);
 
 
 
@@ -298,7 +241,7 @@ if( is_user_logged_in() ) {
 
                             <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
 
-                            <textarea  placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
+                            <textarea  required placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
 
                         </div>
 
@@ -339,47 +282,6 @@ if( is_user_logged_in() ) {
                             <div id="imcReportIssueMapCanvas" class="u-full-width imc-ReportIssueMapCanvasStyle"></div>
 
                         </div>
-
-						<div class="imc-row">
-							<div class="imc-grid-6 imc-columns">
-								<h3 class="imc-SectionTitleTextStyle"><?php echo __("Proposer's full name",'participace-projekty'); ?></h3>
-
-								<input required autocomplete="off" placeholder="<?php echo __('Fill a name and surname','participace-projekty'); ?>" type="text" name="pb_project_navrhovatel_jmeno" id="pb_project_navrhovatel_jmeno" class="imc-InputStyle" />
-
-								<label id="pb_project_navrhovatel_jmenoLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-
-							</div>
-
-							<div class="imc-grid-3 imc-columns">
-								<h3 class="imc-SectionTitleTextStyle"><?php echo __("Phone",'participace-projekty'); ?></h3>
-
-								<input required autocomplete="off" placeholder="<?php echo __("Enter proposer's phone number",'participace-projekty'); ?>" type="text" name="pb_project_navrhovatel_telefon" id="pb_project_navrhovatel_telefon" class="imc-InputStyle" />
-
-								<label id="pb_project_navrhovatel_telefonLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-							</div>
-
-							<div class="imc-grid-3 imc-columns">
-								<h3 class="imc-SectionTitleTextStyle"><?php echo __("E-mail",'participace-projekty'); ?></h3>
-
-								<input required autocomplete="off" placeholder="<?php echo __("Enter proposer's e-mail",'participace-projekty'); ?>" type="text" name="pb_project_navrhovatel_email" id="pb_project_navrhovatel_email" class="imc-InputStyle" />
-
-								<label id="pb_project_navrhovatel_emailLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-							</div>
-
-						</div>
-
-						<div class="imc-row">
-
-							<h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Address','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
-
-							<textarea  placeholder="<?php echo __('Fill street, number, City district','participace-projekty'); ?>" rows="2"
-								class="imc-InputStyle" title="Address" name="pb_project_navrhovatel_adresa"
-								id="pb_project_navrhovatel_adresa"><?php if(isset($_POST['postContent'])) {
-									if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); }
-									else { echo esc_html($_POST['postContent']); } } ?>
-							</textarea>
-
-						</div>
 
 
                         <!-- Issue's Image -->
@@ -425,6 +327,7 @@ if( is_user_logged_in() ) {
                         </div>
 
 
+						<?php echo pb_template_part_new_project() ;?>
 
                         <div class="imc-row">
 
@@ -561,317 +464,162 @@ if( is_user_logged_in() ) {
     <script>
 
         "use strict";
-
-
-
         (function(){
 
             /*Google Maps API*/
-
             google.maps.event.addDomListener(window, 'load', imcInitMap);
 
-
-
             jQuery( document ).ready(function() {
-
-
-
                 var validator = new FormValidator('report_an_issue_form', [{
-
                     name: 'postTitle',
-
                     display: 'Title',
-
                     rules: 'required|min_length[3]|max_length[255]'
-
                 }, {
-
                     name: 'my_custom_taxonomy',
-
                     display: 'Category',
-
                     rules: 'required'
-
                 }, {
-
                     name: 'postAddress',
-
                     display: 'Address',
-
                     rules: 'required'
-
                 }, {
-
+                    name: 'pb_project_cile',
+                    display: 'goals',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_prospech',
+                    display: 'profit',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_parcely',
+                    display: 'parcel',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_navrhovatel_jmeno',
+                    display: 'name',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_navrhovatel_telefon',
+                    display: 'phone',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_navrhovatel_email',
+                    display: 'email',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_navrhovatel_adresa',
+                    display: 'Adresa navrhovatele',
+                    rules: 'required'
+                }, {
+                    name: 'pb_project_podporovatele',
+                    display: 'Podpisový arch',
+                    rules: 'required'
+                }, {
                     name: 'featured_image',
-
                     display: 'Photo',
-
                     rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
-
                 }], function(errors) {
-
                     if (errors.length > 0) {
-
                         var i, j;
-
                         var errorLength;
-
                         jQuery("#imcReportFormSubmitErrors").html("");
-
                         jQuery('#postTitleLabel').html();
 
-
-
                         for (i = 0, errorLength = errors.length; i < errorLength; i++) {
-
                             if (errors[i].name === "postTitle") {
-
                                 for(j=1; j < errors[i].messages.length; j++) {
-
                                     jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
-
                                 }
-
-                            }
-
-                            else if (errors[i].name === "featured_image") {
-
+                            } else if (errors[i].name === "featured_image") {
                                 imcDeleteAttachedImage('imcReportAddImgInput');
-
                                 jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
-
                             }
-
                         }
-
                     } else {
-
                         jQuery('#imcInsertIssueSubmitBtn').attr('disabled', 'disabled');
-
                     }
-
                 });
-
             });
 
         })();
 
-
-
-
-
         function imcInitMap() {
-
             "use strict";
-
-
-
             var mapId = "imcReportIssueMapCanvas";
-
-
-
             // Checking the saved latlng on settings
-
             var lat = parseFloat('<?php echo floatval($map_options_initial_lat); ?>');
-
             var lng = parseFloat('<?php echo floatval($map_options_initial_lng); ?>');
-
             if (lat === '' || lng === '' ) { lat = 40.1349854; lng = 22.0264538; }
 
-
-
             // Options casting if empty
-
             var zoom = parseInt('<?php echo intval($map_options_initial_zoom, 10); ?>', 10);
 
             if(!zoom){ zoom = 7; }
-
-
-
             var allowScroll;
-
             '<?php echo intval($map_options_initial_mscroll, 10); ?>' === '1' ? allowScroll = true : allowScroll = false;
-
-
-
             var boundaries = <?php echo json_encode($map_options_initial_bound);?> ?
-
 				<?php echo json_encode($map_options_initial_bound);?>: null;
 
-
-
             imcInitializeMap(lat, lng, mapId, 'imcAddress', true, zoom, allowScroll, JSON.parse(boundaries));
-
-
-
             imcFindAddress('imcAddress', false, lat, lng);
-
         }
 
-
-
-
-
         document.getElementById('imcReportAddImgInput').onchange = function (e) {
-
-
-
             var file = jQuery("#imcReportAddImgInput")[0].files[0];
-
-
-
             // Delete image if "Cancel"
-
             if (document.getElementById("imcReportAttachedImageThumb")) {
-
                 imcDeleteAttachedImage("imcReportAttachedImageThumb");
-
             }
-
-
-
             // If image is too big
-
             // Get filesize
-
             var maxFileSize = '<?php echo imc_file_upload_max_size(); ?>';
-
-
-
             if(file && file.size < maxFileSize) {
-
-
-
                 loadImage.parseMetaData(file, function(data) { //read image metadata to get orientation info
-
-
-
                     var orientation = 0;
-
                     if (data.exif) {
-
                         orientation = data.exif.get('Orientation');
-
                         console.log(orientation);
-
                     }
-
                     document.getElementById('imcPhotoOri').value = parseInt(orientation, 10);
-
-
-
                     var loadingImage =	loadImage (
-
                         file,
-
-
-
                         function (img) {
-
-
-
                             if(img.type === "error") {
-
                                 console.log("Error loading image ");
-
                                 jQuery("#imcReportFormSubmitErrors").html("The Photo field must contain only gif, png, jpg files.").show();
-
-
-
                                 if (document.getElementById("imcReportAttachedImageThumb")) {
-
                                     imcDeleteAttachedImage("imcReportAttachedImageThumb");
-
                                 }
-
-
-
                             } else {
-
-
-
                                 if (document.getElementById("imcReportAttachedImageThumb")) {
-
                                     imcDeleteAttachedImage("imcReportAttachedImageThumb");
-
                                 }
-
-
-
                                 img.setAttribute("id", "imcReportAttachedImageThumb");
-
                                 img.setAttribute("alt", "Attached photo");
-
                                 img.setAttribute("class", "imc-ReportAttachedImgStyle u-cf");
-
-
-
                                 document.getElementById('imcImageSection').appendChild(img);
-
-
-
                                 jQuery("#imcReportFormSubmitErrors").html("");
-
-
-
                                 jQuery("#imcNoPhotoAttachedLabel").hide();
-
                                 jQuery("#imcLargePhotoAttachedLabel").hide();
-
                                 jQuery("#imcPhotoAttachedFilename").html(" " + file.name);
-
                                 jQuery("#imcPhotoAttachedLabel").show();
-
-
-
                             }
-
                         },
-
                         {
-
                             maxHeight: 200,
-
                             orientation: orientation,
-
                             canvas: true
-
                         }
-
                     );
-
                 });
-
-
-
             } else {
-
-
-
                 imcDeleteAttachedImage('imcReportAddImgInput');
-
-
-
                 e.preventDefault();
-
-
-
                 jQuery("#imcNoPhotoAttachedLabel").hide();
-
                 jQuery("#imcPhotoAttachedLabel").hide();
-
                 jQuery("#imcLargePhotoAttachedLabel").show();
-
             }
-
-
-
-
-
         };
-
     </script>
-
-
 
 <?php get_footer(); ?>

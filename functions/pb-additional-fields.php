@@ -12,104 +12,177 @@
  	private $screen = array(
  		'imc_issues',
  	);
+
  	private $meta_fields = array(
- 		array(
+ 		'name' => array(
  			'label' => 'Jméno a příjmení navrhovatele',
  			'id' => 'pb_project_navrhovatel_jmeno',
  			'type' => 'text',
             'default' => '',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte jméno',
+            'title' => "Proposer Name",
+            'columns' => 6,
  		),
- 		array(
+ 		'address' => array(
  			'label' => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
  			'id' => 'pb_project_navrhovatel_adresa',
  			'type' => 'text',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte adresu navrhovatele',
+            'title' => "address",
  		),
- 		array(
+ 		'phone' => array(
  			'label' => 'Telefonický kontakt',
  			'id' => 'pb_project_navrhovatel_telefon',
  			'type' => 'tel',
+            'mandatory' => false,
+            'placeholder' => 'Vyplňte telefonní číslo',
+            'title' => "phone",
+            'columns' => 3,
  		),
- 		array(
+ 		'email' => array(
  			'label' => 'E-mail',
  			'id' => 'pb_project_navrhovatel_email',
  			'type' => 'email',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte e-mailovou adresu',
+            'title' => "email",
+            'columns' => 3,
  		),
- 		array(
+ 		'age_conf' => array(
  			'label' => 'Prohlašuji, že jsem starší 15 let ',
  			'id' => 'pb_project_prohlaseni_veku',
  			'default' => 'yes',
  			'type' => 'checkbox',
+            'mandatory' => true,
+            'title' => "age_conf",
  		),
- 		array(
+ 		'title' => array(
  			'label' => 'Název návrhu',
  			'id' => 'pb_project_nazev',
  			'type' => 'text',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte název návrhu',
+            'title' => "title",
  		),
- 		array(
+ 		'description' => array(
  			'label' => 'Popis návrhu',
  			'id' => 'pb_project_popis',
  			'type' => 'textarea',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte popis projektu',
+            'title' => "descrition",
  		),
- 		array(
+ 		'goals' => array(
  			'label' => 'Proč je projekt důležitý, co je jeho cílem',
  			'id' => 'pb_project_cile',
  			'type' => 'textarea',
+            'mandatory' => true,
+            'placeholder' => 'Popište cíle projekt',
+            'title' => "goals",
  		),
- 		array(
+ 		'actions' => array(
  			'label' => 'Co by se mělo udělat',
  			'id' => 'pb_project_akce',
  			'type' => 'textarea',
+            'mandatory' => true,
+            'placeholder' => 'Popište aktivity, které je pottřeba vykonat',
+            'title' => "Actions",
  		),
- 		array(
+ 		'parcel' => array(
  			'label' => 'Parcelní číslo',
  			'id' => 'pb_project_parcely',
  			'type' => 'text',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte číslo parcely ve formátu NNNN/NNNN',
+            'title' => "parcel",
  		),
- 		array(
+ 		'profits' => array(
  			'label' => 'Kdo bude mít z projektu prospěch',
  			'id' => 'pb_project_prospech',
  			'type' => 'textarea',
+            'mandatory' => true,
+            'placeholder' => 'Popište kdo a jaký bude mít z projektu prospěch',
+            'title' => 'profit',
  		),
- 		array(
- 			'label' => 'Souhlas s podmínkami',
+ 		'agreement' => array(
+ 			'label' => 'Souhlasím s podmínkami',
  			'id' => 'pb_project_podminky_souhlas',
  			'default' => 'no',
  			'type' => 'checkbox',
+            'title' => "Agreement",
+            'mandatory' => true,
  		),
- 		array(
- 			'label' => 'Podpisový arch (povinná příloha)',
- 			'id' => 'pb_project_podporovatele',
- 			'type' => 'media',
+ 		'signatures' => array(
+ 			'label'     => 'Podpisový arch (povinná příloha)',
+ 			'id'        => 'pb_project_podporovatele',
+ 			'type'      => 'media',
+            'title'     => "signatures",
+            'mandatory' => true,
+            'material_icon' => 'list',
+            'AddBtnLabel'   => 'Vložit arch',
+            'DelBtnLabel'   => 'Smazat arch',
  		),
- 		array(
+ 		'photo' => array(
  			'label' => 'Ilustrační fotografie/obrázek (povinná příloha) ',
- 			'id' => 'pb_project_foto',
- 			'type' => 'media',
+ 			'id'    => 'pb_project_foto',
+ 			'type'  => 'media',
+            'title' => 'photo',
+            'mandatory'     => true,
+            'material_icon' => 'image',
+            'AddBtnLabel'   => 'Vložit fotku',
+            'DelBtnLabel'   => 'Smazat fotku',
  		),
- 		array(
+ 		'map' => array(
  			'label' => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
- 			'id' => 'pb_project_mapa',
- 			'type' => 'media',
+ 			'id'    => 'pb_project_mapa',
+ 			'type'  => 'media',
+            'title' => "map",
+            'mandatory'     => true,
+            'material_icon' => 'language',
+            'AddBtnLabel'   => 'Vložit mapu',
+            'DelBtnLabel'   => 'Smazat mapu',
  		),
- 		array(
+ 		'cost' => array(
  			'label' => 'Předpokládané náklady (povinná příloha)',
  			'id' => 'pb_project_naklady',
- 			'type' => 'number',
+ 			'type' => 'media',
+            'title' => "cost",
+            'mandatory'     => true,
+            'material_icon' => 'credit_card',
+            'AddBtnLabel'   => 'Vložit náklady',
+            'DelBtnLabel'   => 'Smazat náklady',
  		),
- 		array(
- 			'label' => 'Vizualizace, výkresy, fotodokumentace… (nepovinné přílohy)',
+ 		'attach1' => array(
+ 			'label' => 'Vizualizace, výkresy, fotodokumentace… 1 (nepovinné přílohy)',
  			'id' => 'pb_project_dokumentace1',
  			'type' => 'media',
+            'title' => "attach1",
+            'mandatory'     => false,
+            'material_icon' => 'content_copy',
+            'AddBtnLabel'   => 'Vložit přílohu',
+            'DelBtnLabel'   => 'Smazat přílohu',
  		),
- 		array(
- 			'label' => 'Vizualizace, výkresy, fotodokumentace… (nepovinné přílohy)',
+ 		'attach2' => array(
+ 			'label' => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
  			'id' => 'pb_project_dokumentace2',
  			'type' => 'media',
+            'title' => "attach2",
+            'mandatory'     => false,
+            'material_icon' => 'content_copy',
+            'AddBtnLabel'   => 'Vložit přílohu',
+            'DelBtnLabel'   => 'Smazat přílohu',
  		),
- 		array(
- 			'label' => 'Vizualizace, výkresy, fotodokumentace… (nepovinné přílohy)',
+ 		'attach3' => array(
+ 			'label' => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
  			'id' => 'pb_project_dokumentace3',
  			'type' => 'media',
+            'title' => "attach3",
+            'mandatory'     => false,
+            'material_icon' => 'content_copy',
+            'AddBtnLabel'   => 'Vložit přílohu',
+            'DelBtnLabel'   => 'Smazat přílohu',
  		),
  	);
  	public function __construct() {
@@ -237,7 +310,279 @@
  			}
  		}
  	}
+    public function get_fields()
+    {
+        return $this->meta_fields;
+    }
  }
  if (class_exists('informacekprojektuMetabox')) {
  	new informacekprojektuMetabox;
  };
+
+function pb_template_part_new_project( $data = null)
+{
+    $pb_project_meta_fields = new informacekprojektuMetabox();
+    $fields = $pb_project_meta_fields->get_fields();
+
+    ob_start();
+    pb_render_field( $fields['goals'] );
+    pb_render_field( $fields['actions'] );
+    pb_render_field( $fields['profits'] );
+    pb_render_field( $fields['parcel'] );
+
+    echo '<div class="imc-row">';
+    pb_render_field( $fields['name'] );
+    pb_render_field( $fields['phone'] );
+    pb_render_field( $fields['email'] );
+    echo '</div>';
+    pb_render_field( $fields['address'] );
+    pb_render_field( $fields['age_conf'] );
+
+    pb_render_field( $fields['signatures'] );
+    pb_render_field( $fields['map'] );
+    pb_render_field( $fields['cost'] );
+    pb_render_field( $fields['attach1'] );
+    pb_render_field( $fields['attach2'] );
+    pb_render_field( $fields['attach3'] );
+    pb_render_field( $fields['agreement'] );
+
+    ?>
+
+    <script>
+         "use strict";
+        function pbProjectAddFile(e){
+            jQuery("#"+e.id+"Name").html(e.files[0].name);
+        };
+        function imcDeleteAttachedFile( id ){
+            document.getElementById(id).value = "";
+
+            jQuery("#"+id+"Name").html("Vyberte soubor");
+        };
+    </script>
+
+     <?php
+     return ob_get_clean();
+ }
+function pb_render_field( $field, $value = '' )
+{
+    switch ( $field['type'] ) {
+        case 'media':
+            pb_render_file_attachemnt( $field, $value);
+            break;
+        case 'checkbox':
+            pb_render_checkbox($field, $value);
+            break;
+        case 'textarea':
+            pb_render_textarea($field, $value);
+            break;
+        default:
+            pb_render_text($field, $value);
+    }
+}
+
+function pb_render_textarea( $input = null, $value = '' )
+{
+    if ( !empty( $input['mandatory'])) {
+        $mandatory = pb_render_mandatory( $input['mandatory']) ;
+        $required = " required ";
+    } else {
+        $mandatory = '';
+        $required = "";
+    }
+    if ( ! empty($input['rows'])) {
+        $rows = $input['rows'];
+    } else {
+        $rows = 3;
+    }
+
+    $output = '<div class="imc-row">
+        <h3 class="u-pull-left imc-SectionTitleTextStyle">%s</h3>%s
+        <textarea %s placeholder="%s" rows="%d"
+             class="imc-InputStyle" title="%s" name="%s"
+             id="%s">%s</textarea></div>';
+    if ( empty( $input ) ) {
+        return $output;
+    } else {
+        printf( $output,
+            $input['label'],
+            $mandatory,
+            $required,
+            $input['placeholder'],
+            $rows,
+            $input['title'],
+            $input['id'],
+            $input['id'],
+            $value
+        );
+    }
+}
+function pb_render_text( $input = null, $value = '', $columns = null )
+{
+    if ( !empty( $input['mandatory'])) {
+        $mandatory = pb_render_mandatory( $input['mandatory']) ;
+        $required = " required ";
+    } else {
+        $mandatory = '';
+        $required = "";
+    }
+    if ( ! empty($input['columns'])) {
+        $columns = $input['columns'];
+    } else {
+        $columns = '';
+    }
+
+    $output = '<h3 class="imc-SectionTitleTextStyle">%s</h3>%s<input %s autocomplete="off"
+        placeholder="%s" type="text" name="%s" id="%s" class="imc-InputStyle" value="%s"/>
+        <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
+    if ( ! empty($columns) ) {
+        $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
+    }
+    if ( empty( $input ) ) {
+        return $output;
+    } else {
+        printf( $output,
+            $input['label'],
+            $mandatory,
+            $required,
+            $input['placeholder'],
+            $input['id'],
+            $input['id'],
+            $value,
+            $input['id']
+        );
+    }
+}
+function pb_render_file_attachemnt( $input, $value = '')
+{
+    if ( ! empty( $input['mandatory'])) {
+        $mandatory = pb_render_mandatory( $input['mandatory']) ;
+        $required = " required ";
+    } else {
+        $mandatory = '';
+        $required = "";
+    }
+
+    $output = '<div class="imc-row" id="pbProjectSection%s">
+                <div class="imc-row">
+                    <h3 class="u-pull-left imc-SectionTitleTextStyle">%s</h3>%s
+                </div>
+                <div class="imc-row">
+                    <div class="imc-grid-4 imc-columns">
+                    <span id="%sName" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">'. __('Vyberte soubor','participace-projekty') .'</span>
+                </div>
+                <div class="imc-grid-8 imc-columns">
+                    <div class="u-cf">
+                        <div class="imc-row">
+                            <input %s autocomplete="off" class="imc-ReportAddImgInputStyle" id="%s" type="file" name="%s" onchange="pbProjectAddFile(this)" />
+                            <label for="%s">
+                                <i class="material-icons md-24 imc-AlignIconToButton">%s</i>%s
+                            </label>
+                            <button type="button" class="imc-button" onclick="imcDeleteAttachedFile(\'%s\');">
+                                <i class="material-icons md-24 imc-AlignIconToButton">delete</i>%s</button>
+                </div></div></div></div></div>';
+    if ( empty( $input ) ) {
+        return $output;
+    } else {
+        printf( $output,
+            $input['title'],
+            $input['label'],
+            $mandatory,
+            $input['id'],
+            $required,
+            $input['id'],
+            $input['id'],
+            $input['id'],
+            $input['material_icon'],
+            $input['AddBtnLabel'],
+            $input['id'],
+            $input['DelBtnLabel']
+        );
+    }
+}
+function pb_render_checkbox( $input, $value = '')
+{
+    if ( empty( $value) ){
+        if (! empty($input['default']) && ( $input['default'] != 'no')) {
+            $value = 1;
+            $required = " required ";
+        } else {
+            $value = 0;
+            $required = "";
+        }
+    }
+    $output = '<div class="imc-row">
+    <h3 class="imc-SectionTitleTextStyle"><label id="%sLabel" for="%s">%s</label>
+        <input type="checkbox"  %s name="%s" id="%s" class="imc-InputStyle" value="%s" style="width:20px; height:20px; display:inline-block"/></h3></div>' ;
+    if ( empty( $input ) ) {
+        return $output;
+    } else {
+        printf( $output,
+            $input['id'],
+            $input['id'],
+            $input['label'],
+            $required,
+            $input['id'],
+            $input['id'],
+            $value
+        );
+    }
+}
+
+function pb_render_mandatory( $mandatory = false)
+{
+    if ( $mandatory ) {
+        return '';
+    } else {
+        return '<span class="imc-OptionalTextLabelStyle">" "(' . __('optional','participace-projekty') .')></span>';
+    }
+}
+
+function pb_new_project_meta_save_prep( $data)
+{
+    $output = array(
+		'imc_lat'		=> esc_attr(sanitize_text_field($data['imcLatValue'])),
+		'imc_lng'		=> esc_attr(sanitize_text_field($data['imcLngValue'])),
+		'imc_address'	=> esc_attr(sanitize_text_field($data['postAddress'])),
+		'imc_likes'		=> '0',
+		'modality'		=> '0',
+		'pb_project_navrhovatel_jmeno'   => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_jmeno'])),
+		'pb_project_navrhovatel_adresa'  => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_adresa'])),
+		'pb_project_navrhovatel_telefon' => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_telefon'])),
+        'pb_project_parcely'             => esc_attr(sanitize_text_field($data['pb_project_parcely'])),
+        'pb_project_prohlaseni_veku'     => esc_attr(sanitize_text_field($data['pb_project_prohlaseni_veku'])),
+        'pb_project_podminky_souhlas'    => esc_attr(sanitize_text_field($data['pb_project_podminky_souhlas'])),
+		'pb_project_navrhovatel_email'   => esc_attr(sanitize_email($data['pb_project_navrhovatel_email'])),
+        'pb_project_cile'                => esc_attr(sanitize_textarea_field($data['pb_project_cile'])),
+        'pb_project_akce'                => esc_attr(sanitize_textarea_field($data['pb_project_akce'])),
+        'pb_project_prospech'            => esc_attr(sanitize_textarea_field($data['pb_project_prospech'])),
+		);
+    return $output;
+}
+
+function pb_new_project_insert_attachments( $post_id, $files)
+{
+    // $_FILE['id'], fields - error, name, size, tmp_name, type, pro prazdne je error = 4 ostatni prazdne,
+    pb_new_project_insert_attachment_1($files['pb_project_podporovatele'], $post_id, 'pb_project_podporovatele');
+    pb_new_project_insert_attachment_1($files['pb_project_mapa'], $post_id, 'pb_project_mapa');
+    pb_new_project_insert_attachment_1($files['pb_project_naklady'], $post_id, 'pb_project_naklady');
+    pb_new_project_insert_attachment_1($files['pb_project_dokumentace1'], $post_id, 'pb_project_dokumentace1');
+    pb_new_project_insert_attachment_1($files['pb_project_dokumentace2'], $post_id, 'pb_project_dokumentace2');
+    pb_new_project_insert_attachment_1($files['pb_project_dokumentace3'], $post_id, 'pb_project_dokumentace3');
+}
+
+function pb_new_project_insert_attachment_1 ($file, $post_id, $attachment_type )
+{
+    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))) {
+        $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
+        if ( $attachment_id) {
+            $url = wp_get_attachment_url( $attachment_id);
+            update_post_meta( $post_id, $attachment_type, $url);
+        }
+        return $attachment_id;
+    } elseif ($post_id) {
+        delete_post_meta( $post_id, $attachment_type );
+        return true;
+    } else {
+        return false;
+    }
+}
