@@ -42,8 +42,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
 
-
-	$post_id = wp_insert_post($post_information);
+	$post_id = wp_insert_post($post_information, true);
 
 	if ( $post_id && ( ! is_wp_error($post_id)) ) {
 		pb_new_project_insert_attachments( $post_id, $_FILES);

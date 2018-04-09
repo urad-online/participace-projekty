@@ -29,19 +29,25 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 		'post_content' => $content,
 	);
 
+
 	$post_id = wp_update_post( $post_information, true );
+
 	if (is_wp_error($post_id)) {
 		$errors = $post_id->get_error_messages();
 		foreach ($errors as $error) {
 			echo $error;
 		}
+		exit;
 	}
 
 	//we now use $post id to help add out post meta data
-	update_post_meta($post_id, 'imc_lat', $lat);
-	update_post_meta($post_id, 'imc_lng', $lng);
-	update_post_meta($post_id, 'imc_address', $address);
+	// update_post_meta($post_id, 'imc_lat', $lat);
+	// update_post_meta($post_id, 'imc_lng', $lng);
+	// update_post_meta($post_id, 'imc_address', $address);
 
+	$meta_update = true; // to ignore imc_likes & modality
+	$post_information_meta = pb_new_project_meta_save_prep( $_POST, $meta_update );
+	pb_new_project_update_postmeta( $post_id, $post_information_meta );
 	/************************ ABOUT FEATURED IMAGE  ***********************************/
 
 	$imageScenario = intval(strip_tags($_POST['imcImgScenario']), 10);
@@ -63,9 +69,11 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 		set_post_thumbnail( $post_id, $attachment_id );
 	}
 
-
-
 	/************************ END FEATURED IMAGE  ***********************************/
+
+	/************************ About FILE ATTACHMENTS  *******************************/
+	pb_new_project_update_attachments( $post_id, $_FILES, $_POST);
+	/************************ END FILE ATTACHMENTS  *******************************/
 
 	if($post_id){
 		wp_redirect(get_permalink($listpage[0]->ID));
