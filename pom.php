@@ -81,3 +81,81 @@
  }
 
  ?>
+
+<!-- zobrazeni mapy -->
+ <div class="imc-row-no-margin">
+
+     <h3 class="imc-SectionTitleTextStyle"><?php echo '4. ' . __('Address','participace-projekty'); ?></h3>
+
+
+
+     <button class="imc-button u-pull-right" type="button" onclick="imcFindAddress('imcAddress', true);">
+
+         <i class="material-icons md-24 imc-AlignIconToButton">search</i> <?php echo __('Locate', 'participace-projekty') ?>
+
+     </button>
+
+
+
+     <div style="padding-right: .5em;" class="imc-OverflowHidden">
+
+         <input required name="postAddress" placeholder="<?php echo __('Add an address','participace-projekty'); ?>" id="imcAddress" class="u-pull-left imc-InputStyle"/>
+
+     </div>
+
+     <input title="lat" type="hidden" id="imcLatValue" name="imcLatValue"/>
+
+     <input title="lng" type="hidden" id="imcLngValue" name="imcLngValue"/>
+
+ </div>
+
+
+
+ <!-- Issue's Map -->
+
+ <div class="imc-row">
+
+     <div id="imcReportIssueMapCanvas" class="u-full-width imc-ReportIssueMapCanvasStyle"></div>
+
+ </div>
+
+ <!-- zobrazeni fotky -->
+ <div class="imc-row" id="imcImageSection">
+
+
+
+     <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Photo','participace-projekty');  ?>&nbsp; </h3><span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
+
+
+
+     <div class="u-cf">
+
+         <input autocomplete="off" class="imc-ReportAddImgInputStyle" id="imcReportAddImgInput" type="file" name="featured_image" />
+
+         <label for="imcReportAddImgInput">
+
+             <i class="material-icons md-24 imc-AlignIconToButton">photo</i>
+
+            <?php echo __('Add photo','participace-projekty'); ?>
+
+         </label>
+
+
+
+         <button type="button" class="imc-button" onclick="imcDeleteAttachedImage('imcReportAddImgInput');"><i class="material-icons md-24 imc-AlignIconToButton">delete</i><?php echo __('Delete Photo', 'participace-projekty');?></button>
+
+     </div>
+
+
+
+     <span id="imcNoPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('No photo attached','participace-projekty'); ?></span>
+
+     <span style="display: none;" id="imcLargePhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('Photo size must be smaller in size, please resize it or select a smaller one!','participace-projekty'); ?></span>
+
+     <span style="display: none;" id="imcPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('A photo has been selected:','participace-projekty'); ?></span>
+
+     <span class="imc-ReportGenericLabelStyle imc-TextColorPrimary" id="imcPhotoAttachedFilename"></span>
+
+
+
+ </div>

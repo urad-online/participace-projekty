@@ -49,10 +49,14 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	}
 
 	// Choose the imcstatus with smaller id
-
+// zmenit order by imc_term_order
 	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
 
-	$first_status = $all_status_terms[0];
+	if ( ! empty( $post_information['meta_input']['pb_project_edit_completed']) && ($post_information['meta_input']['pb_project_edit_completed'] == '1')) {
+		$first_status = $all_status_terms[1];
+	} else {
+		$first_status = $all_status_terms[0];
+	}
 
 	wp_set_object_terms($post_id, $first_status->name, 'imcstatus');
 
@@ -103,7 +107,6 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	}
 
 }
-
 
 
 get_header();
@@ -200,7 +203,7 @@ if( is_user_logged_in() ) {
 
 
 
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo __('Title','participace-projekty'); ?></h3>
+                                <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
 
                                 <input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" />
 
@@ -214,7 +217,7 @@ if( is_user_logged_in() ) {
 
                             <div class="imc-grid-6 imc-columns">
 
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo __('Category','participace-projekty'); ?></h3>
+                                <h3 class="imc-SectionTitleTextStyle"><?php echo '2. ' . __('Category','participace-projekty'); ?></h3>
 
 
 
@@ -238,95 +241,19 @@ if( is_user_logged_in() ) {
 
                         <div class="imc-row">
 
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
+                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
 
                             <textarea  required placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
 
                         </div>
 
 
-
-                        <!-- Issue's Address -->
-
-                        <div class="imc-row-no-margin">
-
-                            <h3 class="imc-SectionTitleTextStyle"><?php echo __('Address','participace-projekty'); ?></h3>
-
-
-
-                            <button class="imc-button u-pull-right" type="button" onclick="imcFindAddress('imcAddress', true);">
-
-                                <i class="material-icons md-24 imc-AlignIconToButton">search</i> <?php echo __('Locate', 'participace-projekty') ?>
-
-                            </button>
-
-
-
-                            <div style="padding-right: .5em;" class="imc-OverflowHidden">
-
-                                <input required name="postAddress" placeholder="<?php echo __('Add an address','participace-projekty'); ?>" id="imcAddress" class="u-pull-left imc-InputStyle"/>
-
-                            </div>
-
-
-
-                        </div>
-
-
-
-                        <!-- Issue's Map -->
-
-                        <div class="imc-row">
-
-                            <div id="imcReportIssueMapCanvas" class="u-full-width imc-ReportIssueMapCanvasStyle"></div>
-
-                        </div>
-
+						<?php echo pb_template_part_new_project( array(
+								'lat' => $map_options_initial_lat,
+								'lon' => $map_options_initial_lng,
+							)) ;?>
 
                         <!-- Issue's Image -->
-
-                        <div class="imc-row" id="imcImageSection">
-
-
-
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Photo','participace-projekty');  ?>&nbsp; </h3><span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
-
-
-
-                            <div class="u-cf">
-
-                                <input autocomplete="off" class="imc-ReportAddImgInputStyle" id="imcReportAddImgInput" type="file" name="featured_image" />
-
-                                <label for="imcReportAddImgInput">
-
-                                    <i class="material-icons md-24 imc-AlignIconToButton">photo</i>
-
-									<?php echo __('Add photo','participace-projekty'); ?>
-
-                                </label>
-
-
-
-                                <button type="button" class="imc-button" onclick="imcDeleteAttachedImage('imcReportAddImgInput');"><i class="material-icons md-24 imc-AlignIconToButton">delete</i><?php echo __('Delete Photo', 'participace-projekty');?></button>
-
-                            </div>
-
-
-
-                            <span id="imcNoPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('No photo attached','participace-projekty'); ?></span>
-
-                            <span style="display: none;" id="imcLargePhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('Photo size must be smaller in size, please resize it or select a smaller one!','participace-projekty'); ?></span>
-
-                            <span style="display: none;" id="imcPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('A photo has been selected:','participace-projekty'); ?></span>
-
-                            <span class="imc-ReportGenericLabelStyle imc-TextColorPrimary" id="imcPhotoAttachedFilename"></span>
-
-
-
-                        </div>
-
-
-						<?php echo pb_template_part_new_project() ;?>
 
                         <div class="imc-row">
 
@@ -355,10 +282,6 @@ if( is_user_logged_in() ) {
 
 
                     <!-- Hidden inputs to pass to php -->
-
-                    <input title="lat" type="hidden" id="imcLatValue" name="imcLatValue"/>
-
-                    <input title="lng" type="hidden" id="imcLngValue" name="imcLngValue"/>
 
                     <input title="orientation" type="hidden" id="imcPhotoOri" name="imcPhotoOri"/>
 
