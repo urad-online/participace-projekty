@@ -342,7 +342,7 @@ function imc_show_issue_message($post_id, $current_user){
 
 		if (get_post_status($post_id) == 'pending') {
 			return $moderationMessage;
-		} else if (!imc_user_can_edit($post_id, $current_user)) {
+		} else if (!pb_user_can_edit($post_id, $current_user)) {
 			return $editMessage;
 		}
 

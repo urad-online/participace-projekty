@@ -66,7 +66,7 @@ get_header(); ?>
                     <span class="imc-hidden-xs imc-hidden-sm"><?php echo __('Report an issue','participace-projekty');  ?></span>
                 </a>
 
-				<?php if(imc_user_can_edit(get_the_ID(), $user_id)) { ?>
+				<?php if(pb_user_can_edit(get_the_ID(), $user_id)) { ?>
                     <a href="<?php echo esc_url(get_permalink($editpage[0]->ID) . $parameter_pass . $issue_id ); ?>" class="u-pull-right imc-SingleHeaderLinkStyle">
                         <i class="material-icons md-36 imc-SingleHeaderIconStyle">mode_edit</i>
                         <span class="imc-hidden-xs imc-hidden-sm"><?php echo __('Edit issue','participace-projekty');  ?></span>

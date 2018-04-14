@@ -159,3 +159,36 @@
 
 
  </div>
+
+ <!-- Issue's Address -->
+ <div class="imc-row-no-margin">
+     <h3 class="imc-SectionTitleTextStyle"><?php echo __('Address','participace-projekty'); ?></h3>
+
+     <button class="imc-button u-pull-right" type="button" onclick="imcFindAddress('imcAddress', true);">
+         <i class="material-icons md-24 imc-AlignIconToButton">search</i> <?php echo __('Locate', 'participace-projekty') ?>
+     </button>
+
+     <div style="padding-right: .5em;" class="imc-OverflowHidden">
+         <input required name="postAddress" placeholder="<?php echo __('Add an address','participace-projekty'); ?>" value="<?php echo esc_attr($issue_address);?>" id="imcAddress" class="u-pull-left imc-InputStyle"/>
+     </div>
+
+ </div>
+
+ <!-- Issue's Map -->
+ <div class="imc-row">
+
+     <div id="imcReportIssueMapCanvas" class="u-full-width imc-ReportIssueMapCanvasStyle"></div>
+ </div>
+ [{
+     name: 'postTitle',
+     display: 'Title',
+     rules: 'required|min_length[3]|max_length[255]'
+ }, {
+     name: 'postAddress',
+     display: 'Address',
+     rules: 'required'
+ }, {
+     name: 'featured_image',
+     display: 'Photo',
+     rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
+ }]

@@ -15,11 +15,11 @@ function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pen
         <div class="imc-OverviewTileImageStyle imc-CenterContents">
 
             <?php $author_id = intval(get_the_author_meta('ID'));
-            if ( intval($author_id, 10) === intval($user_id, 10) && !imc_user_can_edit(get_the_ID(), $user_id)  )  { ?>
+            if ( intval($author_id, 10) === intval($user_id, 10) && !pb_user_can_edit(get_the_ID(), $user_id)  )  { ?>
 
                 <img alt="My Issue icon" title="<?php echo __('My Issue','participace-projekty'); ?>" src="<?php echo esc_url($plugin_path_url);?>/img/ic_my_issue_grid.png" class="imc-OverviewGridMyIssueIconStyle">
 
-            <?php } else if(imc_user_can_edit(get_the_ID(), $user_id)) { ?>
+            <?php } else if(pb_user_can_edit(get_the_ID(), $user_id)) { ?>
 
                 <a class="imc-button-primary imc-button imc-OverviewTileEditButtonStyle" href="<?php echo esc_url( get_permalink($editpage[0]->ID) . $parameter_pass . $issue_id ) ; ?>" target="_blank"><?php echo __('Edit','participace-projekty'); ?></a>
 
@@ -43,12 +43,12 @@ function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pen
             <?php } ?>
 
             <div class="imc-OverviewTileIdStyle"><span class="imc-Text-SM">#</span> <?php echo esc_html($issue_id); ?></div>
-            <?php $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
-            <div class="imc-OverviewTileVotesStyle">
+            <?php // $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
+            <!-- <div class="imc-OverviewTileVotesStyle">
                 <div class="my-issue-votes">
                     <i class="material-icons md-18">thumb_up</i> <?php echo esc_html($total_likes); ?>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="imc-OverviewTileDetailsStyle">
@@ -113,18 +113,18 @@ function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pen
                     <span class="imc-DisplayBlock imc-OverviewGridStepLabelStyle imc-TextColorSecondary"><?php echo esc_html(getCurrentImcStatusName($post->ID));?></span>
                 </div>
 
-                <div class="imc-FlexChild imc-CenterContents">
+                <!-- <div class="imc-FlexChild imc-CenterContents">
                     <i class="material-icons md-24 imc-TextColorSecondary">comment</i>
 
                     <span class="imc-DisplayBlock imc-OverviewGridStepLabelStyle imc-TextColorSecondary">
                         <?php
-                        printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
+                        //printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
                         //comments_number( 'No comments', '1 comment', '% comments' );
                         ?>
 
                     </span>
 
-                </div>
+                </div> -->
 
             </div>
         </div>

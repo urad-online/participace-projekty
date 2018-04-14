@@ -15,31 +15,35 @@
 
  	private $meta_fields = array(
  		'name' => array(
- 			'label' => 'Jméno a příjmení navrhovatele',
- 			'id' => 'pb_project_navrhovatel_jmeno',
- 			'type' => 'text',
-            'default' => '',
+ 			'label'     => 'Jméno a příjmení navrhovatele',
+ 			'id'        => 'pb_project_navrhovatel_jmeno',
+ 			'type'      => 'text',
+            'default'   => '',
             'mandatory' => true,
             'placeholder' => 'Vyplňte jméno',
-            'title' => "Proposer Name",
-            'columns' => 6,
+            'title'     => "Proposer Name",
+            'columns'   => 6,
+            'help'      => 'Jméno navrhovatele je povinné',
  		),
  		'address' => array(
- 			'label' => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
- 			'id' => 'pb_project_navrhovatel_adresa',
- 			'type' => 'text',
+ 			'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
+ 			'id'        => 'pb_project_navrhovatel_adresa',
+ 			'type'      => 'text',
             'mandatory' => true,
             'placeholder' => 'Vyplňte adresu navrhovatele',
-            'title' => "address",
+            'title'     => "address",
+            'help'      => '',
  		),
  		'phone' => array(
- 			'label' => 'Telefonický kontakt',
- 			'id' => 'pb_project_navrhovatel_telefon',
- 			'type' => 'tel',
+ 			'label'     => 'Telefonický kontakt',
+ 			'id'        => 'pb_project_navrhovatel_telefon',
+ 			'type'      => 'tel',
+            'options'   => 'pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
             'mandatory' => false,
-            'placeholder' => 'Vyplňte telefonní číslo',
+            'placeholder' => 'číslo ve formátu (+420) nnn nnn nnn',
             'title' => "phone",
             'columns' => 3,
+            'help'      => 'Číslo zadejte ve formátu (+420) 999 999 999',
  		),
  		'email' => array(
  			'label' => 'E-mail',
@@ -49,6 +53,7 @@
             'placeholder' => 'Vyplňte e-mailovou adresu',
             'title' => "email",
             'columns' => 3,
+            'help'      => '',
  		),
  		'age_conf' => array(
  			'label' => 'Prohlašuji, že jsem starší 15 let ',
@@ -75,28 +80,30 @@
         //     'title' => "descrition",
  	// 	),
  		'goals' => array(
- 			'label' => 'Proč je projekt důležitý, co je jeho cílem',
- 			'id' => 'pb_project_cile',
- 			'type' => 'textarea',
+ 			'label'     => 'Proč je projekt důležitý, co je jeho cílem',
+ 			'id'        => 'pb_project_cile',
+ 			'type'      => 'textarea',
             'mandatory' => true,
             'placeholder' => 'Popište cíle projekt',
-            'title' => "goals",
+            'title'     => "goals",
+            'help'      => 'Nebojte se trochu více rozepsat',
  		),
  		'actions' => array(
- 			'label' => 'Co by se mělo udělat',
- 			'id' => 'pb_project_akce',
- 			'type' => 'textarea',
+ 			'label'     => 'Co by se mělo udělat',
+ 			'id'        => 'pb_project_akce',
+ 			'type'      => 'textarea',
             'mandatory' => true,
             'placeholder' => 'Popište aktivity, které je pottřeba vykonat',
-            'title' => "Actions",
+            'title'     => "Actions",
  		),
  		'parcel' => array(
  			'label'       => 'Parcelní číslo',
  			'id'          => 'pb_project_parcely',
- 			'type'        => 'text',
+ 			'type'        => 'textarea',
             'mandatory'   => true,
             'placeholder' => 'Vyplňte číslo parcely ve formátu NNNN/NNNN',
             'title'       => "parcel",
+            'help'        => 'Pro usnadnění kontroly zadejte prosím, každé číslo na samostatný řádek',
  		),
  		'profits' => array(
  			'label'         => 'Kdo bude mít z projektu prospěch',
@@ -105,14 +112,16 @@
             'mandatory'     => true,
             'placeholder'   => 'Popište kdo a jaký bude mít z projektu prospěch',
             'title'         => 'profit',
+            'help'          => '',
  		),
  		'agreement'     => array(
  			'label'     => 'Souhlasím s podmínkami',
  			'id'        => 'pb_project_podminky_souhlas',
  			'default'   => 'no',
- 			'type'      => 'checkbox',
+ 			'type'      => 'agreement',
             'title'     => "Agreement",
             'mandatory' => true,
+            'help'      => 'K podání projektu musíte souhlasit s podmínkami'
  		),
  		'signatures' => array(
  			'label'     => 'Podpisový arch (povinná příloha)',
@@ -120,7 +129,8 @@
  			'type'      => 'media',
             'title'     => "signatures",
             'mandatory' => true,
-            'material_icon' => 'list',
+            'material_icon' => 'file_upload',
+            // 'material_icon' => 'list',
             'AddBtnLabel'   => 'Vložit',
             'DelBtnLabel'   => 'Smazat',
  		),
@@ -135,52 +145,76 @@
         //     'DelBtnLabel'   => 'Smazat fotku',
  	// 	),
  		'map' => array(
- 			'label' => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
- 			'id'    => 'pb_project_mapa',
- 			'type'  => 'media',
-            'title' => "map",
-            'mandatory'     => true,
-            'material_icon' => 'language',
+ 			'label'     => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
+ 			'id'        => 'pb_project_mapa',
+ 			'type'      => 'media',
+            'title'     => "map",
+            'mandatory' => true,
+            'material_icon' => 'file_upload',
+            // 'material_icon' => 'language',
             'AddBtnLabel'   => 'Vložit',
             'DelBtnLabel'   => 'Smazat',
  		),
  		'cost' => array(
- 			'label' => 'Předpokládané náklady (povinná příloha)',
- 			'id' => 'pb_project_naklady',
- 			'type' => 'media',
-            'title' => "cost",
+ 			'label'         => 'Předpokládané náklady (povinná příloha)',
+ 			'id'            => 'pb_project_naklady',
+ 			'type'          => 'media',
+            'title'         => "cost",
             'mandatory'     => true,
-            'material_icon' => 'credit_card',
+            'material_icon' => 'file_upload',
+            // 'material_icon' => 'credit_card',
             'AddBtnLabel'   => 'Vložit',
             'DelBtnLabel'   => 'Smazat',
  		),
+        'budget_total' => array(
+ 			'label'     => 'Celkové náklady',
+ 			'id'        => 'pb_project_naklady_celkem',
+ 			'type'      => 'number',
+            'options'   => 'min="1" max="1000000000" style="text-align:right" pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
+            'mandatory' => true,
+            'placeholder' => 'Vyplňte celkové náklady projektu',
+            'title'     => "Celkove naklady",
+            'columns'   => 5,
+ 		),
+        'budget_increase' => array(
+ 			'label'     => 'Náklady byly navýšeny o rezervu 10%',
+ 			'id'        => 'pb_project_naklady_navyseni',
+ 			'default'   => 'no',
+ 			'type'      => 'checkbox',
+            'title'     => "budget_increase",
+            'mandatory' => true,
+            'columns'   => 6,
+ 		),
  		'attach1' => array(
- 			'label' => 'Vizualizace, výkresy, fotodokumentace… 1 (nepovinné přílohy)',
- 			'id' => 'pb_project_dokumentace1',
- 			'type' => 'media',
-            'title' => "attach1",
+ 			'label'         => 'Vizualizace, výkresy, fotodokumentace… 1 (nepovinné přílohy)',
+ 			'id'            => 'pb_project_dokumentace1',
+ 			'type'          => 'media',
+            'title'         => "attach1",
             'mandatory'     => false,
-            'material_icon' => 'content_copy',
+            'material_icon' => 'file_upload',
+            // 'material_icon' => 'content_copy',
             'AddBtnLabel'   => 'Vložit',
             'DelBtnLabel'   => 'Smazat',
  		),
  		'attach2' => array(
- 			'label' => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
- 			'id' => 'pb_project_dokumentace2',
- 			'type' => 'media',
-            'title' => "attach2",
+ 			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
+ 			'id'            => 'pb_project_dokumentace2',
+ 			'type'          => 'media',
+            'title'         => "attach2",
             'mandatory'     => false,
-            'material_icon' => 'content_copy',
+            'material_icon' => 'file_upload',
+            // 'material_icon' => 'content_copy',
             'AddBtnLabel'   => 'Vložit',
             'DelBtnLabel'   => 'Smazat',
  		),
  		'attach3' => array(
- 			'label' => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
- 			'id' => 'pb_project_dokumentace3',
- 			'type' => 'media',
-            'title' => "attach3",
+ 			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
+ 			'id'            => 'pb_project_dokumentace3',
+ 			'type'          => 'media',
+            'title'         => "attach3",
             'mandatory'     => false,
-            'material_icon' => 'content_copy',
+            'material_icon' => 'file_upload',
+            // 'material_icon' => 'content_copy',
             'AddBtnLabel'   => 'Vložit',
             'DelBtnLabel'   => 'Smazat',
  		),
@@ -191,7 +225,7 @@
             'type'      => 'checkbox',
             'title'     => "completed",
             'mandatory' => false,
-            'tip'       => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
+            'help'      => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
         ),
  	);
  	public function __construct() {
@@ -340,22 +374,26 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
     pb_new_project_tempate_part_map( '7. ' );
     pb_render_field( 8,  $fields['parcel'],     pb_render_field_get_value( $fields['parcel']['id'], $data ) );
     pb_new_project_tempate_part_link_katastr( $latlng);
-    pb_new_project_tempate_part_image('9. ');
+    pb_new_project_tempate_part_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
     pb_render_field( 10, $fields['map'],        pb_render_field_get_value( $fields['map']['id'], $data ) );
     pb_render_field( 11, $fields['cost'],       pb_render_field_get_value( $fields['cost']['id'], $data ) );
-    pb_render_field( 12, $fields['attach1'],    pb_render_field_get_value( $fields['attach1']['id'], $data ) );
-    pb_render_field( 13, $fields['attach2'],    pb_render_field_get_value( $fields['attach2']['id'], $data ) );
-    pb_render_field( 14, $fields['attach3'],    pb_render_field_get_value( $fields['attach3']['id'], $data ) );
     echo '<div class="imc-row">';
-    pb_render_field( 15, $fields['name'],       pb_render_field_get_value( $fields['name']['id'], $data ) );
-    pb_render_field( 16, $fields['phone'],      pb_render_field_get_value( $fields['phone']['id'], $data ) );
-    pb_render_field( 17, $fields['email'],      pb_render_field_get_value( $fields['email']['id'], $data ) );
+    pb_render_field( 12, $fields['budget_total'],    pb_render_field_get_value( $fields['budget_total']['id'], $data ) );
+    pb_render_field( 13, $fields['budget_increase'], pb_render_field_get_value( $fields['budget_increase']['id'], $data ) );
     echo '</div>';
-    pb_render_field( 18, $fields['address'],    pb_render_field_get_value( $fields['address']['id'], $data ) );
-    pb_render_field( 19, $fields['signatures'], pb_render_field_get_value( $fields['signatures']['id'], $data ) );
-    pb_render_field( 20, $fields['age_conf'],   pb_render_field_get_value( $fields['age_conf']['id'], $data ) );
-    pb_render_field( 21, $fields['agreement'],  pb_render_field_get_value( $fields['agreement']['id'], $data ) );
-    pb_render_field( 22, $fields['completed'],  pb_render_field_get_value( $fields['completed']['id'], $data ) );
+    pb_render_field( 14, $fields['attach1'],    pb_render_field_get_value( $fields['attach1']['id'], $data ) );
+    pb_render_field( 15, $fields['attach2'],    pb_render_field_get_value( $fields['attach2']['id'], $data ) );
+    pb_render_field( 16, $fields['attach3'],    pb_render_field_get_value( $fields['attach3']['id'], $data ) );
+    echo '<div class="imc-row">';
+    pb_render_field( 17, $fields['name'],       pb_render_field_get_value( $fields['name']['id'], $data ) );
+    pb_render_field( 18, $fields['phone'],      pb_render_field_get_value( $fields['phone']['id'], $data ) );
+    pb_render_field( 19, $fields['email'],      pb_render_field_get_value( $fields['email']['id'], $data ) );
+    echo '</div>';
+    pb_render_field( 20, $fields['address'],    pb_render_field_get_value( $fields['address']['id'], $data ) );
+    pb_render_field( 21, $fields['signatures'], pb_render_field_get_value( $fields['signatures']['id'], $data ) );
+    pb_render_field( 22, $fields['age_conf'],   pb_render_field_get_value( $fields['age_conf']['id'], $data ) );
+    pb_render_field( 23, $fields['agreement'],  pb_render_field_get_value( $fields['agreement']['id'], $data ) );
+    pb_render_field( 24, $fields['completed'],  pb_render_field_get_value( $fields['completed']['id'], $data ) );
 
     ?>
 
@@ -381,7 +419,32 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
                 return false;
             };
     </script>
-
+    <style>
+        .pb_tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .pb_tooltip .pb_tooltip_text {
+            visibility: hidden;
+            width: 250px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .pb_tooltip:hover .pb_tooltip_text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
      <?php
      return ob_get_clean();
 }
@@ -399,22 +462,35 @@ function pb_render_field( $order = '' , $field, $value = '' )
     if (! empty( $order )) {
         $order = $order . ". ";
     }
+    if (! empty( $field['help'])) {
+        $help = $field['help'];
+    } else {
+        $help = '';
+    }
+
+
     switch ( $field['type'] ) {
         case 'media':
-            pb_render_file_attachemnt( $order, $field, $value);
+            pb_render_file_attachment( $order, $field, $value, $help);
             break;
         case 'checkbox':
-            pb_render_checkbox( $order, $field, $value);
+            pb_render_checkbox( $order, $field, $value, $help);
+            break;
+        case 'agreement':
+            pb_render_checkbox( $order, $field, $value, $help);
             break;
         case 'textarea':
-            pb_render_textarea( $order, $field, $value);
+            pb_render_textarea( $order, $field, $value, $help);
+            break;
+        case 'email':
+            pb_render_text( $order, $field, $value, $help);
             break;
         default:
-            pb_render_text( $order, $field, $value);
+            pb_render_text( $order, $field, $value, $help);
     }
 }
 
-function pb_render_textarea( $order, $input = null, $value = '' )
+function pb_render_textarea( $order, $input = null, $value = '', $help = '' )
 {
     if ( !empty( $input['mandatory'])) {
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
@@ -430,7 +506,7 @@ function pb_render_textarea( $order, $input = null, $value = '' )
     }
 
     $output = '<div class="imc-row">
-        <h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s</h3>%s
+        <h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s'.pb_project_tooltip( $help ).'</h3>%s
         <textarea %s placeholder="%s" rows="%d"
              class="imc-InputStyle" title="%s" name="%s"
              id="%s">%s</textarea></div>';
@@ -451,27 +527,35 @@ function pb_render_textarea( $order, $input = null, $value = '' )
         );
     }
 }
-function pb_render_text( $order, $input = null, $value = '', $columns = null )
+function pb_render_text( $order, $input = null, $value = '', $help = '' )
 {
     if ( !empty( $input['mandatory'])) {
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
-        $required = " required ";
+        $options = " required ";
     } else {
         $mandatory = '';
-        $required = "";
+        $options = "";
     }
+
+    if ( ! empty($input['options'])) {
+        $options .= " ".$input['options'];
+    }
+
     if ( ! empty($input['columns'])) {
         $columns = $input['columns'];
     } else {
         $columns = '';
     }
 
-    $output = '<h3 class="imc-SectionTitleTextStyle">%s%s</h3>%s<input %s autocomplete="off"
-        data-tip="zde kliknete" placeholder="%s" type="text" name="%s" id="%s" class="imc-InputStyle" value="%s"><i class="fa fa-info-circle"></i></input>
+    $output = '<h3 class="imc-SectionTitleTextStyle">%s%s'.pb_project_tooltip( $help ).'</h3>%s<input type="%s" %s autocomplete="off"
+        data-tip="zde kliknete" placeholder="%s" name="%s" id="%s" class="imc-InputStyle" value="%s" ></input>
         <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
     if ( ! empty($columns) ) {
         $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
+    } else {
+        $output = '<div class="imc-row">' . $output . '</div>';
     }
+
     if ( empty( $input ) ) {
         return $output;
     } else {
@@ -479,7 +563,8 @@ function pb_render_text( $order, $input = null, $value = '', $columns = null )
             $order,
             $input['label'],
             $mandatory,
-            $required,
+            $input['type'],
+            $options,
             $input['placeholder'],
             $input['id'],
             $input['id'],
@@ -488,7 +573,7 @@ function pb_render_text( $order, $input = null, $value = '', $columns = null )
         );
     }
 }
-function pb_render_file_attachemnt( $order, $input, $value = '')
+function pb_render_file_attachment( $order, $input, $value = '', $help = '')
 {
     if ( ! empty( $input['mandatory'])) {
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
@@ -507,7 +592,7 @@ function pb_render_file_attachemnt( $order, $input, $value = '')
     // <span id="%sName" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">'. __('Vyberte soubor','participace-projekty') .'</span>
     $output = '<div class="imc-row" id="pbProjectSection%s">
                 <div class="imc-row">
-                    <h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s</h3>%s
+                    <h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s'.pb_project_tooltip( $help ).'</h3>%s
                 </div>
                 <div class="imc-row">
                     <div class="imc-grid-5 imc-columns">
@@ -555,14 +640,15 @@ function pb_render_file_link($url, $id)
 {
     if (! empty($url)) {
         return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right  imc-SingleHeaderLinkStyle">
-                    <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
+                    <i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
+                    // <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
     } else {
         return '<a hidden id="'.$id.'Link" data-toggle="tooltip" title="Chybí příloha" class="u-pull-right imc-SingleHeaderLinkStyle ">
-        <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
+        <i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
     }
 }
 
-function pb_render_checkbox( $order, $input, $value = '')
+function pb_render_checkbox( $order, $input, $value = '', $help = '')
 {
     $checked = '';
     $required = '';
@@ -583,13 +669,23 @@ function pb_render_checkbox( $order, $input, $value = '')
             $required = "required";
         }
     }
-    if (! empty( $input['tip'])) {
-        $tip = $input['tip'];
+
+    if ( ! empty($input['columns'])) {
+        $columns = $input['columns'];
+    } else {
+        $columns = '';
     }
 
-    $output = '<div class="imc-row">
-    <h3 class="imc-SectionTitleTextStyle"><label id="%sLabel" for="%s">%s%s</label>
-        <input title="%s" type="checkbox"  %s %s name="%s" id="%s" class="imc-InputStyle" value="1" style="width:20px; height:20px; display:inline-block"/></h3></div>' ;
+    $output = '<h3 class="imc-SectionTitleTextStyle"><label id="%sLabel" for="%s">%s%s</label>'. pb_project_tooltip($help) .'
+        <input title="%s" type="checkbox"  %s %s name="%s" id="%s" class="imc-InputStyle" value="1"
+        style="width:20px; height:20px; display:inline-block"/></h3>';
+
+    if ( ! empty($columns) ) {
+        $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
+    } else {
+        $output = '<div class="imc-row">' . $output . '</div>';
+    }
+
     if ( empty( $input ) ) {
         return $output;
     } else {
@@ -632,7 +728,8 @@ function pb_new_project_meta_save_prep( $data, $update = false )
         'pb_project_cile'                => esc_attr(sanitize_textarea_field($data['pb_project_cile'])),
         'pb_project_akce'                => esc_attr(sanitize_textarea_field($data['pb_project_akce'])),
         'pb_project_prospech'            => esc_attr(sanitize_textarea_field($data['pb_project_prospech'])),
-        'pb_project_edit_completed'      => esc_attr(sanitize_text_field($data['pb_project_edit_completed'])),
+        'pb_project_naklady_celkem'      => esc_attr(sanitize_textarea_field($data['pb_project_naklady_celkem'])),
+        'pb_project_naklady_navyseni'    => esc_attr(sanitize_textarea_field($data['pb_project_naklady_navyseni'])),
 		);
     if ( ! $update ) {
         $output['imc_likes'] = '0';
@@ -729,7 +826,7 @@ function pb_new_project_tempate_part_map( $order = '')
         __('Add an address','participace-projekty')
     );
 }
-function pb_new_project_tempate_part_image( $order = '')
+function pb_new_project_tempate_part_image( $order = '', $issue_image = '')
 {
     $output = '
         <div class="imc-row" id="imcImageSection">
@@ -746,7 +843,17 @@ function pb_new_project_tempate_part_image( $order = '')
             <span style="display: none;" id="imcLargePhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">%s</span>
             <span style="display: none;" id="imcPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">%s</span>
             <span class="imc-ReportGenericLabelStyle imc-TextColorPrimary" id="imcPhotoAttachedFilename"></span>
-        </div>';
+            <br>
+            <br>
+        </div>
+        <input title="orientation" type="hidden" id="imcPhotoOri" name="imcPhotoOri"/>
+        ';
+    if ( $issue_image) {
+        $output .= '<img id="imcPreviousImg" class="u-cf" style="max-height: 200px;" src="%s">';
+    } else {
+        $output .= "%s";
+    }
+
     printf( $output,
         $order,
         __('Photo','participace-projekty'),
@@ -755,9 +862,11 @@ function pb_new_project_tempate_part_image( $order = '')
         __('Delete Photo', 'participace-projekty'),
         __('No photo attached','participace-projekty'),
         __('Photo size must be smaller in size, please resize it or select a smaller one!','participace-projekty'),
-        __('A photo has been selected:','participace-projekty')
+        __('A photo has been selected:','participace-projekty'),
+        $issue_image
     );
 }
+
 function pb_new_project_tempate_part_link_katastr($latlng)
 {
     if (! empty( $latlng ) ) {
@@ -778,4 +887,105 @@ function pb_new_project_tempate_part_link_katastr($latlng)
         zda jsou pozemky ve správě HMP nebo MČ a seznam všech dotčených pozemků uveďte do pole níže (jedna položka na jeden řádek).</span>
         </div>';
     printf($output);
+}
+
+function pb_new_project_mandatory_fields_js_validation()
+{
+    return "
+    [{
+        name: 'postTitle',
+        display: 'Title',
+        rules: 'required|min_length[3]|max_length[255]'
+    }, {
+        name: 'my_custom_taxonomy',
+        display: 'Category',
+        rules: 'required'
+    }, {
+        name: 'postAddress',
+        display: 'Address',
+        rules: 'required'
+    }, {
+        name: 'pb_project_cile',
+        display: 'goals',
+        rules: 'required'
+    }, {
+        name: 'pb_project_prospech',
+        display: 'profit',
+        rules: 'required'
+    }, {
+        name: 'pb_project_parcely',
+        display: 'parcel',
+        rules: 'required'
+    }, {
+        name: 'pb_project_navrhovatel_jmeno',
+        display: 'name',
+        rules: 'required'
+    }, {
+        name: 'pb_project_navrhovatel_telefon',
+        display: 'phone',
+        rules: 'required'
+    }, {
+        name: 'pb_project_navrhovatel_email',
+        display: 'email',
+        rules: 'required'
+    }, {
+        name: 'pb_project_navrhovatel_adresa',
+        display: 'Adresa navrhovatele',
+        rules: 'required'
+    }, {
+        name: 'pb_project_podporovatele',
+        display: 'Podpisový arch',
+        rules: 'required'
+    }, {
+        name: 'featured_image',
+        display: 'Photo',
+        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
+    }, {
+        name: 'pb_project_naklady_celkem',
+        display: 'budget_total',
+        rules: 'required'
+    }, {
+        name: 'pb_project_naklady_navyseni',
+        display: 'budget_increase',
+        rules: 'required'
+    }]
+    ";
+}
+/**
+ * 6.09
+ * Function that checks if user can edit an issue
+ * basically checks if current user is issue's author
+ * and if status changed
+ */
+
+function pb_user_can_edit($post_id, $current_user) {
+
+	$status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+    $terms_count = count($status_terms);
+    if ( $terms_count > 2 ) {
+        $edit_statuses = array($status_terms[0]->term_id, $status_terms[1]->term_id);
+    } elseif ($terms_count > 1) {
+        $edit_statuses = array($status_terms[0]->term_id, );
+    } else {
+        $edit_statuses = array();
+    }
+
+	// Issue is not current user's
+	$my_issue = get_post($post_id);
+	$author_id = intval($my_issue ->post_author, 10); // Author's id of current #post
+
+	if($author_id == $current_user) {
+		return in_array( getCurrentImcStatusID($post_id), $edit_statuses , true);
+	}
+
+	return false;
+}
+function pb_project_tooltip( $text = "")
+{
+    if (! empty( $text)) {
+        return '<span class="pb_tooltip"><i class="material-icons md-24">help_outline</i>
+        <span class="pb_tooltip_text" >' . $text . '</span></span>' ;
+    } else {
+        return '';
+    }
 }
