@@ -180,6 +180,13 @@ class ImcSettingsPage {
         add_settings_field( 'default_view', __('Default Issues View','participace-projekty'), array( &$this, 'field_default_view' ), $this->general_settings_key, 'section_general' );
 
         add_settings_field( 'imc_custom_slug', __('Add a custom slug for the issues page','participace-projekty'), array( &$this, 'field_imc_custom_slug' ), $this->general_settings_key, 'section_general' );
+
+    /*************************** nová pole v nastavení pluginu ****************************************/
+        
+        add_settings_field( 'imc_comments', __('Povolit komentáře návrhů projektů','participace-projekty'), array( &$this, 'field_comment_view' ), $this->general_settings_key, 'section_general' );
+
+        add_settings_field( 'imc_ratings', __('Povolit hodnocení návrhů projektů','participace-projekty'), array( &$this, 'field_ratings_view' ), $this->general_settings_key, 'section_general' );
+
     }
 
 
@@ -493,6 +500,23 @@ class ImcSettingsPage {
         <input type="radio" name="<?php echo $this->notifications_settings_key; ?>[notify_comment_to_admin]" value="2" <?php checked(2, $this->notifications_settings['notify_comment_to_admin'], true); ?>><?php _e('ΝΟ','participace-projekty'); ?>
         <?php
     }
+    /*************************** nová pole v nastavení pluginu ****************************************/
+    
+        function field_comment_view() {
+        ?>
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[default_view_comment]" value="1" <?php checked(1, $this->general_settings['default_view_comment'], true); ?>><?php _e('YES','participace-projekty'); ?>
+
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[default_view_comment]" value="2" <?php checked(2, $this->general_settings['default_view_comment'], true); ?>><?php _e('ΝΟ','participace-projekty'); ?>
+        <?php
+    }
+    function field_ratings_view() {
+        ?>
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[default_view_ratings]" value="1" <?php checked(1, $this->general_settings['default_view_ratings'], true); ?>><?php _e('YES','participace-projekty'); ?>
+
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[default_view_ratings]" value="2" <?php checked(2, $this->general_settings['default_view_ratings'], true); ?>><?php _e('ΝΟ','participace-projekty'); ?>
+        <?php
+    }
+
 
 
 
