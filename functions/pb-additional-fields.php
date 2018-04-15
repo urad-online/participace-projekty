@@ -116,7 +116,6 @@
                 'help'          => '',
      		),
      		'agreement'     => array(
-     		// 	'label'     => 'Souhlasím s '.  '<a href="podminky-pouziti-a-ochrana-osobnich-udaju/" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
      			'label'     => 'Souhlasím s <a href="'. site_url("podminky-pouziti-a-ochrana-osobnich-udaju/") . '" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
      			'id'        => 'pb_project_podminky_souhlas',
      			'default'   => 'no',
@@ -375,10 +374,10 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
     pb_render_field( 4,  $fields['goals'],      pb_render_field_get_value( $fields['goals']['id'], $data ));
     pb_render_field( 5,  $fields['actions'],    pb_render_field_get_value( $fields['actions']['id'], $data ) );
     pb_render_field( 6,  $fields['profits'],    pb_render_field_get_value( $fields['profits']['id'], $data ) );
-    pb_new_project_tempate_part_map( '7. ' );
+    pb_new_project_template_part_map( '7. ' );
     pb_render_field( 8,  $fields['parcel'],     pb_render_field_get_value( $fields['parcel']['id'], $data ) );
-    pb_new_project_tempate_part_link_katastr( $latlng);
-    pb_new_project_tempate_part_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
+    pb_new_project_template_part_link_katastr( $latlng);
+    pb_new_project_template_part_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
     pb_render_field( 10, $fields['map'],        pb_render_field_get_value( $fields['map']['id'], $data ) );
     pb_render_field( 11, $fields['cost'],       pb_render_field_get_value( $fields['cost']['id'], $data ) );
     echo '<div class="imc-row">';
@@ -811,7 +810,7 @@ function pb_new_project_update_postmeta($post_id, $data)
         update_post_meta($post_id, $key, $value);
     }
 }
-function pb_new_project_tempate_part_map( $order = '')
+function pb_new_project_template_part_map( $order = '')
 {
     $output = '
         <div class="imc-row-no-margin">
@@ -835,7 +834,7 @@ function pb_new_project_tempate_part_map( $order = '')
         __('Add an address','participace-projekty')
     );
 }
-function pb_new_project_tempate_part_image( $order = '', $issue_image = '')
+function pb_new_project_template_part_image( $order = '', $issue_image = '')
 {
     $output = '
         <div class="imc-row" id="imcImageSection">
@@ -876,7 +875,7 @@ function pb_new_project_tempate_part_image( $order = '', $issue_image = '')
     );
 }
 
-function pb_new_project_tempate_part_link_katastr($latlng)
+function pb_new_project_template_part_link_katastr($latlng)
 {
     if (! empty( $latlng ) ) {
         $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=".$latlng['lat']."&lon=".$latlng['lon']."&layers_3=0B0000FFTFFT";
@@ -1001,4 +1000,74 @@ function pb_render_condition_link()
         <a id="pb_link_to_conditions" target="_blank" href="'.$page_link.'" title="Přejít na stránku s podmínkami">zde</a></h3>';
     return $output;
     // return '<span style="display:inline-block; margin-left:20px;">S podmínkami se můžete seznámit </span>';
+}
+
+function pb_template_part_single_project( $data = null)
+{
+    $pb_project_meta_fields = new informacekprojektuMetabox();
+    $fields = $pb_project_meta_fields->get_fields();
+
+    ob_start();
+    pb_render_field_single_project( '',  $fields['goals'],      pb_render_field_get_value( $fields['goals']['id'], $data ));
+    pb_render_field_single_project( '',  $fields['actions'],    pb_render_field_get_value( $fields['actions']['id'], $data ) );
+    pb_render_field_single_project( '',  $fields['profits'],    pb_render_field_get_value( $fields['profits']['id'], $data ) );
+    pb_render_field_single_project( '',  $fields['address'],    pb_render_field_get_value( 'imc_address', $data ) );
+    pb_render_field_single_project( '',  $fields['parcel'],     pb_render_field_get_value( $fields['parcel']['id'], $data ) );
+    pb_render_field_single_project( '',  $fields['map'],        pb_render_field_get_value( $fields['map']['id'], $data ) );
+    pb_render_field_single_project( '', $fields['cost'],       pb_render_field_get_value( $fields['cost']['id'], $data ) );
+    pb_render_field_single_project( '', $fields['budget_total'],    pb_render_field_get_value( $fields['budget_total']['id'], $data ) );
+    pb_render_field_single_project( '', $fields['attach1'],    pb_render_field_get_value( $fields['attach1']['id'], $data ) );
+    pb_render_field_single_project( '', $fields['attach2'],    pb_render_field_get_value( $fields['attach2']['id'], $data ) );
+    pb_render_field_single_project( '', $fields['attach3'],    pb_render_field_get_value( $fields['attach3']['id'], $data ) );
+    pb_render_field_single_project( '', $fields['name'],       pb_render_field_get_value( $fields['name']['id'], $data ) );
+    return ob_get_clean();
+}
+function pb_render_field_single_project( $order = '' , $field, $value = '' )
+{
+    if ( empty( $value)) {
+        return '';
+    }
+    if (! empty( $order )) {
+        $order = $order . ". ";
+    }
+
+    switch ( $field['type'] ) {
+        case 'media':
+            pb_render_single_project_file_field( $order, $field['label'], $value);
+            break;
+        case 'checkbox':
+            pb_render_single_project_text_field( $order, $field['label'], $value);
+            break;
+        case 'textarea':
+            pb_render_single_project_text_field( $order, $field['label'], $value);
+            break;
+        default:
+            pb_render_single_project_text_field( $order, $field['label'], $value);
+    }
+}
+
+function pb_render_single_project_text_field( $order = '', $label = '', $value = '')
+{
+    $output = '<div class="imc-row">
+        <h3 class="imc-SectionTitleTextStyle">%s%s</h3>
+        <div class="imc-SingleDescriptionStyle imc-TextColorSecondary imc-JustifyText">%s</div>
+    </div>';
+    printf( $output ,
+        $order,
+        $label,
+        $value);
+}
+
+function pb_render_single_project_file_field( $order = '', $label = '', $value = '')
+{
+    $output = '<div class="imc-row">
+        <h3 class="imc-SectionTitleTextStyle">%s%s</h3>
+        <div><p>Zobrazit přílohu<a href="%s" target="_blank" data-toggle="tooltip"
+            title="Zobrazit přílohu" >
+                <i class="material-icons md-28 imc-SingleHeaderIconStyle" >file_download</i></a></p>
+        </div></div>';
+    printf( $output ,
+        $order,
+        $label,
+        $value);
 }
