@@ -141,7 +141,7 @@ get_header(); ?>
 												</span>
 
 									<?php //if (get_post_status( $issue_id ) == 'publish') { ?>
-
+										<!-- tohle se musi dodelat podle parametru v nastaveni -->
                                         <!-- <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
                                         <span class="imc-SingleInformationTextStyle imc-TextColorSecondary imc-FontRoboto imc-TextMedium
 											imc-Text-SM"><?php //echo esc_html(intval(get_post_meta($post->ID, "imc_likes", true), 10)); ?></span> -->
@@ -234,7 +234,8 @@ get_header(); ?>
 									?>
                             </div> <!--End Card-->
 
-							<?php if (get_post_status( $issue_id ) == 'publish') { ?>
+							<?php if ((get_post_status( $issue_id ) == 'publish') && (true == false)) { ?>
+								<!-- tohle se musi dodelat -->
 
                                 <div class="imc-CardLayoutStyle">
                                     <h3 class="imc-SectionTitleTextStyle"><?php echo __('Comments','participace-projekty'); ?></h3>
