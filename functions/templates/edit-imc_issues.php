@@ -8,6 +8,7 @@ wp_enqueue_script('imc-gmap');
 
 $listpage = getIMCArchivePage();
 $postTitleError = '';
+$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
 
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 
@@ -30,18 +31,23 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	);
 
 	$post_id = wp_update_post( $post_information, true );
+
 	if (is_wp_error($post_id)) {
 		$errors = $post_id->get_error_messages();
 		foreach ($errors as $error) {
 			echo $error;
 		}
+		exit;
 	}
 
 	//we now use $post id to help add out post meta data
-	update_post_meta($post_id, 'imc_lat', $lat);
-	update_post_meta($post_id, 'imc_lng', $lng);
-	update_post_meta($post_id, 'imc_address', $address);
+	// update_post_meta($post_id, 'imc_lat', $lat);
+	// update_post_meta($post_id, 'imc_lng', $lng);
+	// update_post_meta($post_id, 'imc_address', $address);
 
+	$meta_update = true; // to ignore imc_likes & modality
+	$post_information_meta = pb_new_project_meta_save_prep( $_POST, $meta_update );
+	pb_new_project_update_postmeta( $post_id, $post_information_meta );
 	/************************ ABOUT FEATURED IMAGE  ***********************************/
 
 	$imageScenario = intval(strip_tags($_POST['imcImgScenario']), 10);
@@ -63,9 +69,27 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 		set_post_thumbnail( $post_id, $attachment_id );
 	}
 
-
-
 	/************************ END FEATURED IMAGE  ***********************************/
+
+	/************************ About FILE ATTACHMENTS  *******************************/
+	pb_new_project_update_attachments( $post_id, $_FILES, $_POST);
+	/************************ END FILE ATTACHMENTS  *******************************/
+
+	/********************** About changing Project status  ************************/
+	$pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
+	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+	if ( $pb_edit_completed ) {
+		$set_status = $all_status_terms[1];
+	} else {
+		$set_status = $all_status_terms[0];
+	}
+	$pb_project_status = wp_get_object_terms($post_id, 'imcstatus');
+
+	if ( $set_status->slug != $pb_project_status[0]->slug) {
+		wp_remove_object_terms( $post_id, $pb_project_status[0]->slug, 'imcstatus');
+		wp_set_object_terms($post_id, $set_status->name, 'imcstatus');
+	}
+	/*********************** End changing Project status  *************************/
 
 	if($post_id){
 		wp_redirect(get_permalink($listpage[0]->ID));
@@ -89,21 +113,37 @@ $user = wp_get_current_user();
 
 $safe_inserted_id = intval( $_GET['myparam'] );
 $safe_inserted_id = sanitize_text_field( $safe_inserted_id );
+
 $given_issue_id = $safe_inserted_id;
 
 $issue_for_edit = get_post($given_issue_id);
 $issue_title = get_the_title($given_issue_id);
 $issue_content = $issue_for_edit->post_content;
-$issue_address = get_post_meta($given_issue_id, "imc_address", true);
-
 $issue_image = wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
 
-$issue_lat = get_post_meta($given_issue_id, "imc_lat", true);
-$issue_lng = get_post_meta($given_issue_id,"imc_lng",true);
+$pb_project_meta = get_post_meta($safe_inserted_id);
+$pb_project_meta[ 'issue_image'] = $issue_image;
+
+$pb_project_status = wp_get_object_terms($given_issue_id, 'imcstatus');
+$pb_project_edit_completed = '0';
+foreach ($all_status_terms as $key => $term ) {
+	if ( $term->slug == $pb_project_status[0]->slug) {
+		$pb_project_edit_completed = $key;
+	}
+}
+if ($pb_project_edit_completed == '0') {
+	$pb_project_meta[ 'pb_project_edit_completed'] = "0";
+} else {
+	$pb_project_meta[ 'pb_project_edit_completed'] = "1";
+}
+
+$issue_address 	= $pb_project_meta[ 'imc_address'][0];
+$issue_lat 		= $pb_project_meta[ 'imc_lat'][0];
+$issue_lng 		= $pb_project_meta[ 'imc_lng'][0];
 
 $plugin_path_url = imc_calculate_plugin_base_url();
 
-if(imc_user_can_edit($given_issue_id, $user->ID)) { ?>
+if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
     <div class="imc-BGColorGray">
 
         <div class="imc-SingleHeaderStyle imc-BGColorWhite">
@@ -141,14 +181,15 @@ if(imc_user_can_edit($given_issue_id, $user->ID)) { ?>
                             <!-- Issue's Title -->
                             <div class="imc-grid-6 imc-columns">
 
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo __('Title','participace-projekty'); ?></h3>
-                                <input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" value="<?php echo esc_attr($issue_title); ?>"/>
+                                <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
+								<input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>"
+									type="text" name="postTitle" id="postTitle" class="imc-InputStyle" value="<?php echo esc_attr($issue_title); ?>"/>
                                 <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                             </div>
 
                             <!-- Issue's Category -->
                             <div class="imc-grid-6 imc-columns">
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo __('Category', 'participace-projekty'); ?></h3>
+                                <h3 class="imc-SectionTitleTextStyle"><?php echo '2. ' . __('Category', 'participace-projekty'); ?></h3>
 
 								<?php $imccategory_currentterm = get_the_terms($given_issue_id , 'imccategory' );
 								if ($imccategory_currentterm) {
@@ -177,77 +218,17 @@ if(imc_user_can_edit($given_issue_id, $user->ID)) { ?>
 
                         <!-- Issue's Description -->
                         <div class="imc-row">
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
+                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
                             <textarea placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php echo esc_html($issue_content); ?><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
                         </div>
 
-                        <!-- Issue's Address -->
-                        <div class="imc-row-no-margin">
-                            <h3 class="imc-SectionTitleTextStyle"><?php echo __('Address','participace-projekty'); ?></h3>
-
-                            <button class="imc-button u-pull-right" type="button" onclick="imcFindAddress('imcAddress', true);">
-                                <i class="material-icons md-24 imc-AlignIconToButton">search</i> <?php echo __('Locate', 'participace-projekty') ?>
-                            </button>
-
-                            <div style="padding-right: .5em;" class="imc-OverflowHidden">
-                                <input required name="postAddress" placeholder="<?php echo __('Add an address','participace-projekty'); ?>" value="<?php echo esc_attr($issue_address);?>" id="imcAddress" class="u-pull-left imc-InputStyle"/>
-                            </div>
-
-                        </div>
-
-                        <!-- Issue's Map -->
-                        <div class="imc-row">
-
-                            <div id="imcReportIssueMapCanvas" class="u-full-width imc-ReportIssueMapCanvasStyle"></div>
-                        </div>
-
-                        <!-- Issue's Image -->
-                        <div class="imc-row" id="imcImageSection">
-
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo __('Photo','participace-projekty');  ?>&nbsp; </h3><span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
-
-							<?php if ($issue_image) { ?>
-
-                                <div class="u-cf">
-                                    <input autocomplete="off" class="imc-ReportAddImgInputStyle" id="imcReportAddImgInput" type="file" name="featured_image" />
-                                    <label for="imcReportAddImgInput">
-                                        <i class="material-icons md-24 imc-AlignIconToButton">photo</i>
-										<?php echo __('Add photo','participace-projekty'); ?>
-                                    </label>
-
-                                    <button type="button" class="imc-button" onclick="imcDeleteAttachedImage('imcReportAddImgInput'); "><i class="material-icons md-24 imc-AlignIconToButton">delete</i><?php echo __('Delete Photo', 'participace-projekty');?></button>
-                                </div>
-
-                                <span style="display: none;" id="imcNoPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('No photo attached','participace-projekty'); ?></span>
-                                <span style="display: none;" id="imcLargePhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('Photo size must be less than 2MB, please resize it or select a smaller one!','participace-projekty'); ?></span>
-                                <span id="imcPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('A photo has been selected:','participace-projekty'); ?></span>
-                                <span class="imc-ReportGenericLabelStyle imc-TextColorPrimary" id="imcPhotoAttachedFilename"></span>
-
-                                <br>
-                                <br>
-
-                                <img id="imcPreviousImg" class="u-cf" style="max-height: 200px;" src="<?php echo esc_url($issue_image); ?>">
-
-							<?php } else {  ?>
-
-                                <div class="u-cf">
-                                    <input autocomplete="off" class="imc-ReportAddImgInputStyle" id="imcReportAddImgInput" type="file" name="featured_image" />
-                                    <label for="imcReportAddImgInput">
-                                        <i class="material-icons md-24 imc-AlignIconToButton">photo</i>
-										<?php echo __('Add photo','participace-projekty'); ?>
-                                    </label>
-
-                                    <button type="button" class="imc-button" onclick="imcDeleteAttachedImage('imcReportAddImgInput');"><i class="material-icons md-24 imc-AlignIconToButton">delete</i><?php echo __('Delete Photo', 'participace-projekty');?></button>
-                                </div>
-
-                                <span id="imcNoPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('No photo attached','participace-projekty'); ?></span>
-                                <span style="display: none;" id="imcPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('A photo has been selected:','participace-projekty'); ?></span>
-                                <span style="display: none;" id="imcLargePhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary"><?php echo __('Photo size must be less than 2MB, please resize it or select a smaller one!','participace-projekty'); ?></span>
-                                <span class="imc-ReportGenericLabelStyle imc-TextColorPrimary" id="imcPhotoAttachedFilename"></span>
-
-							<?php } ?>
-
-                        </div>
+						<?php echo pb_template_part_new_project(
+										array(
+											'lat' => $pb_project_meta[ 'imc_lat'][0],
+											'lon' => $pb_project_meta[ 'imc_lng'][0],
+										),
+										$pb_project_meta
+										) ;?>
 
                         <div class="imc-row">
                             <span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
@@ -262,9 +243,6 @@ if(imc_user_can_edit($given_issue_id, $user->ID)) { ?>
                     </div>
 
                     <!-- Hidden inputs to pass to php -->
-                    <input title="lat" type="hidden" id="imcLatValue" name="imcLatValue"/>
-                    <input title="lng" type="hidden" id="imcLngValue" name="imcLngValue"/>
-                    <input title="orientation" type="hidden" id="imcPhotoOri" name="imcPhotoOri"/>
                     <input title="imgScenario" type="hidden" id="imcImgScenario" name="imcImgScenario" value="0"/>
 
 
@@ -327,19 +305,9 @@ if(imc_user_can_edit($given_issue_id, $user->ID)) { ?>
 
         jQuery( document ).ready(function() {
 
-            var validator = new FormValidator('report_an_issue_form', [{
-                name: 'postTitle',
-                display: 'Title',
-                rules: 'required|min_length[3]|max_length[255]'
-            }, {
-                name: 'postAddress',
-                display: 'Address',
-                rules: 'required'
-            }, {
-                name: 'featured_image',
-                display: 'Photo',
-                rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
-            }], function(errors) {
+            var validator = new FormValidator('report_an_issue_form'<?PHP
+				echo pb_new_project_mandatory_fields_js_validation();
+				?>, function(errors) {
                 if (errors.length > 0) {
                     var i, j;
                     var errorLength;

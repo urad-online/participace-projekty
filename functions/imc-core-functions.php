@@ -132,17 +132,16 @@ function imc_rename_featured_img_metabox() {
 
 
 
+function imc_filename_rename_to_hash( $filename ) {
+	$info = pathinfo( $filename );
+	$ext  = empty( $info['extension'] ) ? '' : '.' . $info['extension'];
+	$name = basename( $filename, $ext );
+	return md5( $name ) . $ext;
+}
 
 function imc_upload_img($file = array(), $parent_post_id, $issue_title, $orientation = null) {
 
 	require_once( ABSPATH . 'wp-admin/includes/admin.php' );
-
-	function imc_filename_rename_to_hash( $filename ) {
-		$info = pathinfo( $filename );
-		$ext  = empty( $info['extension'] ) ? '' : '.' . $info['extension'];
-		$name = basename( $filename, $ext );
-		return md5( $name ) . $ext;
-	}
 
 	add_filter( 'sanitize_file_name', 'imc_filename_rename_to_hash', 10 );
 	$file_return = wp_handle_upload( $file, array(
@@ -343,7 +342,7 @@ function imc_show_issue_message($post_id, $current_user){
 
 		if (get_post_status($post_id) == 'pending') {
 			return $moderationMessage;
-		} else if (!imc_user_can_edit($post_id, $current_user)) {
+		} else if (!pb_user_can_edit($post_id, $current_user)) {
 			return $editMessage;
 		}
 
@@ -790,11 +789,11 @@ function imc_slogin_get_user($provider_name, $provider_user_id )
 	$userSloginTable = $wpdb->prefix . 'imc_users_slogin';
 
 	// Select the required fields from the table.
-	$query = "SELECT * 
+	$query = "SELECT *
 
 	FROM $usersTable AS users
 	INNER JOIN $userSloginTable AS userSlogin ON users.ID = userSlogin.userid
-	 
+
 	WHERE userSlogin.provider_name = '$provider_name' AND userSlogin.provider_uid = '$provider_user_id'";
 
 	$sql = $wpdb->get_results( $query );
