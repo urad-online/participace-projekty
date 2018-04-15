@@ -24,6 +24,8 @@ function getCurrentImcStatusID($mypostID){
 
     if ($imcstatus_currentterm) {
         $current_step = $imcstatus_currentterm[0]->term_id;
+    } else {
+        $current_step = 0;
     }
 
     return 	$current_step;
@@ -179,8 +181,8 @@ function imc_get_issue_timeline($id) {
     $query = " SELECT a.timeline_title AS title, a.description AS description,
 	a.theColor AS color, a.created AS dateUTC,  b.display_name AS name
 	FROM $logsTable AS a
-	INNER JOIN $usersTable AS b ON a.created_by = b.ID 
-	WHERE a.issueid = $id 
+	INNER JOIN $usersTable AS b ON a.created_by = b.ID
+	WHERE a.issueid = $id
 	ORDER BY a.created DESC ";
 
     $sql = $wpdb->get_results( $query );

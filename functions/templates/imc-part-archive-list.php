@@ -98,18 +98,18 @@ function imc_archive_show_list($post, $editpage, $parameter_pass, $user_id, $pen
                         <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php echo esc_html(getCurrentImcStatusName($post->ID));?></span>
                     </div>
 
-                    <div class="imc-DisplayInlineBlock">
+                    <!-- <div class="imc-DisplayInlineBlock">
                         <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">comment</i>
                         <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php
 							//comments_number( 'No comments', '1 comment', '% comments' );
-							printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
+							//printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
 							?></span>
                     </div>
-					<?php $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
+					<?php //$total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
                     <div class="imc-DisplayInlineBlock">
                         <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
-                        <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php echo esc_html($total_likes); ?></span>
-                    </div>
+                        <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php //echo esc_html($total_likes); ?></span>
+                    </div> -->
                 </div>
             </div>
 
@@ -133,11 +133,11 @@ function imc_archive_show_list($post, $editpage, $parameter_pass, $user_id, $pen
 				<?php } ?>
 
 				<?php $author_id = intval(get_the_author_meta('ID'));
-				if ( intval($author_id, 10) === intval($user_id, 10) && !imc_user_can_edit(get_the_ID(), $user_id)  )  { ?>
+				if ( intval($author_id, 10) === intval($user_id, 10) && !pb_user_can_edit(get_the_ID(), $user_id)  )  { ?>
 
                     <img class="imc-OverviewListMyIssueIconStyle" alt="My Issue icon" title="<?php echo __('My Issue','participace-projekty'); ?>" src="<?php echo esc_url($plugin_path_url);?>/img/ic_my_issue_list.png">
 
-				<?php } else if(imc_user_can_edit(get_the_ID(), $user_id)) { ?>
+				<?php } else if(pb_user_can_edit(get_the_ID(), $user_id)) { ?>
 
                     <a class="imc-button-primary imc-button-small imc-OverviewListEditButtonStyle" href="<?php echo esc_url( get_permalink($editpage[0]->ID) . $parameter_pass . $issue_id ); ?>" target="_blank"><?php echo __('Edit','participace-projekty'); ?></a>
 

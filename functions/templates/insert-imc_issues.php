@@ -42,6 +42,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
 
+
 	$post_id = wp_insert_post($post_information, true);
 
 	if ( $post_id && ( ! is_wp_error($post_id)) ) {
@@ -49,10 +50,11 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	}
 
 	// Choose the imcstatus with smaller id
-// zmenit order by imc_term_order
-	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+	// zmenit order by imc_term_order
 
-	if ( ! empty( $post_information['meta_input']['pb_project_edit_completed']) && ($post_information['meta_input']['pb_project_edit_completed'] == '1')) {
+	$pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
+	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+	if ( $pb_edit_completed ) {
 		$first_status = $all_status_terms[1];
 	} else {
 		$first_status = $all_status_terms[0];
@@ -279,14 +281,6 @@ if( is_user_logged_in() ) {
 
                     </div>
 
-
-
-                    <!-- Hidden inputs to pass to php -->
-
-                    <input title="orientation" type="hidden" id="imcPhotoOri" name="imcPhotoOri"/>
-
-
-
                 </form>
 
             </div> <!-- Form end -->
@@ -392,55 +386,9 @@ if( is_user_logged_in() ) {
             google.maps.event.addDomListener(window, 'load', imcInitMap);
 
             jQuery( document ).ready(function() {
-                var validator = new FormValidator('report_an_issue_form', [{
-                    name: 'postTitle',
-                    display: 'Title',
-                    rules: 'required|min_length[3]|max_length[255]'
-                }, {
-                    name: 'my_custom_taxonomy',
-                    display: 'Category',
-                    rules: 'required'
-                }, {
-                    name: 'postAddress',
-                    display: 'Address',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_cile',
-                    display: 'goals',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_prospech',
-                    display: 'profit',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_parcely',
-                    display: 'parcel',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_navrhovatel_jmeno',
-                    display: 'name',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_navrhovatel_telefon',
-                    display: 'phone',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_navrhovatel_email',
-                    display: 'email',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_navrhovatel_adresa',
-                    display: 'Adresa navrhovatele',
-                    rules: 'required'
-                }, {
-                    name: 'pb_project_podporovatele',
-                    display: 'Podpisový arch',
-                    rules: 'required'
-                }, {
-                    name: 'featured_image',
-                    display: 'Photo',
-                    rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
-                }], function(errors) {
+                var validator = new FormValidator('report_an_issue_form',
+					<?PHP echo pb_new_project_mandatory_fields_js_validation(); ?>,
+				function(errors) {
                     if (errors.length > 0) {
                         var i, j;
                         var errorLength;
