@@ -189,7 +189,9 @@ include_once( plugin_dir_path( __FILE__ ) . 'functions/imc-core-taxstatus-orderi
 include_once( plugin_dir_path( __FILE__ ) . 'functions/imc-user-groups.php' );
 
 // 20.01 Add additional fields to imc_issues
+// 20.02 Add a check box with the terms of the login and registration form
 include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-additional-fields.php' );
+include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-add-terms-fields.php' );
 
 
 
