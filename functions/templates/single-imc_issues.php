@@ -93,7 +93,6 @@ get_header(); ?>
                     <div class="imc-row">
                         <div class="imc-grid-8 imc-columns">
                             <div class="imc-CardLayoutStyle">
-
                                 <div class="imc-row">
 									<?php $imccategory_currentterm = get_the_terms($post->ID , 'imccategory' );
 									if ($imccategory_currentterm) {
@@ -141,12 +140,13 @@ get_header(); ?>
 													<?php the_author(); ?>
 												</span>
 
-									<?php if (get_post_status( $issue_id ) == 'publish') { ?>
+									<?php //if (get_post_status( $issue_id ) == 'publish') { ?>
 
-                                        <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
-                                        <span class="imc-SingleInformationTextStyle imc-TextColorSecondary imc-FontRoboto imc-TextMedium imc-Text-SM"><?php echo esc_html(intval(get_post_meta($post->ID, "imc_likes", true), 10)); ?></span>
+                                        <!-- <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
+                                        <span class="imc-SingleInformationTextStyle imc-TextColorSecondary imc-FontRoboto imc-TextMedium
+											imc-Text-SM"><?php //echo esc_html(intval(get_post_meta($post->ID, "imc_likes", true), 10)); ?></span> -->
 
-									<?php } ?>
+									<?php //} ?>
 
                                 </div>
 
@@ -228,7 +228,10 @@ get_header(); ?>
 									<?php }?>
 
                                 </div>
-
+									<hr class="imc-HorizontalWhitespaceSeparator" style="padding-top:10px">
+									<?php
+									echo pb_template_part_single_project( get_post_meta( $issue_id ));
+									?>
                             </div> <!--End Card-->
 
 							<?php if (get_post_status( $issue_id ) == 'publish') { ?>
