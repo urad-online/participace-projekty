@@ -6,232 +6,236 @@
  *
  */
 
-
-
  class informacekprojektuMetabox {
  	private $screen = array(
  		'imc_issues',
  	);
-
- 	private $meta_fields = array(
- 		'name' => array(
- 			'label'     => 'Jméno a příjmení navrhovatele',
- 			'id'        => 'pb_project_navrhovatel_jmeno',
- 			'type'      => 'text',
-            'default'   => '',
-            'mandatory' => true,
-            'placeholder' => 'Vyplňte jméno',
-            'title'     => "Proposer Name",
-            'columns'   => 6,
-            'help'      => 'Jméno navrhovatele je povinné',
- 		),
- 		'address' => array(
- 			'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
- 			'id'        => 'pb_project_navrhovatel_adresa',
- 			'type'      => 'text',
-            'mandatory' => true,
-            'placeholder' => 'Vyplňte adresu navrhovatele',
-            'title'     => "address",
-            'help'      => '',
- 		),
- 		'phone' => array(
- 			'label'     => 'Telefonický kontakt',
- 			'id'        => 'pb_project_navrhovatel_telefon',
- 			'type'      => 'tel',
-            'options'   => 'pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
-            'mandatory' => false,
-            'placeholder' => 'číslo ve formátu (+420) nnn nnn nnn',
-            'title' => "phone",
-            'columns' => 3,
-            'help'      => 'Číslo zadejte ve formátu (+420) 999 999 999',
- 		),
- 		'email' => array(
- 			'label' => 'E-mail',
- 			'id' => 'pb_project_navrhovatel_email',
- 			'type' => 'email',
-            'mandatory' => true,
-            'placeholder' => 'Vyplňte e-mailovou adresu',
-            'title' => "email",
-            'columns' => 3,
-            'help'      => '',
- 		),
- 		'age_conf' => array(
- 			'label' => 'Prohlašuji, že jsem starší 15 let ',
- 			'id' => 'pb_project_prohlaseni_veku',
- 			'default' => 'no',
- 			'type' => 'checkbox',
-            'mandatory' => true,
-            'title' => "age_conf",
- 		),
- 	// 	'title' => array(
- 	// 		'label' => 'Název návrhu',
- 	// 		'id' => 'pb_project_nazev',
- 	// 		'type' => 'text',
-        //     'mandatory' => true,
-        //     'placeholder' => 'Vyplňte název návrhu',
-        //     'title' => "title",
- 	// 	),
- 	// 	'description' => array(
- 	// 		'label' => 'Popis návrhu',
- 	// 		'id' => 'pb_project_popis',
- 	// 		'type' => 'textarea',
-        //     'mandatory' => true,
-        //     'placeholder' => 'Vyplňte popis projektu',
-        //     'title' => "descrition",
- 	// 	),
- 		'goals' => array(
- 			'label'     => 'Proč je projekt důležitý, co je jeho cílem',
- 			'id'        => 'pb_project_cile',
- 			'type'      => 'textarea',
-            'mandatory' => true,
-            'placeholder' => 'Popište cíle projekt',
-            'title'     => "goals",
-            'help'      => 'Nebojte se trochu více rozepsat',
- 		),
- 		'actions' => array(
- 			'label'     => 'Co by se mělo udělat',
- 			'id'        => 'pb_project_akce',
- 			'type'      => 'textarea',
-            'mandatory' => true,
-            'placeholder' => 'Popište aktivity, které je pottřeba vykonat',
-            'title'     => "Actions",
- 		),
- 		'parcel' => array(
- 			'label'       => 'Parcelní číslo',
- 			'id'          => 'pb_project_parcely',
- 			'type'        => 'textarea',
-            'mandatory'   => true,
-            'placeholder' => 'Vyplňte číslo parcely ve formátu NNNN/NNNN',
-            'title'       => "parcel",
-            'help'        => 'Pro usnadnění kontroly zadejte prosím, každé číslo na samostatný řádek',
- 		),
- 		'profits' => array(
- 			'label'         => 'Kdo bude mít z projektu prospěch',
- 			'id'            => 'pb_project_prospech',
- 			'type'          => 'textarea',
-            'mandatory'     => true,
-            'placeholder'   => 'Popište kdo a jaký bude mít z projektu prospěch',
-            'title'         => 'profit',
-            'help'          => '',
- 		),
- 		'agreement'     => array(
- 			'label'     => 'Souhlasím s podmínkami',
- 			'id'        => 'pb_project_podminky_souhlas',
- 			'default'   => 'no',
- 			'type'      => 'agreement',
-            'title'     => "Agreement",
-            'mandatory' => true,
-            'help'      => 'K podání projektu musíte souhlasit s podmínkami'
- 		),
- 		'signatures' => array(
- 			'label'     => 'Podpisový arch (povinná příloha)',
- 			'id'        => 'pb_project_podporovatele',
- 			'type'      => 'media',
-            'title'     => "signatures",
-            'mandatory' => true,
-            'material_icon' => 'file_upload',
-            // 'material_icon' => 'list',
-            'AddBtnLabel'   => 'Vložit',
-            'DelBtnLabel'   => 'Smazat',
- 		),
- 	// 	'photo' => array(
- 	// 		'label' => 'Ilustrační fotografie/obrázek (povinná příloha) ',
- 	// 		'id'    => 'pb_project_foto',
- 	// 		'type'  => 'media',
-        //     'title' => 'photo',
-        //     'mandatory'     => true,
-        //     'material_icon' => 'image',
-        //     'AddBtnLabel'   => 'Vložit fotku',
-        //     'DelBtnLabel'   => 'Smazat fotku',
- 	// 	),
- 		'map' => array(
- 			'label'     => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
- 			'id'        => 'pb_project_mapa',
- 			'type'      => 'media',
-            'title'     => "map",
-            'mandatory' => true,
-            'material_icon' => 'file_upload',
-            // 'material_icon' => 'language',
-            'AddBtnLabel'   => 'Vložit',
-            'DelBtnLabel'   => 'Smazat',
- 		),
- 		'cost' => array(
- 			'label'         => 'Předpokládané náklady (povinná příloha)',
- 			'id'            => 'pb_project_naklady',
- 			'type'          => 'media',
-            'title'         => "cost",
-            'mandatory'     => true,
-            'material_icon' => 'file_upload',
-            // 'material_icon' => 'credit_card',
-            'AddBtnLabel'   => 'Vložit',
-            'DelBtnLabel'   => 'Smazat',
- 		),
-        'budget_total' => array(
- 			'label'     => 'Celkové náklady',
- 			'id'        => 'pb_project_naklady_celkem',
- 			'type'      => 'number',
-            'options'   => 'min="1" max="1000000000" style="text-align:right" pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
-            'mandatory' => true,
-            'placeholder' => 'Vyplňte celkové náklady projektu',
-            'title'     => "Celkove naklady",
-            'columns'   => 5,
- 		),
-        'budget_increase' => array(
- 			'label'     => 'Náklady byly navýšeny o rezervu 10%',
- 			'id'        => 'pb_project_naklady_navyseni',
- 			'default'   => 'no',
- 			'type'      => 'checkbox',
-            'title'     => "budget_increase",
-            'mandatory' => true,
-            'columns'   => 6,
- 		),
- 		'attach1' => array(
- 			'label'         => 'Vizualizace, výkresy, fotodokumentace… 1 (nepovinné přílohy)',
- 			'id'            => 'pb_project_dokumentace1',
- 			'type'          => 'media',
-            'title'         => "attach1",
-            'mandatory'     => false,
-            'material_icon' => 'file_upload',
-            // 'material_icon' => 'content_copy',
-            'AddBtnLabel'   => 'Vložit',
-            'DelBtnLabel'   => 'Smazat',
- 		),
- 		'attach2' => array(
- 			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
- 			'id'            => 'pb_project_dokumentace2',
- 			'type'          => 'media',
-            'title'         => "attach2",
-            'mandatory'     => false,
-            'material_icon' => 'file_upload',
-            // 'material_icon' => 'content_copy',
-            'AddBtnLabel'   => 'Vložit',
-            'DelBtnLabel'   => 'Smazat',
- 		),
- 		'attach3' => array(
- 			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
- 			'id'            => 'pb_project_dokumentace3',
- 			'type'          => 'media',
-            'title'         => "attach3",
-            'mandatory'     => false,
-            'material_icon' => 'file_upload',
-            // 'material_icon' => 'content_copy',
-            'AddBtnLabel'   => 'Vložit',
-            'DelBtnLabel'   => 'Smazat',
- 		),
-        'completed'     => array(
-            'label'     => 'Popis projektu je úplný a chci ho poslat k vyhodnocení. ',
-            'id'        => 'pb_project_edit_completed',
-            'default'   => 'no',
-            'type'      => 'checkbox',
-            'title'     => "completed",
-            'mandatory' => false,
-            'help'      => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
-        ),
- 	);
+    private $cond_url ;
+ 	private $meta_fields;
+ 	private function set_meta_fields()
+    {
+        $this->meta_fields = array(
+     		'name' => array(
+     			'label'     => 'Jméno a příjmení navrhovatele',
+     			'id'        => 'pb_project_navrhovatel_jmeno',
+     			'type'      => 'text',
+                'default'   => '',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte jméno',
+                'title'     => "Proposer Name",
+                'columns'   => 6,
+                'help'      => 'Jméno navrhovatele je povinné',
+     		),
+     		'address' => array(
+     			'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
+     			'id'        => 'pb_project_navrhovatel_adresa',
+     			'type'      => 'text',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte adresu navrhovatele',
+                'title'     => "address",
+                'help'      => '',
+     		),
+     		'phone' => array(
+     			'label'     => 'Telefonický kontakt',
+     			'id'        => 'pb_project_navrhovatel_telefon',
+     			'type'      => 'tel',
+                'options'   => 'pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
+                'mandatory' => false,
+                'placeholder' => 'číslo ve formátu (+420) nnn nnn nnn',
+                'title' => "phone",
+                'columns' => 3,
+                'help'      => 'Číslo zadejte ve formátu (+420) 999 999 999',
+     		),
+     		'email' => array(
+     			'label' => 'E-mail',
+     			'id' => 'pb_project_navrhovatel_email',
+     			'type' => 'email',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte e-mailovou adresu',
+                'title' => "email",
+                'columns' => 3,
+                'help'      => '',
+     		),
+     		'age_conf' => array(
+     			'label' => 'Prohlašuji, že jsem starší 15 let ',
+     			'id' => 'pb_project_prohlaseni_veku',
+     			'default' => 'no',
+     			'type' => 'checkbox',
+                'mandatory' => true,
+                'title' => "age_conf",
+     		),
+     	// 	'title' => array(
+     	// 		'label' => 'Název návrhu',
+     	// 		'id' => 'pb_project_nazev',
+     	// 		'type' => 'text',
+            //     'mandatory' => true,
+            //     'placeholder' => 'Vyplňte název návrhu',
+            //     'title' => "title",
+     	// 	),
+     	// 	'description' => array(
+     	// 		'label' => 'Popis návrhu',
+     	// 		'id' => 'pb_project_popis',
+     	// 		'type' => 'textarea',
+            //     'mandatory' => true,
+            //     'placeholder' => 'Vyplňte popis projektu',
+            //     'title' => "descrition",
+     	// 	),
+     		'goals' => array(
+     			'label'     => 'Proč je projekt důležitý, co je jeho cílem',
+     			'id'        => 'pb_project_cile',
+     			'type'      => 'textarea',
+                'mandatory' => true,
+                'placeholder' => 'Popište cíle projekt',
+                'title'     => "goals",
+                'help'      => 'Nebojte se trochu více rozepsat',
+     		),
+     		'actions' => array(
+     			'label'     => 'Co by se mělo udělat',
+     			'id'        => 'pb_project_akce',
+     			'type'      => 'textarea',
+                'mandatory' => true,
+                'placeholder' => 'Popište aktivity, které je pottřeba vykonat',
+                'title'     => "Actions",
+     		),
+     		'parcel' => array(
+     			'label'       => 'Parcelní číslo',
+     			'id'          => 'pb_project_parcely',
+     			'type'        => 'textarea',
+                'mandatory'   => true,
+                'placeholder' => 'Vyplňte číslo parcely ve formátu NNNN/NNNN',
+                'title'       => "parcel",
+                'help'        => 'Pro usnadnění kontroly zadejte prosím, každé číslo na samostatný řádek',
+     		),
+     		'profits' => array(
+     			'label'         => 'Kdo bude mít z projektu prospěch',
+     			'id'            => 'pb_project_prospech',
+     			'type'          => 'textarea',
+                'mandatory'     => true,
+                'placeholder'   => 'Popište kdo a jaký bude mít z projektu prospěch',
+                'title'         => 'profit',
+                'help'          => '',
+     		),
+     		'agreement'     => array(
+     		// 	'label'     => 'Souhlasím s '.  '<a href="podminky-pouziti-a-ochrana-osobnich-udaju/" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
+     			'label'     => 'Souhlasím s <a href="'. site_url("podminky-pouziti-a-ochrana-osobnich-udaju/") . '" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
+     			'id'        => 'pb_project_podminky_souhlas',
+     			'default'   => 'no',
+     			'type'      => 'agreement',
+                'title'     => "Agreement",
+                'mandatory' => true,
+                'help'      => 'K podání projektu musíte souhlasit s podmínkami'
+     		),
+     		'signatures' => array(
+     			'label'     => 'Podpisový arch (povinná příloha)',
+     			'id'        => 'pb_project_podporovatele',
+     			'type'      => 'media',
+                'title'     => "signatures",
+                'mandatory' => true,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'list',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+     		),
+     	// 	'photo' => array(
+     	// 		'label' => 'Ilustrační fotografie/obrázek (povinná příloha) ',
+     	// 		'id'    => 'pb_project_foto',
+     	// 		'type'  => 'media',
+            //     'title' => 'photo',
+            //     'mandatory'     => true,
+            //     'material_icon' => 'image',
+            //     'AddBtnLabel'   => 'Vložit fotku',
+            //     'DelBtnLabel'   => 'Smazat fotku',
+     	// 	),
+     		'map' => array(
+     			'label'     => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
+     			'id'        => 'pb_project_mapa',
+     			'type'      => 'media',
+                'title'     => "map",
+                'mandatory' => true,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'language',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+     		),
+     		'cost' => array(
+     			'label'         => 'Předpokládané náklady (povinná příloha)',
+     			'id'            => 'pb_project_naklady',
+     			'type'          => 'media',
+                'title'         => "cost",
+                'mandatory'     => true,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'credit_card',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+     		),
+            'budget_total' => array(
+     			'label'     => 'Celkové náklady',
+     			'id'        => 'pb_project_naklady_celkem',
+     			'type'      => 'number',
+                'options'   => 'min="100000" max="2000000" step="1000" style="text-align:right" ',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte celkové náklady projektu',
+                'title'     => "Celkove naklady",
+                'columns'   => 5,
+     		),
+            'budget_increase' => array(
+     			'label'     => 'Náklady byly navýšeny o rezervu 10%',
+     			'id'        => 'pb_project_naklady_navyseni',
+     			'default'   => 'no',
+     			'type'      => 'checkbox',
+                'title'     => "budget_increase",
+                'mandatory' => true,
+                'columns'   => 6,
+     		),
+     		'attach1' => array(
+     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 1 (nepovinné přílohy)',
+     			'id'            => 'pb_project_dokumentace1',
+     			'type'          => 'media',
+                'title'         => "attach1",
+                'mandatory'     => false,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'content_copy',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+     		),
+     		'attach2' => array(
+     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
+     			'id'            => 'pb_project_dokumentace2',
+     			'type'          => 'media',
+                'title'         => "attach2",
+                'mandatory'     => false,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'content_copy',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+     		),
+     		'attach3' => array(
+     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
+     			'id'            => 'pb_project_dokumentace3',
+     			'type'          => 'media',
+                'title'         => "attach3",
+                'mandatory'     => false,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'content_copy',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+     		),
+            'completed'     => array(
+                'label'     => 'Popis projektu je úplný a chci ho poslat k vyhodnocení. ',
+                'id'        => 'pb_project_edit_completed',
+                'default'   => 'no',
+                'type'      => 'checkbox',
+                'title'     => "completed",
+                'mandatory' => false,
+                'help'      => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
+            ),
+     	);
+    }
  	public function __construct() {
  		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
  		add_action( 'admin_footer', array( $this, 'media_fields' ) );
  		add_action( 'save_post', array( $this, 'save_fields' ) );
+        $this->set_meta_fields();
  	}
  	public function add_meta_boxes() {
  		foreach ( $this->screen as $single_screen ) {
@@ -477,6 +481,7 @@ function pb_render_field( $order = '' , $field, $value = '' )
             pb_render_checkbox( $order, $field, $value, $help);
             break;
         case 'agreement':
+            // $field[ 'text_after_checkbox' ] = 'pb_render_condition_link';
             pb_render_checkbox( $order, $field, $value, $help);
             break;
         case 'textarea':
@@ -653,7 +658,6 @@ function pb_render_checkbox( $order, $input, $value = '', $help = '')
     $checked = '';
     $required = '';
     $mandatory = '';
-    $tip = '';
     if ( ! empty( $value) ){
         if ( $value ) {
             $checked = 'checked';
@@ -676,9 +680,15 @@ function pb_render_checkbox( $order, $input, $value = '', $help = '')
         $columns = '';
     }
 
-    $output = '<h3 class="imc-SectionTitleTextStyle"><label id="%sLabel" for="%s">%s%s</label>'. pb_project_tooltip($help) .'
-        <input title="%s" type="checkbox"  %s %s name="%s" id="%s" class="imc-InputStyle" value="1"
-        style="width:20px; height:20px; display:inline-block"/></h3>';
+    // if (! empty( $input['text_after_checkbox']) && function_exists($input['text_after_checkbox'])) {
+    //     $text_after = $input['text_after_checkbox']();
+    // } else {
+    //     $text_after = '';
+    // }
+
+    $output = '<h3 class="imc-SectionTitleTextStyle" style="display:inline-block;"><label id="%sLabel" for="%s">%s%s</label>'. pb_project_tooltip($help) .'
+        </h3><input type="checkbox"  %s %s name="%s" id="%s" class="imc-InputStyle" value="1"
+        style="width:20px; height:20px; display:inline-block;margin-left:10px"/>';
 
     if ( ! empty($columns) ) {
         $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
@@ -694,7 +704,6 @@ function pb_render_checkbox( $order, $input, $value = '', $help = '')
             $input['id'],
             $order,
             $input['label'],
-            $tip,
             $checked,
             $required,
             $input['id'],
@@ -875,12 +884,6 @@ function pb_new_project_tempate_part_link_katastr($latlng)
         $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=50.10766&lon=14.47145&layers_3=0B0000FFTFFT";
     }
     $output = '<div class="imc-row" ><span>Kliknutím na tento </span>
-        <a id="pb_link_to_katastr" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Přejít na stránku s katastrální mapou"
-            class=""><span>odkaz</span></a><span> zobrazíte katastrální mapu na místě svého návrhu.
-        Nalezněte všechna katastrální čísla týkajících se návrhu, kliknutím do mapy ověřte,
-        zda jsou pozemky ve správě HMP nebo MČ a seznam všech dotčených pozemků uveďte do pole níže (jedna položka na jeden řádek).</span>
-        </div>';
-    $output = '<div class="imc-row" ><span>Kliknutím na tento </span>
         <a id="pb_link_to_katastr" href="#" data-toggle="tooltip" title="Přejít na stránku s katastrální mapou"
             class=""><span>odkaz</span></a><span> zobrazíte katastrální mapu na místě svého návrhu.
         Nalezněte všechna katastrální čísla týkajících se návrhu, kliknutím do mapy ověřte,
@@ -983,9 +986,19 @@ function pb_user_can_edit($post_id, $current_user) {
 function pb_project_tooltip( $text = "")
 {
     if (! empty( $text)) {
-        return '<span class="pb_tooltip"><i class="material-icons md-24">help_outline</i>
+        return '<span class="pb_tooltip"><i class="material-icons md-24" style="margin-left:5px;">help_outline</i>
         <span class="pb_tooltip_text" >' . $text . '</span></span>' ;
     } else {
         return '';
     }
+}
+function pb_render_condition_link()
+{
+    // nuni asi neni potreba a jde to smazat
+    $page_conditions = get_page_by_path( 'podminky-pouziti-a-ochrana-osobnich-udaju');
+    $page_link = get_page_link( $page_conditions->ID);
+    $output = '<h3 class="imc-SectionTitleTextStyle" style="display:inline-block; margin-left:20px;">S podmínkami se můžete seznámit
+        <a id="pb_link_to_conditions" target="_blank" href="'.$page_link.'" title="Přejít na stránku s podmínkami">zde</a></h3>';
+    return $output;
+    // return '<span style="display:inline-block; margin-left:20px;">S podmínkami se můžete seznámit </span>';
 }
