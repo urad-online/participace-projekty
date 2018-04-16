@@ -37,6 +37,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 		'post_content' => esc_attr(strip_tags($_POST['postContent'])),
 		'post_type' => 'imc_issues',
 		'post_status' => $mypost_status,
+		'post_name'   => sanitize_title( $_POST['postTitle']),
 		'tax_input' => array( 'imccategory' => $imccategory_id ),
 	);
 

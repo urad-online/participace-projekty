@@ -6,6 +6,8 @@
  *
  */
 
+$voting_enabled = true;
+
 function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pendingColorClass, $plugin_path_url) {
 
     $issue_id = intval($post->ID, 10); ?>
@@ -43,12 +45,14 @@ function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pen
             <?php } ?>
 
             <div class="imc-OverviewTileIdStyle"><span class="imc-Text-SM">#</span> <?php echo esc_html($issue_id); ?></div>
-            <?php // $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
-            <!-- <div class="imc-OverviewTileVotesStyle">
-                <div class="my-issue-votes">
-                    <i class="material-icons md-18">thumb_up</i> <?php echo esc_html($total_likes); ?>
+            <?php if ( $voting_enabled) {
+                $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
+                <div class="imc-OverviewTileVotesStyle">
+                    <div class="my-issue-votes">
+                        <i class="material-icons md-18">thumb_up</i> <?php echo esc_html($total_likes); ?>
+                    </div>
                 </div>
-            </div> -->
+            <?php } ?>
         </div>
 
         <div class="imc-OverviewTileDetailsStyle">

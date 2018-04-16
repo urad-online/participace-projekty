@@ -86,8 +86,10 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	$pb_project_status = wp_get_object_terms($post_id, 'imcstatus');
 
 	if ( $set_status->slug != $pb_project_status[0]->slug) {
-		wp_remove_object_terms( $post_id, $pb_project_status[0]->slug, 'imcstatus');
+		// wp_remove_object_terms( $post_id, $pb_project_status[0]->slug, 'imcstatus');
+		wp_delete_object_term_relationships( $post_id, 'imcstatus' );
 		wp_set_object_terms($post_id, $set_status->name, 'imcstatus');
+		pb_change_project_status_log( $set_status, $post_id, 'Změna stavu navrhovatelem' );
 	}
 	/*********************** End changing Project status  *************************/
 

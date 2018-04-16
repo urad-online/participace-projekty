@@ -923,10 +923,6 @@ function pb_new_project_mandatory_fields_js_validation()
         display: 'name',
         rules: 'required'
     }, {
-        name: 'pb_project_navrhovatel_telefon',
-        display: 'phone',
-        rules: 'required'
-    }, {
         name: 'pb_project_navrhovatel_email',
         display: 'email',
         rules: 'required'
@@ -1070,4 +1066,40 @@ function pb_render_single_project_file_field( $order = '', $label = '', $value =
         $order,
         $label,
         $value);
+}
+function pb_change_project_status_log( $new_step_term, $post_id, $description = 'Změna stavu')
+{
+    global $wpdb;
+    
+    $current_step_name = $new_step_term->name;
+    $transition = __( 'Status changed: ', 'participace-projekty' ) . $new_step_term->name;
+    $tagid = intval($new_step_term->term_id, 10);
+    $theColor = 'tax_imcstatus_color_' . $tagid;
+    $term_data = get_option($theColor);
+    $currentStatusColor = $term_data;
+    $timeline_label = $new_step_term->name;
+    $theUser =  get_current_user_id();
+    $currentlang = get_bloginfo('language');
+
+    $imc_logs_table_name = $wpdb->prefix . 'imc_logs';
+
+    $wpdb->insert(
+        $imc_logs_table_name,
+        array(
+            'issueid' => $post_id,
+            'stepid' => $tagid,
+            'transition_title' => $transition,
+            'timeline_title' => $timeline_label,
+            'theColor' => $currentStatusColor,
+            'description' => $description,
+            'action' => 'step',
+            'state' => 1,
+            'created' => gmdate("Y-m-d H:i:s",time()),
+            'created_by' => $theUser,
+            'language' => $currentlang,
+        )
+    );
+
+    //fires mail notification
+    imcplus_mailnotify_4imcstatuschange($transition, $post_id, $theUser);
 }
