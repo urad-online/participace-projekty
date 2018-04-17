@@ -94,7 +94,7 @@
      			'id'        => 'pb_project_akce',
      			'type'      => 'textarea',
                 'mandatory' => true,
-                'placeholder' => 'Popište aktivity, které je pottřeba vykonat',
+                'placeholder' => 'Popište aktivity, které je potřeba vykonat',
                 'title'     => "Actions",
      		),
      		'parcel' => array(
@@ -375,8 +375,8 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
     pb_render_field( 5,  $fields['actions'],    pb_render_field_get_value( $fields['actions']['id'], $data ) );
     pb_render_field( 6,  $fields['profits'],    pb_render_field_get_value( $fields['profits']['id'], $data ) );
     pb_new_project_template_part_map( '7. ' );
-    pb_render_field( 8,  $fields['parcel'],     pb_render_field_get_value( $fields['parcel']['id'], $data ) );
     pb_new_project_template_part_link_katastr( $latlng);
+    pb_render_field( 8,  $fields['parcel'],     pb_render_field_get_value( $fields['parcel']['id'], $data ) );
     pb_new_project_template_part_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
     pb_render_field( 10, $fields['map'],        pb_render_field_get_value( $fields['map']['id'], $data ) );
     pb_render_field( 11, $fields['cost'],       pb_render_field_get_value( $fields['cost']['id'], $data ) );
@@ -416,7 +416,8 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
                 var lt = document.getElementById('imcLatValue').value;
                 var url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat="+
                     document.getElementById('imcLatValue').value+"&lon="+
-                    document.getElementById('imcLngValue').value+"&layers_3=0B0000FFTFFT";
+                    document.getElementById('imcLngValue').value+"&layers_3=000B00FFTFFT&ilat="+document.getElementById('imcLatValue').value+"&ilon="+
+                    document.getElementById('imcLngValue').value;
                 var win = window.open( url, '_blank');
                 win.focus();
                 return false;
@@ -878,15 +879,15 @@ function pb_new_project_template_part_image( $order = '', $issue_image = '')
 function pb_new_project_template_part_link_katastr($latlng)
 {
     if (! empty( $latlng ) ) {
-        $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=".$latlng['lat']."&lon=".$latlng['lon']."&layers_3=0B0000FFTFFT";
+        $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=".$latlng['lat']."&lon=".$latlng['lon']."&layers_3=000B00FFTFFT&ilat=".$latlng['lat']."&lon=".$latlng['lon'];
     } else {
-        $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=50.10766&lon=14.47145&layers_3=0B0000FFTFFT";
+        $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=50.10766&lon=14.47145&layers_3=000B00FFTFFT";
     }
     $output = '<div class="imc-row" ><span>Kliknutím na tento </span>
         <a id="pb_link_to_katastr" href="#" data-toggle="tooltip" title="Přejít na stránku s katastrální mapou"
-            class=""><span>odkaz</span></a><span> zobrazíte katastrální mapu na místě svého návrhu.
-        Nalezněte všechna katastrální čísla týkajících se návrhu, kliknutím do mapy ověřte,
-        zda jsou pozemky ve správě HMP nebo MČ a seznam všech dotčených pozemků uveďte do pole níže (jedna položka na jeden řádek).</span>
+            class=""><span>odkaz</span></a><span> zobrazíte katastrální mapu na vámi označeném místě.
+        Ve vyskakovacím okně (musíte mít povoleno ve vašem prohlížeči) získáte informace k vybranému pozemku. Nalezněte všechna katastrální čísla týkajících se návrhu, kliknutím do mapy ověřte,
+        zda jsou všechny dotčené pozemky ve správě HMP nebo MČ a tedy splňujete podmínky pravidel participativního rozpočtu. Seznam všech dotčených pozemků uveďte do pole níže (jedna položka na jeden řádek).</span>
         </div>';
     printf($output);
 }
