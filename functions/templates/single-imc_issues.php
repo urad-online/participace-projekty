@@ -3,8 +3,10 @@
  * The template for displaying all single issues and attachments
  *
  */
-$voting_enabled = false;
-$comments_enabled = false;
+
+$generaloptions = get_option( 'general_settings' );
+$voting_enabled = $generaloptions["imc_ratings"];
+$comments_enabled = $generaloptions["imc_comments"];
 
 wp_enqueue_script('imc-gmap');
 
@@ -142,7 +144,7 @@ get_header(); ?>
 													<?php the_author(); ?>
 												</span>
 
-									<?php if ((get_post_status( $issue_id ) == 'publish') && ($voting_enabled)) { ?>
+									<?php if ((get_post_status( $issue_id ) == 'publish') && ($voting_enabled == '1')) { ?>
 										<i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
                                         <span class="imc-SingleInformationTextStyle imc-TextColorSecondary imc-FontRoboto imc-TextMedium
 											imc-Text-SM"><?php echo esc_html(intval(get_post_meta($post->ID, "imc_likes", true), 10)); ?></span>
@@ -235,7 +237,7 @@ get_header(); ?>
 									?>
                             </div> <!--End Card-->
 
-							<?php if ((get_post_status( $issue_id ) == 'publish') && ($comments_enabled)) { ?>
+							<?php if ((get_post_status( $issue_id ) == 'publish') && ($comments_enabled == '1')) { ?>
 
                                 <div class="imc-CardLayoutStyle">
                                     <h3 class="imc-SectionTitleTextStyle"><?php echo __('Comments','participace-projekty'); ?></h3>
@@ -442,7 +444,7 @@ get_header(); ?>
 								// Check if user can vote
 								$voterslist = get_post_meta($post->ID, "imc_allvoters", false);
 
-								if ( is_user_logged_in() && ($voting_enabled)) { ?>
+								if ( is_user_logged_in() && ($voting_enabled == '1')) { ?>
 
                                     <form action="" id="increaseBtn" method="POST" enctype="multipart/form-data">
                                         <input type="hidden" name="submitted" id="submitted" value="true"/>

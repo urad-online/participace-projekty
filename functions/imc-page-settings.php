@@ -35,8 +35,8 @@ class ImcSettingsPage {
         add_action( 'admin_init', array( &$this, 'register_gmap_settings' ) );
         add_action( 'admin_init', array( &$this, 'register_notifications_settings' ) );
         add_action( 'admin_init', array( &$this, 'register_general_settings' ) );
-        //add_action( 'admin_init', array( &$this, 'register_api_settings' ) );
-        //add_action( 'admin_init', array( &$this, 'register_firebase_settings' ) );
+        add_action( 'admin_init', array( &$this, 'register_api_settings' ) );
+        add_action( 'admin_init', array( &$this, 'register_firebase_settings' ) );
         add_action( 'admin_menu', array( &$this, 'render_setting') );
     }
 
@@ -82,6 +82,8 @@ class ImcSettingsPage {
             'slogin_use' => '1',
             'default_view' => '2',
             'imc_custom_slug' => '',
+            'imc_comments' => '1',
+            'imc_ratings' => '1',
         ), $this->general_settings );
 
         $this->api_settings = array();
@@ -180,6 +182,11 @@ class ImcSettingsPage {
         add_settings_field( 'default_view', __('Default Issues View','participace-projekty'), array( &$this, 'field_default_view' ), $this->general_settings_key, 'section_general' );
 
         add_settings_field( 'imc_custom_slug', __('Add a custom slug for the issues page','participace-projekty'), array( &$this, 'field_imc_custom_slug' ), $this->general_settings_key, 'section_general' );
+
+        add_settings_field( 'imc_comments', __('Povolit komentáře návrhů projektů','participace-projekty'), array( &$this, 'field_comment_view' ), $this->general_settings_key, 'section_general' );
+
+        add_settings_field( 'imc_ratings', __('Povolit hodnocení návrhů projektů','participace-projekty'), array( &$this, 'field_ratings_view' ), $this->general_settings_key, 'section_general' );
+
     }
 
 
@@ -533,6 +540,22 @@ class ImcSettingsPage {
 
         <?php
     }
+
+    function field_comment_view() {
+        ?>
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[imc_comments]" value="1" <?php checked(1, $this->general_settings['imc_comments'], true); ?>><?php _e('YES','participace-projekty'); ?>
+
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[imc_comments]" value="2" <?php checked(2, $this->general_settings['imc_comments'], true); ?>><?php _e('ΝΟ','participace-projekty'); ?>
+        <?php
+    }
+    function field_ratings_view() {
+        ?>
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[imc_ratings]" value="1" <?php checked(1, $this->general_settings['imc_ratings'], true); ?>><?php _e('YES','participace-projekty'); ?>
+
+        <input type="radio" name="<?php echo $this->general_settings_key; ?>[imc_ratings]" value="2" <?php checked(2, $this->general_settings['imc_ratings'], true); ?>><?php _e('ΝΟ','participace-projekty'); ?>
+        <?php
+    }
+
 
 
     /*************************** FIREBASE TAB FIELDS: ****************************************/
