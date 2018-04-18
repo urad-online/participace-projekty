@@ -254,7 +254,8 @@ function imc_register_scripts() {
 	wp_register_script( 'mapsV3_richmarker', plugin_dir_url( __FILE__ ) . 'js/richmarker-compiled.js', array( 'mapsV3_infobubble' ));
 
 	// Form validation (Report an Issue) before sending it to backend.
-	wp_register_script( 'imc-insert-form-validation', plugin_dir_url( __FILE__ ) . 'js/validate.min.js', array( 'imc-gmap' ));
+	// wp_register_script( 'imc-insert-form-validation', plugin_dir_url( __FILE__ ) . 'js/validate.min.js', array( 'imc-gmap' ));
+	wp_register_script( 'imc-insert-form-validation', plugin_dir_url( __FILE__ ) . 'js/validate.js', array( 'imc-gmap' ));
 	wp_enqueue_script('imc-insert-form-validation');
 
 	wp_register_script(

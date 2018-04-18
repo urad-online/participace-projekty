@@ -43,6 +43,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
 
+	return array("chhybova hlaska",);
 
 	$post_id = wp_insert_post($post_information, true);
 
@@ -194,6 +195,11 @@ if( is_user_logged_in() ) {
 
                         <div class="imc-Separator"></div>
 
+						<div class="imc-row">
+
+							<span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
+
+						</div>
 
 
                         <div class="imc-row">
@@ -208,7 +214,7 @@ if( is_user_logged_in() ) {
 
                                 <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
 
-                                <input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" />
+                                <input autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" />
 
                                 <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
 
@@ -246,7 +252,7 @@ if( is_user_logged_in() ) {
 
                             <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
 
-                            <textarea  required placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
+                            <textarea  placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
 
                         </div>
 
@@ -258,11 +264,6 @@ if( is_user_logged_in() ) {
 
                         <!-- Issue's Image -->
 
-                        <div class="imc-row">
-
-                            <span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
-
-                        </div>
 
 
 
@@ -389,7 +390,7 @@ if( is_user_logged_in() ) {
             jQuery( document ).ready(function() {
                 var validator = new FormValidator('report_an_issue_form',
 					<?PHP echo pb_new_project_mandatory_fields_js_validation(); ?>,
-				function(errors) {
+				function(errors, events) {
                     if (errors.length > 0) {
                         var i, j;
                         var errorLength;
