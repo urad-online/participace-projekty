@@ -338,7 +338,7 @@ function imcInitOverviewMap(json, plugin_path) {
                         }
 
                         if (!photo) {
-                            photo = "<div class='imc-OverviewGridNoPhotoWrapperStyle'><i class='imc-EmptyStateIconStyle material-icons md-huge'>landscape</i><span class='imc-DisplayBlock imc-ReportGenericLabelStyle imc-TextColorHint'>No photo submitted</span></div>";
+                            photo = "<div class='imc-OverviewGridNoPhotoWrapperStyle'><i class='imc-EmptyStateIconStyle material-icons md-huge'>landscape</i><span class='imc-DisplayBlock imc-ReportGenericLabelStyle imc-TextColorHint'>Fotografie nebyla vložena</span></div>";
                         }
 
                         var content = "";
@@ -353,8 +353,12 @@ function imcInitOverviewMap(json, plugin_path) {
                             "<a class='imc-InfoWindowTitleStyle imc-LinkStyle' href='"+ url +"'>"+ title +"</a>" +
                             "</div>" +
                             "<div class='imc-CenterContents'> <span class='imc-OptionalTextLabelStyle'>"+ cat +"</span><br>" +
-                            "<span class='imc-VerticalAlignMiddle imc-Text-MD imc-TextColorSecondary'>#</span><span class='imc-OptionalTextLabelStyle'>"+ id +"</span>&nbsp;&nbsp; &nbsp;&nbsp;" +
-                            "<i class='material-icons md-18 imc-VerticalAlignMiddle imc-TextColorHint'>thumb_up</i> <span class='imc-OptionalTextLabelStyle'>"+ votes +"</span></div>"
+                            "<span class='imc-VerticalAlignMiddle imc-Text-MD imc-TextColorSecondary'>#</span><span class='imc-OptionalTextLabelStyle'>"+ id +"</span>&nbsp;&nbsp; &nbsp;&nbsp;"
+                            
+                            if (votes > 0) {
+                                content = content + "<i class='material-icons md-18 imc-VerticalAlignMiddle imc-TextColorHint'>thumb_up</i> <span class='imc-OptionalTextLabelStyle'>"+ votes +"</span></div>";
+                            }
+                                
                         ;
 
                         infoBubble.setContent(content);
