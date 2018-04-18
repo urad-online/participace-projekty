@@ -14,33 +14,34 @@
 
     var defaults = {
         messages: {
-            required: 'The %s field is required.',
-            matches: 'The %s field does not match the %s field.',
-            "default": 'The %s field is still set to default, please change.',
-            valid_email: 'The %s field must contain a valid email address.',
-            valid_emails: 'The %s field must contain all valid email addresses.',
-            min_length: 'The %s field must be at least %s characters in length.',
-            max_length: 'The %s field must not exceed %s characters in length.',
-            exact_length: 'The %s field must be exactly %s characters in length.',
-            greater_than: 'The %s field must contain a number greater than %s.',
-            less_than: 'The %s field must contain a number less than %s.',
-            alpha: 'The %s field must only contain alphabetical characters.',
-            alpha_numeric: 'The %s field must only contain alpha-numeric characters.',
-            alpha_dash: 'The %s field must only contain alpha-numeric characters, underscores, and dashes.',
-            numeric: 'The %s field must contain only numbers.',
-            integer: 'The %s field must contain an integer.',
-            decimal: 'The %s field must contain a decimal number.',
-            is_natural: 'The %s field must contain only positive numbers.',
-            is_natural_no_zero: 'The %s field must contain a number greater than zero.',
-            valid_ip: 'The %s field must contain a valid IP.',
-            valid_base64: 'The %s field must contain a base64 string.',
-            valid_credit_card: 'The %s field must contain a valid credit card number.',
-            is_file_type: 'The %s field must contain only %s files.',
-            valid_url: 'The %s field must contain a valid URL.',
-            greater_than_date: 'The %s field must contain a more recent date than %s.',
-            less_than_date: 'The %s field must contain an older date than %s.',
-            greater_than_or_equal_date: 'The %s field must contain a date that\'s at least as recent as %s.',
-            less_than_or_equal_date: 'The %s field must contain a date that\'s %s or older.'
+            required: 'Pole %s je vyžadováno.',
+            matches: 'Pole %s se neshoduje s polem %s.',
+            "default": "Pole %s je stále nastaveno na výchozí, prosím změňte.",
+            valid_email: 'Pole %s musí obsahovat platnou e-mailovou adresu.',
+            valid_emails: 'Pole %s musí obsahovat všechny platné e-mailové adresy.',
+            min_length: 'Pole %s musí mít délku nejméně %s znaků(y).',
+            max_length: 'Pole %s nesmí překročit délku %s znaků.',
+            exact_length: 'Pole %s musí mít délku přesně %s znaků(y).',
+            greater_than: "Pole %s musí obsahovat číslo větší než %s.",
+            less_than: "Pole %s musí obsahovat číslo menší než %s.",
+            alpha: "Pole %s musí obsahovat pouze abecední znaky.",
+            alpha_numeric: "Pole %s musí obsahovat pouze alfanumerické znaky.",
+            alpha_dash: 'Pole %s musí obsahovat pouze alfanumerické znaky, podtržítka a pomlčky.',
+            numeric: "Pole %s musí obsahovat pouze čísla.",
+            integer: 'Pole %s musí obsahovat celé číslo.',
+            decimal: 'Pole %s musí obsahovat desetinné číslo.',
+            is_natural: 'Pole %s musí obsahovat pouze kladná čísla.',
+            is_natural_no_zero: 'Pole %s musí obsahovat číslo větší než nula.',
+            valid_ip: 'Pole %s musí obsahovat platnou adresu IP.',
+            valid_base64: 'Pole %s musí obsahovat řetězec base64.',
+            valid_credit_card: "Pole %s musí obsahovat platné číslo kreditní karty.",
+            is_file_type: 'Pole %s musí obsahovat pouze soubory %s.',
+            valid_url: 'Pole %s musí obsahovat platnou adresu URL.',
+            greater_than_date: 'Pole %s musí obsahovat pozdější datum než %s.',
+            less_than_date: 'Pole %s musí obsahovat dřívější datum než %s.',
+            greater_than_or_equal_date: 'Pole %s musí obsahovat stejné nebo pozdější než %s.',
+            less_than_or_equal_date: 'Pole %s musí obsahovat stejné nebo dřívější než  %s.',
+            valid_phone: "Pole %s musí obsahovat platné telefonní číslo."
         },
         callback: function(errors) {
 
@@ -65,8 +66,8 @@
         base64Regex = /[^a-zA-Z0-9\/\+=]/i,
         numericDashRegex = /^[\d\-\s]+$/,
         urlRegex = /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/,
-        dateRegex = /\d{4}-\d{1,2}-\d{1,2}/;
-
+        dateRegex = /\d{4}-\d{1,2}-\d{1,2}/,
+        phoneRegex = /^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$/;
     /*
      * The exposed public object to validate a form:
      *
@@ -425,6 +426,10 @@
 
         valid_email: function(field) {
             return emailRegex.test(field.value);
+        },
+
+        valid_phone: function(field) {
+            return phoneRegex.test(field.value);
         },
 
         valid_emails: function(field) {

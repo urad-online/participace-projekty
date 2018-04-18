@@ -43,8 +43,6 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
 
-	return array("chhybova hlaska",);
-
 	$post_id = wp_insert_post($post_information, true);
 
 	if ( $post_id && ( ! is_wp_error($post_id)) ) {
@@ -195,12 +193,6 @@ if( is_user_logged_in() ) {
 
                         <div class="imc-Separator"></div>
 
-						<div class="imc-row">
-
-							<span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
-
-						</div>
-
 
                         <div class="imc-row">
 
@@ -238,7 +230,7 @@ if( is_user_logged_in() ) {
 
                                 </label>
 
-
+								<label id="my_custom_taxonomyLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
 
                             </div>
 
@@ -253,7 +245,7 @@ if( is_user_logged_in() ) {
                             <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
 
                             <textarea  placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
-
+							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                         </div>
 
 
@@ -266,6 +258,11 @@ if( is_user_logged_in() ) {
 
 
 
+						<div class="imc-row">
+
+							<span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
+
+						</div>
 
                     </div>
 
@@ -391,6 +388,7 @@ if( is_user_logged_in() ) {
                 var validator = new FormValidator('report_an_issue_form',
 					<?PHP echo pb_new_project_mandatory_fields_js_validation(); ?>,
 				function(errors, events) {
+					jQuery('label.imc-ReportFormErrorLabelStyle').html("");
                     if (errors.length > 0) {
                         var i, j;
                         var errorLength;
@@ -398,17 +396,19 @@ if( is_user_logged_in() ) {
                         jQuery('#postTitleLabel').html();
 
                         for (i = 0, errorLength = errors.length; i < errorLength; i++) {
-                            if (errors[i].name === "postTitle") {
-                                for(j=1; j < errors[i].messages.length; j++) {
-                                    jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
-                                }
-                            } else if (errors[i].name === "featured_image") {
-                                imcDeleteAttachedImage('imcReportAddImgInput');
-                                jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                            if (errors[i].name === "featured_image") {
+								imcDeleteAttachedImage('imcReportAddImgInput');
+								jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                            } else {
+								for(j=0; j < errors[i].messages.length; j++) {
+									jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
+									jQuery("#imcReportFormSubmitErrors").append("<p>"+errors[i].message+"</p>");
+								}
                             }
                         }
                     } else {
                         jQuery('#imcInsertIssueSubmitBtn').attr('disabled', 'disabled');
+                        jQuery('label.imc-ReportFormErrorLabelStyle').html();
                     }
                 });
             });
