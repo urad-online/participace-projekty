@@ -310,7 +310,8 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 
             var validator = new FormValidator('report_an_issue_form'<?PHP
 				echo pb_new_project_mandatory_fields_js_validation();
-				?>, function(errors) {
+				?>, function(errors, events) {
+				jQuery('label.imc-ReportFormErrorLabelStyle').html("");
                 if (errors.length > 0) {
                     var i, j;
                     var errorLength;
@@ -318,18 +319,19 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
                     jQuery('#postTitleLabel').html();
 
                     for (i = 0, errorLength = errors.length; i < errorLength; i++) {
-                        if (errors[i].name === "postTitle") {
-                            for(j=1; j < errors[i].messages.length; j++) {
-                                jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
-                            }
-                        }
-                        else if (errors[i].name === "featured_image") {
-                            imcDeleteAttachedImage('imcReportAddImgInput');
-                            jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                        if (errors[i].name === "featured_image") {
+							imcDeleteAttachedImage('imcReportAddImgInput');
+							jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                        } else {
+							for(j=0; j < errors[i].messages.length; j++) {
+								jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
+								jQuery("#imcReportFormSubmitErrors").append("<p>"+errors[i].message+"</p>");
+							}
                         }
                     }
                 } else {
                     jQuery('#imcEditIssueSubmitBtn').attr('disabled', 'disabled');
+					jQuery('label.imc-ReportFormErrorLabelStyle').html();
                 }
             });
         });
