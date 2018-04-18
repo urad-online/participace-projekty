@@ -7,7 +7,7 @@
 */
 
 // souhlas s podmínkami při registraci uživatele nebo při jeho přihlášení
-
+// nesouhlasím-li, nejsou dostupná tlačítka připojení pomocí sociálních služeb (plugin Nextend facebook connect)
 
 // As part of WP authentication process, call our function
 add_filter('wp_authenticate_user', 'wp_authenticate_user_acc', 99999, 2);
@@ -30,14 +30,31 @@ add_filter ( 'login_form', 'login_form_acc');
 
 function login_form_acc(){
    // Add an element to the login form, which must be checked
-   ?>
-   <script type="text/javascript">
-       has_social_form = false;
-       socialLogins = null;
+ 
+
+   echo '<label><input type="checkbox" name="login_accept" id="login_accept" checked /> Souhlasím s <a href="podminky-pouziti-a-ochrana-osobnich-udaju/" target="_blank" rel="noopener">podmínkami použití</a></label>';
+
+     ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
+    <script>
+
+    $('#login_accept').on('change', function () {
+
+        if ($('#login_accept').is(':checked') ) {
+            
+            $('#nsl-custom-login-form-main').css( { display: 'block'});
+            
+        } else {
+            
+            $('#nsl-custom-login-form-main').css({ display: 'none'});
+        }
+    });
+       
+       
+       
    </script>
    <?php
-
-   echo '<span title="asdf" class="fa fa-info"></span><label><input type="checkbox" name="login_accept" id="login_accept" /> Souhlasím s <a href="podminky-pouziti-a-ochrana-osobnich-udaju/" target="_blank" rel="noopener">podmínkami použití</a></label>';
+   
 }
 
 // As part of WP authentication process, call our function
@@ -59,7 +76,34 @@ function user_register_acc($user, $password) {
 // As part of WP login form construction, call our function
 add_filter ( 'register_form', 'user_register_form_acc');
 
+
+
 function user_register_form_acc(){
    // Add an element to the login form, which must be checked
-   echo '<label><input type="checkbox" name="login_accept" id="login_accept" /> Souhlasím s <a href="podminky-pouziti-a-ochrana-osobnich-udaju/" target="_blank" rel="noopener">podmínkami použití</a></label>';
+    echo '<label><input type="checkbox" name="login_accept" id="login_accept" checked /> Souhlasím s <a href="podminky-pouziti-a-ochrana-osobnich-udaju/" target="_blank" rel="noopener">podmínkami použití</a></label>';
+
+        ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
+    
+    <script>
+
+    $('#login_accept').on('change', function () {
+
+        if ($('#login_accept').is(':checked') ) {
+            
+            $('#nsl-custom-login-form-main').css( { display: 'block'});
+            
+        } else {
+            
+            $('#nsl-custom-login-form-main').css({ display: 'none'});
+        }
+    });
+       
+       
+       
+   </script>
+   <?php
+   
+   
+   
 }
