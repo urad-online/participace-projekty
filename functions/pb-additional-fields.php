@@ -371,8 +371,8 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
     $fields = $pb_project_meta_fields->get_fields();
 
     ob_start();
-    pb_render_field( 4,  $fields['goals'],      pb_render_field_get_value( $fields['goals']['id'], $data ));
-    pb_render_field( 5,  $fields['actions'],    pb_render_field_get_value( $fields['actions']['id'], $data ) );
+    pb_render_field( 4,  $fields['actions'],    pb_render_field_get_value( $fields['actions']['id'], $data ) );
+    pb_render_field( 5,  $fields['goals'],      pb_render_field_get_value( $fields['goals']['id'], $data ));
     pb_render_field( 6,  $fields['profits'],    pb_render_field_get_value( $fields['profits']['id'], $data ) );
     pb_new_project_template_part_map( '7. ' );
     pb_new_project_template_part_link_katastr( $latlng);
