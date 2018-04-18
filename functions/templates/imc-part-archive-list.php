@@ -7,6 +7,7 @@
  */
 
 function imc_archive_show_list($post, $editpage, $parameter_pass, $user_id, $pendingColorClass, $plugin_path_url) {
+global $voting_enabled, $comments_enabled;
 
 	$issue_id = intval($post->ID, 10);
 
@@ -97,19 +98,22 @@ function imc_archive_show_list($post, $editpage, $parameter_pass, $user_id, $pen
                         <span class="imc-OverviewListStepCircleStyle imc-circle imc-AlignIconToLabel" style="background-color: #<?php echo esc_attr(getCurrentImcStatusColor($post->ID));?>"></span>
                         <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php echo esc_html(getCurrentImcStatusName($post->ID));?></span>
                     </div>
-
-                    <!-- <div class="imc-DisplayInlineBlock">
-                        <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">comment</i>
-                        <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php
-							//comments_number( 'No comments', '1 comment', '% comments' );
-							//printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
+					<?php if ($comments_enabled) { ?>
+						<div class="imc-DisplayInlineBlock">
+							<i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">comment</i>
+							<span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php
+							comments_number( 'No comments', '1 comment', '% comments' );
+							printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
 							?></span>
-                    </div>
-					<?php //$total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
-                    <div class="imc-DisplayInlineBlock">
-                        <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
-                        <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php //echo esc_html($total_likes); ?></span>
-                    </div> -->
+						</div>
+					<?PHP } ?>
+					<?php if ($voting_enabled) { ?>
+						<?php $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
+	                    <div class="imc-DisplayInlineBlock">
+	                        <i class="material-icons md-18 imc-TextColorSecondary imc-AlignIconToLabel">thumb_up</i>
+	                        <span class="imc-OverviewListStepLabelStyle imc-TextColorSecondary"><?php //echo esc_html($total_likes); ?></span>
+	                    </div>
+					<?PHP } ?>
                 </div>
             </div>
 

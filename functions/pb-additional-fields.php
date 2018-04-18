@@ -5,6 +5,7 @@
  * Add additional fields to imc_issues
  *
  */
+$voting_enabled = $comments_enabled = false;
 
  class informacekprojektuMetabox {
  	private $screen = array(
@@ -1070,7 +1071,7 @@ function pb_render_single_project_file_field( $order = '', $label = '', $value =
 function pb_change_project_status_log( $new_step_term, $post_id, $description = 'Změna stavu')
 {
     global $wpdb;
-    
+
     $current_step_name = $new_step_term->name;
     $transition = __( 'Status changed: ', 'participace-projekty' ) . $new_step_term->name;
     $tagid = intval($new_step_term->term_id, 10);
@@ -1103,3 +1104,13 @@ function pb_change_project_status_log( $new_step_term, $post_id, $description = 
     //fires mail notification
     imcplus_mailnotify_4imcstatuschange($transition, $post_id, $theUser);
 }
+function pb_change_project_status_log_action( $post_id, $terms, $new_term_ids, $taxo, $append, $old_term_ids)
+{
+    if ( ! $taxo === 'imcstatus') {
+        return;
+    }
+    $new_term = get_term_by('id', $new_term_ids[0], $taxo);
+    $transition = __( 'Status changed: ', 'participace-projekty' );
+    $pocet_term = count($new_term_ids);
+}
+add_action( 'set_object_terms', 'pb_change_project_status_log_action', 11, 6);

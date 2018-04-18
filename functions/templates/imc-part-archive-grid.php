@@ -6,10 +6,8 @@
  *
  */
 
-$voting_enabled = true;
-
 function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pendingColorClass, $plugin_path_url) {
-
+global $voting_enabled;
     $issue_id = intval($post->ID, 10); ?>
 
     <div class="imc-CardLayoutStyle imc-OverviewTileStyle" id="issue-<?php echo esc_html($issue_id);?>">

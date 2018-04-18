@@ -3,8 +3,7 @@
  * The template for displaying all single issues and attachments
  *
  */
-$voting_enabled = false;
-$comments_enabled = false;
+global $voting_enabled,$comments_enabled ;
 
 wp_enqueue_script('imc-gmap');
 
