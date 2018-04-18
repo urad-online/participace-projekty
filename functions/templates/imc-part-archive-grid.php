@@ -6,13 +6,8 @@
  *
  */
 
-
 function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pendingColorClass, $plugin_path_url) {
-
-    $generaloptions = get_option( 'general_settings' );
-    $voting_enabled = $generaloptions["imc_ratings"];
-    $comments_enabled = $generaloptions["imc_comments"];
-
+global $voting_enabled;
     $issue_id = intval($post->ID, 10); ?>
 
     <div class="imc-CardLayoutStyle imc-OverviewTileStyle" id="issue-<?php echo esc_html($issue_id);?>">
@@ -48,16 +43,14 @@ function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pen
             <?php } ?>
 
             <div class="imc-OverviewTileIdStyle"><span class="imc-Text-SM">#</span> <?php echo esc_html($issue_id); ?></div>
-             
-            
-                <?php if ((get_post_status( $issue_id ) == 'publish') && ($voting_enabled == '1')) { 
+            <?php if ( $voting_enabled) {
                 $total_likes = intval (get_post_meta($post->ID, 'imc_likes', true), 10); ?>
                 <div class="imc-OverviewTileVotesStyle">
                     <div class="my-issue-votes">
                         <i class="material-icons md-18">thumb_up</i> <?php echo esc_html($total_likes); ?>
                     </div>
                 </div>
-                <?php } ?>
+            <?php } ?>
         </div>
 
         <div class="imc-OverviewTileDetailsStyle">
@@ -122,22 +115,18 @@ function imc_archive_show_grid($post, $editpage, $parameter_pass, $user_id, $pen
                     <span class="imc-DisplayBlock imc-OverviewGridStepLabelStyle imc-TextColorSecondary"><?php echo esc_html(getCurrentImcStatusName($post->ID));?></span>
                 </div>
 
-                
-                <?php if ((get_post_status( $issue_id ) == 'publish') && ($comments_enabled == '1')) { ?>
-                <div class="imc-FlexChild imc-CenterContents">
+                <!-- <div class="imc-FlexChild imc-CenterContents">
                     <i class="material-icons md-24 imc-TextColorSecondary">comment</i>
 
                     <span class="imc-DisplayBlock imc-OverviewGridStepLabelStyle imc-TextColorSecondary">
                         <?php
-                        printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
+                        //printf( _nx( '1 Comment', '%1$s Comments', get_comments_number(), 'comments number', 'participace-projekty' ), number_format_i18n( get_comments_number() ) );
                         //comments_number( 'No comments', '1 comment', '% comments' );
                         ?>
 
                     </span>
 
-                </div>
-                <?php } ?>
-                
+                </div> -->
 
             </div>
         </div>
