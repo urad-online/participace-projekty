@@ -5,7 +5,10 @@
  * Add additional fields to imc_issues
  *
  */
-$voting_enabled = $comments_enabled = false;
+// $voting_enabled = $comments_enabled = false;
+$generaloptions     = get_option( 'general_settings' );
+$voting_enabled     = ( empty($generaloptions["imc_ratings"]))  ? false : $generaloptions["imc_ratings"];
+$comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $generaloptions["imc_comments"];
 
  class informacekprojektuMetabox {
  	private $screen = array(
