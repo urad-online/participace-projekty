@@ -87,9 +87,9 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	if ( $set_status->slug != $pb_project_status[0]->slug) {
 		// wp_remove_object_terms( $post_id, $pb_project_status[0]->slug, 'imcstatus');
-		// wp_delete_object_term_relationships( $post_id, 'imcstatus' );
+		wp_delete_object_term_relationships( $post_id, 'imcstatus' );
 		wp_set_object_terms($post_id, array($set_status->term_id,), 'imcstatus', false);
-		// pb_change_project_status_log( $set_status, $post_id, 'Změna stavu navrhovatelem' );
+		pb_change_project_status_log( $set_status, $post_id, 'Změna stavu navrhovatelem' );
 	}
 	/*********************** End changing Project status  *************************/
 
@@ -270,7 +270,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
         <div class="imc-container">
 
             <div class="imc-CardLayoutStyle imc-ContainerEmptyStyle">
-                <img src="<?php echo esc_url($plugin_path_url);?>/img/img_banner.png" class="u-full-width">
+                <img src="<?php echo esc_url($plugin_path_url);?>/img/img_banner.jpg" class="u-full-width">
 
                 <div class="imc-Separator"></div>
 

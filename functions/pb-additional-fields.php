@@ -1117,4 +1117,4 @@ function pb_change_project_status_log_action( $post_id, $terms, $new_term_ids, $
     $transition = __( 'Status changed: ', 'participace-projekty' );
     $pocet_term = count($new_term_ids);
 }
-add_action( 'set_object_terms', 'pb_change_project_status_log_action', 11, 6);
+// add_action( 'set_object_terms', 'pb_change_project_status_log_action', 11, 6);
