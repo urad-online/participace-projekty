@@ -105,8 +105,8 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
             'budget_total' => array(
      			'label'     => 'Celkové náklady',
      			'id'        => 'pb_project_naklady_celkem',
-     			'type'      => 'number',
-                'options'   => 'min="100000" max="2000000" step="1000" style="text-align:right" ',
+     			'type'      => 'text',
+                // 'options'   => 'min="100000" max="2000000" step="1000" style="text-align:right" ',
                 'mandatory' => true,
                 'placeholder' => 'Vyplňte celkové náklady projektu',
                 'title'     => "Celkove naklady",
@@ -927,23 +927,28 @@ function pb_new_project_mandatory_fields_js_validation()
     }, {
         name: 'pb_project_akce',
         display: '\"Co by se mělo udělat\"',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_cile',
         display: '\"Proč je projekt důležitý\"',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_prospech',
         display: '\"Kdo bude mít z projektu prospěch\"',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'postAddress',
         display: 'Adresa',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_parcely',
         display: 'Parcelní číslo',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'featured_image',
         display: 'Fotografie',
@@ -951,7 +956,8 @@ function pb_new_project_mandatory_fields_js_validation()
     }, {
         name: 'pb_project_mapaName',
         display: 'Mapa (situační nákres)',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_mapa',
         display: 'Mapa (situační nákres)',
@@ -959,7 +965,8 @@ function pb_new_project_mandatory_fields_js_validation()
     }, {
         name: 'pb_project_nakladyName',
         display: 'Předpokládané náklady',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_naklady',
         display: 'Předpokládané náklady',
@@ -967,15 +974,18 @@ function pb_new_project_mandatory_fields_js_validation()
     }, {
         name: 'pb_project_naklady_celkem',
         display: 'Celkové náklady',
-        rules: 'required'
+        rules: 'required|integer|greater_than[99999]|less_than[2000001]',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_naklady_navyseni',
         display: 'Navýšení rozpočtu',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_navrhovatel_jmeno',
         display: 'Jméno navrhovatele',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_navrhovatel_telefon',
         display: 'Telefonický kontakt',
@@ -983,15 +993,18 @@ function pb_new_project_mandatory_fields_js_validation()
     }, {
         name: 'pb_project_navrhovatel_email',
         display: 'email',
-        rules: 'required|valid_email'
+        rules: 'required|valid_email',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_navrhovatel_adresa',
         display: 'Adresa navrhovatele',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_podporovateleName',
         display: 'Podpisový arch',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_podporovatele',
         display: 'Podpisový arch',
@@ -999,11 +1012,13 @@ function pb_new_project_mandatory_fields_js_validation()
     }, {
         name: 'pb_project_prohlaseni_veku',
         display: 'Prohlašení věku',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_podminky_souhlas',
         display: 'Souhlas s podmínkami',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }]
     ";
 }

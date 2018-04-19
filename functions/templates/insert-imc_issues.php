@@ -42,7 +42,7 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	);
 
 	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
-
+	
 	$post_id = wp_insert_post($post_information, true);
 
 	if ( $post_id && ( ! is_wp_error($post_id)) ) {
@@ -400,7 +400,8 @@ if( is_user_logged_in() ) {
 								imcDeleteAttachedImage('imcReportAddImgInput');
 								jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
                             } else {
-								for(j=0; j < errors[i].messages.length; j++) {
+								for(j=0; j < Math.min(1, errors[i].messages.length); j++) {
+									/* zobrazuje se jen prvni chyba, validator vraci stejnou chybu pokud je vice praidel */
 									jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
 									jQuery("#imcReportFormSubmitErrors").append("<p>"+errors[i].message+"</p>");
 								}
@@ -411,8 +412,12 @@ if( is_user_logged_in() ) {
                         jQuery('label.imc-ReportFormErrorLabelStyle').html();
                     }
                 });
+				validator.registerConditional( 'pb_project_js_validate_required', function(field){
+					/* povinna pole se validuji pouze pokud narhovatel zaskrtne odeslat k vyhodnoceni
+					 plati pro pole s pravidlem "depends" */
+					return jQuery('#pb_project_edit_completed').prop('checked');
+				});
             });
-
         })();
 
         function imcInitMap() {

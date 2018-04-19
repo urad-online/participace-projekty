@@ -184,7 +184,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
                             <div class="imc-grid-6 imc-columns">
 
                                 <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
-								<input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>"
+								<input autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>"
 									type="text" name="postTitle" id="postTitle" class="imc-InputStyle" value="<?php echo esc_attr($issue_title); ?>"/>
                                 <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                             </div>
@@ -308,7 +308,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 
         jQuery( document ).ready(function() {
 
-            var validator = new FormValidator('report_an_issue_form'<?PHP
+            var validator = new FormValidator('report_an_issue_form',<?PHP
 				echo pb_new_project_mandatory_fields_js_validation();
 				?>, function(errors, events) {
 				jQuery('label.imc-ReportFormErrorLabelStyle').html("");
@@ -323,7 +323,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 							imcDeleteAttachedImage('imcReportAddImgInput');
 							jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
                         } else {
-							for(j=0; j < errors[i].messages.length; j++) {
+							for(j=0; j < Math.min(1, errors[i].messages.length); j++) {
 								jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
 								jQuery("#imcReportFormSubmitErrors").append("<p>"+errors[i].message+"</p>");
 							}
@@ -334,6 +334,12 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 					jQuery('label.imc-ReportFormErrorLabelStyle').html();
                 }
             });
+			validator.registerConditional( 'pb_project_js_validate_required', function(field){
+				/* povinna pole se validuji pouze pokud narhovatel zaskrtne odeslat k vyhodnoceni
+				 plati pro pole s pravidlem "depends" */
+				console.log('validuju povinna pole');
+				return jQuery('#pb_project_edit_completed').prop('checked');
+			});
         });
     })();
 
