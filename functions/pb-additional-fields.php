@@ -1,5 +1,7 @@
 <?php
-
+define("FILE_TYPES_IMAGE", "gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG");
+define("FILE_TYPES_SCAN", "pdf,PDF");
+define("FILE_TYPES_DOCS", "doc,DOC,xls,XLS,docX,DOCX,xlsx,XLSX");
 /**
  * 20.01
  * Add additional fields to imc_issues
@@ -19,55 +21,6 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
  	private function set_meta_fields()
     {
         $this->meta_fields = array(
-     		'name' => array(
-     			'label'     => 'Jméno a příjmení navrhovatele',
-     			'id'        => 'pb_project_navrhovatel_jmeno',
-     			'type'      => 'text',
-                'default'   => '',
-                'mandatory' => true,
-                'placeholder' => 'Vyplňte jméno',
-                'title'     => "Proposer Name",
-                'columns'   => 6,
-                'help'      => 'Jméno navrhovatele je povinné',
-     		),
-     		'address' => array(
-     			'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
-     			'id'        => 'pb_project_navrhovatel_adresa',
-     			'type'      => 'text',
-                'mandatory' => true,
-                'placeholder' => 'Vyplňte adresu navrhovatele',
-                'title'     => "address",
-                'help'      => '',
-     		),
-     		'phone' => array(
-     			'label'     => 'Telefonický kontakt',
-     			'id'        => 'pb_project_navrhovatel_telefon',
-     			'type'      => 'tel',
-                'options'   => 'pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
-                'mandatory' => false,
-                'placeholder' => 'číslo ve formátu (+420) nnn nnn nnn',
-                'title' => "phone",
-                'columns' => 3,
-                'help'      => 'Číslo zadejte ve formátu (+420) 999 999 999',
-     		),
-     		'email' => array(
-     			'label' => 'E-mail',
-     			'id' => 'pb_project_navrhovatel_email',
-     			'type' => 'email',
-                'mandatory' => true,
-                'placeholder' => 'Vyplňte e-mailovou adresu',
-                'title' => "email",
-                'columns' => 3,
-                'help'      => '',
-     		),
-     		'age_conf' => array(
-     			'label' => 'Prohlašuji, že jsem starší 15 let ',
-     			'id' => 'pb_project_prohlaseni_veku',
-     			'default' => 'no',
-     			'type' => 'checkbox',
-                'mandatory' => true,
-                'title' => "age_conf",
-     		),
      	// 	'title' => array(
      	// 		'label' => 'Název návrhu',
      	// 		'id' => 'pb_project_nazev',
@@ -84,6 +37,14 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
             //     'placeholder' => 'Vyplňte popis projektu',
             //     'title' => "descrition",
      	// 	),
+            'actions' => array(
+                'label'     => 'Co by se mělo udělat',
+                'id'        => 'pb_project_akce',
+                'type'      => 'textarea',
+                'mandatory' => true,
+                'placeholder' => 'Popište aktivity, které je potřeba vykonat',
+                'title'     => "Actions",
+            ),
      		'goals' => array(
      			'label'     => 'Proč je projekt důležitý, co je jeho cílem',
      			'id'        => 'pb_project_cile',
@@ -93,14 +54,15 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'title'     => "goals",
                 'help'      => 'Nebojte se trochu více rozepsat',
      		),
-     		'actions' => array(
-     			'label'     => 'Co by se mělo udělat',
-     			'id'        => 'pb_project_akce',
-     			'type'      => 'textarea',
-                'mandatory' => true,
-                'placeholder' => 'Popište aktivity, které je potřeba vykonat',
-                'title'     => "Actions",
-     		),
+            'profits' => array(
+                'label'         => 'Kdo bude mít z projektu prospěch',
+                'id'            => 'pb_project_prospech',
+                'type'          => 'textarea',
+                'mandatory'     => true,
+                'placeholder'   => 'Popište kdo a jaký bude mít z projektu prospěch',
+                'title'         => 'profit',
+                'help'          => '',
+            ),
      		'parcel' => array(
      			'label'       => 'Parcelní číslo',
      			'id'          => 'pb_project_parcely',
@@ -109,35 +71,6 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'placeholder' => 'Vyplňte číslo parcely ve formátu NNNN/NNNN',
                 'title'       => "parcel",
                 'help'        => 'Pro usnadnění kontroly zadejte prosím, každé číslo na samostatný řádek',
-     		),
-     		'profits' => array(
-     			'label'         => 'Kdo bude mít z projektu prospěch',
-     			'id'            => 'pb_project_prospech',
-     			'type'          => 'textarea',
-                'mandatory'     => true,
-                'placeholder'   => 'Popište kdo a jaký bude mít z projektu prospěch',
-                'title'         => 'profit',
-                'help'          => '',
-     		),
-     		'agreement'     => array(
-     			'label'     => 'Souhlasím s <a href="'. site_url("podminky-pouziti-a-ochrana-osobnich-udaju/") . '" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
-     			'id'        => 'pb_project_podminky_souhlas',
-     			'default'   => 'no',
-     			'type'      => 'agreement',
-                'title'     => "Agreement",
-                'mandatory' => true,
-                'help'      => 'K podání projektu musíte souhlasit s podmínkami'
-     		),
-     		'signatures' => array(
-     			'label'     => 'Podpisový arch (povinná příloha)',
-     			'id'        => 'pb_project_podporovatele',
-     			'type'      => 'media',
-                'title'     => "signatures",
-                'mandatory' => true,
-                'material_icon' => 'file_upload',
-                // 'material_icon' => 'list',
-                'AddBtnLabel'   => 'Vložit',
-                'DelBtnLabel'   => 'Smazat',
      		),
      	// 	'photo' => array(
      	// 		'label' => 'Ilustrační fotografie/obrázek (povinná příloha) ',
@@ -159,6 +92,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'language',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf'
      		),
      		'cost' => array(
      			'label'         => 'Předpokládané náklady (povinná příloha)',
@@ -170,12 +104,13 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'credit_card',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf'
      		),
             'budget_total' => array(
      			'label'     => 'Celkové náklady',
      			'id'        => 'pb_project_naklady_celkem',
-     			'type'      => 'number',
-                'options'   => 'min="100000" max="2000000" step="1000" style="text-align:right" ',
+     			'type'      => 'text',
+                // 'options'   => 'min="100000" max="2000000" step="1000" style="text-align:right" ',
                 'mandatory' => true,
                 'placeholder' => 'Vyplňte celkové náklady projektu',
                 'title'     => "Celkove naklady",
@@ -200,6 +135,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf,doc,docx,xls,xlsx',
      		),
      		'attach2' => array(
      			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
@@ -211,6 +147,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf,doc,docx,xls,xlsx',
      		),
      		'attach3' => array(
      			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
@@ -222,7 +159,78 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf,doc,docx,xls,xlsx',
      		),
+            'name' => array(
+                'label'     => 'Jméno a příjmení navrhovatele',
+                'id'        => 'pb_project_navrhovatel_jmeno',
+                'type'      => 'text',
+                'default'   => '',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte jméno',
+                'title'     => "Proposer Name",
+                'columns'   => 6,
+                'help'      => 'Jméno navrhovatele je povinné',
+            ),
+            'address' => array(
+                'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
+                'id'        => 'pb_project_navrhovatel_adresa',
+                'type'      => 'text',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte adresu navrhovatele',
+                'title'     => "address",
+                'help'      => '',
+            ),
+            'phone' => array(
+                'label'     => 'Telefonický kontakt',
+                'id'        => 'pb_project_navrhovatel_telefon',
+                'type'      => 'tel',
+                // 'options'   => 'pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
+                'mandatory' => false,
+                'placeholder' => 'číslo ve formátu (+420) 999 999 999',
+                'title' => "phone",
+                'columns' => 3,
+                'help'      => 'Číslo zadejte ve formátu (+420) 999 999 999',
+            ),
+            'email' => array(
+                'label'     => 'E-mail',
+                'id'        => 'pb_project_navrhovatel_email',
+                'type'      => 'text',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte e-mailovou adresu',
+                'title'     => "email",
+                'columns'   => 3,
+                'help'      => '',
+            ),
+            'signatures' => array(
+                'label'     => 'Podpisový arch (povinná příloha)',
+                'id'        => 'pb_project_podporovatele',
+                'type'      => 'media',
+                'title'     => "signatures",
+                'mandatory' => true,
+                'material_icon' => 'file_upload',
+                // 'material_icon' => 'list',
+                'AddBtnLabel'   => 'Vložit',
+                'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf',
+            ),
+            'age_conf' => array(
+                'label'     => 'Prohlašuji, že jsem starší 15 let ',
+                'id'        => 'pb_project_prohlaseni_veku',
+                'default'   => 'no',
+                'type'      => 'checkbox',
+                'mandatory' => true,
+                'title'     => "age_conf",
+            ),
+            'agreement'     => array(
+                'label'     => 'Souhlasím s <a href="'. site_url("podminky-pouziti-a-ochrana-osobnich-udaju/") . '" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
+                'id'        => 'pb_project_podminky_souhlas',
+                'default'   => 'no',
+                'type'      => 'agreement',
+                'title'     => "Agreement",
+                'mandatory' => true,
+                'help'      => 'K podání projektu musíte souhlasit s podmínkami'
+            ),
             'completed'     => array(
                 'label'     => 'Popis projektu je úplný a chci ho poslat k vyhodnocení. ',
                 'id'        => 'pb_project_edit_completed',
@@ -504,6 +512,7 @@ function pb_render_textarea( $order, $input = null, $value = '', $help = '' )
     if ( !empty( $input['mandatory'])) {
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
         $required = " required ";
+        $required = " ";
     } else {
         $mandatory = '';
         $required = "";
@@ -518,7 +527,9 @@ function pb_render_textarea( $order, $input = null, $value = '', $help = '' )
         <h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s'.pb_project_tooltip( $help ).'</h3>%s
         <textarea %s placeholder="%s" rows="%d"
              class="imc-InputStyle" title="%s" name="%s"
-             id="%s">%s</textarea></div>';
+             id="%s">%s</textarea>
+        <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
+        </div>';
     if ( empty( $input ) ) {
         return $output;
     } else {
@@ -532,7 +543,8 @@ function pb_render_textarea( $order, $input = null, $value = '', $help = '' )
             $input['title'],
             $input['id'],
             $input['id'],
-            $value
+            $value,
+            $input['id']
         );
     }
 }
@@ -541,6 +553,7 @@ function pb_render_text( $order, $input = null, $value = '', $help = '' )
     if ( !empty( $input['mandatory'])) {
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
         $options = " required ";
+        $options = "";
     } else {
         $mandatory = '';
         $options = "";
@@ -587,6 +600,7 @@ function pb_render_file_attachment( $order, $input, $value = '', $help = '')
     if ( ! empty( $input['mandatory'])) {
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
         $required = ' required readonly="readonly" ';
+        $required = ' readonly="readonly" ';
     } else {
         $mandatory = '';
         $required = 'readonly="readonly"';
@@ -607,7 +621,9 @@ function pb_render_file_attachment( $order, $input, $value = '', $help = '')
                     <div class="imc-grid-5 imc-columns">
                         <input %s autocomplete="off"
                             placeholder="Vyberte soubor" type="text" name="%sName" id="%sName" class="imc-InputStyle" value="%s"/>
+                        <label id="%sNameLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                     </div>
+
                     <div class="imc-grid-6 imc-columns">
                     <div class="u-cf">
                         <div class="imc-row">%s
@@ -633,6 +649,7 @@ function pb_render_file_attachment( $order, $input, $value = '', $help = '')
             $input['id'],
             $input['id'],
             $filename,
+            $input['id'],
             $link,
             $input['id'],
             $input['id'],
@@ -675,6 +692,7 @@ function pb_render_checkbox( $order, $input, $value = '', $help = '')
         $mandatory = pb_render_mandatory( $input['mandatory']) ;
         if ($input['mandatory']) {
             $required = "required";
+            $required = "";
         }
     }
 
@@ -690,9 +708,10 @@ function pb_render_checkbox( $order, $input, $value = '', $help = '')
     //     $text_after = '';
     // }
 
-    $output = '<h3 class="imc-SectionTitleTextStyle" style="display:inline-block;"><label id="%sLabel" for="%s">%s%s</label>'. pb_project_tooltip($help) .'
+    $output = '<h3 class="imc-SectionTitleTextStyle" style="display:inline-block;"><label id="%sName" for="%s">%s%s</label>'. pb_project_tooltip($help) .'
         </h3><input type="checkbox"  %s %s name="%s" id="%s" class="imc-InputStyle" value="1"
-        style="width:20px; height:20px; display:inline-block;margin-left:10px"/>';
+        style="width:20px; height:20px; display:inline-block;margin-left:10px"/>
+        <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
 
     if ( ! empty($columns) ) {
         $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
@@ -710,6 +729,7 @@ function pb_render_checkbox( $order, $input, $value = '', $help = '')
             $input['label'],
             $checked,
             $required,
+            $input['id'],
             $input['id'],
             $input['id']
         );
@@ -734,21 +754,40 @@ function pb_new_project_meta_save_prep( $data, $update = false )
 		'pb_project_navrhovatel_jmeno'   => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_jmeno'])),
 		'pb_project_navrhovatel_adresa'  => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_adresa'])),
 		'pb_project_navrhovatel_telefon' => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_telefon'])),
-        'pb_project_parcely'             => esc_attr(sanitize_text_field($data['pb_project_parcely'])),
-        'pb_project_prohlaseni_veku'     => esc_attr(sanitize_text_field($data['pb_project_prohlaseni_veku'])),
-        'pb_project_podminky_souhlas'    => esc_attr(sanitize_text_field($data['pb_project_podminky_souhlas'])),
+        'pb_project_parcely'             => esc_attr(sanitize_textarea_field($data['pb_project_parcely'])),
+        'pb_project_prohlaseni_veku'     => (! empty($data['pb_project_prohlaseni_veku'])) ? esc_attr(sanitize_text_field($data['pb_project_prohlaseni_veku'])) : '0',
+        'pb_project_podminky_souhlas'    => (! empty($data['pb_project_podminky_souhlas'])) ? esc_attr(sanitize_text_field($data['pb_project_podminky_souhlas'])) : '0',
 		'pb_project_navrhovatel_email'   => esc_attr(sanitize_email($data['pb_project_navrhovatel_email'])),
         'pb_project_cile'                => esc_attr(sanitize_textarea_field($data['pb_project_cile'])),
         'pb_project_akce'                => esc_attr(sanitize_textarea_field($data['pb_project_akce'])),
         'pb_project_prospech'            => esc_attr(sanitize_textarea_field($data['pb_project_prospech'])),
         'pb_project_naklady_celkem'      => esc_attr(sanitize_textarea_field($data['pb_project_naklady_celkem'])),
-        'pb_project_naklady_navyseni'    => esc_attr(sanitize_textarea_field($data['pb_project_naklady_navyseni'])),
+        'pb_project_naklady_navyseni'    => (! empty($data['pb_project_naklady_navyseni'])) ? esc_attr(sanitize_textarea_field($data['pb_project_naklady_navyseni'])) : '0',
 		);
     if ( ! $update ) {
         $output['imc_likes'] = '0';
         $output['modality'] = '0';
     }
     return $output;
+}
+function pb_project_check_file_type( $file, $attach_type)
+{
+    switch ($attach_type) {
+        case 'featured_image':
+            $allowed_file_type = FILE_TYPES_IMAGE;
+            break;
+
+        case 'pb_project_mapa':;
+        case 'pb_project_podporovatele':
+            $allowed_file_type = FILE_TYPES_IMAGE.FILE_TYPES_SCAN;
+            break;
+
+        default:
+            $allowed_file_type = FILE_TYPES_IMAGE.FILE_TYPES_SCAN.FILE_TYPES_DOCS;
+            break;
+    }
+    $type = wp_check_filetype(basename($file)) ;
+    return  strpos( $allowed_file_type, $type['ext']);
 }
 
 function pb_new_project_insert_attachments( $post_id, $files)
@@ -760,6 +799,24 @@ function pb_new_project_insert_attachments( $post_id, $files)
     pb_new_project_insert_attachment_1($files['pb_project_dokumentace1'], $post_id, 'pb_project_dokumentace1');
     pb_new_project_insert_attachment_1($files['pb_project_dokumentace2'], $post_id, 'pb_project_dokumentace2');
     pb_new_project_insert_attachment_1($files['pb_project_dokumentace3'], $post_id, 'pb_project_dokumentace3');
+}
+
+function pb_new_project_insert_attachment_1 ($file, $post_id, $attachment_type = '' )
+{
+    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type)) &&
+            ( pb_project_check_file_type($file['name'],$attachment_type))) {
+        $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
+        if ( $attachment_id) {
+          $url = wp_get_attachment_url( $attachment_id);
+          update_post_meta( $post_id, $attachment_type, $url);
+        }
+        return $attachment_id;
+    } elseif ($post_id) {
+        delete_post_meta( $post_id, $attachment_type );
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function pb_new_project_update_attachments( $post_id, $files, $data)
@@ -777,25 +834,10 @@ function pb_new_project_update_attachments( $post_id, $files, $data)
     }
 }
 
-function pb_new_project_insert_attachment_1 ($file, $post_id, $attachment_type )
-{
-    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))) {
-        $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
-        if ( $attachment_id) {
-            $url = wp_get_attachment_url( $attachment_id);
-            update_post_meta( $post_id, $attachment_type, $url);
-        }
-        return $attachment_id;
-    } elseif ($post_id) {
-        delete_post_meta( $post_id, $attachment_type );
-        return true;
-    } else {
-        return false;
-    }
-}
 function pb_new_project_update_attachment_1 ($file, $post_id, $attachment_type, $meta_value )
 {
-    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))) {
+    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))  &&
+            ( pb_project_check_file_type($file['name'],$attachment_type)) ) {
         $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
         if ( $attachment_id) {
             $url = wp_get_attachment_url( $attachment_id);
@@ -817,13 +859,14 @@ function pb_new_project_update_postmeta($post_id, $data)
 }
 function pb_new_project_template_part_map( $order = '')
 {
+    $output = '<input required name="postAddress" placeholder="%s" id="imcAddress" class="u-pull-left imc-InputStyle"/>';
     $output = '
         <div class="imc-row-no-margin">
             <h3 class="imc-SectionTitleTextStyle">%s%s</h3>
             <button class="imc-button u-pull-right" type="button" onclick="imcFindAddress(\'imcAddress\', true)">
                 <i class="material-icons md-24 imc-AlignIconToButton">search</i>%s</button>
             <div style="padding-right: .5em;" class="imc-OverflowHidden">
-                <input required name="postAddress" placeholder="%s" id="imcAddress" class="u-pull-left imc-InputStyle"/>
+                <input name="postAddress" placeholder="%s" id="imcAddress" class="u-pull-left imc-InputStyle"/>
             </div>
             <input title="lat" type="hidden" id="imcLatValue" name="imcLatValue"/>
             <input title="lng" type="hidden" id="imcLngValue" name="imcLngValue"/>
@@ -901,56 +944,111 @@ function pb_new_project_mandatory_fields_js_validation()
     return "
     [{
         name: 'postTitle',
-        display: 'Title',
-        rules: 'required|min_length[3]|max_length[255]'
+        display: 'Název',
+        rules: 'required|min_length[5]|max_length[255]'
     }, {
         name: 'my_custom_taxonomy',
-        display: 'Category',
+        display: 'Kategorie',
         rules: 'required'
     }, {
-        name: 'postAddress',
-        display: 'Address',
+        name: 'postContent',
+        display: 'Popis',
         rules: 'required'
+    }, {
+        name: 'pb_project_akce',
+        display: '\"Co by se mělo udělat\"',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_cile',
-        display: 'goals',
-        rules: 'required'
+        display: '\"Proč je projekt důležitý\"',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_prospech',
-        display: 'profit',
-        rules: 'required'
+        display: '\"Kdo bude mít z projektu prospěch\"',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'postAddress',
+        display: 'Adresa',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_parcely',
-        display: 'parcel',
-        rules: 'required'
+        display: 'Parcelní číslo',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'featured_image',
+        display: 'Fotografie',
+        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
+    }, {
+        name: 'pb_project_mapaName',
+        display: 'Mapa (situační nákres)',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'pb_project_mapa',
+        display: 'Mapa (situační nákres)',
+        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]'
+    }, {
+        name: 'pb_project_nakladyName',
+        display: 'Předpokládané náklady',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'pb_project_naklady',
+        display: 'Předpokládané náklady',
+        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF,doc,DOC,xls,XLS]'
+    }, {
+        name: 'pb_project_naklady_celkem',
+        display: 'Celkové náklady',
+        rules: 'required|integer|greater_than[99999]|less_than[2000001]',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'pb_project_naklady_navyseni',
+        display: 'Navýšení rozpočtu',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_navrhovatel_jmeno',
-        display: 'name',
-        rules: 'required'
+        display: 'Jméno navrhovatele',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'pb_project_navrhovatel_telefon',
+        display: 'Telefonický kontakt',
+        rules: 'valid_phone'
     }, {
         name: 'pb_project_navrhovatel_email',
         display: 'email',
-        rules: 'required'
+        rules: 'required|valid_email',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_navrhovatel_adresa',
         display: 'Adresa navrhovatele',
-        rules: 'required'
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
+    }, {
+        name: 'pb_project_podporovateleName',
+        display: 'Podpisový arch',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
         name: 'pb_project_podporovatele',
         display: 'Podpisový arch',
-        rules: 'required'
+        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]'
     }, {
-        name: 'featured_image',
-        display: 'Photo',
-        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
+        name: 'pb_project_prohlaseni_veku',
+        display: 'Prohlašení věku',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }, {
-        name: 'pb_project_naklady_celkem',
-        display: 'budget_total',
-        rules: 'required'
-    }, {
-        name: 'pb_project_naklady_navyseni',
-        display: 'budget_increase',
-        rules: 'required'
+        name: 'pb_project_podminky_souhlas',
+        display: 'Souhlas s podmínkami',
+        rules: 'required',
+        depends: 'pb_project_js_validate_required'
     }]
     ";
 }

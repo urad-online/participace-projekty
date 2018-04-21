@@ -74,7 +74,7 @@ function imc_insert_cat_dropdown() {
 		$terms = get_terms('imccategory', $args);
 
 		$html = '';
-		$html .= '<select required name="' . $fieldName . '" ' . 'class="' . $fieldName . ' "' . '>';
+		$html .= '<select name="' . $fieldName . '" id="'.$fieldName.'"class="' . $fieldName . ' "' . '>';
 
 		$html .= '<option value="" class="imc-CustomOptionDisabledStyle" disabled selected>'.__('Select a category','participace-projekty').'</option>';
 

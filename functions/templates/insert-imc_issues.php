@@ -43,7 +43,6 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
 
-
 	$post_id = wp_insert_post($post_information, true);
 
 	if ( $post_id && ( ! is_wp_error($post_id)) ) {
@@ -195,7 +194,6 @@ if( is_user_logged_in() ) {
                         <div class="imc-Separator"></div>
 
 
-
                         <div class="imc-row">
 
 
@@ -208,7 +206,7 @@ if( is_user_logged_in() ) {
 
                                 <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
 
-                                <input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" />
+                                <input autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" />
 
                                 <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
 
@@ -232,7 +230,7 @@ if( is_user_logged_in() ) {
 
                                 </label>
 
-
+								<label id="my_custom_taxonomyLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
 
                             </div>
 
@@ -246,8 +244,8 @@ if( is_user_logged_in() ) {
 
                             <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
 
-                            <textarea  required placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
-
+                            <textarea  placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
+							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                         </div>
 
 
@@ -258,13 +256,13 @@ if( is_user_logged_in() ) {
 
                         <!-- Issue's Image -->
 
-                        <div class="imc-row">
-
-                            <span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
-
-                        </div>
 
 
+						<div class="imc-row">
+
+							<span class="u-pull-left imc-ReportFormSubmitErrorsStyle" id="imcReportFormSubmitErrors"></span>
+
+						</div>
 
                     </div>
 
@@ -389,7 +387,8 @@ if( is_user_logged_in() ) {
             jQuery( document ).ready(function() {
                 var validator = new FormValidator('report_an_issue_form',
 					<?PHP echo pb_new_project_mandatory_fields_js_validation(); ?>,
-				function(errors) {
+				function(errors, events) {
+					jQuery('label.imc-ReportFormErrorLabelStyle').html("");
                     if (errors.length > 0) {
                         var i, j;
                         var errorLength;
@@ -397,21 +396,28 @@ if( is_user_logged_in() ) {
                         jQuery('#postTitleLabel').html();
 
                         for (i = 0, errorLength = errors.length; i < errorLength; i++) {
-                            if (errors[i].name === "postTitle") {
-                                for(j=1; j < errors[i].messages.length; j++) {
-                                    jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
-                                }
-                            } else if (errors[i].name === "featured_image") {
-                                imcDeleteAttachedImage('imcReportAddImgInput');
-                                jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                            if (errors[i].name === "featured_image") {
+								imcDeleteAttachedImage('imcReportAddImgInput');
+								jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                            } else {
+								for(j=0; j < Math.min(1, errors[i].messages.length); j++) {
+									/* zobrazuje se jen prvni chyba, validator vraci stejnou chybu pokud je vice praidel */
+									jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
+									jQuery("#imcReportFormSubmitErrors").append("<p>"+errors[i].message+"</p>");
+								}
                             }
                         }
                     } else {
                         jQuery('#imcInsertIssueSubmitBtn').attr('disabled', 'disabled');
+                        jQuery('label.imc-ReportFormErrorLabelStyle').html();
                     }
                 });
+				validator.registerConditional( 'pb_project_js_validate_required', function(field){
+					/* povinna pole se validuji pouze pokud narhovatel zaskrtne odeslat k vyhodnoceni
+					 plati pro pole s pravidlem "depends" */
+					return jQuery('#pb_project_edit_completed').prop('checked');
+				});
             });
-
         })();
 
         function imcInitMap() {

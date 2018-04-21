@@ -184,7 +184,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
                             <div class="imc-grid-6 imc-columns">
 
                                 <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
-								<input required autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>"
+								<input autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>"
 									type="text" name="postTitle" id="postTitle" class="imc-InputStyle" value="<?php echo esc_attr($issue_title); ?>"/>
                                 <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                             </div>
@@ -222,6 +222,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
                         <div class="imc-row">
                             <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
                             <textarea placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php echo esc_html($issue_content); ?><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
+							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                         </div>
 
 						<?php echo pb_template_part_new_project(
@@ -307,9 +308,10 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 
         jQuery( document ).ready(function() {
 
-            var validator = new FormValidator('report_an_issue_form'<?PHP
+            var validator = new FormValidator('report_an_issue_form',<?PHP
 				echo pb_new_project_mandatory_fields_js_validation();
-				?>, function(errors) {
+				?>, function(errors, events) {
+				jQuery('label.imc-ReportFormErrorLabelStyle').html("");
                 if (errors.length > 0) {
                     var i, j;
                     var errorLength;
@@ -317,20 +319,27 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
                     jQuery('#postTitleLabel').html();
 
                     for (i = 0, errorLength = errors.length; i < errorLength; i++) {
-                        if (errors[i].name === "postTitle") {
-                            for(j=1; j < errors[i].messages.length; j++) {
-                                jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
-                            }
-                        }
-                        else if (errors[i].name === "featured_image") {
-                            imcDeleteAttachedImage('imcReportAddImgInput');
-                            jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                        if (errors[i].name === "featured_image") {
+							imcDeleteAttachedImage('imcReportAddImgInput');
+							jQuery("#imcReportFormSubmitErrors").html(errors[i].message);
+                        } else {
+							for(j=0; j < Math.min(1, errors[i].messages.length); j++) {
+								jQuery('#'+errors[i].id+'Label').html(errors[i].messages[j]);
+								jQuery("#imcReportFormSubmitErrors").append("<p>"+errors[i].message+"</p>");
+							}
                         }
                     }
                 } else {
                     jQuery('#imcEditIssueSubmitBtn').attr('disabled', 'disabled');
+					jQuery('label.imc-ReportFormErrorLabelStyle').html();
                 }
             });
+			validator.registerConditional( 'pb_project_js_validate_required', function(field){
+				/* povinna pole se validuji pouze pokud narhovatel zaskrtne odeslat k vyhodnoceni
+				 plati pro pole s pravidlem "depends" */
+				console.log('validuju povinna pole');
+				return jQuery('#pb_project_edit_completed').prop('checked');
+			});
         });
     })();
 

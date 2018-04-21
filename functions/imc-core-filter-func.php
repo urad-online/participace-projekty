@@ -97,7 +97,7 @@ function imcFilterIssuesByStatus($imported_sstatus, $include_pending){
         'tax_query' => array(
             array(
                 'taxonomy' => 'imcstatus',
-                'field' => 'id',
+                'field' => 'term_taxonomy_id',
                 'terms' => $imported_sstatus,
             ),
         ),
@@ -123,8 +123,8 @@ function imcFilterIssuesByStatus($imported_sstatus, $include_pending){
 
 function imcLoadIssuesForGuests($paged, $page, $status, $category){
 
-    $imported_sstatus = explode(",", $status);
-    $imported_scategory = explode(",", $category);
+    $imported_sstatus = ( $status ) ? explode(",", $status): $status;
+    $imported_scategory = ( $category ) ? explode(",", $category) : $category;
 
     $custom_query_args = array(
         'post_type' => 'imc_issues',
@@ -163,8 +163,8 @@ function imcLoadIssuesForGuests($paged, $page, $status, $category){
 
 function imcLoadIssuesForAdmins($paged, $page, $status, $category){
 
-    $imported_sstatus = explode(",", $status);
-    $imported_scategory = explode(",", $category);
+    $imported_sstatus = ( $status ) ? explode(",", $status): $status;
+    $imported_scategory = ( $category ) ? explode(",", $category) : $category;
 
     $custom_query_args = array(
         'post_type' => 'imc_issues',
@@ -203,8 +203,8 @@ function imcLoadIssuesForAdmins($paged, $page, $status, $category){
 
 function imcLoadIssuesForUsers($paged, $page, $user_id, $status, $category){
 
-    $imported_sstatus = explode(",", $status);
-    $imported_scategory = explode(",", $category);
+    $imported_sstatus = ( $status ) ? explode(",", $status): $status;
+    $imported_scategory = ( $category ) ? explode(",", $category) : $category;
 
     //the filtering is for users so -plus user's pending issues-
     $include_pending = true;
