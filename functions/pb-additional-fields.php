@@ -680,6 +680,7 @@ function pb_render_file_link($url, $id )
 function pb_render_file_link_metabox($url, $id)
 {
     $display = 'Zobrazit';
+    
     if (! empty($url)) {
         return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right
             imc-SingleHeaderLinkStyle" style="width:15%%">'.$display.'</a>';
