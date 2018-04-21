@@ -302,8 +302,12 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
  				$meta_value = $meta_field['default']; }
  			switch ( $meta_field['type'] ) {
  				case 'media':
+                    $link = pb_render_file_link_metabox($meta_value, $meta_field['id']);
  					$input = sprintf(
- 						'<input style="width: 80%%" id="%s" name="%s" type="text" value="%s"> <input style="width: 19%%" class="button informacekprojektu-media" id="%s_button" name="%s_button" type="button" value="Upload" />',
+ 						'<input style="width: 70%%;" id="%s" name="%s" type="text"
+                            value="%s"><p style="width:2%%; display:inline-block"></p><input
+                            style="width: 15%%; padding-left: 10px;display:inline-block;" class="button informacekprojektu-media"
+                            id="%s_button" name="%s_button" type="button" value="Upload" /><p style="width:2%%; display:inline-block"></p>'.$link,
  						$meta_field['id'],
  						$meta_field['id'],
  						$meta_value,
@@ -662,15 +666,26 @@ function pb_render_file_attachment( $order, $input, $value = '', $help = '')
     }
 }
 
-function pb_render_file_link($url, $id)
+function pb_render_file_link($url, $id )
 {
     if (! empty($url)) {
-        return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right  imc-SingleHeaderLinkStyle">
-                    <i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
+        return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right
+            imc-SingleHeaderLinkStyle"><i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
                     // <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
     } else {
-        return '<a hidden id="'.$id.'Link" data-toggle="tooltip" title="Chybí příloha" class="u-pull-right imc-SingleHeaderLinkStyle ">
-        <i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
+        return '<a hidden id="'.$id.'Link" data-toggle="tooltip" title="Chybí příloha" class="u-pull-right
+            imc-SingleHeaderLinkStyle"><i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
+    }
+}
+function pb_render_file_link_metabox($url, $id)
+{
+    $display = 'Zobrazit';
+    if (! empty($url)) {
+        return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right
+            imc-SingleHeaderLinkStyle" style="width:15%%">'.$display.'</a>';
+                    // <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
+    } else {
+        return '';
     }
 }
 
