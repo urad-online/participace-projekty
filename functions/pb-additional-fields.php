@@ -426,7 +426,7 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
         };
         document.getElementById("pb_link_to_katastr").onclick = function() {
                 var lt = document.getElementById('imcLatValue').value;
-                var url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat="+
+                var url = "https://www.ikatastr.cz/ikatastr.htm#zoom=19&lat="+
                     document.getElementById('imcLatValue').value+"&lon="+
                     document.getElementById('imcLngValue').value+"&layers_3=000B00FFTFFT&ilat="+document.getElementById('imcLatValue').value+"&ilon="+
                     document.getElementById('imcLngValue').value;
@@ -926,9 +926,9 @@ function pb_new_project_template_part_image( $order = '', $issue_image = '')
 function pb_new_project_template_part_link_katastr($latlng)
 {
     if (! empty( $latlng ) ) {
-        $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=".$latlng['lat']."&lon=".$latlng['lon']."&layers_3=000B00FFTFFT&ilat=".$latlng['lat']."&lon=".$latlng['lon'];
+        $url = "https://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=".$latlng['lat']."&lon=".$latlng['lon']."&layers_3=000B00FFTFFT&ilat=".$latlng['lat']."&lon=".$latlng['lon'];
     } else {
-        $url = "http://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=50.10766&lon=14.47145&layers_3=000B00FFTFFT";
+        $url = "https://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=50.10766&lon=14.47145&layers_3=000B00FFTFFT";
     }
     $output = '<div class="imc-row" ><span>Kliknutím na tento </span>
         <a id="pb_link_to_katastr" href="#" data-toggle="tooltip" title="Přejít na stránku s katastrální mapou"

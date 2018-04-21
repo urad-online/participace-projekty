@@ -300,7 +300,7 @@ class ImcSettingsPage {
                             jQuery.ajax ({
                                 //url: "http://api.openstreetmap.org/api/0.6/relation/43992/full",
                                 /*url: "http://overpass-api.de/api/interpreter?data=[out:json]; ( rel(43992); <; ); out geom;",*/
-                                url: "http://nominatim.openstreetmap.org/",
+                                url: "https://nominatim.openstreetmap.org/",
                                 dataType: 'json',
                                 type: 'get',
                                 data: {
