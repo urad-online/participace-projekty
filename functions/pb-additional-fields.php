@@ -1,5 +1,7 @@
 <?php
-
+define("FILE_TYPES_IMAGE", "gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG");
+define("FILE_TYPES_SCAN", "pdf,PDF");
+define("FILE_TYPES_DOCS", "doc,DOC,xls,XLS,docX,DOCX,xlsx,XLSX");
 /**
  * 20.01
  * Add additional fields to imc_issues
@@ -90,6 +92,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'language',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf'
      		),
      		'cost' => array(
      			'label'         => 'Předpokládané náklady (povinná příloha)',
@@ -101,6 +104,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'credit_card',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf'
      		),
             'budget_total' => array(
      			'label'     => 'Celkové náklady',
@@ -131,6 +135,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf,doc,docx,xls,xlsx',
      		),
      		'attach2' => array(
      			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2 (nepovinné přílohy)',
@@ -142,6 +147,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf,doc,docx,xls,xlsx',
      		),
      		'attach3' => array(
      			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3 (nepovinné přílohy)',
@@ -153,6 +159,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf,doc,docx,xls,xlsx',
      		),
             'name' => array(
                 'label'     => 'Jméno a příjmení navrhovatele',
@@ -205,6 +212,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'list',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
+                'help'          => 'Povolené typy příloh: gif,png,jpg,jpeg,pdf',
             ),
             'age_conf' => array(
                 'label'     => 'Prohlašuji, že jsem starší 15 let ',
@@ -747,20 +755,39 @@ function pb_new_project_meta_save_prep( $data, $update = false )
 		'pb_project_navrhovatel_adresa'  => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_adresa'])),
 		'pb_project_navrhovatel_telefon' => esc_attr(sanitize_text_field($data['pb_project_navrhovatel_telefon'])),
         'pb_project_parcely'             => esc_attr(sanitize_textarea_field($data['pb_project_parcely'])),
-        'pb_project_prohlaseni_veku'     => esc_attr(sanitize_text_field($data['pb_project_prohlaseni_veku'])),
-        'pb_project_podminky_souhlas'    => esc_attr(sanitize_text_field($data['pb_project_podminky_souhlas'])),
+        'pb_project_prohlaseni_veku'     => (! empty($data['pb_project_prohlaseni_veku'])) ? esc_attr(sanitize_text_field($data['pb_project_prohlaseni_veku'])) : '0',
+        'pb_project_podminky_souhlas'    => (! empty($data['pb_project_podminky_souhlas'])) ? esc_attr(sanitize_text_field($data['pb_project_podminky_souhlas'])) : '0',
 		'pb_project_navrhovatel_email'   => esc_attr(sanitize_email($data['pb_project_navrhovatel_email'])),
         'pb_project_cile'                => esc_attr(sanitize_textarea_field($data['pb_project_cile'])),
         'pb_project_akce'                => esc_attr(sanitize_textarea_field($data['pb_project_akce'])),
         'pb_project_prospech'            => esc_attr(sanitize_textarea_field($data['pb_project_prospech'])),
         'pb_project_naklady_celkem'      => esc_attr(sanitize_textarea_field($data['pb_project_naklady_celkem'])),
-        'pb_project_naklady_navyseni'    => esc_attr(sanitize_textarea_field($data['pb_project_naklady_navyseni'])),
+        'pb_project_naklady_navyseni'    => (! empty($data['pb_project_naklady_navyseni'])) ? esc_attr(sanitize_textarea_field($data['pb_project_naklady_navyseni'])) : '0',
 		);
     if ( ! $update ) {
         $output['imc_likes'] = '0';
         $output['modality'] = '0';
     }
     return $output;
+}
+function pb_project_check_file_type( $file, $attach_type)
+{
+    switch ($attach_type) {
+        case 'featured_image':
+            $allowed_file_type = FILE_TYPES_IMAGE;
+            break;
+
+        case 'pb_project_mapa':;
+        case 'pb_project_podporovatele':
+            $allowed_file_type = FILE_TYPES_IMAGE.FILE_TYPES_SCAN;
+            break;
+
+        default:
+            $allowed_file_type = FILE_TYPES_IMAGE.FILE_TYPES_SCAN.FILE_TYPES_DOCS;
+            break;
+    }
+    $type = wp_check_filetype(basename($file)) ;
+    return  strpos( $allowed_file_type, $type['ext']);
 }
 
 function pb_new_project_insert_attachments( $post_id, $files)
@@ -772,6 +799,24 @@ function pb_new_project_insert_attachments( $post_id, $files)
     pb_new_project_insert_attachment_1($files['pb_project_dokumentace1'], $post_id, 'pb_project_dokumentace1');
     pb_new_project_insert_attachment_1($files['pb_project_dokumentace2'], $post_id, 'pb_project_dokumentace2');
     pb_new_project_insert_attachment_1($files['pb_project_dokumentace3'], $post_id, 'pb_project_dokumentace3');
+}
+
+function pb_new_project_insert_attachment_1 ($file, $post_id, $attachment_type = '' )
+{
+    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type)) &&
+            ( pb_project_check_file_type($file['name'],$attachment_type))) {
+        $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
+        if ( $attachment_id) {
+          $url = wp_get_attachment_url( $attachment_id);
+          update_post_meta( $post_id, $attachment_type, $url);
+        }
+        return $attachment_id;
+    } elseif ($post_id) {
+        delete_post_meta( $post_id, $attachment_type );
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function pb_new_project_update_attachments( $post_id, $files, $data)
@@ -789,25 +834,10 @@ function pb_new_project_update_attachments( $post_id, $files, $data)
     }
 }
 
-function pb_new_project_insert_attachment_1 ($file, $post_id, $attachment_type )
-{
-    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))) {
-        $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
-        if ( $attachment_id) {
-            $url = wp_get_attachment_url( $attachment_id);
-            update_post_meta( $post_id, $attachment_type, $url);
-        }
-        return $attachment_id;
-    } elseif ($post_id) {
-        delete_post_meta( $post_id, $attachment_type );
-        return true;
-    } else {
-        return false;
-    }
-}
 function pb_new_project_update_attachment_1 ($file, $post_id, $attachment_type, $meta_value )
 {
-    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))) {
+    if (( $file['error'] == '0') && (! empty($post_id)) && (! empty($attachment_type))  &&
+            ( pb_project_check_file_type($file['name'],$attachment_type)) ) {
         $attachment_id = imc_upload_img( $file, $post_id, $post_id . '-' . $attachment_type, null);
         if ( $attachment_id) {
             $url = wp_get_attachment_url( $attachment_id);
