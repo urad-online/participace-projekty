@@ -243,10 +243,12 @@ if ( is_front_page() || is_home() ) {
 
                 <div class="imc-row imc-DrawerContentsStyle">
 
-                    <div class="imc-DrawerFirstCol">
-                        <h3 class="imc-SectionTitleTextStyle"><?php echo __('Search', 'participace-projekty'); ?></h3>
+					<div class="imc-row">
+						<h3 class="imc-SectionTitleTextStyle"><?php echo __('Search', 'participace-projekty'); ?></h3>
 
-                        <input name="searchKeyword" autocomplete="off" placeholder="<?php echo __('Keyword search','participace-projekty'); ?>" id="imcSearchKeywordInput" type="search" class="imc-InputStyle"/>
+						<input name="searchKeyword" autocomplete="off" placeholder="<?php echo __('Keyword search','participace-projekty'); ?>" id="imcSearchKeywordInput" type="search" class="imc-InputStyle"/>
+					</div>
+                    <div class="imc-DrawerFirstCol">
 
                         <input checked="checked" class="imc-CheckboxToggleStyle" id="imcToggleStatusCheckbox" type="checkbox" name="imcToggleStatusCheckbox" value="">
                         <label class="imc-SectionTitleTextStyle" for="imcToggleStatusCheckbox"><?php echo __('Issue status', 'participace-projekty'); ?></label>
@@ -273,7 +275,7 @@ if ( is_front_page() || is_home() ) {
                         <label class="imc-SectionTitleTextStyle" for="imcToggleCatsCheckbox"><?php echo __('Categories', 'participace-projekty'); ?></label>
                         <br>
 
-                        <div id="imcCatCheckboxes">
+                        <div id="imcCatCheckboxes" class="imc-row">
 
 							<?php $all_imccategory = get_all_imccategory();
 
