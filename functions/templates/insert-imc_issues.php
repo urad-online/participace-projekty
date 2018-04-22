@@ -16,8 +16,6 @@ $listpage = getIMCArchivePage();
 
 $postTitleError = '';
 
-
-
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 
 	$imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
@@ -242,7 +240,7 @@ if( is_user_logged_in() ) {
 
                         <div class="imc-row">
 
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; </h3> <span class="imc-OptionalTextLabelStyle"> <?php echo __(' (optional)','participace-projekty'); ?></span>
+                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; <?php echo pb_render_mandatory(false)?></h3>
 
                             <textarea  placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
 							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
@@ -276,7 +274,7 @@ if( is_user_logged_in() ) {
 
                         <input type="hidden" name="submitted" id="submitted" value="true" />
 
-                        <input id="imcInsertIssueSubmitBtn" class="imc-button imc-button-primary imc-button-block" type="submit" value="<?php echo __('Submit','participace-projekty'); ?>" />
+                        <input id="imcInsertIssueSubmitBtn" class="imc-button imc-button-primary imc-button-block pb-project-submit-btn" type="submit" value="<?php echo pb_project_submit_btn_label(false); ?>" />
 
                     </div>
 
