@@ -226,7 +226,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'label'     => 'Souhlasím s <a href="'. site_url("podminky-pouziti-a-ochrana-osobnich-udaju/") . '" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
                 'id'        => 'pb_project_podminky_souhlas',
                 'default'   => 'no',
-                'type'      => 'agreement',
+                'type'      => 'checkbox',
                 'title'     => "Agreement",
                 'mandatory' => true,
                 'help'      => 'K podání projektu musíte souhlasit s podmínkami'
@@ -496,10 +496,6 @@ function pb_render_field( $order = '' , $field, $value = '' )
         case 'checkbox':
             pb_render_checkbox( $order, $field, $value, $help);
             break;
-        case 'agreement':
-            // $field[ 'text_after_checkbox' ] = 'pb_render_condition_link';
-            pb_render_checkbox( $order, $field, $value, $help);
-            break;
         case 'textarea':
             pb_render_textarea( $order, $field, $value, $help);
             break;
@@ -680,7 +676,7 @@ function pb_render_file_link($url, $id )
 function pb_render_file_link_metabox($url, $id)
 {
     $display = 'Zobrazit';
-    
+
     if (! empty($url)) {
         return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right
             imc-SingleHeaderLinkStyle" style="width:15%%">'.$display.'</a>';
