@@ -19,15 +19,17 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 	$lat = esc_attr(strip_tags($_POST['imcLatValue']));
 	$lng = esc_attr(strip_tags($_POST['imcLngValue']));
 
-	$address = esc_attr(strip_tags($_POST['postAddress']));
 	$title = esc_attr(strip_tags($_POST['postTitle']));
+	$imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
 	$content = esc_attr(strip_tags($_POST['postContent']));
+	$address = esc_attr(strip_tags($_POST['postAddress']));
 
 	//UPDATE THE ISSUE TO DB
 	$post_information = array(
 		'ID' => $issue_id,
 		'post_title' => $title,
 		'post_content' => $content,
+		'tax_input' => array( 'imccategory' => $imccategory_id ),
 	);
 
 	$post_id = wp_update_post( $post_information, true );
@@ -201,20 +203,26 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 									$cat_thumb_arr = wp_get_attachment_image_src( $term_thumb->term_image);
 								}?>
 
-                                <div class="imc-EditCatBlockStyle">
-									<?php if ( $cat_thumb_arr ) { ?>
+                                <!-- <div class="imc-EditCatBlockStyle">
+									<?php //if ( $cat_thumb_arr ) { ?>
 
-                                        <img src="<?php echo esc_url($cat_thumb_arr[0]); ?>" class="imc-OverviewTileCategoryIcon u-pull-left">
+                                        <img src="<?php //echo esc_url($cat_thumb_arr[0]); ?>" class="imc-OverviewTileCategoryIcon u-pull-left">
 
-									<?php }	else { ?>
+									<?php //}	else { ?>
 
                                         <img src="<?php echo esc_url($plugin_path_url);?>/img/ic_default_cat.png" class="imc-OverviewTileCategoryIcon u-pull-left">
 
-									<?php } ?>
+									<?php //} ?>
 
-                                    <span class="imc-EditCatNameStyle"><?php echo esc_html($current_category_name); ?></span>
-                                </div>
+                                    <span class="imc-EditCatNameStyle"><?php // echo esc_html($current_category_name); ?></span>
+                                </div> -->
+								<label class="imc-CustomSelectStyle u-full-width">
 
+									<?php esc_html(imc_insert_cat_dropdown( 'my_custom_taxonomy', $current_category_id )); ?>
+
+                                </label>
+
+								<label id="my_custom_taxonomyLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                             </div>
                         </div>
 

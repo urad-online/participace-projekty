@@ -67,9 +67,9 @@ add_action( 'edit_form_after_title', 'imc_add_issue_id_after_title');
  * for insert page
  */
 
-function imc_insert_cat_dropdown() {
+function imc_insert_cat_dropdown( $taxonomy = 'my_custom_taxonomy', $selected_term_id = 0) {
 
-	function create_select_with_grandchildren( $fieldName ) {
+	function create_select_with_grandchildren( $fieldName, $selected_term_id  ) {
 		$args = array('hide_empty' => false, 'hierarchical' => true, 'parent' => 0);
 		$terms = get_terms('imccategory', $args);
 
@@ -79,7 +79,8 @@ function imc_insert_cat_dropdown() {
 		$html .= '<option value="" class="imc-CustomOptionDisabledStyle" disabled selected>'.__('Select a category','participace-projekty').'</option>';
 
 		foreach ( $terms as $term ) {
-			$html .= '<option class="imc-CustomOptionParentStyle" value="' . $term->term_id . '" >'.$term->name.'</option>';
+			$selected = ((!empty( $selected_term_id)) && ( $selected_term_id == $term->term_id )) ? "selected" : "";
+			$html .= '<option class="imc-CustomOptionParentStyle" '.$selected.' value="' . $term->term_id . '" >'.$term->name.'</option>';
 
 			$args = array(
 				'hide_empty'    => false,
@@ -104,7 +105,7 @@ function imc_insert_cat_dropdown() {
 		return $html;
 	}
 
-	$selector = create_select_with_grandchildren('my_custom_taxonomy');
+	$selector = create_select_with_grandchildren( $taxonomy, $selected_term_id);
 	echo $selector;
 
 }
