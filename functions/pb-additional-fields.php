@@ -130,7 +130,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'columns'   => 6,
      		),
      		'attach1' => array(
-     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 1 ',
+     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 1',
      			'id'            => 'pb_project_dokumentace1',
      			'type'          => 'media',
                 'title'         => "attach1",
@@ -142,7 +142,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf, doc, docx, xls, xlsx',
      		),
      		'attach2' => array(
-     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2 ',
+     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2',
      			'id'            => 'pb_project_dokumentace2',
      			'type'          => 'media',
                 'title'         => "attach2",
@@ -154,7 +154,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf, doc, docx, xls, xlsx',
      		),
      		'attach3' => array(
-     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3 ',
+     			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3',
      			'id'            => 'pb_project_dokumentace3',
      			'type'          => 'media',
                 'title'         => "attach3",
@@ -173,17 +173,8 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'mandatory' => true,
                 'placeholder' => 'Vyplňte jméno',
                 'title'     => "Proposer Name",
-                'columns'   => 6,
+                'columns'   => 5,
                 'help'      => 'Jméno navrhovatele je povinné',
-            ),
-            'address' => array(
-                'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
-                'id'        => 'pb_project_navrhovatel_adresa',
-                'type'      => 'text',
-                'mandatory' => true,
-                'placeholder' => 'Vyplňte adresu navrhovatele',
-                'title'     => "address",
-                'help'      => '',
             ),
             'phone' => array(
                 'label'     => 'Tel. číslo',
@@ -203,8 +194,17 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'mandatory' => true,
                 'placeholder' => '',
                 'title'     => "email",
-                'columns'   => 3,
+                'columns'   => 4,
                 'help'      => 'E-mailová adresa je povinný údaj',
+            ),
+            'address' => array(
+                'label'     => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
+                'id'        => 'pb_project_navrhovatel_adresa',
+                'type'      => 'text',
+                'mandatory' => true,
+                'placeholder' => 'Vyplňte adresu navrhovatele',
+                'title'     => "address",
+                'help'      => '',
             ),
             'signatures' => array(
                 'label'     => 'Podpisový arch (povinná příloha)',
@@ -219,7 +219,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf',
             ),
             'age_conf' => array(
-                'label'     => 'Prohlašuji, že jsem starší 15 let ',
+                'label'     => 'Prohlašuji, že jsem starší 15 let',
                 'id'        => 'pb_project_prohlaseni_veku',
                 'default'   => 'no',
                 'type'      => 'checkbox',
@@ -236,7 +236,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'help'      => 'K podání projektu musíte souhlasit s podmínkami'
             ),
             'completed'     => array(
-                'label'     => 'Popis projektu je úplný a chci ho poslat k vyhodnocení. ',
+                'label'     => 'Popis projektu je úplný a chci ho poslat k vyhodnocení',
                 'id'        => 'pb_project_edit_completed',
                 'default'   => 'no',
                 'type'      => 'checkbox',
@@ -1100,7 +1100,7 @@ function pb_user_can_edit($post_id, $current_user) {
 function pb_project_tooltip( $text = "")
 {
     if (! empty( $text)) {
-        return '<span class="pb_tooltip"><i class="material-icons md-24" style="margin-left:5px;">help_outline</i>
+        return '<span class="pb_tooltip"><i class="material-icons md-24" style="margin-left:2px;">help_outline</i>
         <span class="pb_tooltip_text" >' . $text . '</span></span>' ;
     } else {
         return '';
