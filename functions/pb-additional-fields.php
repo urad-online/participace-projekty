@@ -930,7 +930,6 @@ function pb_new_project_template_part_image( $order = '', $issue_image = '')
     printf( $output,
         $order,
         __('Photo','participace-projekty'),
-        " ( ".__('Volitelné','participace-projekty')." )",
         __('Add photo','participace-projekty'),
         __('Delete Photo', 'participace-projekty'),
         __('No photo attached','participace-projekty'),
