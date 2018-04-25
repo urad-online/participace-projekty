@@ -116,11 +116,13 @@ span a p h1 h2 h3 h4 h5 h6 {
 }
 
 .imc-BGColorAccent {
-  background-color: #1ABC9C;
+  background-color: #0274be;
+  /* background-color: #1ABC9C; */
 }
 
 .imc-ColorAccent {
-  color: #1ABC9C;
+  color: #0274be;
+  /* color: #1ABC9C; */
 }
 
 .imc-BGColorAccent700 {
@@ -253,8 +255,10 @@ input[type="reset"].imc-button-primary:visited,
 input[type="button"].imc-button-primary:visited
 {
   color: #FFF;
-  background: #1ABC9C;
-  border: 1px solid #1ABC9C;
+  background: #4197CE;
+  border: 1px solid #4197CE;
+  /* background: #1ABC9C;
+  border: 1px solid #1ABC9C; */
 }
 
 a.imc-button-primary:hover,
@@ -268,8 +272,10 @@ input[type="submit"].imc-button-primary:focus,
 input[type="reset"].imc-button-primary:focus,
 input[type="button"].imc-button-primary:focus {
   color: #FFF;
-  background: #138A73;
-  border: 1px solid #138A73;
+  background: #0274be;
+  border: 1px solid #0274be;
+  /* background: #138A73;
+  border: 1px solid #138A73; */
 }
 
 a.imc-button-primary-disabled,
@@ -291,8 +297,10 @@ input[type="button"].imc-button-primary-disabled:hover
 {
   font-family: 'Roboto', sans-serif;
   color: #121212;
-  background: #138A73;
-  border: 1px solid #138A73;
+  background: #A0CBE7;
+  border: 1px solid #A0CBE7;
+  /* background: #138A73;
+  border: 1px solid #138A73; */
   opacity: 0.6;
   cursor: default;
   display: inline-block;
@@ -363,8 +371,10 @@ input[type="search"].imc-InputStyle {
   border-bottom: solid 1px rgba(0,0,0,0.3);
   -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #0274be 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #0274be 4%);
+  /* background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%); */
   background-position: -1180px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -384,8 +394,10 @@ textarea.imc-InputStyle {
   padding: 10px 0;
   border-bottom: solid 1px rgba(0,0,0,0.3);
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #0274be 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #0274be 4%);
+  /* background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%); */
   background-position: -1180px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -409,7 +421,8 @@ input[type="search"].imc-InputStyle:hover,
 textarea.imc-InputStyle:focus,
 textarea.imc-InputStyle:hover {
   border:none;
-  border-bottom: solid 1px #1ABC9C;
+  border-bottom: solid 1px #0274be;
+  /* border-bottom: solid 1px #1ABC9C; */
   box-shadow: none;
   outline: none;
   background-position: 0 0;
@@ -425,7 +438,8 @@ input[type="search"].imc-InputStyle:valid::-webkit-input-placeholder,
 textarea.imc-InputStyle:focus::-webkit-input-placeholder
 {
   border: none;
-  color: #1ABC9C;
+  color: #0274be;
+  /* color: #1ABC9C; */
   font-size: 12px;
   line-height: 28px;
   font-weight: 500;
@@ -647,7 +661,8 @@ there.
 
 .imc-OverviewFilteringPanelLabelStyle:hover {
   background: white;
-  border-bottom: 2px solid #1ABC9C;
+  border-bottom: 2px solid #0274be;
+  /* border-bottom: 2px solid #1ABC9C; */
   transition: all 0.1s linear;
 }
 
