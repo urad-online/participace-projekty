@@ -425,8 +425,10 @@ label.imc-CustomSelectStyle select {
     border-radius: 0;
 
     transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #0274be 4%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #0274be 4%);
+    /* background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1ABC9C 4%); */
     background-position: -600px 0;
     background-size: contain;
     background-repeat: no-repeat;
@@ -450,7 +452,8 @@ label.imc-CustomSelectStyle:after {
 
 label.imc-CustomSelectStyle select:hover,
 label.imc-CustomSelectStyle select:focus {
-    border-bottom: 1px solid #1ABC9C;
+    border-bottom: 1px solid #0274be;
+    /* border-bottom: 1px solid #1ABC9C; */
     background-position: 0 0;
     outline: none;
 }
