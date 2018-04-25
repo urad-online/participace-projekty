@@ -271,9 +271,9 @@ button.imc-button-primary:focus,
 input[type="submit"].imc-button-primary:focus,
 input[type="reset"].imc-button-primary:focus,
 input[type="button"].imc-button-primary:focus {
-  color: #FFF;
-  background: #0274be;
-  border: 1px solid #0274be;
+    color: #FFF;
+    background: #0274be;
+    border: 1px solid #0274be;
   /* background: #138A73;
   border: 1px solid #138A73; */
 }
