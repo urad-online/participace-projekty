@@ -385,6 +385,19 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
  	new informacekprojektuMetabox;
  };
 
+function pb_render_file_link_metabox($url, $id)
+{
+    $display = 'Zobrazit';
+
+    if (! empty($url)) {
+        return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right
+        imc-SingleHeaderLinkStyle" style="width:15%%">'.$display.'</a>';
+        // <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
+    } else {
+        return '';
+    }
+}
+
 function pb_template_part_new_project( $latlng = array(), $data = null)
 {
     global $pb_submit_btn_text;
@@ -452,32 +465,6 @@ function pb_template_part_new_project( $latlng = array(), $data = null)
             }
         });
     </script>
-    <style>
-        .pb_tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        .pb_tooltip .pb_tooltip_text {
-            visibility: hidden;
-            width: 250px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .pb_tooltip:hover .pb_tooltip_text {
-            visibility: visible;
-            opacity: 1;
-        }
-    </style>
      <?php
      return ob_get_clean();
 }
@@ -677,19 +664,6 @@ function pb_render_file_link($url, $id )
             imc-SingleHeaderLinkStyle"><i class="material-icons md-36 imc-SingleHeaderIconStyle">file_download</i></a>';
     }
 }
-function pb_render_file_link_metabox($url, $id)
-{
-    $display = 'Zobrazit';
-
-    if (! empty($url)) {
-        return '<a id="'.$id.'Link" href="'.$url.'" target="_blank" data-toggle="tooltip" title="Zobrazit přílohu" class="u-pull-right
-            imc-SingleHeaderLinkStyle" style="width:15%%">'.$display.'</a>';
-                    // <i class="material-icons md-36 imc-SingleHeaderIconStyle">open_in_browser</i></a>';
-    } else {
-        return '';
-    }
-}
-
 function pb_render_checkbox( $order, $input, $value = '', $help = '')
 {
     $checked = '';
@@ -1117,75 +1091,6 @@ function pb_render_condition_link()
     // return '<span style="display:inline-block; margin-left:20px;">S podmínkami se můžete seznámit </span>';
 }
 
-function pb_template_part_single_project( $data = null)
-{
-    $pb_project_meta_fields = new informacekprojektuMetabox();
-    $fields = $pb_project_meta_fields->get_fields();
-
-    ob_start();
-    pb_render_field_single_project( '',  $fields['goals'],      pb_render_field_get_value( $fields['goals']['id'], $data ));
-    pb_render_field_single_project( '',  $fields['actions'],    pb_render_field_get_value( $fields['actions']['id'], $data ) );
-    pb_render_field_single_project( '',  $fields['profits'],    pb_render_field_get_value( $fields['profits']['id'], $data ) );
-    pb_render_field_single_project( '',  $fields['address'],    pb_render_field_get_value( 'imc_address', $data ) );
-    pb_render_field_single_project( '',  $fields['parcel'],     pb_render_field_get_value( $fields['parcel']['id'], $data ) );
-    pb_render_field_single_project( '',  $fields['map'],        pb_render_field_get_value( $fields['map']['id'], $data ) );
-    pb_render_field_single_project( '', $fields['cost'],       pb_render_field_get_value( $fields['cost']['id'], $data ) );
-    pb_render_field_single_project( '', $fields['budget_total'],    pb_render_field_get_value( $fields['budget_total']['id'], $data ) );
-    pb_render_field_single_project( '', $fields['attach1'],    pb_render_field_get_value( $fields['attach1']['id'], $data ) );
-    pb_render_field_single_project( '', $fields['attach2'],    pb_render_field_get_value( $fields['attach2']['id'], $data ) );
-    pb_render_field_single_project( '', $fields['attach3'],    pb_render_field_get_value( $fields['attach3']['id'], $data ) );
-    pb_render_field_single_project( '', $fields['name'],       pb_render_field_get_value( $fields['name']['id'], $data ) );
-    return ob_get_clean();
-}
-function pb_render_field_single_project( $order = '' , $field, $value = '' )
-{
-    if ( empty( $value)) {
-        return '';
-    }
-    if (! empty( $order )) {
-        $order = $order . ". ";
-    }
-
-    switch ( $field['type'] ) {
-        case 'media':
-            pb_render_single_project_file_field( $order, $field['label'], $value);
-            break;
-        case 'checkbox':
-            pb_render_single_project_text_field( $order, $field['label'], $value);
-            break;
-        case 'textarea':
-            pb_render_single_project_text_field( $order, $field['label'], $value);
-            break;
-        default:
-            pb_render_single_project_text_field( $order, $field['label'], $value);
-    }
-}
-
-function pb_render_single_project_text_field( $order = '', $label = '', $value = '')
-{
-    $output = '<div class="imc-row">
-        <h3 class="imc-SectionTitleTextStyle">%s%s</h3>
-        <div class="imc-SingleDescriptionStyle imc-TextColorSecondary imc-JustifyText">%s</div>
-    </div>';
-    printf( $output ,
-        $order,
-        $label,
-        $value);
-}
-
-function pb_render_single_project_file_field( $order = '', $label = '', $value = '')
-{
-    $output = '<div class="imc-row">
-        <h3 class="imc-SectionTitleTextStyle">%s%s</h3>
-        <div><p>Zobrazit přílohu<a href="%s" target="_blank" data-toggle="tooltip"
-            title="Zobrazit přílohu" >
-                <i class="material-icons md-28 imc-SingleHeaderIconStyle" >file_download</i></a></p>
-        </div></div>';
-    printf( $output ,
-        $order,
-        $label,
-        $value);
-}
 function pb_change_project_status_log( $new_step_term, $post_id, $description = 'Změna stavu')
 {
     global $wpdb;

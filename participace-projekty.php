@@ -11,6 +11,7 @@ Domain Path: /languages
 License: AGPLv3
 */
 
+define('PB_PATH', plugin_dir_path( __FILE__ ) );
 
 if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) {
 
@@ -192,6 +193,7 @@ include_once( plugin_dir_path( __FILE__ ) . 'functions/imc-user-groups.php' );
 // 20.02 Add a check box with the terms of the login and registration form
 include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-additional-fields.php' );
 include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-add-terms-fields.php' );
+// include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-project-single.php' );
 
 
 
@@ -373,3 +375,37 @@ function imc_enqueue_admin_scripts($hook) {
 }
 
 add_action( 'admin_enqueue_scripts', 'imc_enqueue_admin_scripts');
+
+function pb_enqueue_scripts( )
+{
+    global $post;
+
+	wp_enqueue_style( 'pb-project', plugin_dir_url( __FILE__ ) . 'css/pb-styles.css' );
+
+	if ( is_object( $post)) {
+        if (is_page( $post->ID)) {
+            switch ( $post->post_name) {
+                case 'imc-edit-issue':
+                case 'novy-navrh-projektu':
+                    $edit_show = 'edit';
+					wp_register_script('pb-project-edit',  plugin_dir_url( __FILE__ ) . 'functions/js/pb-project-edit.js', array('jquery'),'1.1', true);
+			        wp_enqueue_script('pb-project-edit');
+					wp_localize_script('pb-project-edit', 'pbSubmitBtnText', array(
+						        'completed_off' => 'Uložit si pro budoucí editaci',
+						        'completed_on'  => 'Odeslat návrh ke schválení',
+		            ));
+                    break;
+
+                default:
+                    $edit_show = 'unknown page';
+                    break;
+            }
+        } elseif ( is_single($post->ID) and ($post->post_type = 'imc-issues')) {
+            $edit_show = 'show_single';
+        } else {
+            $edit_show = 'other';
+        }
+    }
+
+}
+add_action( 'wp_enqueue_scripts',  'pb_enqueue_scripts');

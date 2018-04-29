@@ -4,8 +4,15 @@
  *
  */
 global $voting_enabled,$comments_enabled ;
-
 wp_enqueue_script('imc-gmap');
+include_once( PB_PATH . 'functions/pb-project-single.php' );
+
+
+$project_single = new pbProjectSingle(array(
+		'goals', 'actions', 'profits', 'address',
+		'parcel', 'map', 'cost', 'budget_total',
+		'attach1', 'attach2', 'attach3',
+	));
 
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 
@@ -43,6 +50,8 @@ if ( get_option('permalink_structure') ) { $perma_structure = true; } else {$per
 if( $perma_structure){$parameter_pass = '/?myparam=';} else{$parameter_pass = '&myparam=';}
 
 $plugin_path_url = imc_calculate_plugin_base_url();
+
+// $pb_project_single = new pbProjectSingle;
 
 get_header(); ?>
 
@@ -230,7 +239,8 @@ get_header(); ?>
                                 </div>
 									<hr class="imc-HorizontalWhitespaceSeparator" style="padding-top:10px">
 									<?php
-									echo pb_template_part_single_project( get_post_meta( $issue_id ));
+									$project_meta = get_post_meta( $issue_id );
+									echo $project_single->template_part_pb_project( $project_meta );
 									?>
                             </div> <!--End Card-->
 

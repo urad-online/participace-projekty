@@ -108,6 +108,8 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 }
 
+include_once( PB_PATH . 'functions/pb-project-edit.php' );
+$project_single = new pbProjectEdit;
 
 get_header();
 
@@ -247,7 +249,7 @@ if( is_user_logged_in() ) {
                         </div>
 
 
-						<?php echo pb_template_part_new_project( array(
+						<?php echo $project_single->template_project_edit( array(
 								'lat' => $map_options_initial_lat,
 								'lon' => $map_options_initial_lng,
 							)) ;?>
