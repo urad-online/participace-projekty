@@ -9,6 +9,8 @@
  */
 
 
+include_once( PB_PATH . 'functions/pb-project-edit.php' );
+$project_single = null;
 
 wp_enqueue_script('imc-gmap');
 
@@ -18,85 +20,9 @@ $postTitleError = '';
 
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 
-	$imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
+	$project_save = new pbProjectSaveData;
 
-	// Check options if the status of new issue is pending or publish
-
-	$generaloptions = get_option( 'general_settings' );
-	$moderateOption = $generaloptions["moderate_new"];
-	$mypost_status 	= 'pending';
-
-	if($moderateOption == 2){$mypost_status = 'publish';}
-
-	//CREATE THE ISSUE TO DB
-
-	$post_information = array(
-		'post_title' => esc_attr(strip_tags($_POST['postTitle'])),
-		'post_content' => esc_attr(strip_tags($_POST['postContent'])),
-		'post_type' => 'imc_issues',
-		'post_status' => $mypost_status,
-		'post_name'   => sanitize_title( $_POST['postTitle']),
-		'tax_input' => array( 'imccategory' => $imccategory_id ),
-	);
-
-	$post_information['meta_input'] = pb_new_project_meta_save_prep( $_POST);
-
-	$post_id = wp_insert_post($post_information, true);
-
-	if ( $post_id && ( ! is_wp_error($post_id)) ) {
-		pb_new_project_insert_attachments( $post_id, $_FILES);
-	}
-
-	// Choose the imcstatus with smaller id
-	// zmenit order by imc_term_order
-
-	$pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
-	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
-	if ( $pb_edit_completed ) {
-		$first_status = $all_status_terms[1];
-	} else {
-		$first_status = $all_status_terms[0];
-	}
-
-	wp_set_object_terms($post_id, $first_status->name, 'imcstatus');
-
-	//Create Log if moderate is OFF
-
-	if($moderateOption == 2) {
-
-		imcplus_crelog_frontend_nomoder($post_id, $first_status->term_id, get_current_user_id());
-
-	}
-
-	/************************ ABOUT FEATURED IMAGE  ***********************************/
-
-	$image =  $_FILES['featured_image'];
-
-	$orientation = intval(strip_tags($_POST['imcPhotoOri']), 10);
-
-
-
-	if ($orientation !== 0) {
-
-		$attachment_id = imc_upload_img( $image, $post_id, $post_information['post_title'], $orientation);
-
-	} else {
-
-		$attachment_id = imc_upload_img( $image, $post_id, $post_information['post_title'], null);
-
-	}
-
-
-
-	set_post_thumbnail( $post_id, $attachment_id );
-
-	/************************ END FEATURED IMAGE  ***********************************/
-
-
-
-	imcplus_mailnotify_4submit($post_id,$imccategory_id, $post_information['meta_input']['imc_address']);
-
-
+	$post_id = $project_save->project_insert();
 
 	if($post_id){
 
@@ -108,7 +34,6 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 
 }
 
-include_once( PB_PATH . 'functions/pb-project-edit.php' );
 $project_single = new pbProjectEdit;
 
 get_header();
