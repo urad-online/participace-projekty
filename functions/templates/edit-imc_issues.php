@@ -148,7 +148,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 
                         <!-- Issue's Description -->
                         <div class="imc-row">
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; <?php echo pb_render_mandatory(false)?></h3>
+                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; <?php echo $project_single->render_mandatory(false)?></h3>
                             <textarea placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php echo esc_html($issue_content); ?><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
 							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                         </div>
@@ -172,7 +172,6 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
                         <input type="hidden" name="submitted" id="submitted" value="true" />
                         <input id="imcEditIssueSubmitBtn" class="imc-button imc-button-primary imc-button-block pb-project-submit-btn"
 							type="submit" value="Odeslat" />
-							<!-- type="submit" value="<?php //echo pb_project_submit_btn_label( $pb_project_meta["pb_project_edit_completed"][0] ) ;?>" /> -->
                     </div>
 
                     <!-- Hidden inputs to pass to php -->

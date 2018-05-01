@@ -7,8 +7,6 @@
  * class pbProjectSaveData saves data
  *
  */
-
-
 class pbProjectEdit {
     private $file_type_image = "gif, png, jpg, jpeg";
     private $file_type_scan  = "pdf" ;
@@ -18,10 +16,11 @@ class pbProjectEdit {
             'completed_on'  => 'Odeslat návrh ke schválení',
         );
 
+    /*
+    * Renders the form part with additional fields
+    */
     public function template_project_edit( $latlng = array(), $data = null)
     {
-        global $pb_submit_btn_text;
-
         $pb_project_meta_fields = new informacekprojektuMetabox();
         $fields = $pb_project_meta_fields->get_fields();
 
@@ -55,6 +54,7 @@ class pbProjectEdit {
 
         return ob_get_clean();
     }
+
     private function render_field_get_value( $id, $values)
     {
         if (! empty($values[ $id][0])) {
@@ -64,6 +64,9 @@ class pbProjectEdit {
         }
     }
 
+    /*
+    * Core functin for field renderingRenders the form part with additional fields
+    */
     private function render_field( $order = '' , $field, $value = '' )
     {
         if (! empty( $order )) {
@@ -74,7 +77,6 @@ class pbProjectEdit {
         } else {
             $help = '';
         }
-
 
         switch ( $field['type'] ) {
             case 'media':
@@ -241,6 +243,9 @@ class pbProjectEdit {
         }
     }
 
+    /*
+    * Renders HTML link for opening an file attachment
+    */
     private function render_file_link($url, $id )
     {
         if (! empty($url)) {
@@ -314,7 +319,7 @@ class pbProjectEdit {
         }
     }
 
-    private function render_mandatory( $mandatory = false)
+    public function render_mandatory( $mandatory = false)
     {
         if ( $mandatory ) {
             return '';
@@ -350,6 +355,9 @@ class pbProjectEdit {
         );
     }
 
+    /*
+    * Renders featured_image
+    */
     private function render_image( $order = '', $issue_image = '')
     {
         $output = '
@@ -390,6 +398,9 @@ class pbProjectEdit {
         );
     }
 
+    /*
+    * Renders link to katastr with
+    */
     private function render_link_katastr($latlng)
     {
         if (! empty( $latlng ) ) {
@@ -406,6 +417,9 @@ class pbProjectEdit {
         printf($output);
     }
 
+    /*
+    * Definition of rules for FormValidator in validate.js
+    */
     public function render_fields_js_validation()
     {
         return "
@@ -519,6 +533,10 @@ class pbProjectEdit {
         }]
         ";
     }
+
+    /*
+    * Renders link to katastr with
+    */
     private function render_tooltip( $text = "")
     {
         if (! empty( $text)) {
@@ -528,17 +546,11 @@ class pbProjectEdit {
             return '';
         }
     }
-    public function render_condition_link()
-    {
-        // nuni asi neni potreba a jde to smazat
-        $page_conditions = get_page_by_path( 'podminky-pouziti-a-ochrana-osobnich-udaju');
-        $page_link = get_page_link( $page_conditions->ID);
-        $output = '<h3 class="imc-SectionTitleTextStyle" style="display:inline-block; margin-left:20px;">S podmínkami se můžete seznámit
-            <a id="pb_link_to_conditions" target="_blank" href="'.$page_link.'" title="Přejít na stránku s podmínkami">zde</a></h3>';
-        return $output;
-        // return '<span style="display:inline-block; margin-left:20px;">S podmínkami se můžete seznámit </span>';
-    }
 }
+
+/*
+* Class pbProjectSaveData - save data for insert and update
+*/
 class pbProjectSaveData {
     private $file_type_image = "gif, png, jpg, jpeg";
     private $file_type_scan  = "pdf" ;
@@ -546,6 +558,9 @@ class pbProjectSaveData {
     private $post_data       = null;
     private $status_taxo     = 'imcstatus';
 
+    /*
+    * Create new project
+    */
     public function project_insert()
     {
         $imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
@@ -602,6 +617,9 @@ class pbProjectSaveData {
         return $this->post_id;
     }
 
+    /*
+    * Update existing project
+    */
     public function update_project()
     {
     	$this->post_id = intval( sanitize_text_field( $_GET['myparam'] ));
@@ -638,6 +656,10 @@ class pbProjectSaveData {
 
         return $this->post_id;
     }
+
+    /*
+    * read post_metadata from $_POST
+    */
     public function get_metadata_from_request( $data, $update = false )
     {
         $this->post_data['meta_input'] = array(
@@ -663,9 +685,11 @@ class pbProjectSaveData {
         }
     }
 
+    /*
+    * save featured_image for new project
+    */
     private function project_insert_image()
     {
-        /************************ ABOUT FEATURED IMAGE  ***********************************/
 
     	$image =  $_FILES['featured_image'];
 
@@ -679,9 +703,11 @@ class pbProjectSaveData {
 
     	set_post_thumbnail( $this->post_id, $attachment_id );
 
-    	/************************ END FEATURED IMAGE  ***********************************/
     }
-    /************************ ABOUT FEATURED IMAGE  ***********************************/
+
+    /*
+    * save featured_image for updated project
+    */
     private function project_update_image()
     {
 
@@ -696,9 +722,9 @@ class pbProjectSaveData {
         }
     }
 
-    /************************ END FEATURED IMAGE  ***********************************/
-
-
+    /*
+    * save all file attachment for new project
+    */
     private function insert_attachments( $files)
     {
         if (! empty( $this->post_id)) {
@@ -730,6 +756,9 @@ class pbProjectSaveData {
         }
     }
 
+    /*
+    * save all file attachment updated project
+    */
     private function update_attachments( $files )
     {
         if (! $this->post_id) {
@@ -767,6 +796,9 @@ class pbProjectSaveData {
         }
     }
 
+    /*
+    * check allowed file types
+    */
     private function check_file_type( $file, $attach_type)
     {
         switch ($attach_type) {
@@ -787,13 +819,40 @@ class pbProjectSaveData {
         return  strpos( $allowed_file_type, $type['ext']);
     }
 
+    /*
+    * update post_metadata for updated project
+    */
     private function update_postmeta()
     {
         foreach ($this->post_data['meta_input'] as $key => $value) {
             update_post_meta($this->post_id, $key, $value);
         }
     }
-    public function pb_change_project_status_log( $new_step_term, $post_id, $description = 'Změna stavu')
+
+    /*
+    * update terms imcstatus
+    */
+    private function update_project_status()
+    {
+        /********************** About changing Project status  ************************/
+        $pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
+        $all_status_terms = get_terms( $this->status_taxo , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+        if ( $pb_edit_completed ) {
+            $set_status = $all_status_terms[1];
+        } else {
+            $set_status = $all_status_terms[0];
+        }
+        $pb_project_status = wp_get_object_terms( $this->post_id, $this->status_taxo);
+
+        if ( $set_status->slug != $pb_project_status[0]->slug) {
+            wp_delete_object_term_relationships( $this->post_id, $this->status_taxo );
+            wp_set_object_terms( $this->post_id, array($set_status->term_id,), $this->status_taxo, false);
+            $this->change_project_status_log( $set_status, $this->post_id, 'Změna stavu navrhovatelem' );
+        }
+
+    }
+
+    public function change_project_status_log( $new_step_term, $post_id, $description = 'Změna stavu')
     {
         global $wpdb;
 
@@ -829,25 +888,7 @@ class pbProjectSaveData {
         //fires mail notification
         imcplus_mailnotify_4imcstatuschange($transition, $post_id, $theUser);
     }
-    private function update_project_status()
-    {
-        /********************** About changing Project status  ************************/
-        $pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
-        $all_status_terms = get_terms( $this->status_taxo , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
-        if ( $pb_edit_completed ) {
-            $set_status = $all_status_terms[1];
-        } else {
-            $set_status = $all_status_terms[0];
-        }
-        $pb_project_status = wp_get_object_terms( $this->post_id, $this->status_taxo);
 
-        if ( $set_status->slug != $pb_project_status[0]->slug) {
-            wp_delete_object_term_relationships( $this->post_id, $this->status_taxo );
-            wp_set_object_terms( $this->post_id, array($set_status->term_id,), $this->status_taxo, false);
-            pb_change_project_status_log( $set_status, $this->post_id, 'Změna stavu navrhovatelem' );
-        }
-
-    }
 }
 
  ?>

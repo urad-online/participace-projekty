@@ -1,4 +1,8 @@
 <?php
+/**
+ * PB 1.00
+ * Renders part of single archive template with PB Project additional fields
+ */
 class pbProjectSingle {
     private $field_list = array();
 
