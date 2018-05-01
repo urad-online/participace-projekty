@@ -108,7 +108,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'credit_card',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
-                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf'
+                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf, doc, docx, xls, xlsx'
      		),
             'budget_total' => array(
      			'label'     => 'Celkové náklady',
@@ -139,7 +139,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
-                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf, doc, docx, xls, xlsx',
+                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf',
      		),
      		'attach2' => array(
      			'label'         => 'Vizualizace, výkresy, fotodokumentace… 2',
@@ -151,7 +151,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
-                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf, doc, docx, xls, xlsx',
+                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf',
      		),
      		'attach3' => array(
      			'label'         => 'Vizualizace, výkresy, fotodokumentace… 3',
@@ -163,7 +163,7 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 // 'material_icon' => 'content_copy',
                 'AddBtnLabel'   => 'Vložit',
                 'DelBtnLabel'   => 'Smazat',
-                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf, doc, docx, xls, xlsx',
+                'help'          => 'Povolené typy příloh: gif, png, jpg, jpeg, pdf',
      		),
             'name' => array(
                 'label'     => 'Jméno a příjmení navrhovatele',

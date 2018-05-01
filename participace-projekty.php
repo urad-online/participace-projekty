@@ -388,11 +388,21 @@ function pb_enqueue_scripts( )
                 case 'imc-edit-issue':
                 case 'novy-navrh-projektu':
                     $edit_show = 'edit';
+					// $map_options = get_option('gmap_settings');
+					// $mapOptions = array(
+					// 	'initial_lat'  	  => $map_options["gmap_initial_lat"],
+					// 	'initial_lng'  	  => $map_options["gmap_initial_lng"],
+					// 	'initial_zoom'    => $map_options["gmap_initial_zoom"],
+					// 	'initial_mscroll' => $map_options["gmap_mscroll"],
+					// 	'initial_bound'   => $map_options["gmap_boundaries"],
+					// );
+
 					wp_register_script('pb-project-edit',  plugin_dir_url( __FILE__ ) . 'functions/js/pb-project-edit.js', array('jquery'),'1.1', true);
 			        wp_enqueue_script('pb-project-edit');
-					wp_localize_script('pb-project-edit', 'pbSubmitBtnText', array(
+					wp_localize_script('pb-project-edit', 'pbFormInitialData', array(
 						        'completed_off' => 'Uložit si pro budoucí editaci',
 						        'completed_on'  => 'Odeslat návrh ke schválení',
+								// 'mapOptions'	=> $mapOptions ,
 		            ));
                     break;
 

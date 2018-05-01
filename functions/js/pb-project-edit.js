@@ -25,10 +25,10 @@
     });
     function setSubmitBtnLabel (){
         if (jQuery("#pb_project_edit_completed").prop("checked")) {
-            jQuery(".pb-project-submit-btn").val( pbSubmitBtnText.completed_on );
+            jQuery(".pb-project-submit-btn").val( pbFormInitialData.completed_on );
         } else {
-            jQuery(".pb-project-submit-btn").val( pbSubmitBtnText.completed_off );
+            jQuery(".pb-project-submit-btn").val( pbFormInitialData.completed_off );
         }
     };
-
+    
     jQuery( setSubmitBtnLabel );

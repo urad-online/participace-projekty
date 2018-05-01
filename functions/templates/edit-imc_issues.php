@@ -4,6 +4,9 @@
  *
  */
 
+include_once( PB_PATH . 'functions/pb-project-edit.php' );
+$project_single = null;
+
 wp_enqueue_script('imc-gmap');
 
 $listpage = getIMCArchivePage();
@@ -12,28 +15,9 @@ $all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby
 
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 
-	$safe_inserted_id = intval( $_GET['myparam'] );
-	$safe_inserted_id = sanitize_text_field( $safe_inserted_id );
-	$issue_id = $safe_inserted_id;
+	$project_save = new pbProjectSaveData;
 
-	$lat = esc_attr(strip_tags($_POST['imcLatValue']));
-	$lng = esc_attr(strip_tags($_POST['imcLngValue']));
-
-	$title = esc_attr(strip_tags($_POST['postTitle']));
-	$imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
-	$content = esc_attr(strip_tags($_POST['postContent']));
-	$address = esc_attr(strip_tags($_POST['postAddress']));
-
-	//UPDATE THE ISSUE TO DB
-	$post_information = array(
-		'ID' => $issue_id,
-		'post_title' => $title,
-		'post_content' => $content,
-		'tax_input' => array( 'imccategory' => $imccategory_id ),
-	);
-
-	$post_id = wp_update_post( $post_information, true );
-
+	$post_id = $project_save->update_project();
 	if (is_wp_error($post_id)) {
 		$errors = $post_id->get_error_messages();
 		foreach ($errors as $error) {
@@ -41,59 +25,6 @@ if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_
 		}
 		exit;
 	}
-
-	//we now use $post id to help add out post meta data
-	// update_post_meta($post_id, 'imc_lat', $lat);
-	// update_post_meta($post_id, 'imc_lng', $lng);
-	// update_post_meta($post_id, 'imc_address', $address);
-
-	$meta_update = true; // to ignore imc_likes & modality
-	$post_information_meta = pb_new_project_meta_save_prep( $_POST, $meta_update );
-	pb_new_project_update_postmeta( $post_id, $post_information_meta );
-	/************************ ABOUT FEATURED IMAGE  ***********************************/
-
-	$imageScenario = intval(strip_tags($_POST['imcImgScenario']), 10);
-
-	if (intval($imageScenario, 10) === 1) {
-		delete_post_thumbnail( $post_id );
-
-	} else if (intval($imageScenario, 10) === 2) {
-		$image =  $_FILES['featured_image'];
-		$orientation = intval(strip_tags($_POST['imcPhotoOri']), 10);
-
-		if ($orientation !== 0) {
-			$attachment_id = imc_upload_img( $image, $post_id, $post_information['post_title'], $orientation);
-		} else {
-			$attachment_id = imc_upload_img( $image, $post_id, $post_information['post_title'], null);
-		}
-
-
-		set_post_thumbnail( $post_id, $attachment_id );
-	}
-
-	/************************ END FEATURED IMAGE  ***********************************/
-
-	/************************ About FILE ATTACHMENTS  *******************************/
-	pb_new_project_update_attachments( $post_id, $_FILES, $_POST);
-	/************************ END FILE ATTACHMENTS  *******************************/
-
-	/********************** About changing Project status  ************************/
-	$pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
-	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
-	if ( $pb_edit_completed ) {
-		$set_status = $all_status_terms[1];
-	} else {
-		$set_status = $all_status_terms[0];
-	}
-	$pb_project_status = wp_get_object_terms($post_id, 'imcstatus');
-
-	if ( $set_status->slug != $pb_project_status[0]->slug) {
-		// wp_remove_object_terms( $post_id, $pb_project_status[0]->slug, 'imcstatus');
-		wp_delete_object_term_relationships( $post_id, 'imcstatus' );
-		wp_set_object_terms($post_id, array($set_status->term_id,), 'imcstatus', false);
-		pb_change_project_status_log( $set_status, $post_id, 'Změna stavu navrhovatelem' );
-	}
-	/*********************** End changing Project status  *************************/
 
 	if($post_id){
 		wp_redirect(get_permalink($listpage[0]->ID));
@@ -111,19 +42,21 @@ $map_options_initial_mscroll = $map_options["gmap_mscroll"];
 $map_options_initial_bound = $map_options["gmap_boundaries"];
 /*****************************************************************************/
 
+/* create instance of class for form rendering */
+$project_single = new pbProjectEdit;
+
 get_header();
 // checks if the current user has the ability to post anything
 $user = wp_get_current_user();
 
 $safe_inserted_id = intval( $_GET['myparam'] );
 $safe_inserted_id = sanitize_text_field( $safe_inserted_id );
-
-$given_issue_id = $safe_inserted_id;
+$given_issue_id   = $safe_inserted_id;
 
 $issue_for_edit = get_post($given_issue_id);
-$issue_title = get_the_title($given_issue_id);
-$issue_content = $issue_for_edit->post_content;
-$issue_image = wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
+$issue_title 	= get_the_title($given_issue_id);
+$issue_content 	= $issue_for_edit->post_content;
+$issue_image 	= wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
 
 $pb_project_meta = get_post_meta($safe_inserted_id);
 $pb_project_meta[ 'issue_image'] = $issue_image;
@@ -203,19 +136,6 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 									$cat_thumb_arr = wp_get_attachment_image_src( $term_thumb->term_image);
 								}?>
 
-                                <!-- <div class="imc-EditCatBlockStyle">
-									<?php //if ( $cat_thumb_arr ) { ?>
-
-                                        <img src="<?php //echo esc_url($cat_thumb_arr[0]); ?>" class="imc-OverviewTileCategoryIcon u-pull-left">
-
-									<?php //}	else { ?>
-
-                                        <img src="<?php echo esc_url($plugin_path_url);?>/img/ic_default_cat.png" class="imc-OverviewTileCategoryIcon u-pull-left">
-
-									<?php //} ?>
-
-                                    <span class="imc-EditCatNameStyle"><?php // echo esc_html($current_category_name); ?></span>
-                                </div> -->
 								<label class="imc-CustomSelectStyle u-full-width">
 
 									<?php esc_html(imc_insert_cat_dropdown( 'my_custom_taxonomy', $current_category_id )); ?>
@@ -233,7 +153,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                         </div>
 
-						<?php echo pb_template_part_new_project(
+						<?php echo $project_single->template_project_edit(
 										array(
 											'lat' => $pb_project_meta[ 'imc_lat'][0],
 											'lon' => $pb_project_meta[ 'imc_lng'][0],
@@ -251,7 +171,8 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 						<?php wp_nonce_field('post_nonce', 'post_nonce_field'); ?>
                         <input type="hidden" name="submitted" id="submitted" value="true" />
                         <input id="imcEditIssueSubmitBtn" class="imc-button imc-button-primary imc-button-block pb-project-submit-btn"
-							type="submit" value="<?php echo pb_project_submit_btn_label( $pb_project_meta["pb_project_edit_completed"][0] ) ;?>" />
+							type="submit" value="Odeslat" />
+							<!-- type="submit" value="<?php //echo pb_project_submit_btn_label( $pb_project_meta["pb_project_edit_completed"][0] ) ;?>" /> -->
                     </div>
 
                     <!-- Hidden inputs to pass to php -->

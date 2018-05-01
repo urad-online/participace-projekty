@@ -544,6 +544,7 @@ class pbProjectSaveData {
     private $file_type_scan  = "pdf" ;
     private $post_id         = null;
     private $post_data       = null;
+    private $status_taxo     = 'imcstatus';
 
     public function project_insert()
     {
@@ -577,14 +578,14 @@ class pbProjectSaveData {
     	// zmenit order by imc_term_order
 
     	$pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
-    	$all_status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+    	$all_status_terms = get_terms( $this->status_taxo , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
     	if ( $pb_edit_completed ) {
     		$first_status = $all_status_terms[1];
     	} else {
     		$first_status = $all_status_terms[0];
     	}
 
-    	wp_set_object_terms($this->post_id, $first_status->name, 'imcstatus');
+    	wp_set_object_terms($this->post_id, $first_status->name, $this->status_taxo);
 
     	//Create Log if moderate is OFF
 
@@ -601,6 +602,42 @@ class pbProjectSaveData {
         return $this->post_id;
     }
 
+    public function update_project()
+    {
+    	$this->post_id = intval( sanitize_text_field( $_GET['myparam'] ));
+    	$issue_id = $this->post_id ;
+
+    	$lat = esc_attr(strip_tags($_POST['imcLatValue']));
+    	$lng = esc_attr(strip_tags($_POST['imcLngValue']));
+
+
+    	$imccategory_id = esc_attr(strip_tags($_POST['my_custom_taxonomy']));
+    	$address = esc_attr(strip_tags($_POST['postAddress']));
+
+    	//UPDATE THE ISSUE TO DB
+    	$thia->post_data = array(
+    		'ID' => $issue_id,
+            'post_title' => esc_attr(strip_tags($_POST['postTitle'])),
+            'post_content' => esc_attr(strip_tags($_POST['postContent'])),
+            'tax_input' => array( 'imccategory' => $imccategory_id ),
+        );
+
+    	$post_id = wp_update_post( $thia->post_data, true );
+
+    	if (is_wp_error($post_id)) {
+            return $post_id;
+    	}
+        $this->get_metadata_from_request( $_POST, true);
+
+    	$this->update_postmeta();
+
+        $this->project_update_image();
+
+    	$this->update_attachments( $_FILES );
+        $this->update_project_status();
+
+        return $this->post_id;
+    }
     public function get_metadata_from_request( $data, $update = false )
     {
         $this->post_data['meta_input'] = array(
@@ -626,7 +663,6 @@ class pbProjectSaveData {
         }
     }
 
-
     private function project_insert_image()
     {
         /************************ ABOUT FEATURED IMAGE  ***********************************/
@@ -645,6 +681,23 @@ class pbProjectSaveData {
 
     	/************************ END FEATURED IMAGE  ***********************************/
     }
+    /************************ ABOUT FEATURED IMAGE  ***********************************/
+    private function project_update_image()
+    {
+
+        $imageScenario = intval(strip_tags($_POST['imcImgScenario']), 10);
+
+        if ( $imageScenario === 1) {
+            delete_post_thumbnail( $this->post_id );
+        }
+
+        if ( $imageScenario === 2) {
+            $this->project_insert_image();
+        }
+    }
+
+    /************************ END FEATURED IMAGE  ***********************************/
+
 
     private function insert_attachments( $files)
     {
@@ -677,7 +730,7 @@ class pbProjectSaveData {
         }
     }
 
-    private function pb_new_project_update_attachments( $files, $data)
+    private function update_attachments( $files )
     {
         if (! $this->post_id) {
             return false;
@@ -692,7 +745,7 @@ class pbProjectSaveData {
             'pb_project_dokumentace3',
         );
         foreach ($list as $key) {
-            $this->update_attachment_1($files[ $key ], $key, $data[ $key.'Name']);
+            $this->update_attachment_1($files[ $key ], $key, $_POST[ $key.'Name']);
         }
     }
 
@@ -734,9 +787,9 @@ class pbProjectSaveData {
         return  strpos( $allowed_file_type, $type['ext']);
     }
 
-    private function update_postmeta( $data)
+    private function update_postmeta()
     {
-        foreach ($data as $key => $value) {
+        foreach ($this->post_data['meta_input'] as $key => $value) {
             update_post_meta($this->post_id, $key, $value);
         }
     }
@@ -776,7 +829,25 @@ class pbProjectSaveData {
         //fires mail notification
         imcplus_mailnotify_4imcstatuschange($transition, $post_id, $theUser);
     }
+    private function update_project_status()
+    {
+        /********************** About changing Project status  ************************/
+        $pb_edit_completed = (! empty( $_POST['pb_project_edit_completed']) ) ?  $_POST['pb_project_edit_completed'] : 0;
+        $all_status_terms = get_terms( $this->status_taxo , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+        if ( $pb_edit_completed ) {
+            $set_status = $all_status_terms[1];
+        } else {
+            $set_status = $all_status_terms[0];
+        }
+        $pb_project_status = wp_get_object_terms( $this->post_id, $this->status_taxo);
 
+        if ( $set_status->slug != $pb_project_status[0]->slug) {
+            wp_delete_object_term_relationships( $this->post_id, $this->status_taxo );
+            wp_set_object_terms( $this->post_id, array($set_status->term_id,), $this->status_taxo, false);
+            pb_change_project_status_log( $set_status, $this->post_id, 'Změna stavu navrhovatelem' );
+        }
+
+    }
 }
 
  ?>
