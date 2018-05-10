@@ -118,62 +118,6 @@ if( is_user_logged_in() ) {
 
                         <div class="imc-Separator"></div>
 
-
-                        <div class="imc-row">
-
-
-
-                            <!-- Issue's Title -->
-
-                            <div class="imc-grid-6 imc-columns">
-
-
-
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
-
-                                <input autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>" type="text" name="postTitle" id="postTitle" class="imc-InputStyle" />
-
-                                <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-
-                            </div>
-
-
-
-                            <!-- Issue's Category -->
-
-                            <div class="imc-grid-6 imc-columns">
-
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo '2. ' . __('Category','participace-projekty'); ?></h3>
-
-
-
-                                <!-- Function that creates the select box -->
-
-                                <label class="imc-CustomSelectStyle u-full-width">
-
-									<?php //$pom = imc_insert_cat_dropdown( 'my_custom_taxonomy' ); echo $pom;  ?>
-
-                                </label>
-
-								<label id="my_custom_taxonomyLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- Issue's Description -->
-
-                        <div class="imc-row">
-
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; <?php echo $project_single->render_mandatory(false)?></h3>
-
-                            <textarea  placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
-							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-                        </div>
-
-
 						<?php echo $project_single->template_project_edit( array(
 								'lat' => $map_options_initial_lat,
 								'lon' => $map_options_initial_lng,

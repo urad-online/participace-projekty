@@ -54,12 +54,19 @@ $safe_inserted_id = sanitize_text_field( $safe_inserted_id );
 $given_issue_id   = $safe_inserted_id;
 
 $issue_for_edit = get_post($given_issue_id);
-$issue_title 	= get_the_title($given_issue_id);
-$issue_content 	= $issue_for_edit->post_content;
-$issue_image 	= wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
+// $issue_title 	= get_the_title($given_issue_id);
+// $issue_content 	= $issue_for_edit->post_content;
+// $issue_image 	= wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
 
 $pb_project_meta = get_post_meta($safe_inserted_id);
-$pb_project_meta[ 'issue_image'] = $issue_image;
+$pb_project_meta[ 'issue_image'][0] = wp_get_attachment_url( get_post_thumbnail_id($given_issue_id) );
+$pb_project_meta[ 'postTitle'][0] = get_the_title($given_issue_id);
+$pb_project_meta[ 'postContent'][0] = $issue_for_edit->post_content;
+$imccategory_currentterm = get_the_terms($given_issue_id , 'imccategory' );
+if ($imccategory_currentterm) {
+	$pb_project_meta[ 'my_custom_taxonomy'][0] = $imccategory_currentterm[0]->term_id;
+}
+
 
 $pb_project_status = wp_get_object_terms($given_issue_id, 'imcstatus');
 $pb_project_edit_completed = '0';
@@ -69,9 +76,9 @@ foreach ($all_status_terms as $key => $term ) {
 	}
 }
 if ($pb_project_edit_completed == '0') {
-	$pb_project_meta[ 'pb_project_edit_completed'] = "0";
+	$pb_project_meta[ 'pb_project_edit_completed'][0] = "0";
 } else {
-	$pb_project_meta[ 'pb_project_edit_completed'] = "1";
+	$pb_project_meta[ 'pb_project_edit_completed'][0] = "1";
 }
 
 $issue_address 	= $pb_project_meta[ 'imc_address'][0];
@@ -113,45 +120,44 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
 
                         <div class="imc-Separator"></div>
 
-                        <div class="imc-row">
+                        <!-- <div class="imc-row">
 
-                            <!-- Issue's Title -->
                             <div class="imc-grid-6 imc-columns">
 
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo '1. ' . __('Title','participace-projekty'); ?></h3>
-								<input autocomplete="off" placeholder="<?php echo __('Add a short title for the issue','participace-projekty'); ?>"
-									type="text" name="postTitle" id="postTitle" class="imc-InputStyle" value="<?php echo esc_attr($issue_title); ?>"/>
+                                <h3 class="imc-SectionTitleTextStyle"><?php //echo '1. ' . __('Title','participace-projekty'); ?></h3>
+								<input autocomplete="off" placeholder="<?php //echo __('Add a short title for the issue','participace-projekty'); ?>"
+									type="text" name="postTitle" id="postTitle" class="imc-InputStyle" value="<?php //echo esc_attr($issue_title); ?>"/>
                                 <label id="postTitleLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                             </div>
 
-                            <!-- Issue's Category -->
                             <div class="imc-grid-6 imc-columns">
-                                <h3 class="imc-SectionTitleTextStyle"><?php echo '2. ' . __('Category', 'participace-projekty'); ?></h3>
+                                <h3 class="imc-SectionTitleTextStyle"><?php //echo '2. ' . __('Category', 'participace-projekty'); ?></h3>
 
-								<?php $imccategory_currentterm = get_the_terms($given_issue_id , 'imccategory' );
-								if ($imccategory_currentterm) {
-									$current_category_name = $imccategory_currentterm[0]->name;
-									$current_category_id = $imccategory_currentterm[0]->term_id;
-									$term_thumb = get_term_by('id', $current_category_id, 'imccategory');
-									$cat_thumb_arr = wp_get_attachment_image_src( $term_thumb->term_image);
-								}?>
+								<?php //$imccategory_currentterm = get_the_terms($given_issue_id , 'imccategory' );
+								//if ($imccategory_currentterm) {
+									// $current_category_name = $imccategory_currentterm[0]->name;
+									//$current_category_id = $imccategory_currentterm[0]->term_id;
+									// $term_thumb = get_term_by('id', $current_category_id, 'imccategory');
+									// $cat_thumb_arr = wp_get_attachment_image_src( $term_thumb->term_image);
+								//}?>
 
 								<label class="imc-CustomSelectStyle u-full-width">
 
-									<?php esc_html(imc_insert_cat_dropdown( 'my_custom_taxonomy', $current_category_id )); ?>
+									<?php //echo imc_insert_cat_dropdown( 'my_custom_taxonomy', $current_category_id ); ?>
 
                                 </label>
 
 								<label id="my_custom_taxonomyLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!-- Issue's Description -->
-                        <div class="imc-row">
-                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; <?php echo $project_single->render_mandatory(false)?></h3>
-                            <textarea placeholder="<?php echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2" class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php echo esc_html($issue_content); ?><?php if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
+                        <!-- <div class="imc-row">
+                            <h3 class="u-pull-left imc-SectionTitleTextStyle"><?php //echo '3. ' . __('Description','participace-projekty'); ?>&nbsp; <?php// echo $project_single->render_mandatory(false)?></h3>
+                            <textarea placeholder="<?php// echo __('Add a thorough description of the issue','participace-projekty'); ?>" rows="2"
+								class="imc-InputStyle" title="Description" name="postContent" id="postContent"><?php //echo esc_html($issue_content); ?>
+								  <?php  //if(isset($_POST['postContent'])) { if(function_exists('stripslashes')) { echo esc_html(stripslashes($_POST['postContent'])); } else { echo esc_html($_POST['postContent']); } } ?></textarea>
 							<label id="postContentLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-                        </div>
+                        </div> -->
 
 						<?php echo $project_single->template_project_edit(
 										array(

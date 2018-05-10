@@ -413,7 +413,7 @@ class pbProjectEdit {
     /*
     * Renders featured_image
     */
-    private function render_image( $order = '', $issue_image = '')
+    private function render_image( $order = '',  $value = '')
     {
         $output = '
             <div class="imc-row" id="imcImageSection">
@@ -435,7 +435,7 @@ class pbProjectEdit {
             </div>
             <input title="orientation" type="hidden" id="imcPhotoOri" name="imcPhotoOri"/>
             ';
-        if ( $issue_image) {
+        if ( $value) {
             $output .= '<img id="imcPreviousImg" class="u-cf" style="max-height: 200px;" src="%s">';
         } else {
             $output .= "%s";
@@ -449,7 +449,7 @@ class pbProjectEdit {
             __('No photo attached','participace-projekty'),
             __('Photo size must be smaller in size, please resize it or select a smaller one!','participace-projekty'),
             __('A photo has been selected:','participace-projekty'),
-            $issue_image
+            $value[0]
         );
     }
 
@@ -486,11 +486,15 @@ class pbProjectEdit {
     /*
     * Renders select with taxo category
     */
-    private function render_category(  $order, $input, $value = '', $help = '')
+    private function render_category(  $order, $input, $value, $help = '')
     {
+        if ( empty( $value )) {
+            $value = 0;
+        }
+
         $output = '<h3 class="imc-SectionTitleTextStyle">%s%s</h3>
             <label class="imc-CustomSelectStyle u-full-width">';
-        $output .= imc_insert_cat_dropdown( 'my_custom_taxonomy' );
+        $output .= imc_insert_cat_dropdown( 'my_custom_taxonomy', $value );
         $output .= '</label><label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
         if ( empty( $input ) ) {
             return $output;
