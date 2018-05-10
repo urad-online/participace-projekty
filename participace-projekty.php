@@ -419,3 +419,8 @@ function pb_enqueue_scripts( )
 
 }
 add_action( 'wp_enqueue_scripts',  'pb_enqueue_scripts');
+
+if (! function_exists( 'pb_get_custom_fields_metabox' )) {
+	$file = plugin_dir_path( __FILE__ ) . 'pb_field_definition.php';
+	include_once(  $file );
+}

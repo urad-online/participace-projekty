@@ -151,7 +151,7 @@ if( is_user_logged_in() ) {
 
                                 <label class="imc-CustomSelectStyle u-full-width">
 
-									<?php esc_html(imc_insert_cat_dropdown( 'my_custom_taxonomy' )); ?>
+									<?php //$pom = imc_insert_cat_dropdown( 'my_custom_taxonomy' ); echo $pom;  ?>
 
                                 </label>
 

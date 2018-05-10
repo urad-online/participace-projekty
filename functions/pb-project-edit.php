@@ -15,44 +15,85 @@ class pbProjectEdit {
             'completed_off' => 'Uložit si pro budoucí editaci',
             'completed_on'  => 'Odeslat návrh ke schválení',
         );
+    private $fields_definition  = array();
+    private $fields_order  = array();
 
     /*
     * Renders the form part with additional fields
     */
     public function template_project_edit( $latlng = array(), $data = null)
     {
-        $pb_project_meta_fields = new informacekprojektuMetabox();
-        $fields = $pb_project_meta_fields->get_fields();
+        // // $pb_project_meta_fields = new informacekprojektuMetabox();
+        // // $fields = $pb_project_meta_fields->get_fields();
+        // $fields = pb_get_custom_fields();
 
         ob_start();
-        $this->render_field( 4,  $fields['actions'],    $this->render_field_get_value( $fields['actions']['id'], $data ) );
-        $this->render_field( 5,  $fields['goals'],      $this->render_field_get_value( $fields['goals']['id'], $data ));
-        $this->render_field( 6,  $fields['profits'],    $this->render_field_get_value( $fields['profits']['id'], $data ) );
-        $this->render_map( '7. ' );
-        $this->render_link_katastr( $latlng);
-        $this->render_field( 8,  $fields['parcel'],     $this->render_field_get_value( $fields['parcel']['id'], $data ) );
-        $this->render_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
-        $this->render_field( 10, $fields['map'],        $this->render_field_get_value( $fields['map']['id'], $data ) );
-        $this->render_field( 11, $fields['cost'],       $this->render_field_get_value( $fields['cost']['id'], $data ) );
-        echo '<div class="imc-row">';
-        $this->render_field( 12, $fields['budget_total'],    $this->render_field_get_value( $fields['budget_total']['id'], $data ) );
-        $this->render_field( 13, $fields['budget_increase'], $this->render_field_get_value( $fields['budget_increase']['id'], $data ) );
-        echo '</div>';
-        $this->render_field( 14, $fields['attach1'],    $this->render_field_get_value( $fields['attach1']['id'], $data ) );
-        $this->render_field( 15, $fields['attach2'],    $this->render_field_get_value( $fields['attach2']['id'], $data ) );
-        $this->render_field( 16, $fields['attach3'],    $this->render_field_get_value( $fields['attach3']['id'], $data ) );
-        echo '<div class="imc-row">';
-        $this->render_field( 17, $fields['name'],       $this->render_field_get_value( $fields['name']['id'], $data ) );
-        $this->render_field( 18, $fields['phone'],      $this->render_field_get_value( $fields['phone']['id'], $data ) );
-        $this->render_field( 19, $fields['email'],      $this->render_field_get_value( $fields['email']['id'], $data ) );
-        echo '</div>';
-        $this->render_field( 20, $fields['address'],    $this->render_field_get_value( $fields['address']['id'], $data ) );
-        $this->render_field( 21, $fields['signatures'], $this->render_field_get_value( $fields['signatures']['id'], $data ) );
-        $this->render_field( 22, $fields['age_conf'],   $this->render_field_get_value( $fields['age_conf']['id'], $data ) );
-        $this->render_field( 23, $fields['agreement'],  $this->render_field_get_value( $fields['agreement']['id'], $data ) );
-        $this->render_field( 24, $fields['completed'],  $this->render_field_get_value( $fields['completed']['id'], $data ) );
+        // $this->render_field( 4,  $fields['actions'],    $this->render_field_get_value( $fields['actions']['id'], $data ) );
+        // $this->render_field( 5,  $fields['goals'],      $this->render_field_get_value( $fields['goals']['id'], $data ));
+        // $this->render_field( 6,  $fields['profits'],    $this->render_field_get_value( $fields['profits']['id'], $data ) );
+        // $this->render_field( 7,  $fields['postAddress'], $this->render_field_get_value( $fields['postAddress']['id'], $data ), $latlng );
+        // // $this->render_map( '7. ' );
+        // $this->render_field( 8,  $fields['parcel'],     $this->render_field_get_value( $fields['parcel']['id'], $data ) );
+        // $this->render_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
+        // $this->render_field( 10, $fields['map'],        $this->render_field_get_value( $fields['map']['id'], $data ) );
+        // $this->render_field( 11, $fields['cost'],       $this->render_field_get_value( $fields['cost']['id'], $data ) );
+        // echo '<div class="imc-row">';
+        // $this->render_field( 12, $fields['budget_total'],    $this->render_field_get_value( $fields['budget_total']['id'], $data ) );
+        // $this->render_field( 13, $fields['budget_increase'], $this->render_field_get_value( $fields['budget_increase']['id'], $data ) );
+        // echo '</div>';
+        // $this->render_field( 14, $fields['attach1'],    $this->render_field_get_value( $fields['attach1']['id'], $data ) );
+        // $this->render_field( 15, $fields['attach2'],    $this->render_field_get_value( $fields['attach2']['id'], $data ) );
+        // $this->render_field( 16, $fields['attach3'],    $this->render_field_get_value( $fields['attach3']['id'], $data ) );
+        // echo '<div class="imc-row">';
+        // $this->render_field( 17, $fields['name'],       $this->render_field_get_value( $fields['name']['id'], $data ) );
+        // $this->render_field( 18, $fields['phone'],      $this->render_field_get_value( $fields['phone']['id'], $data ) );
+        // $this->render_field( 19, $fields['email'],      $this->render_field_get_value( $fields['email']['id'], $data ) );
+        // echo '</div>';
+        // $this->render_field( 20, $fields['address'],    $this->render_field_get_value( $fields['address']['id'], $data ) );
+        // $this->render_field( 21, $fields['signatures'], $this->render_field_get_value( $fields['signatures']['id'], $data ) );
+        // $this->render_field( 22, $fields['age_conf'],   $this->render_field_get_value( $fields['age_conf']['id'], $data ) );
+        // $this->render_field( 23, $fields['agreement'],  $this->render_field_get_value( $fields['agreement']['id'], $data ) );
+        // $this->render_field( 24, $fields['completed'],  $this->render_field_get_value( $fields['completed']['id'], $data ) );
 
+        $fields_def = new pbRenderForm;
+        $this->fields_definition = $fields_def->get_form_fields();
+        $this->fields_order = $fields_def->get_form_fields_order();
+        unset( $fields_def );
+        $this->render_form( $latlng, $data, 1 );
         return ob_get_clean();
+    }
+
+    private function render_form( $latlng, $data, $order_num = 1 )
+    {
+        foreach ($this->fields_order as $field) {
+            echo '<div class="imc-row">';
+            if ( $field['type'] === 'field' ) {
+                $this->render_field(
+                        $order_num,
+                        $this->fields_definition[ $field['data']['field'] ],
+                        $this->render_field_get_value( $this->fields_definition[ $field['data']['field'] ]['id'],
+                        $data ),
+                        $latlng,
+                        $field['data']['columns']
+                );
+                $order_num ++;
+            } elseif ($field['type'] === 'row') {
+                foreach ($field['data'] as $subfield) {
+                    if ( $subfield['type'] === 'field') {
+                        $this->render_field(
+                            $order_num,
+                            $this->fields_definition[ $subfield['data']['field'] ],
+                            $this->render_field_get_value( $this->fields_definition[$subfield['data']['field'] ]['id'],
+                            $data ),
+                            $latlng,
+                            $subfield['data']['columns']
+                        );
+                        $order_num ++;
+                    }
+                }
+            }
+            echo '</div>';
+        }
     }
 
     private function render_field_get_value( $id, $values)
@@ -67,7 +108,7 @@ class pbProjectEdit {
     /*
     * Core functin for field renderingRenders the form part with additional fields
     */
-    private function render_field( $order = '' , $field, $value = '' )
+    private function render_field( $order = '' , $field, $value = '', $latlng = '', $columns = 0 )
     {
         if (! empty( $order )) {
             $order = $order . ". ";
@@ -77,7 +118,9 @@ class pbProjectEdit {
         } else {
             $help = '';
         }
-
+        if ( ! empty($columns) ) {
+            echo '<div class="imc-grid-'.$columns.' imc-columns">';
+        }
         switch ( $field['type'] ) {
             case 'media':
                 $this->render_file_attachment( $order, $field, $value, $help);
@@ -91,8 +134,19 @@ class pbProjectEdit {
             case 'email':
                 $this->render_text( $order, $field, $value, $help);
                 break;
+            case 'category':
+                $this->render_category( $order, $field, $value, $help);
+                break;
+            case 'imcmap':
+                $this->render_map( $order, $field, $value, $help);
+                $this->render_link_katastr( $latlng );
+                break;
             default:
                 $this->render_text( $order, $field, $value, $help);
+        }
+
+        if ( ! empty($columns) ) {
+            echo '</div>';
         }
     }
 
@@ -109,13 +163,13 @@ class pbProjectEdit {
             $rows = 3;
         }
 
-        $output = '<div class="imc-row">
-            <h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s %s'.$this->render_tooltip( $help ).'</h3>
+        // $output = '<div class="imc-row">
+        $output = '<h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s %s'.$this->render_tooltip( $help ).'</h3>
             <textarea placeholder="%s" rows="%d"
                  class="imc-InputStyle" title="%s" name="%s"
                  id="%s">%s</textarea>
-            <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>
-            </div>';
+            <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
+            // </div>';
         if ( empty( $input ) ) {
             return $output;
         } else {
@@ -123,7 +177,7 @@ class pbProjectEdit {
                 $order,
                 $input['label'],
                 $mandatory,
-                $input['placeholder'],
+                ( empty( $input['placeholder'])) ? "" : $input['placeholder'],
                 $rows,
                 $input['title'],
                 $input['id'],
@@ -145,20 +199,21 @@ class pbProjectEdit {
             $options = " ".$input['options'];
         }
 
-        if ( ! empty($input['columns'])) {
-            $columns = $input['columns'];
-        } else {
-            $columns = '';
-        }
+        // if ( ! empty($input['columns'])) {
+        //     $columns = $input['columns'];
+        // } else {
+        //     $columns = '';
+        // }
 
         $output = '<h3 class="imc-SectionTitleTextStyle">%s%s %s'.$this->render_tooltip( $help ).'</h3><input type="%s" %s autocomplete="off"
             data-tip="zde kliknete" placeholder="%s" name="%s" id="%s" class="imc-InputStyle" value="%s" ></input>
             <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
-        if ( ! empty($columns) ) {
-            $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
-        } else {
-            $output = '<div class="imc-row">' . $output . '</div>';
-        }
+
+        // if ( ! empty($columns) ) {
+        //     $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
+        // } else {
+        //     $output = '<div class="imc-row">' . $output . '</div>';
+        // }
 
         if ( empty( $input ) ) {
             return $output;
@@ -169,7 +224,7 @@ class pbProjectEdit {
                 $mandatory,
                 $input['type'],
                 $options,
-                $input['placeholder'],
+                ( empty( $input['placeholder'])) ? "" : $input['placeholder'],
                 $input['id'],
                 $input['id'],
                 $value,
@@ -279,11 +334,11 @@ class pbProjectEdit {
             }
         }
 
-        if ( ! empty($input['columns'])) {
-            $columns = $input['columns'];
-        } else {
-            $columns = '';
-        }
+        // if ( ! empty($input['columns'])) {
+        //     $columns = $input['columns'];
+        // } else {
+        //     $columns = '';
+        // }
 
         // if (! empty( $input['text_after_checkbox']) && function_exists($input['text_after_checkbox'])) {
         //     $text_after = $input['text_after_checkbox']();
@@ -296,11 +351,11 @@ class pbProjectEdit {
             style="width:20px; height:20px; display:inline-block;margin-left:10px"/>
             <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
 
-        if ( ! empty($columns) ) {
-            $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
-        } else {
-            $output = '<div class="imc-row">' . $output . '</div>';
-        }
+        // if ( ! empty($columns) ) {
+        //     $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
+        // } else {
+        //     $output = '<div class="imc-row">' . $output . '</div>';
+        // }
 
         if ( empty( $input ) ) {
             return $output;
@@ -329,7 +384,7 @@ class pbProjectEdit {
         }
     }
 
-    private function render_map( $order = '')
+    private function render_map( $order = '', $field = '', $value = '', $help = '')
     {
         $output = '<input required name="postAddress" placeholder="%s" id="imcAddress" class="u-pull-left imc-InputStyle"/>';
         $output = '
@@ -416,124 +471,6 @@ class pbProjectEdit {
             </div>';
         printf($output);
     }
-
-    /*
-    * Definition of rules for FormValidator in validate.js
-    */
-    public function render_fields_js_validation()
-    {
-        return "
-        [{
-            name: 'postTitle',
-            display: 'Název',
-            rules: 'required|min_length[5]|max_length[255]'
-        }, {
-            name: 'my_custom_taxonomy',
-            display: 'Kategorie',
-            rules: 'required'
-        }, {
-            name: 'postContent',
-            display: 'Popis',
-            rules: 'required'
-        }, {
-            name: 'pb_project_akce',
-            display: '\"Co by se mělo udělat\"',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_cile',
-            display: '\"Proč je projekt důležitý\"',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_prospech',
-            display: '\"Kdo bude mít z projektu prospěch\"',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'postAddress',
-            display: 'Adresa',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_parcely',
-            display: 'Parcelní číslo',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'featured_image',
-            display: 'Fotografie',
-            rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
-        }, {
-            name: 'pb_project_mapaName',
-            display: 'Mapa (situační nákres)',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_mapa',
-            display: 'Mapa (situační nákres)',
-            rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]'
-        }, {
-            name: 'pb_project_nakladyName',
-            display: 'Předpokládané náklady',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_naklady',
-            display: 'Předpokládané náklady',
-            rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF,doc,DOC,xls,XLS]'
-        }, {
-            name: 'pb_project_naklady_celkem',
-            display: 'Celkové náklady',
-            rules: 'required|integer|greater_than[99999]|less_than[2000001]',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_naklady_navyseni',
-            display: 'Navýšení rozpočtu',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_navrhovatel_jmeno',
-            display: 'Jméno navrhovatele',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_navrhovatel_telefon',
-            display: 'Telefonický kontakt',
-            rules: 'valid_phone'
-        }, {
-            name: 'pb_project_navrhovatel_email',
-            display: 'email',
-            rules: 'required|valid_email',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_navrhovatel_adresa',
-            display: 'Adresa navrhovatele',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_podporovateleName',
-            display: 'Podpisový arch',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_podporovatele',
-            display: 'Podpisový arch',
-            rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]'
-        }, {
-            name: 'pb_project_prohlaseni_veku',
-            display: 'Prohlašení věku',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }, {
-            name: 'pb_project_podminky_souhlas',
-            display: 'Souhlas s podmínkami',
-            rules: 'required',
-            depends: 'pb_project_js_validate_required'
-        }]
-        ";
-    }
-
     /*
     * Renders link to katastr with
     */
@@ -546,6 +483,34 @@ class pbProjectEdit {
             return '';
         }
     }
+    /*
+    * Renders select with taxo category
+    */
+    private function render_category(  $order, $input, $value = '', $help = '')
+    {
+        $output = '<h3 class="imc-SectionTitleTextStyle">%s%s</h3>
+            <label class="imc-CustomSelectStyle u-full-width">';
+        $output .= imc_insert_cat_dropdown( 'my_custom_taxonomy' );
+        $output .= '</label><label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
+        if ( empty( $input ) ) {
+            return $output;
+        } else {
+            printf( $output,
+                $order,
+                $input['label'],
+                $input['id']
+            );
+        }
+    }
+
+    /*
+    * Definition of rules for FormValidator in validate.js
+    */
+    public function render_fields_js_validation()
+    {
+        return pb_get_custom_fields_form_validation();
+    }
+
 }
 
 /*

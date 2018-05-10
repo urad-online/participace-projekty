@@ -106,7 +106,7 @@ function imc_insert_cat_dropdown( $taxonomy = 'my_custom_taxonomy', $selected_te
 	}
 
 	$selector = create_select_with_grandchildren( $taxonomy, $selected_term_id);
-	echo $selector;
+	return $selector;
 
 }
 

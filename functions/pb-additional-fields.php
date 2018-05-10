@@ -398,24 +398,11 @@ function pb_render_file_link_metabox($url, $id)
     }
 }
 
-function pb_new_project_template_part_link_katastr($latlng)
-{
-    if (! empty( $latlng ) ) {
-        $url = "https://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=".$latlng['lat']."&lon=".$latlng['lon']."&layers_3=000B00FFTFFT&ilat=".$latlng['lat']."&lon=".$latlng['lon'];
-    } else {
-        $url = "https://www.ikatastr.cz/ikatastr.htm#zoom=19&lat=50.10766&lon=14.47145&layers_3=000B00FFTFFT";
-    }
-    $output = '<div class="imc-row" ><span>Kliknutím na tento </span>
-        <a id="pb_link_to_katastr" href="#" data-toggle="tooltip" title="Přejít na stránku s katastrální mapou"
-            class=""><span>odkaz</span></a><span> zobrazíte katastrální mapu na vámi označeném místě.
-        Ve vyskakovacím okně (musíte mít povoleno ve vašem prohlížeči) získáte informace k vybranému pozemku. Nalezněte všechna katastrální čísla týkajících se návrhu, kliknutím do mapy ověřte,
-        zda jsou všechny dotčené pozemky ve správě HMP nebo MČ a tedy splňujete podmínky pravidel participativního rozpočtu. Seznam všech dotčených pozemků uveďte do pole níže (jedna položka na jeden řádek).</span>
-        </div>';
-    printf($output);
-}
-
 function pb_new_project_mandatory_fields_js_validation()
 {
+    $output = pb_get_custom_fields_form_validation();
+    return $output;
+
     return "
     [{
         name: 'postTitle',
