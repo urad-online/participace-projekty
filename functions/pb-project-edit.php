@@ -30,9 +30,6 @@ class pbProjectEdit {
     */
     public function template_project_edit( $latlng = array(), $data = null)
     {
-        // // $pb_project_meta_fields = new informacekprojektuMetabox();
-        // // $fields = $pb_project_meta_fields->get_fields();
-        // $fields = pb_get_custom_fields();
 
         ob_start();
         // $this->render_field( 4,  $fields['actions'],    $this->render_field_get_value( $fields['actions']['id'], $data ) );

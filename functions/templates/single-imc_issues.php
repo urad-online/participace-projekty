@@ -8,11 +8,7 @@ wp_enqueue_script('imc-gmap');
 include_once( PB_PATH . 'functions/pb-project-single.php' );
 
 
-$project_single = new pbProjectSingle(array(
-		'goals', 'actions', 'profits', 'address',
-		'parcel', 'map', 'cost', 'budget_total',
-		'attach1', 'attach2', 'attach3',
-	));
+$project_single = new pbProjectSingle();
 
 if(isset($_POST['submitted']) && isset($_POST['post_nonce_field']) && wp_verify_nonce($_POST['post_nonce_field'], 'post_nonce')) {
 

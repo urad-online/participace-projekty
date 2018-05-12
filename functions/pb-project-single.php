@@ -6,29 +6,24 @@
 class pbProjectSingle {
     private $field_list = array();
 
-    public function __construct($list = array() ) {
-        if ((!empty($list)) && is_array($list) ) {
-            $this->field_list = $list;
-        } else {
-            $this->field_list = 'all';
-        }
+    public function __construct() {
+        $this->form_fields = new pbRenderForm();
+        $this->fields_definition = $this->form_fields->get_form_fields();
+        $this->field_list      = $this->form_fields->get_form_fields_layout_single();
     }
 
     public function template_part_pb_project( $data = null)
     {
-        $pb_project_meta_fields = new informacekprojektuMetabox();
-        $fields = $pb_project_meta_fields->get_fields();
-        unset($pb_project_meta_fields);
 
         if ( $this->field_list == 'all') {
-            $field_list = array_keys( $fields );
+            $field_list = array_keys( $this->fields_definition );
         } else {
             $field_list = $this->field_list;
         }
         ob_start();
         if ( count($field_list) > 0 ) {
             foreach ($field_list as $key ) {
-                $this->render_field( '', $fields[ $key ], $this->render_field_get_value( $fields[ $key ]['id'], $data ));
+                $this->render_field( '', $this->fields_definition[ $key ], $this->render_field_get_value( $this->fields_definition[ $key ]['id'], $data ));
                 // code...
             }
         }

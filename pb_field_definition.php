@@ -63,6 +63,15 @@ class pbRenderForm {
         }
         return json_encode( $output );
     }
+    
+    public function get_form_fields_layout_single()
+    {
+        return array(
+        		'goals', 'actions', 'profits', 'address',
+        		'parcel', 'map', 'cost', 'budget_total',
+        		'attach1', 'attach2', 'attach3',
+        	);
+    }
 
 }
 
