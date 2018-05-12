@@ -245,6 +245,8 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'help'      => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
             ),
      	);
+        $pom = new pbRenderForm();
+        $this->meta_fields = $pom->get_form_fields_mtbx();
     }
  	public function __construct() {
  		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );

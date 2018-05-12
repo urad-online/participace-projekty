@@ -191,12 +191,9 @@ include_once( plugin_dir_path( __FILE__ ) . 'functions/imc-user-groups.php' );
 
 // 20.01 Add additional fields to imc_issues
 // 20.02 Add a check box with the terms of the login and registration form
+include_once( plugin_dir_path( __FILE__ ) . 'pb_field_definition.php' );
 include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-additional-fields.php' );
 include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-add-terms-fields.php' );
-// include_once( plugin_dir_path( __FILE__ ) . 'functions/pb-project-single.php' );
-
-
-
 
 /*******************************            SETTINGS LINK ON PLUGINS PAGE           **********************************/
 
@@ -419,8 +416,3 @@ function pb_enqueue_scripts( )
 
 }
 add_action( 'wp_enqueue_scripts',  'pb_enqueue_scripts');
-
-if (! function_exists( 'pb_get_custom_fields_metabox' )) {
-	$file = plugin_dir_path( __FILE__ ) . 'pb_field_definition.php';
-	include_once(  $file );
-}

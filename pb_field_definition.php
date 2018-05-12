@@ -36,6 +36,24 @@ class pbRenderForm {
         return $this->fields;
     }
 
+    public function get_form_fields_mtbx()
+    {
+        $output = array();
+        foreach ($this->fields as $key => $value) {
+            if ((!empty($value['show_mtbx'] )) && ($value['show_mtbx'] )) {
+                $output[ $key] = array(
+                    'label' => $value['label'],
+                    'id'    => $value['id'],
+                    'type'  => $value['type'],
+                );
+                if (!empty( $value['default'])) {
+                    $output[ $key]['default'] = $value['default'];
+                }
+            }
+        }
+        return $output;
+    }
+
     public function get_form_fields_layout()
     {
         return $this->fields_layout;
@@ -63,7 +81,7 @@ class pbRenderForm {
         }
         return json_encode( $output );
     }
-    
+
     public function get_form_fields_layout_single()
     {
         return array(
@@ -122,7 +140,7 @@ function pb_get_custom_fields()
             'mandatory' => true,
             'placeholder' => 'Zadejte krátký název projektu',
             'show_mtbx' => false,
-            'show_form' => false,
+            'show_form' => true,
             'js_rules'  => array(
                 'rules' => 'required|min_length[5]|max_length[255]',),
         ),
@@ -132,7 +150,7 @@ function pb_get_custom_fields()
             'type'      => 'category',
             'mandatory' => true,
             'show_mtbx' => false,
-            'show_form' => false,
+            'show_form' => true,
             'js_rules'  => array(
                 'rules' => 'required',),
         ),
@@ -143,7 +161,7 @@ function pb_get_custom_fields()
             'mandatory' => true,
             'placeholder' => 'Vyplňte obsah svého projektu',
             'show_mtbx' => false,
-            'show_form' => false,
+            'show_form' => true,
             'js_rules'  => array(
                 'rules' => 'required',),
         ),
@@ -195,7 +213,7 @@ function pb_get_custom_fields()
             'label'     => 'Adresa',
             'id'        => 'postAddress',
             'type'      => 'imcmap',
-            'show_mtbx' => true,
+            'show_mtbx' => false,
             'show_form' => true,
             'js_rules'  => array(
                 'rules' => 'required',
@@ -225,7 +243,7 @@ function pb_get_custom_fields()
             'material_icon' => 'image',
             'AddBtnLabel'   => 'Vložit fotku',
             'DelBtnLabel'   => 'Smazat fotku',
-            'show_mtbx'     => true,
+            'show_mtbx'     => false,
             'show_form'     => true,
             'js_rules'      => array(
                 'rules' => 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]',
@@ -252,6 +270,7 @@ function pb_get_custom_fields()
         'mapName' => array(
             'label'     => 'Mapa (situační nákres)',
             'id'        => 'pb_project_mapaName',
+            'show_mtbx'     => false,
             'js_rules'      => array(
                 'rules' => 'required',
                 'depends' => 'pb_project_js_validate_required',
@@ -277,6 +296,7 @@ function pb_get_custom_fields()
         'costName' => array(
             'label'     => 'Předpokládané náklady',
             'id'        => 'pb_project_nakladyName',
+            'show_mtbx'     => false,
             'js_rules'      => array(
                 'rules' => 'required',
             ),
@@ -430,6 +450,7 @@ function pb_get_custom_fields()
         'signatureName' => array(
             'label'     => 'Podpisový arch',
             'id'        => 'pb_project_podporovateleName',
+            'show_mtbx'   => false,
             'js_rules'      => array(
                 'rules'   => 'required',
                 'depends' => 'pb_project_js_validate_required',
@@ -493,27 +514,6 @@ function pb_get_custom_fields()
         ),
     );
     return $custom_fields;
-}
-
-function pb_get_custom_fields_metabox()
-{
-    $all_fields = pb_get_custom_fields();
-    $output = array();
-    foreach ($all_fields as $key => $value) {
-        if ((!empty($value['show_mtbx'] )) && ($value['show_mtbx'] )) {
-            $output[ $key] = array(
-                'label' => $value['label'],
-                'id'    => $value['id'],
-                'type'  => $value['type'],
-            );
-            if (!empty( $value['default'])) {
-                $output[ $key] = array(
-                    'default' => $value['default'],
-                );
-            }
-        }
-    }
-    return $output;
 }
 
 function pb_get_custom_fields_form()
