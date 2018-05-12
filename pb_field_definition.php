@@ -1,4 +1,8 @@
 <?php
+define("FILE_TYPES_IMAGE", "gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG");
+define("FILE_TYPES_SCAN", "pdf,PDF");
+define("FILE_TYPES_DOCS", "doc,DOC,xls,XLS,docX,DOCX,xlsx,XLSX");
+
 class pbRenderForm {
     private $fields_layout;
     private $fields;

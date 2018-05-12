@@ -32,35 +32,6 @@ class pbProjectEdit {
     {
 
         ob_start();
-        // $this->render_field( 4,  $fields['actions'],    $this->render_field_get_value( $fields['actions']['id'], $data ) );
-        // $this->render_field( 5,  $fields['goals'],      $this->render_field_get_value( $fields['goals']['id'], $data ));
-        // $this->render_field( 6,  $fields['profits'],    $this->render_field_get_value( $fields['profits']['id'], $data ) );
-        // $this->render_field( 7,  $fields['postAddress'], $this->render_field_get_value( $fields['postAddress']['id'], $data ), $latlng );
-        // // $this->render_map( '7. ' );
-        // $this->render_field( 8,  $fields['parcel'],     $this->render_field_get_value( $fields['parcel']['id'], $data ) );
-        // $this->render_image('9. ', $issue_image = (! empty($data['issue_image']) ? esc_url($data['issue_image']) : ''));
-        // $this->render_field( 10, $fields['map'],        $this->render_field_get_value( $fields['map']['id'], $data ) );
-        // $this->render_field( 11, $fields['cost'],       $this->render_field_get_value( $fields['cost']['id'], $data ) );
-        // echo '<div class="imc-row">';
-        // $this->render_field( 12, $fields['budget_total'],    $this->render_field_get_value( $fields['budget_total']['id'], $data ) );
-        // $this->render_field( 13, $fields['budget_increase'], $this->render_field_get_value( $fields['budget_increase']['id'], $data ) );
-        // echo '</div>';
-        // $this->render_field( 14, $fields['attach1'],    $this->render_field_get_value( $fields['attach1']['id'], $data ) );
-        // $this->render_field( 15, $fields['attach2'],    $this->render_field_get_value( $fields['attach2']['id'], $data ) );
-        // $this->render_field( 16, $fields['attach3'],    $this->render_field_get_value( $fields['attach3']['id'], $data ) );
-        // echo '<div class="imc-row">';
-        // $this->render_field( 17, $fields['name'],       $this->render_field_get_value( $fields['name']['id'], $data ) );
-        // $this->render_field( 18, $fields['phone'],      $this->render_field_get_value( $fields['phone']['id'], $data ) );
-        // $this->render_field( 19, $fields['email'],      $this->render_field_get_value( $fields['email']['id'], $data ) );
-        // echo '</div>';
-        // $this->render_field( 20, $fields['address'],    $this->render_field_get_value( $fields['address']['id'], $data ) );
-        // $this->render_field( 21, $fields['signatures'], $this->render_field_get_value( $fields['signatures']['id'], $data ) );
-        // $this->render_field( 22, $fields['age_conf'],   $this->render_field_get_value( $fields['age_conf']['id'], $data ) );
-        // $this->render_field( 23, $fields['agreement'],  $this->render_field_get_value( $fields['agreement']['id'], $data ) );
-        // $this->render_field( 24, $fields['completed'],  $this->render_field_get_value( $fields['completed']['id'], $data ) );
-
-        // $fields_def = new pbRenderForm;
-        // unset( $fields_def );
         $this->render_form( $latlng, $data, 1 );
         return ob_get_clean();
     }
@@ -204,21 +175,9 @@ class pbProjectEdit {
             $options = " ".$input['options'];
         }
 
-        // if ( ! empty($input['columns'])) {
-        //     $columns = $input['columns'];
-        // } else {
-        //     $columns = '';
-        // }
-
         $output = '<h3 class="imc-SectionTitleTextStyle">%s%s %s'.$this->render_tooltip( $help ).'</h3><input type="%s" %s autocomplete="off"
             data-tip="zde kliknete" placeholder="%s" name="%s" id="%s" class="imc-InputStyle" value="%s" ></input>
             <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
-
-        // if ( ! empty($columns) ) {
-        //     $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
-        // } else {
-        //     $output = '<div class="imc-row">' . $output . '</div>';
-        // }
 
         if ( empty( $input ) ) {
             return $output;
@@ -339,28 +298,10 @@ class pbProjectEdit {
             }
         }
 
-        // if ( ! empty($input['columns'])) {
-        //     $columns = $input['columns'];
-        // } else {
-        //     $columns = '';
-        // }
-
-        // if (! empty( $input['text_after_checkbox']) && function_exists($input['text_after_checkbox'])) {
-        //     $text_after = $input['text_after_checkbox']();
-        // } else {
-        //     $text_after = '';
-        // }
-
         $output = '<h3 class="imc-SectionTitleTextStyle" style="display:inline-block;"><label id="%sName" for="%s">%s%s</label>'. $this->render_tooltip($help) .'
             </h3><input type="checkbox"  %s %s name="%s" id="%s" class="imc-InputStyle" value="1"
             style="width:20px; height:20px; display:inline-block;margin-left:10px"/>
             <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
-
-        // if ( ! empty($columns) ) {
-        //     $output = '<div class="imc-grid-'.$columns.' imc-columns">' . $output . '</div>';
-        // } else {
-        //     $output = '<div class="imc-row">' . $output . '</div>';
-        // }
 
         if ( empty( $input ) ) {
             return $output;
