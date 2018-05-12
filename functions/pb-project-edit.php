@@ -17,7 +17,14 @@ class pbProjectEdit {
         );
     private $fields_definition  = array();
     private $fields_order  = array();
+    private $form_fields;
 
+    public function __construct()
+    {
+        $this->form_fields = new pbRenderForm();
+        $this->fields_definition = $this->form_fields->get_form_fields();
+        $this->fields_order      = $this->form_fields->get_form_fields_layout();
+    }
     /*
     * Renders the form part with additional fields
     */
@@ -55,10 +62,8 @@ class pbProjectEdit {
         // $this->render_field( 23, $fields['agreement'],  $this->render_field_get_value( $fields['agreement']['id'], $data ) );
         // $this->render_field( 24, $fields['completed'],  $this->render_field_get_value( $fields['completed']['id'], $data ) );
 
-        $fields_def = new pbRenderForm;
-        $this->fields_definition = $fields_def->get_form_fields();
-        $this->fields_order = $fields_def->get_form_fields_order();
-        unset( $fields_def );
+        // $fields_def = new pbRenderForm;
+        // unset( $fields_def );
         $this->render_form( $latlng, $data, 1 );
         return ob_get_clean();
     }
@@ -512,7 +517,7 @@ class pbProjectEdit {
     */
     public function render_fields_js_validation()
     {
-        return pb_get_custom_fields_form_validation();
+        return $this->form_fields->get_form_fields_js_validation();
     }
 
 }

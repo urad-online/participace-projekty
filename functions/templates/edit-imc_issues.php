@@ -244,7 +244,7 @@ if(pb_user_can_edit($given_issue_id, $user->ID)) { ?>
         jQuery( document ).ready(function() {
 
             var validator = new FormValidator('report_an_issue_form',<?PHP
-				echo pb_new_project_mandatory_fields_js_validation();
+				echo $project_single->render_fields_js_validation();
 				?>, function(errors, events) {
 				jQuery('label.imc-ReportFormErrorLabelStyle').html("");
                 if (errors.length > 0) {

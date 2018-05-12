@@ -255,7 +255,7 @@ if( is_user_logged_in() ) {
 
             jQuery( document ).ready(function() {
                 var validator = new FormValidator('report_an_issue_form',
-					<?PHP echo pb_new_project_mandatory_fields_js_validation(); ?>,
+					<?PHP echo $project_single->render_fields_js_validation(); ?>,
 				function(errors, events) {
 					jQuery('label.imc-ReportFormErrorLabelStyle').html("");
                     if (errors.length > 0) {

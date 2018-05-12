@@ -1,74 +1,108 @@
 <?php
 class pbRenderForm {
-    private $fields_order;
+    private $fields_layout;
     private $fields;
 
     public function __construct()
     {
         $this->read_form_fields();
-        $this->read_form_fields_order();
+        $this->read_form_fields_layout();
     }
     private function read_form_fields()
     {
-        delete_transient( 'pb_custom_fields_definition');
 
-        if ( false === ( $this->fields = get_transient( 'pb_custom_fields_definition' ) ) ) {
+        if ( false === ( $this->fields = get_option( 'pb_custom_fields_definition' ) ) ) {
             $this->fields = pb_get_custom_fields();
-            set_transient( 'pb_custom_fields_definition', json_encode( $this->fields, JSON_UNESCAPED_UNICODE), 12 * HOUR_IN_SECONDS );
+            add_option( 'pb_custom_fields_definition', json_encode( $this->fields, JSON_UNESCAPED_UNICODE) );
         } else {
             $this->fields = json_decode( $this->fields, true);
         }
 
     }
 
-    private function read_form_fields_order()
+    private function read_form_fields_layout()
     {
-        $this->fields_order = array(
-            array( 'type' => 'row', 'data' => array(
-                array('type' => 'field', 'data' => array( 'field' => 'title', 'columns' => 6)),
-                array('type' => 'field', 'data' => array( 'field' => 'category', 'columns' => 6)),
-            )),
-            array( 'type' => 'field', 'data' => array( 'field' => 'content', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'actions', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'goals', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'profits', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'postAddress', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'parcel', 'columns' => 0)),
-            // array( 'type' => 'field', 'data' => array( 'field' => 'issue_image', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'map', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'cost', 'columns' => 0)),
-            array( 'type' => 'row', 'data' => array(
-                array('type' => 'field', 'data' => array( 'field' => 'budget_total', 'columns' => 5)),
-                array('type' => 'field', 'data' => array( 'field' => 'budget_increase', 'columns' => 6)),
-            )),
-            array( 'type' => 'field', 'data' => array( 'field' => 'attach1', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'attach2', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'attach3', 'columns' => 0)),
-            array( 'type' => 'row', 'data' => array(
-                array('type' => 'field', 'data' => array( 'field' => 'name', 'columns' => 5)),
-                array('type' => 'field', 'data' => array( 'field' => 'phone', 'columns' => 3)),
-                array('type' => 'field', 'data' => array( 'field' => 'email', 'columns' => 4)),
-            )),
-            array( 'type' => 'field', 'data' => array( 'field' => 'address', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'signatures', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'age_conf', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'agreement', 'columns' => 0)),
-            array( 'type' => 'field', 'data' => array( 'field' => 'completed', 'columns' => 0)),
-        );
-
+        if ( false === ( $this->fields_layout = get_option( 'pb_custom_fields_layout' ) ) ) {
+            $this->fields_layout = pb_get_custom_fields_layout();
+            add_option( 'pb_custom_fields_layout', json_encode( $this->fields_layout, JSON_UNESCAPED_UNICODE) );
+        } else {
+            $this->fields_layout = json_decode( $this->fields_layout, true);
+        }
     }
+
 
     public function get_form_fields()
     {
         return $this->fields;
     }
 
-    public function get_form_fields_order()
+    public function get_form_fields_layout()
     {
-        return $this->fields_order;
+        return $this->fields_layout;
+    }
+
+    public function get_form_fields_js_validation()
+    {
+        $fields = pb_get_custom_fields();
+        $output = array();
+        foreach ($this->fields as $key => $value) {
+            if (! empty( $value['js_rules'] )) {
+                $rule = array(
+                    'name'    => $value['id'],
+                    'display' => $value['label'],
+                    'rules'   => $value['js_rules']['rules'],
+                );
+                if (! empty( $value['js_rules']['depends'] )) {
+                    $rule['depends'] = $value['js_rules']['depends'];
+                }
+                if (! empty( $value['js_rules']['name'] )) {
+                    $rule['name'] = $value['js_rules']['name'];
+                }
+                array_push( $output, $rule);
+            }
+        }
+        return json_encode( $output );
     }
 
 }
+
+function pb_get_custom_fields_layout()
+{
+    return array(
+        array( 'type' => 'row', 'data' => array(
+            array('type' => 'field', 'data' => array( 'field' => 'title', 'columns' => 6)),
+            array('type' => 'field', 'data' => array( 'field' => 'category', 'columns' => 6)),
+        )),
+        array( 'type' => 'field', 'data' => array( 'field' => 'content', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'actions', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'goals', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'profits', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'postAddress', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'parcel', 'columns' => 0)),
+        // array( 'type' => 'field', 'data' => array( 'field' => 'issue_image', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'map', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'cost', 'columns' => 0)),
+        array( 'type' => 'row', 'data' => array(
+            array('type' => 'field', 'data' => array( 'field' => 'budget_total', 'columns' => 5)),
+            array('type' => 'field', 'data' => array( 'field' => 'budget_increase', 'columns' => 6)),
+        )),
+        array( 'type' => 'field', 'data' => array( 'field' => 'attach1', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'attach2', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'attach3', 'columns' => 0)),
+        array( 'type' => 'row', 'data' => array(
+            array('type' => 'field', 'data' => array( 'field' => 'name', 'columns' => 5)),
+            array('type' => 'field', 'data' => array( 'field' => 'phone', 'columns' => 3)),
+            array('type' => 'field', 'data' => array( 'field' => 'email', 'columns' => 4)),
+        )),
+        array( 'type' => 'field', 'data' => array( 'field' => 'address', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'signatures', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'age_conf', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'agreement', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'completed', 'columns' => 0)),
+    );
+
+}
+
 function pb_get_custom_fields()
 {
     $custom_fields = array(
@@ -513,28 +547,6 @@ function pb_get_custom_fields_all()
     return $output;
 }
 
-function pb_get_custom_fields_form_validation()
-{
-    $fields = pb_get_custom_fields();
-    $output = array();
-    foreach ($fields as $key => $value) {
-        if (! empty( $value['js_rules'] )) {
-            $rule = array(
-                'name'    => $value['id'],
-                'display' => $value['label'],
-                'rules'   => $value['js_rules']['rules'],
-            );
-            if (! empty( $value['js_rules']['depends'] )) {
-                $rule['depends'] = $value['js_rules']['depends'];
-            }
-            if (! empty( $value['js_rules']['name'] )) {
-                $rule['name'] = $value['js_rules']['name'];
-            }
-            array_push( $output, $rule);
-        }
-    }
-    return json_encode( $output );
-}
 function get_form_field_order()
 {
     return array(
