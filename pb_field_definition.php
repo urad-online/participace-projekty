@@ -79,7 +79,7 @@ function pb_get_custom_fields_layout()
         array( 'type' => 'field', 'data' => array( 'field' => 'profits', 'columns' => 0)),
         array( 'type' => 'field', 'data' => array( 'field' => 'postAddress', 'columns' => 0)),
         array( 'type' => 'field', 'data' => array( 'field' => 'parcel', 'columns' => 0)),
-        // array( 'type' => 'field', 'data' => array( 'field' => 'issue_image', 'columns' => 0)),
+        array( 'type' => 'field', 'data' => array( 'field' => 'photo', 'columns' => 0)),
         array( 'type' => 'field', 'data' => array( 'field' => 'map', 'columns' => 0)),
         array( 'type' => 'field', 'data' => array( 'field' => 'cost', 'columns' => 0)),
         array( 'type' => 'row', 'data' => array(
@@ -210,8 +210,8 @@ function pb_get_custom_fields()
         ),
         'photo' => array(
     		'label'       => 'Fotografie',
-    		'id'          => 'featured_image',
-    		'type'        => 'media',
+    		'id'          => 'issue_image',
+    		'type'        => 'featured_image',
             'mandatory'     => true,
             'material_icon' => 'image',
             'AddBtnLabel'   => 'Vložit fotku',
@@ -545,14 +545,4 @@ function pb_get_custom_fields_all()
         }
     }
     return $output;
-}
-
-function get_form_field_order()
-{
-    return array(
-        'actions',
-        'goals',
-        'profits',
-        'postAddress',
-    );
 }

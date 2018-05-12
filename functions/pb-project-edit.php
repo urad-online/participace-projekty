@@ -130,6 +130,9 @@ class pbProjectEdit {
             case 'media':
                 $this->render_file_attachment( $order, $field, $value, $help);
                 break;
+            case 'featured_image':
+                $this->render_image( $order, $field, $value, $help);
+                break;
             case 'checkbox':
                 $this->render_checkbox( $order, $field, $value, $help);
                 break;
@@ -389,7 +392,7 @@ class pbProjectEdit {
         }
     }
 
-    private function render_map( $order = '', $field = '', $value = '', $help = '')
+    private function render_map( $order = '', $input = '', $value = '', $help = '')
     {
         $output = '<input required name="postAddress" placeholder="%s" id="imcAddress" class="u-pull-left imc-InputStyle"/>';
         $output = '
@@ -418,7 +421,7 @@ class pbProjectEdit {
     /*
     * Renders featured_image
     */
-    private function render_image( $order = '',  $value = '')
+    private function render_image( $order = '', $input = '',  $value = '', $help = '')
     {
         $output = '
             <div class="imc-row" id="imcImageSection">
@@ -431,7 +434,7 @@ class pbProjectEdit {
                     <button type="button" class="imc-button" onclick="imcDeleteAttachedImage(\'imcReportAddImgInput\');">
                         <i class="material-icons md-24 imc-AlignIconToButton">delete</i>%s</button>
                 </div>
-                <span id="imcNoPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">%s</span>
+                <span %s id="imcNoPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">%s</span>
                 <span style="display: none;" id="imcLargePhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">%s</span>
                 <span style="display: none;" id="imcPhotoAttachedLabel" class="imc-ReportGenericLabelStyle imc-TextColorSecondary">%s</span>
                 <span class="imc-ReportGenericLabelStyle imc-TextColorPrimary" id="imcPhotoAttachedFilename"></span>
@@ -440,10 +443,12 @@ class pbProjectEdit {
             </div>
             <input title="orientation" type="hidden" id="imcPhotoOri" name="imcPhotoOri"/>
             ';
-        if ( $value) {
+        if ( $value ) {
             $output .= '<img id="imcPreviousImg" class="u-cf" style="max-height: 200px;" src="%s">';
+            $no_photo = 'style="display: none;"';
         } else {
             $output .= "%s";
+            $no_photo = '';
         }
 
         printf( $output,
@@ -451,10 +456,11 @@ class pbProjectEdit {
             __('Photo','participace-projekty'),
             __('Add photo','participace-projekty'),
             __('Delete Photo', 'participace-projekty'),
+            $no_photo,
             __('No photo attached','participace-projekty'),
             __('Photo size must be smaller in size, please resize it or select a smaller one!','participace-projekty'),
             __('A photo has been selected:','participace-projekty'),
-            $value[0]
+            $value
         );
     }
 
