@@ -142,7 +142,7 @@ class pbProjectEdit {
         // $output = '<div class="imc-row">
         $output = '<h3 class="u-pull-left imc-SectionTitleTextStyle">%s%s %s'.$this->render_tooltip( $help ).'</h3>
             <textarea placeholder="%s" rows="%d"
-                 class="imc-InputStyle" title="%s" name="%s"
+                 class="imc-InputStyle" name="%s"
                  id="%s">%s</textarea>
             <label id="%sLabel" class="imc-ReportFormErrorLabelStyle imc-TextColorPrimary"></label>';
             // </div>';
@@ -155,7 +155,6 @@ class pbProjectEdit {
                 $mandatory,
                 ( empty( $input['placeholder'])) ? "" : $input['placeholder'],
                 $rows,
-                $input['title'],
                 $input['id'],
                 $input['id'],
                 $value,

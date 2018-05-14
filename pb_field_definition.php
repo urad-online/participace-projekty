@@ -4,8 +4,9 @@ define("FILE_TYPES_SCAN", "pdf,PDF");
 define("FILE_TYPES_DOCS", "doc,DOC,xls,XLS,docX,DOCX,xlsx,XLSX");
 
 class pbRenderForm {
-    private $fields_layout;
     private $fields;
+    private $fields_layout;
+    private $fields_single;
 
     public function __construct()
     {
@@ -26,11 +27,17 @@ class pbRenderForm {
 
     private function read_form_fields_layout()
     {
-        if ( false === ( $this->fields_layout = get_option( 'pb_custom_fields_layout' ) ) ) {
+        if ( false === ( $fields_layouts = get_option( 'pb_custom_fields_layout' ) ) ) {
             $this->fields_layout = pb_get_custom_fields_layout();
-            add_option( 'pb_custom_fields_layout', json_encode( $this->fields_layout, JSON_UNESCAPED_UNICODE) );
+            $this->fields_single = pb_get_custom_fields_single();
+            add_option( 'pb_custom_fields_layout', json_encode( array(
+                'form'   => $this->fields_layout,
+                'single' => $this->fields_single,
+                ), JSON_UNESCAPED_UNICODE) );
         } else {
-            $this->fields_layout = json_decode( $this->fields_layout, true);
+            $fields_layouts = json_decode( $fields_layouts, true );
+            $this->fields_layout = $fields_layouts['form'] ;
+            $this->fields_single = $fields_layouts['single'] ;
         }
     }
 
@@ -88,13 +95,19 @@ class pbRenderForm {
 
     public function get_form_fields_layout_single()
     {
-        return array(
-        		'goals', 'actions', 'profits', 'address',
-        		'parcel', 'map', 'cost', 'budget_total',
-        		'attach1', 'attach2', 'attach3',
-        	);
+        return $this->fields_single;
+
     }
 
+}
+
+function pb_get_custom_fields_single()
+{
+    return array(
+            'goals', 'actions', 'profits', 'address',
+            'parcel', 'map', 'cost', 'budget_total',
+            'attach1', 'attach2', 'attach3',
+        );
 }
 
 function pb_get_custom_fields_layout()
@@ -175,7 +188,7 @@ function pb_get_custom_fields()
             'type'      => 'textarea',
             'mandatory' => true,
             'placeholder' => 'Popište aktivity, které je potřeba vykonat',
-            'title'     => "Actions",
+            // 'title'     => "Actions",
             'show_mtbx' => true,
             'show_form' => true,
             'js_rules'  => array(
@@ -189,7 +202,7 @@ function pb_get_custom_fields()
             'type'      => 'textarea',
             'mandatory' => true,
             'placeholder' => 'Popište cíle projektu',
-            'title'     => "goals",
+            // 'title'     => "goals",
             'help'      => 'Nebojte se trochu více rozepsat',
             'show_mtbx' => true,
             'show_form' => true,
@@ -204,7 +217,7 @@ function pb_get_custom_fields()
             'type'          => 'textarea',
             'mandatory'     => true,
             'placeholder'   => 'Popište kdo a jaký bude mít z projektu prospěch',
-            'title'         => 'profit',
+            // 'title'         => 'profit',
             'help'          => '',
             'show_mtbx' => true,
             'show_form' => true,
@@ -230,7 +243,7 @@ function pb_get_custom_fields()
             'type'        => 'textarea',
             'mandatory'   => true,
             'placeholder' => 'Vyplňte číslo parcely ve formátu NNNN/NNNN',
-            'title'       => "parcel",
+            // 'title'       => "parcel",
             'help'        => 'Pro usnadnění kontroly zadejte prosím, každé číslo na samostatný řádek',
             'show_mtbx' => true,
             'show_form' => true,
@@ -312,7 +325,7 @@ function pb_get_custom_fields()
             // 'options'   => 'min="100000" max="2000000" step="1000" style="text-align:right" ',
             'mandatory' => true,
             'placeholder' => 'Vyplňte celkové náklady projektu',
-            'title'     => "Celkove naklady",
+            // 'title'     => "Celkove naklady",
             'columns'   => 5,
             'show_mtbx'   => true,
             'show_form'   => true,
@@ -326,7 +339,7 @@ function pb_get_custom_fields()
             'id'        => 'pb_project_naklady_navyseni',
             'default'   => 'no',
             'type'      => 'checkbox',
-            'title'     => "budget_increase",
+            // 'title'     => "budget_increase",
             'mandatory' => true,
             'columns'   => 6,
             'show_mtbx'   => true,
@@ -394,7 +407,7 @@ function pb_get_custom_fields()
             'default'   => '',
             'mandatory' => true,
             'placeholder' => 'Vyplňte jméno',
-            'title'     => "Proposer Name",
+            // 'title'     => "Proposer Name",
             'columns'   => 5,
             'help'      => 'Jméno navrhovatele je povinné',
             'show_mtbx'   => true,
@@ -411,7 +424,7 @@ function pb_get_custom_fields()
             // 'options'   => 'pattern="^(\+420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}$"',
             'mandatory' => false,
             'placeholder' => '(+420) 999 999 999',
-            'title' => "phone",
+            // 'title' => "phone",
             'columns' => 3,
             'help'      => 'Číslo zadejte ve formátu (+420) 999 999 999',
             'show_mtbx'   => true,
@@ -426,7 +439,7 @@ function pb_get_custom_fields()
             'type'      => 'text',
             'mandatory' => true,
             'placeholder' => '',
-            'title'     => "email",
+            // 'title'     => "email",
             'columns'   => 4,
             'help'      => 'E-mailová adresa je povinný údaj',
             'show_mtbx'   => true,
@@ -442,7 +455,7 @@ function pb_get_custom_fields()
             'type'      => 'text',
             'mandatory' => true,
             'placeholder' => 'Vyplňte adresu navrhovatele',
-            'title'     => "address",
+            // 'title'     => "address",
             'help'      => '',
             'show_mtbx'   => true,
             'show_form'   => true,
@@ -483,7 +496,7 @@ function pb_get_custom_fields()
             'default'   => 'no',
             'type'      => 'checkbox',
             'mandatory' => true,
-            'title'     => "age_conf",
+            // 'title'     => "age_conf",
             'show_mtbx'   => true,
             'show_form'   => true,
             'js_rules'    => array(
@@ -496,7 +509,7 @@ function pb_get_custom_fields()
             'id'        => 'pb_project_podminky_souhlas',
             'default'   => 'no',
             'type'      => 'checkbox',
-            'title'     => "Agreement",
+            // 'title'     => "Agreement",
             'mandatory' => true,
             'help'      => 'K podání projektu musíte souhlasit s podmínkami',
             'show_mtbx'   => true,
@@ -512,50 +525,10 @@ function pb_get_custom_fields()
             'id'        => 'pb_project_edit_completed',
             'default'   => 'no',
             'type'      => 'checkbox',
-            'title'     => "completed",
+            // 'title'     => "completed",
             'mandatory' => false,
             'help'      => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
         ),
     );
     return $custom_fields;
-}
-
-function pb_get_custom_fields_form()
-{
-    $all_fields = pb_get_custom_fields();
-    $output = array();
-    foreach ($all_fields as $key => $value) {
-        if ((!empty($value['show_form'] )) && ($value['show_form'] )) {
-            $output[ $key] = $value;
-            $validation_rules = ( $value['mandatory'] ) ? "required" : "";
-            if ( ! empty( $value['validation'])) {
-                $validation_rules .= (!empty($validation_rules)) ? "|".$value['validation'] : $value['validation'];
-            }
-            $output[ $key]['validation_rules'] = $validation_rules;
-            if ( ! empty( $value['validation_depends'])) {
-                $output[ $key]['validation_depends'] = $value['validation_depends'];
-            }
-        }
-    }
-    return $output;
-}
-
-function pb_get_custom_fields_all()
-{
-    $all_fields = pb_get_custom_fields();
-    $output = array();
-    foreach ($all_fields as $key => $value) {
-        if ((!empty($value['show_form'] )) && ($value['show_form'] )) {
-            $output[ $key] = $value;
-            $validation_rules = ( $value['mandatory'] ) ? "required" : "";
-            if ( ! empty( $value['validation'])) {
-                $validation_rules .= (!empty($validation_rules)) ? "|".$value['validation'] : $value['validation'];
-            }
-            $output[ $key]['validation_rules'] = $validation_rules;
-            if ( ! empty( $value['validation_depends'])) {
-                $output[ $key]['validation_depends'] = $value['validation_depends'];
-            }
-        }
-    }
-    return $output;
 }
