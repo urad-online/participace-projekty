@@ -663,7 +663,7 @@ there.
   background: white;
   border-bottom: 2px solid #0274be;
   /* border-bottom: 2px solid #1ABC9C; */
-  transition: all 0.1s linear;
+  transition: all 0.8s linear;
 }
 
 .imc-OverviewFilteringPanelLabelStyle:hover:after,
@@ -703,5 +703,5 @@ there.
 
 .imc-DrawerCheckbox:checked ~ article.ac-small {
   max-height: 1500px;
-  background-color: white;
+  background-color: red;
 }

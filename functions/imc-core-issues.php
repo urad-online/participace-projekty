@@ -103,7 +103,7 @@ function imcplus_set_single_imc_issues_template($single_template) {
     global $post;
 
     if ($post->post_type == 'imc_issues') {
-        $single_template = dirname( __FILE__ ) . '/templates/single-imc_issues.php';
+        $single_template = PB_PATH_FUN . '/templates/single-imc_issues.php';
     }
     return $single_template;
 }
@@ -127,7 +127,7 @@ function imcplus_set_archive_imc_issues_template($archive_template) {
     global $post;
 
     if ($post->post_type == 'imc_issues') {
-        $archive_template = dirname( __FILE__ ) . '/templates/archive-imc_issues.php';
+        $archive_template = PB_PATH_FUN . '/templates/archive-imc_issues.php';
     }
     return $archive_template;
 }
