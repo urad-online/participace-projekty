@@ -419,3 +419,34 @@ function pb_enqueue_scripts( )
 
 }
 add_action( 'wp_enqueue_scripts',  'pb_enqueue_scripts');
+
+function get_first_pbvoting_post()
+{
+	$args = array(
+		'post_type'   => 'hlasovani',
+		'post_status' => array('publish'),
+		'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'voting_status',
+                'field' => 'slug',
+                'terms' => array('aktivni',),
+            ),
+		),
+		'orderby' => 'ID',
+	);
+
+	$custom_query = new WP_Query($args);
+
+	// Output custom query loop
+	if ($custom_query->have_posts()) {
+		$voting_id = $custom_query->posts[0]->ID;
+		$href_url = esc_url( get_permalink($voting_id));
+	} else {
+		$href_url = '#';
+	}
+
+	wp_reset_postdata();
+
+	return $href_url;
+}

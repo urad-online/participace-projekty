@@ -12,6 +12,7 @@ wp_enqueue_script( 'mapsV3_richmarker' ); // Insert addon lib for Google Maps V3
 $insertpage = getIMCInsertPage();
 $editpage = getIMCEditPage();
 $listpage = getIMCArchivePage();
+$voting_page = get_first_pbvoting_post();
 
 if ( get_option('permalink_structure') ) { $perma_structure = true; } else {$perma_structure = false;}
 if( $perma_structure){$parameter_pass = '/?myparam=';} else{$parameter_pass = '&myparam=';}
@@ -210,15 +211,24 @@ if ( is_front_page() || is_home() ) {
 
                     <li><a href="<?php echo esc_url( $my_permalink . imcCreateFilterVariablesLong($perma_structure, $imported_ppage, $imported_order, $theview = '2', $imported_sstatus, $imported_scategory, $imported_keyword) ); ?>" class="imc-SingleHeaderLinkStyle imc-NavSelectedStyle"><i class="material-icons md-36 imc-VerticalAlignMiddle">apps</i></a></li>
 
-				<?php }
-				?>
+				<?php } ?>
+				<?php if ($voting_page !== '#') { ?>
+					<li class="u-pull-right">
+						<a href="<?php echo $voting_page; ?>" class="imc-SingleHeaderLinkStyle" target="_blank">
+							<i class="material-icons md-36 imc-SingleHeaderIconStyle">how_to_vote</i>
+							<span class="imc-hidden-xs imc-hidden-sm imc-hidden-md"><?php echo __('Registrace k hlasovaní','participace-projekty'); ?></span>
+						</a>
+					</li>
+				<?php } else { ?>
 
-                <li class="u-pull-right">
-                    <a href="<?php echo esc_url( get_permalink($insertpage[0]->ID) ); ?>" class="imc-SingleHeaderLinkStyle">
-                        <i class="material-icons md-36 imc-SingleHeaderIconStyle">add_circle</i>
-                        <span class="imc-hidden-xs imc-hidden-sm imc-hidden-md"><?php echo __('Report an issue','participace-projekty'); ?></span>
-                    </a>
-                </li>
+					<li class="u-pull-right">
+						<a href="<?php echo esc_url( get_permalink($insertpage[0]->ID) ); ?>" class="imc-SingleHeaderLinkStyle">
+							<i class="material-icons md-36 imc-SingleHeaderIconStyle">add_circle</i>
+							<span class="imc-hidden-xs imc-hidden-sm imc-hidden-md"><?php echo __('Report an issue','participace-projekty'); ?></span>
+						</a>
+					</li>
+				<?php } ?>
+
 
             </ul>
         </nav>

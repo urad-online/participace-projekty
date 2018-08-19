@@ -2,7 +2,7 @@
 /**
  * 12.01
  * Add insert, edit & archive templates to every theme
- * 
+ *
  */
 
 class ImcTemplate {
@@ -54,9 +54,9 @@ class ImcTemplate {
 
         // Add your templates to this array.
         $this->templates = array(
-            '/templates/insert-imc_issues.php'     => 'Insert Issue Page',
+            '/templates/insert-imc_issues.php'   => 'Insert Issue Page',
             '/templates/edit-imc_issues.php'     => 'Edit Issue Page',
-            '/templates/archive-imc_issues.php'     => 'Archive Issue Page',
+            '/templates/archive-imc_issues.php'  => 'Archive Issue Page',
         );
 
     }
