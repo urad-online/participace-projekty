@@ -12,7 +12,8 @@ wp_enqueue_script( 'mapsV3_richmarker' ); // Insert addon lib for Google Maps V3
 $insertpage = getIMCInsertPage();
 $editpage = getIMCEditPage();
 $listpage = getIMCArchivePage();
-$voting_page = get_first_pbvoting_post();
+// $voting_page = get_first_pbvoting_post();
+$voting_page = get_pbvoting_page_link('stranka-hlasovani-2018');
 
 if ( get_option('permalink_structure') ) { $perma_structure = true; } else {$perma_structure = false;}
 if( $perma_structure){$parameter_pass = '/?myparam=';} else{$parameter_pass = '&myparam=';}

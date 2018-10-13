@@ -420,7 +420,20 @@ function pb_enqueue_scripts( )
 }
 add_action( 'wp_enqueue_scripts',  'pb_enqueue_scripts');
 
-function get_first_pbvoting_post()
+function get_pbvoting_page_link($slug = '')
+{
+	$post_url = "#";
+	if ( !empty($slug)) {
+		$temp_posts = get_page_by_path($slug);
+		if( $temp_posts ) {
+			$post_url = esc_url( get_permalink($temp_posts->ID));
+		}
+	}
+
+    return $post_url;
+}
+
+function get_first_pbvoting_post($slug = '')
 {
 	$args = array(
 		'post_type'   => 'hlasovani',
