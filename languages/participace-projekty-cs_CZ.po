@@ -2,23 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Participace na projektech\n"
 "POT-Creation-Date: 2018-02-05 15:37+0000\n"
-"PO-Revision-Date: 2018-03-31 14:00+0200\n"
-"Language-Team: Czech\n"
+"PO-Revision-Date: 2018-05-28 10:25+0000\n"
+"Language-Team: Čeština\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : "
 "2;\n"
 "X-Poedit-KeywordsList: __;_e;_x\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Last-Translator: admin <admin@urad.online>\n"
+"Last-Translator: Pavel Roušar <rousar.pavel@gmail.com>\n"
 "Language: cs_CZ\n"
 "Report-Msgid-Bugs-To: \n"
 "X-Poedit-SearchPath-0: functions\n"
 "X-Poedit-SearchPath-1: js/imc-scripts.js\n"
-"X-Poedit-SearchPath-2: improve-my-city.php\n"
+"X-Poedit-SearchPath-2: improve-my-city.php"
 
 #: functions/imc-core-functions.php:22
 #, php-format
@@ -44,7 +44,7 @@ msgstr "Projekt je moderován a dosud nebyl publikován"
 
 #: functions/imc-core-issues-col.php:17 functions/imc-page-logs.php:26
 msgid "Issue ID"
-msgstr "Projekt ID"
+msgstr "Návrh ID"
 
 #: functions/imc-core-issues-col.php:18
 msgid "Issue"
@@ -56,7 +56,7 @@ msgstr "Kategorie projektu"
 
 #: functions/imc-core-issues-col.php:20 functions/imc-core-taxstatus.php:73
 msgid "Issue Status"
-msgstr "Stav projektu"
+msgstr "Stav návrhu"
 
 #: functions/imc-core-issues-col.php:21
 msgid "Author"
@@ -108,12 +108,12 @@ msgstr "Lokalizujte adresu"
 #: functions/imc-core-issues.php:15
 msgctxt "post type general name"
 msgid "Issues"
-msgstr "Projekty"
+msgstr "Návrhy"
 
 #: functions/imc-core-issues.php:16
 msgctxt "post type singular name"
 msgid "Issue"
-msgstr "Projekt"
+msgstr "Návrh"
 
 #: functions/imc-core-issues.php:17
 msgctxt "admin menu"
@@ -128,7 +128,7 @@ msgstr "Participativní projekt"
 #: functions/imc-core-issues.php:19
 msgctxt "add new on menu"
 msgid "Add New"
-msgstr "Přidat nové"
+msgstr "Přidat nový návrh"
 
 #: functions/imc-core-issues.php:20
 msgid "Add New Issue"
@@ -136,7 +136,7 @@ msgstr "Vložit nový projekt"
 
 #: functions/imc-core-issues.php:21
 msgid "New Issue"
-msgstr "Nový projekt"
+msgstr "Nový návrh projektu"
 
 #: functions/imc-core-issues.php:22
 msgid "Edit "
@@ -202,12 +202,12 @@ msgstr "Důvod"
 #: functions/imc-core-logs.php:83 functions/imc-core-logs.php:145
 #: functions/imc-core-logs.php:216
 msgid "Issue published as "
-msgstr "Projekt publikován jako "
+msgstr "Návrh projektu publikován jako "
 
 #: functions/imc-core-logs.php:84 functions/imc-core-logs.php:146
 #: functions/imc-core-logs.php:217
 msgid "Issue reported and published"
-msgstr "Projekt byl uložen a publikován"
+msgstr "Návrh byl uložen a publikován"
 
 #: functions/imc-core-notifications.php:39
 msgid "New issue submitted by: "
@@ -219,7 +219,7 @@ msgstr "Do systému jste vložili nový projekt s názvem: "
 
 #: functions/imc-core-notifications.php:44
 msgid "New issue submitted, classified as: "
-msgstr "Odesláno nové , které je zařazeno jako: "
+msgstr "Odeslán nový návrh , který je zařazen do kategorie: "
 
 #: functions/imc-core-notifications.php:47
 msgid "The issue"
@@ -245,15 +245,15 @@ msgstr "Váš projekt můžete vidět na adrese: "
 
 #: functions/imc-core-notifications.php:133
 msgid "Issue status has been modified to: "
-msgstr "Stav projektu byl změněn na: "
+msgstr "Stav návrhu byl změněn na: "
 
 #: functions/imc-core-notifications.php:136
 msgid "Your submitted issue status has been modified to: "
-msgstr "Your submitted issue status has been modified to: "
+msgstr "Stav odeslaného návrhu byl změněn na:"
 
 #: functions/imc-core-notifications.php:139
 msgid "Issue status has changed to "
-msgstr "Stav projektu se změnil na: "
+msgstr "Stav návrhu se změnil na: "
 
 #: functions/imc-core-notifications.php:141
 msgid "Status was modified by "
@@ -267,11 +267,11 @@ msgstr "Projekt můžete vidět na adrese: "
 #: functions/imc-core-notifications.php:147
 #: functions/imc-core-notifications.php:240
 msgid "Your issue"
-msgstr "Vaše projekty"
+msgstr "Váš návrh projektu"
 
 #: functions/imc-core-notifications.php:149
 msgid "has changed status to "
-msgstr "změnil(a) stav na "
+msgstr "se změnil v položce stav na "
 
 #: functions/imc-core-notifications.php:226
 msgid "Issue category has been modified to: "
@@ -279,11 +279,11 @@ msgstr "Kategorie projektu byla změněna na: "
 
 #: functions/imc-core-notifications.php:229
 msgid "Your submitted issue category has been changed to: "
-msgstr "Your submitted issue category has been changed to: "
+msgstr "Vámi zadaná kategorie projektu byla změněna na:"
 
 #: functions/imc-core-notifications.php:232
 msgid "Issue updated with new category: "
-msgstr "Projektu byla přiřazena nová kategorie: "
+msgstr "Návrhu byla přiřazena nová kategorie: "
 
 #: functions/imc-core-notifications.php:234
 msgid "Category is modified by "
@@ -291,7 +291,7 @@ msgstr "Kategorie je upravena uživatelem "
 
 #: functions/imc-core-notifications.php:242
 msgid "has changed category to "
-msgstr "změnil(a) kategorii na "
+msgstr "se změnil v položce kategorie na "
 
 #: functions/imc-core-notifications.php:303
 msgid "New Comment on Issue: "
@@ -316,12 +316,12 @@ msgstr "Participace na projektech"
 #: functions/imc-core-taxcategory.php:13
 msgctxt "taxonomy general name"
 msgid "Categories"
-msgstr "Kategorie"
+msgstr "Kategorie návrhů projeků"
 
 #: functions/imc-core-taxcategory.php:14
 msgctxt "taxonomy singular name"
 msgid "Category"
-msgstr "Kategorie"
+msgstr "Kategorie návrhu projektu"
 
 #: functions/imc-core-taxcategory.php:15
 msgctxt "admin menu"
@@ -429,7 +429,7 @@ msgstr "E-mail"
 
 #: functions/imc-core-taxcategory.php:803
 msgid "Go back to Issue Categories"
-msgstr "Jít zpět na kategorie projektů"
+msgstr "Jít zpět na kategorie návrhů"
 
 #: functions/imc-core-taxstatus.php:14
 msgctxt "taxonomy general name"
@@ -444,7 +444,7 @@ msgstr "Stav"
 #: functions/imc-core-taxstatus.php:16
 msgctxt "taxonomy menu name"
 msgid "Issue Statuses"
-msgstr "Stavy projektů"
+msgstr "Stavy návrhů"
 
 #: functions/imc-core-taxstatus.php:17
 msgid "Search Statuses"
@@ -608,7 +608,7 @@ msgstr "Obecné nastavení"
 
 #: functions/imc-page-settings.php:176
 msgid "Moderate new issues"
-msgstr "Moderovat nové projekty"
+msgstr "Moderovat nové návrhy"
 
 #: functions/imc-page-settings.php:178
 msgid "Enable Social Login"
@@ -783,8 +783,8 @@ msgstr "Použijte pouze jedno slovo - žádné mezery."
 
 #: functions/imc-page-settings.php:531
 msgid ""
-"Save changes and go to Settings -> Permalinks and click on \"Save Permalinks"
-"\" to enable the custom slug."
+"Save changes and go to Settings -> Permalinks and click on \"Save "
+"Permalinks\" to enable the custom slug."
 msgstr ""
 "Uložte změny a přejděte do Nastavení -> Trvalý odkaz a klikněte na tlačítko "
 "\"Uložit Permalink\" a povolte vlastní slug."
@@ -836,44 +836,44 @@ msgstr "Uživatelé"
 #: functions/imc-user-groups.php:222
 msgctxt "Taxonomy General Name"
 msgid "User Groups"
-msgstr "Uživatelské skupiny"
+msgstr "Skupiny uživatelů"
 
 #: functions/imc-user-groups.php:223
 msgctxt "Taxonomy Singular Name"
 msgid "User Group"
-msgstr "Uživatelská skupina"
+msgstr "Skupina uživatelů"
 
 #: functions/imc-user-groups.php:224
 msgid "User Groups"
-msgstr "Uživatelské skupiny"
+msgstr "Skupiny uživatelů"
 
 #: functions/imc-user-groups.php:225
 msgid "All User Groups"
-msgstr "Všechny uživatelské skupiny"
+msgstr "Všechny skupiny uživatelů"
 
 #: functions/imc-user-groups.php:226
 msgid "Parent User Group"
-msgstr "Nadřazená uživatelská skupina"
+msgstr "Nadřazená skupina uživatelů"
 
 #: functions/imc-user-groups.php:227
 msgid "Parent User Group:"
-msgstr "Nadřazená uživatelská skupina:"
+msgstr "Nadřazená skupina uživatelů:"
 
 #: functions/imc-user-groups.php:228
 msgid "New User Group"
-msgstr "New User Group"
+msgstr "Nová skupina uživatelů"
 
 #: functions/imc-user-groups.php:229
 msgid "Add New User Group"
-msgstr "Add New User Group"
+msgstr "Přidat skupinu uživatelů"
 
 #: functions/imc-user-groups.php:230
 msgid "Edit User Group"
-msgstr "Upravit uživatelskou skupinu"
+msgstr "Upravit skupinu uživatelů"
 
 #: functions/imc-user-groups.php:231
 msgid "Update User Group"
-msgstr "Aktualizovat uživatelskou skupinu"
+msgstr "Aktualizovat skupinu uživatelů"
 
 #: functions/imc-user-groups.php:232
 msgid "View User Group"
@@ -885,7 +885,7 @@ msgstr "Oddělit skupiny uživatelů pomocí čárky"
 
 #: functions/imc-user-groups.php:234
 msgid "Add or remove User Groups"
-msgstr "Add or remove User Groups"
+msgstr "Přidat nebo vyjmout skupiny uživatelů"
 
 #: functions/imc-user-groups.php:235
 msgid "Choose from the most used"
@@ -893,7 +893,7 @@ msgstr "Vyberte si z nejpoužívanějších"
 
 #: functions/imc-user-groups.php:237
 msgid "Search User Groups"
-msgstr "Vyhledávání uživatelských skupin"
+msgstr "Vyhledávání skupin uživatelů"
 
 #: functions/imc-user-groups.php:238
 msgid "Not Found"
@@ -931,7 +931,7 @@ msgstr "Řazeno: "
 #: functions/templates/archive-imc_issues.php:211
 #: functions/templates/single-imc_issues.php:66
 msgid "Report an issue"
-msgstr "Zadat nový projekt"
+msgstr "Poslat nový návrh"
 
 #: functions/templates/archive-imc_issues.php:225
 msgid "Search &amp; Filtering"
@@ -941,7 +941,7 @@ msgstr "Vyhledávání &amp; filtrování"
 #: functions/templates/edit-imc_issues.php:155
 #: functions/templates/insert-imc_issues.php:135
 msgid "Category"
-msgstr "Kategorie"
+msgstr "Kategorie návrhu"
 
 #: functions/templates/archive-imc_issues.php:227
 msgid "Status"
@@ -957,11 +957,11 @@ msgstr "Vyhledat klíčové slovo"
 
 #: functions/templates/archive-imc_issues.php:244
 msgid "Issue status"
-msgstr "Stav projektu"
+msgstr "Stav návrhu"
 
 #: functions/templates/archive-imc_issues.php:265
 msgid "Categories"
-msgstr "Kategorie"
+msgstr "Kategorie návrhů"
 
 #: functions/templates/archive-imc_issues.php:329
 msgid "Apply filters"
@@ -978,7 +978,7 @@ msgstr "Žádný projekt"
 
 #: functions/templates/archive-imc_issues.php:451
 msgid "Add a new issue"
-msgstr "Přidat nový projekt"
+msgstr "Přidat nový návrh projektu"
 
 #: functions/templates/archive-imc_issues.php:476
 msgid "Showing"
@@ -998,7 +998,7 @@ msgstr "projektů"
 #: functions/templates/insert-imc_issues.php:373
 #: functions/templates/single-imc_issues.php:61
 msgid "Return to overview"
-msgstr "Návrat na přehled projektů"
+msgstr "Návrat na přehled podaných návrhů"
 
 #: functions/templates/edit-imc_issues.php:132
 #: functions/templates/single-imc_issues.php:72
@@ -1102,7 +1102,7 @@ msgstr "Prosím přihlaste se!"
 #: functions/templates/imc-part-archive-list.php:138
 #: functions/templates/single-imc_issues.php:452
 msgid "My Issue"
-msgstr "Můj projekt"
+msgstr "Můj návrh"
 
 #: functions/templates/imc-part-archive-grid.php:24
 #: functions/templates/imc-part-archive-list.php:142
@@ -1131,7 +1131,7 @@ msgstr[2] "%1$s komentářů"
 
 #: functions/templates/insert-imc_issues.php:120
 msgid "Report a new issue"
-msgstr "Přidat nový projekt"
+msgstr "Přidat nový návrh projektu"
 
 #: functions/templates/insert-imc_issues.php:186
 msgid ""
@@ -1149,7 +1149,7 @@ msgstr "Nemáte oprávnění zadat projekt"
 
 #: functions/templates/single-imc_issues.php:82
 msgid "Under Moderation"
-msgstr "Čeká na scvhálení"
+msgstr "Čeká na schválení"
 
 #: functions/templates/single-imc_issues.php:219
 msgid "Photos"
@@ -1191,13 +1191,13 @@ msgstr ""
 #: functions/templates/single-imc_issues.php:276
 #, php-format
 msgid ""
-"Logged in as <span class=\"imc-TextColorPrimary\">%2$s</span>. <a class="
-"\"imc-LinkStyle\" href=\"%3$s\" title=\"Log out of this account\">Log out?</"
-"a>"
+"Logged in as <span class=\"imc-TextColorPrimary\">%2$s</span>. <a "
+"class=\"imc-LinkStyle\" href=\"%3$s\" title=\"Log out of this account\">Log "
+"out?</a>"
 msgstr ""
-"Přihlášen(a) jako <span class=\"imc-TextColorPrimary\">%2$s</span>. <a class="
-"\"imc-LinkStyle\" href=\"%3$s\" title=\"Odhlásit se z tohoto účtu\">Odhlásit?"
-"</a>"
+"Přihlášen(a) jako <span class=\"imc-TextColorPrimary\">%2$s</span>. <a "
+"class=\"imc-LinkStyle\" href=\"%3$s\" title=\"Odhlásit se z tohoto účtu\">"
+"Odhlásit?</a>"
 
 #: functions/templates/single-imc_issues.php:295
 msgid "No comments submitted"

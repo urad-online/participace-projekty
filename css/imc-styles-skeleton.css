@@ -703,5 +703,5 @@ there.
 
 .imc-DrawerCheckbox:checked ~ article.ac-small {
   max-height: 1500px;
-  background-color: red;
+  /* background-color: red; */
 }

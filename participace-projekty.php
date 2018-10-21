@@ -15,7 +15,6 @@ define('PB_PLUGIN_FILE', __FILE__ );
 define('PB_PLUGIN_URL', plugin_dir_url( PB_PLUGIN_FILE ));
 define('PB_PATH', plugin_dir_path( PB_PLUGIN_FILE ) );
 define('PB_PATH_FUN', PB_PATH . 'functions' );
-define('PB_ACTIVE_VOTING_SLUG' , 'hlasovani-2018-test');
 
 if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) {
 
