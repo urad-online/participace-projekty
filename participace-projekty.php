@@ -15,6 +15,7 @@ define('PB_PLUGIN_FILE', __FILE__ );
 define('PB_PLUGIN_URL', plugin_dir_url( PB_PLUGIN_FILE ));
 define('PB_PATH', plugin_dir_path( PB_PLUGIN_FILE ) );
 define('PB_PATH_FUN', PB_PATH . 'functions' );
+define('PB_ACTIVE_VOTING_SLUG' , 'hlasovani-2018-test');
 
 if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) {
 
@@ -420,9 +421,35 @@ function pb_enqueue_scripts( )
 }
 add_action( 'wp_enqueue_scripts',  'pb_enqueue_scripts');
 
-function get_pbvoting_page_link($slug = '')
+function get_pbvoting_page_link($voting_slug = '')
 {
 	$post_url = "#";
+	$slug = "";
+	$voting_id = null;
+	$post_type = "hlasovani";
+
+	$current_post_type = get_post_type();
+
+	if (( empty( $current_post_type)) || ($current_post_type !== $post_type )) {
+		if ( !empty($voting_slug)) {
+			$args = array(
+				'name'        => $voting_slug,
+				'post_type'   => $post_type,
+				'numberposts' => 1,
+			);
+			$temp_posts = get_posts($args);
+			if( $temp_posts ) {
+				$voting_id = $temp_posts[0]->ID;
+			}
+		}
+	} else {
+		$voting_id = get_the_ID();
+	}
+
+	if ($voting_id) {
+		$slug = get_post_meta( $voting_id, 'name_page', true);
+	}
+
 	if ( !empty($slug)) {
 		$temp_posts = get_page_by_path($slug);
 		if( $temp_posts ) {
