@@ -24,7 +24,37 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
  	private $meta_fields;
  	private function set_meta_fields()
     {
-        $this->meta_fields = array(
+        $pb_form_settings = get_option('pb_form_settings');
+        // Ensure defaults are available if settings haven't been saved yet.
+        // This primarily helps if the plugin is activated and settings page hasn't been visited.
+        if (false === $pb_form_settings) {
+            // Manually define defaults similar to ImcSettingsPage::load_settings()
+            // This is a subset for brevity, ideally, these would be pulled from a shared source or helper
+            $pb_form_settings = array(
+                'pb_terms_url' => site_url("podminky-pouziti-a-ochrana-osobnich-udaju/"),
+                'pb_actions_enabled' => true, 'pb_actions_mandatory' => true, 'pb_actions_label' => 'Co by se mělo udělat',
+                'pb_goals_enabled' => true, 'pb_goals_mandatory' => true, 'pb_goals_label' => 'Proč je projekt důležitý, co je jeho cílem',
+                'pb_profits_enabled' => true, 'pb_profits_mandatory' => true, 'pb_profits_label' => 'Kdo bude mít z projektu prospěch',
+                'pb_parcel_enabled' => true, 'pb_parcel_mandatory' => true, 'pb_parcel_label' => 'Parcelní číslo',
+                'pb_map_enabled' => true, 'pb_map_mandatory' => true, 'pb_map_label' => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
+                'pb_cost_enabled' => true, 'pb_cost_mandatory' => true, 'pb_cost_label' => 'Předpokládané náklady (povinná příloha)',
+                'pb_budget_total_enabled' => true, 'pb_budget_total_mandatory' => true, 'pb_budget_total_label' => 'Celkové náklady',
+                'pb_budget_increase_enabled' => true, 'pb_budget_increase_mandatory' => true, 'pb_budget_increase_label' => 'Náklady byly navýšeny o rezervu 10%',
+                'pb_attach1_enabled' => true, 'pb_attach1_mandatory' => false, 'pb_attach1_label' => 'Vizualizace, výkresy, fotodokumentace… 1',
+                'pb_attach2_enabled' => true, 'pb_attach2_mandatory' => false, 'pb_attach2_label' => 'Vizualizace, výkresy, fotodokumentace… 2',
+                'pb_attach3_enabled' => true, 'pb_attach3_mandatory' => false, 'pb_attach3_label' => 'Vizualizace, výkresy, fotodokumentace… 3',
+                'pb_name_enabled' => true, 'pb_name_mandatory' => true, 'pb_name_label' => 'Jméno a příjmení navrhovatele',
+                'pb_phone_enabled' => true, 'pb_phone_mandatory' => false, 'pb_phone_label' => 'Tel. číslo',
+                'pb_email_enabled' => true, 'pb_email_mandatory' => true, 'pb_email_label' => 'E-mail',
+                'pb_address_enabled' => true, 'pb_address_mandatory' => true, 'pb_address_label' => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
+                'pb_signatures_enabled' => true, 'pb_signatures_mandatory' => true, 'pb_signatures_label' => 'Podpisový arch (povinná příloha)',
+                'pb_age_conf_enabled' => true, 'pb_age_conf_mandatory' => true, 'pb_age_conf_label' => 'Prohlašuji, že jsem starší 15 let',
+                'pb_agreement_enabled' => true, 'pb_agreement_mandatory' => true, 'pb_agreement_label' => 'Souhlasím s <a href="%s" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>',
+                'pb_completed_enabled' => true, 'pb_completed_mandatory' => false, 'pb_completed_label' => 'Popis projektu je úplný a chci ho poslat k vyhodnocení',
+            );
+        }
+
+        $base_meta_fields = array(
      	// 	'title' => array(
      	// 		'label' => 'Název návrhu',
      	// 		'id' => 'pb_project_nazev',
@@ -240,11 +270,44 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
                 'id'        => 'pb_project_edit_completed',
                 'default'   => 'no',
                 'type'      => 'checkbox',
-                'title'     => "completed",
+                'title'     => "completed", // This is used as the key for settings
                 'mandatory' => false,
                 'help'      => 'Pokud necháte nezaškrtnuté, můžete po uložení dat popis projektu doplnit',
             ),
-     	);
+        );
+
+        $this->meta_fields = array();
+        foreach ($base_meta_fields as $field_key => $field_definition) {
+            $setting_enabled_key = "pb_{$field_key}_enabled";
+            $setting_label_key = "pb_{$field_key}_label";
+            $setting_mandatory_key = "pb_{$field_key}_mandatory";
+
+            // Check if field is enabled
+            if (isset($pb_form_settings[$setting_enabled_key]) && !$pb_form_settings[$setting_enabled_key]) {
+                continue; // Skip this field
+            }
+
+            // Update label if set in settings
+            if (isset($pb_form_settings[$setting_label_key]) && !empty($pb_form_settings[$setting_label_key])) {
+                if ($field_key === 'agreement') {
+                    $terms_url = isset($pb_form_settings['pb_terms_url']) ? esc_url($pb_form_settings['pb_terms_url']) : '#';
+                    $field_definition['label'] = sprintf($pb_form_settings[$setting_label_key], $terms_url);
+                } else {
+                    $field_definition['label'] = $pb_form_settings[$setting_label_key];
+                }
+            } elseif ($field_key === 'agreement') { // Ensure default agreement label uses default terms URL if not customized
+                 $terms_url = isset($pb_form_settings['pb_terms_url']) ? esc_url($pb_form_settings['pb_terms_url']) : site_url("podminky-pouziti-a-ochrana-osobnich-udaju/");
+                 $field_definition['label'] = sprintf($field_definition['label'], $terms_url);
+            }
+
+
+            // Update mandatory status if set in settings (except for 'agreement' which is always mandatory)
+            if ($field_key !== 'agreement' && isset($pb_form_settings[$setting_mandatory_key])) {
+                $field_definition['mandatory'] = (bool)$pb_form_settings[$setting_mandatory_key];
+            }
+
+            $this->meta_fields[$field_key] = $field_definition;
+        }
     }
  	public function __construct() {
  		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
@@ -353,6 +416,10 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
  		return '<tr><th>'.$label.'</th><td>'.$input.'</td></tr>';
  	}
  	public function save_fields( $post_id ) {
+		// Check capabilities
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return $post_id;
+		}
  		if ( ! isset( $_POST['informacekprojektu_nonce'] ) )
  			return $post_id;
  		$nonce = $_POST['informacekprojektu_nonce'];
@@ -366,9 +433,30 @@ $comments_enabled   = ( empty($generaloptions["imc_comments"])) ? false : $gener
  					case 'email':
  						$_POST[ $meta_field['id'] ] = sanitize_email( $_POST[ $meta_field['id'] ] );
  						break;
+					case 'textarea':
+						$_POST[ $meta_field['id'] ] = sanitize_textarea_field( $_POST[ $meta_field['id'] ] );
+						break;
+					case 'media': // Assuming media stores a URL
+						$_POST[ $meta_field['id'] ] = esc_url_raw( $_POST[ $meta_field['id'] ] );
+						break;
+					case 'tel':
+						// sanitize_text_field is okay, or use a regex for more specific validation if needed
+						$_POST[ $meta_field['id'] ] = sanitize_text_field( $_POST[ $meta_field['id'] ] );
+						break;
  					case 'text':
- 						$_POST[ $meta_field['id'] ] = sanitize_text_field( $_POST[ $meta_field['id'] ] );
+						// Special handling for numeric text fields
+						if ( $meta_field['id'] === 'pb_project_naklady_celkem' ) {
+							$_POST[ $meta_field['id'] ] = intval( sanitize_text_field( $_POST[ $meta_field['id'] ] ) );
+						} else {
+							$_POST[ $meta_field['id'] ] = sanitize_text_field( $_POST[ $meta_field['id'] ] );
+						}
  						break;
+					default:
+						// For any other types, default to sanitize_text_field if it's a string
+						if ( is_string( $_POST[ $meta_field['id'] ] ) ) {
+							$_POST[ $meta_field['id'] ] = sanitize_text_field( $_POST[ $meta_field['id'] ] );
+						}
+						break;
  				}
  				update_post_meta( $post_id, $meta_field['id'], $_POST[ $meta_field['id'] ] );
  			} else if ( $meta_field['type'] === 'checkbox' ) {
@@ -957,116 +1045,97 @@ function pb_new_project_template_part_link_katastr($latlng)
 
 function pb_new_project_mandatory_fields_js_validation()
 {
-    return "
-    [{
-        name: 'postTitle',
-        display: 'Název',
-        rules: 'required|min_length[5]|max_length[255]'
-    }, {
-        name: 'my_custom_taxonomy',
-        display: 'Kategorie',
-        rules: 'required'
-    }, {
-        name: 'postContent',
-        display: 'Popis',
-        rules: 'required'
-    }, {
-        name: 'pb_project_akce',
-        display: '\"Co by se mělo udělat\"',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_cile',
-        display: '\"Proč je projekt důležitý\"',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_prospech',
-        display: '\"Kdo bude mít z projektu prospěch\"',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'postAddress',
-        display: 'Adresa',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_parcely',
-        display: 'Parcelní číslo',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'featured_image',
-        display: 'Fotografie',
-        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]'
-    }, {
-        name: 'pb_project_mapaName',
-        display: 'Mapa (situační nákres)',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_mapa',
-        display: 'Mapa (situační nákres)',
-        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]'
-    }, {
-        name: 'pb_project_nakladyName',
-        display: 'Předpokládané náklady',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_naklady',
-        display: 'Předpokládané náklady',
-        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF,doc,DOC,xls,XLS]'
-    }, {
-        name: 'pb_project_naklady_celkem',
-        display: 'Celkové náklady',
-        rules: 'required|integer|greater_than[99999]|less_than[2000001]',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_naklady_navyseni',
-        display: 'Navýšení rozpočtu',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_navrhovatel_jmeno',
-        display: 'Jméno navrhovatele',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_navrhovatel_telefon',
-        display: 'Telefonický kontakt',
-        rules: 'valid_phone'
-    }, {
-        name: 'pb_project_navrhovatel_email',
-        display: 'email',
-        rules: 'required|valid_email',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_navrhovatel_adresa',
-        display: 'Adresa navrhovatele',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_podporovateleName',
-        display: 'Podpisový arch',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_podporovatele',
-        display: 'Podpisový arch',
-        rules: 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]'
-    }, {
-        name: 'pb_project_prohlaseni_veku',
-        display: 'Prohlašení věku',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }, {
-        name: 'pb_project_podminky_souhlas',
-        display: 'Souhlas s podmínkami',
-        rules: 'required',
-        depends: 'pb_project_js_validate_required'
-    }]
-    ";
+    $pb_form_settings = get_option('pb_form_settings');
+    if (false === $pb_form_settings) {
+        // Fallback to some default if settings not saved, though this should ideally not happen
+        // if load_settings in ImcSettingsPage works correctly with defaults.
+        $pb_form_settings = array(
+            'pb_terms_url' => site_url("podminky-pouziti-a-ochrana-osobnich-udaju/"),
+            // ... other defaults ...
+        );
+    }
+
+    $validation_rules = array();
+
+    // Standard fields always required by the form logic itself
+    $validation_rules[] = array('name' => 'postTitle', 'display' => 'Název', 'rules' => 'required|min_length[5]|max_length[255]');
+    $validation_rules[] = array('name' => 'my_custom_taxonomy', 'display' => 'Kategorie', 'rules' => 'required');
+    $validation_rules[] = array('name' => 'postContent', 'display' => 'Popis', 'rules' => 'required');
+    // Assuming postAddress (map related) is fundamental and always there if map section is enabled
+    // This might need its own enabled/mandatory setting if it's to be fully configurable.
+    // For now, keeping its existing logic tied to pb_project_js_validate_required
+     $validation_rules[] = array('name' => 'postAddress', 'display' => 'Adresa', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required');
+
+
+    // Dynamically add rules based on settings
+    $configurable_field_map = array(
+        'actions' => array('id' => 'pb_project_akce', 'display_name' => '\"Co by se mělo udělat\"', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        'goals' => array('id' => 'pb_project_cile', 'display_name' => '\"Proč je projekt důležitý\"', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        'profits' => array('id' => 'pb_project_prospech', 'display_name' => '\"Kdo bude mít z projektu prospěch\"', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        'parcel' => array('id' => 'pb_project_parcely', 'display_name' => 'Parcelní číslo', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        // featured_image is handled separately below
+        'map' => array('id_name' => 'pb_project_mapaName', 'id_file' => 'pb_project_mapa', 'display_name' => 'Mapa (situační nákres)', 'rules_name' => 'required', 'rules_file' => 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]', 'depends' => 'pb_project_js_validate_required'),
+        'cost' => array('id_name' => 'pb_project_nakladyName', 'id_file' => 'pb_project_naklady', 'display_name' => 'Předpokládané náklady', 'rules_name' => 'required', 'rules_file' => 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF,doc,DOC,xls,XLS]', 'depends' => 'pb_project_js_validate_required'),
+        'budget_total' => array('id' => 'pb_project_naklady_celkem', 'display_name' => 'Celkové náklady', 'rules' => 'required|integer|greater_than[99999]|less_than[2000001]', 'depends' => 'pb_project_js_validate_required'),
+        'budget_increase' => array('id' => 'pb_project_naklady_navyseni', 'display_name' => 'Navýšení rozpočtu', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'), // Checkbox, always 'required' if enabled by 'depends'
+        'name' => array('id' => 'pb_project_navrhovatel_jmeno', 'display_name' => 'Jméno navrhovatele', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        'phone' => array('id' => 'pb_project_navrhovatel_telefon', 'display_name' => 'Telefonický kontakt', 'rules' => 'valid_phone'), // Not mandatory by default
+        'email' => array('id' => 'pb_project_navrhovatel_email', 'display_name' => 'email', 'rules' => 'required|valid_email', 'depends' => 'pb_project_js_validate_required'),
+        'address' => array('id' => 'pb_project_navrhovatel_adresa', 'display_name' => 'Adresa navrhovatele', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        'signatures' => array('id_name' => 'pb_project_podporovateleName', 'id_file' => 'pb_project_podporovatele', 'display_name' => 'Podpisový arch', 'rules_name' => 'required', 'rules_file' => 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG,pdf,PDF]', 'depends' => 'pb_project_js_validate_required'),
+        'age_conf' => array('id' => 'pb_project_prohlaseni_veku', 'display_name' => 'Prohlašení věku', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        'agreement' => array('id' => 'pb_project_podminky_souhlas', 'display_name' => 'Souhlas s podmínkami', 'rules' => 'required', 'depends' => 'pb_project_js_validate_required'),
+        // 'completed' checkbox doesn't typically have validation rules applied in this way.
+    );
+
+    // Featured image validation (not part of configurable_field_map directly as it's standard)
+    $validation_rules[] = array('name' => 'featured_image', 'display' => 'Fotografie', 'rules' => 'is_file_type[gif,GIF,png,PNG,jpg,JPG,jpeg,JPEG]');
+
+
+    foreach ($configurable_field_map as $field_key => $field_attrs) {
+        $enabled_key = "pb_{$field_key}_enabled";
+        $mandatory_key = "pb_{$field_key}_mandatory";
+
+        if (isset($pb_form_settings[$enabled_key]) && $pb_form_settings[$enabled_key]) {
+            $is_mandatory = isset($pb_form_settings[$mandatory_key]) && $pb_form_settings[$mandatory_key];
+
+            if (isset($field_attrs['id_name'])) { // For file fields that have a Name input and a File input
+                if ($is_mandatory) {
+                    $validation_rules[] = array('name' => $field_attrs['id_name'], 'display' => $field_attrs['display_name'], 'rules' => $field_attrs['rules_name'], 'depends' => $field_attrs['depends']);
+                }
+                $validation_rules[] = array('name' => $field_attrs['id_file'], 'display' => $field_attrs['display_name'] . ' (soubor)', 'rules' => $field_attrs['rules_file']);
+            } else { // For regular fields
+                $current_rules = '';
+                if ($is_mandatory) {
+                    // If rules already exist, prepend 'required|', otherwise just 'required'
+                    $current_rules = isset($field_attrs['rules']) && strpos($field_attrs['rules'], 'required') === false ? 'required|' . $field_attrs['rules'] : 'required';
+                     if (isset($field_attrs['rules']) && strpos($field_attrs['rules'], 'required') !== false) { // Already contains required
+                        $current_rules = $field_attrs['rules'];
+                    } elseif (isset($field_attrs['rules'])) {
+                        $current_rules = 'required|' . $field_attrs['rules'];
+                    } else {
+                        $current_rules = 'required';
+                    }
+                } else {
+                     // Remove 'required' or 'required|' if it exists for a non-mandatory field
+                    if (isset($field_attrs['rules'])) {
+                        $current_rules = str_replace('required|', '', $field_attrs['rules']);
+                        $current_rules = str_replace('required', '', $current_rules);
+                         if (empty($current_rules)) continue; // Skip if no other rules left
+                    } else {
+                        continue; // Skip if no rules and not mandatory
+                    }
+                }
+                 $rule_entry = array('name' => $field_attrs['id'], 'display' => $field_attrs['display_name'], 'rules' => $current_rules);
+                if (!empty($field_attrs['depends'])) {
+                    $rule_entry['depends'] = $field_attrs['depends'];
+                }
+                $validation_rules[] = $rule_entry;
+            }
+        }
+    }
+
+    return json_encode($validation_rules);
 }
 /**
  * 6.09

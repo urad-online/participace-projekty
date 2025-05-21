@@ -22,6 +22,7 @@ class ImcSettingsPage {
     private $general_settings_key = 'general_settings';
     private $api_settings_key = 'api_settings';
     private $firebase_settings_key = 'firebase_settings';
+    private $pb_form_settings_key = 'pb_form_settings'; // New key for PB Form settings
     private $options_key = 'imc_options';
     private $settings_tabs = array();
 
@@ -37,6 +38,7 @@ class ImcSettingsPage {
         add_action( 'admin_init', array( &$this, 'register_general_settings' ) );
         add_action( 'admin_init', array( &$this, 'register_api_settings' ) );
         add_action( 'admin_init', array( &$this, 'register_firebase_settings' ) );
+        add_action( 'admin_init', array( &$this, 'register_pb_form_settings' ) ); // Action for new settings
         add_action( 'admin_menu', array( &$this, 'render_setting') );
     }
 
@@ -51,6 +53,7 @@ class ImcSettingsPage {
         $this->notifications_settings = (array) get_option( $this->notifications_settings_key );
         $this->general_settings = (array) get_option( $this->general_settings_key );
         $this->firebase_settings = (array) get_option( $this->firebase_settings_key );
+        $this->pb_form_settings = (array) get_option( $this->pb_form_settings_key ); // Initialize PB form settings
 
         // Merge with defaults
         $this->gmap_settings = array_merge( array(
@@ -100,6 +103,72 @@ class ImcSettingsPage {
             'notify_stat_to_user_mobile' => '1',
             'notify_comment_to_user_mobile' => '1',
         ), $this->firebase_settings );
+
+        // Defaults for PB Form Settings
+        // Field names are taken from the `set_meta_fields` method in `pb-additional-fields.php`
+        $pb_form_defaults = array(
+            'pb_terms_url' => site_url("podminky-pouziti-a-ochrana-osobnich-udaju/"),
+            // 'title' and 'description' are handled by standard post title and content, not part of these custom fields.
+            'pb_actions_enabled' => true,
+            'pb_actions_mandatory' => true,
+            'pb_actions_label' => 'Co by se mělo udělat',
+            'pb_goals_enabled' => true,
+            'pb_goals_mandatory' => true,
+            'pb_goals_label' => 'Proč je projekt důležitý, co je jeho cílem',
+            'pb_profits_enabled' => true,
+            'pb_profits_mandatory' => true,
+            'pb_profits_label' => 'Kdo bude mít z projektu prospěch',
+            'pb_parcel_enabled' => true,
+            'pb_parcel_mandatory' => true,
+            'pb_parcel_label' => 'Parcelní číslo',
+            // 'photo' (featured image) is handled by WordPress core.
+            'pb_map_enabled' => true,
+            'pb_map_mandatory' => true,
+            'pb_map_label' => 'Mapa (situační nákres) místa, kde se má návrh realizovat (povinná příloha)',
+            'pb_cost_enabled' => true,
+            'pb_cost_mandatory' => true,
+            'pb_cost_label' => 'Předpokládané náklady (povinná příloha)',
+            'pb_budget_total_enabled' => true,
+            'pb_budget_total_mandatory' => true,
+            'pb_budget_total_label' => 'Celkové náklady',
+            'pb_budget_increase_enabled' => true,
+            'pb_budget_increase_mandatory' => true, // This was true by default for the checkbox logic
+            'pb_budget_increase_label' => 'Náklady byly navýšeny o rezervu 10%',
+            'pb_attach1_enabled' => true,
+            'pb_attach1_mandatory' => false,
+            'pb_attach1_label' => 'Vizualizace, výkresy, fotodokumentace… 1',
+            'pb_attach2_enabled' => true,
+            'pb_attach2_mandatory' => false,
+            'pb_attach2_label' => 'Vizualizace, výkresy, fotodokumentace… 2',
+            'pb_attach3_enabled' => true,
+            'pb_attach3_mandatory' => false,
+            'pb_attach3_label' => 'Vizualizace, výkresy, fotodokumentace… 3',
+            'pb_name_enabled' => true,
+            'pb_name_mandatory' => true,
+            'pb_name_label' => 'Jméno a příjmení navrhovatele',
+            'pb_phone_enabled' => true,
+            'pb_phone_mandatory' => false,
+            'pb_phone_label' => 'Tel. číslo',
+            'pb_email_enabled' => true,
+            'pb_email_mandatory' => true,
+            'pb_email_label' => 'E-mail',
+            'pb_address_enabled' => true,
+            'pb_address_mandatory' => true,
+            'pb_address_label' => 'Adresa (název ulice, číslo popisné, část Prahy 8)',
+            'pb_signatures_enabled' => true,
+            'pb_signatures_mandatory' => true,
+            'pb_signatures_label' => 'Podpisový arch (povinná příloha)',
+            'pb_age_conf_enabled' => true,
+            'pb_age_conf_mandatory' => true,
+            'pb_age_conf_label' => 'Prohlašuji, že jsem starší 15 let',
+            'pb_agreement_enabled' => true,
+            'pb_agreement_mandatory' => true,
+            'pb_agreement_label' => 'Souhlasím s <a href="%s" target="_blank" title="Přejít na stránku s podmínkami">podmínkami použití</a>', // %s will be replaced by pb_terms_url
+            'pb_completed_enabled' => true,
+            'pb_completed_mandatory' => false,
+            'pb_completed_label' => 'Popis projektu je úplný a chci ho poslat k vyhodnocení',
+        );
+        $this->pb_form_settings = array_merge( $pb_form_defaults, $this->pb_form_settings );
     }
 
     /*
@@ -232,6 +301,7 @@ class ImcSettingsPage {
     function section_general_desc() { echo __('Settings concerning the functionality of the application','participace-projekty'); }
     function section_api_desc() { echo __('Settings concerning the functionality of API','participace-projekty'); }
     function section_firebase_desc() { echo __('Settings concerning the functionality of mobile notifications through Google Firebase','participace-projekty'); }
+    function section_pb_form_fields_desc() { echo __('Configure the fields for the project submission form. Uncheck "Enabled" to hide a field. Check "Mandatory" to make it required. You can also customize the labels.', 'participace-projekty'); }
     /*
      * field_gmap_api_key_option field callback, renders a
      * text input, note the name and value.
@@ -846,4 +916,87 @@ function wpse_check_settings( $old_value, $new_value ){
 
 }
 
+    /*
+     * Registers the PB Form settings and appends the
+     * key to the plugin settings tabs array.
+     */
+    function register_pb_form_settings() {
+        $this->settings_tabs[$this->pb_form_settings_key] = __('Participatory Budget Form','participace-projekty');
+
+        register_setting( $this->pb_form_settings_key, $this->pb_form_settings_key );
+        add_settings_section( 'section_pb_form_fields', __('Form Field Configuration', 'participace-projekty'), array( &$this, 'section_pb_form_fields_desc' ), $this->pb_form_settings_key );
+
+        $configurable_fields = array(
+            'actions' => 'Actions Field',
+            'goals' => 'Goals Field',
+            'profits' => 'Profits Field',
+            'parcel' => 'Parcel Number Field',
+            'map' => 'Map Attachment Field',
+            'cost' => 'Cost Attachment Field',
+            'budget_total' => 'Budget Total Field',
+            'budget_increase' => 'Budget Increase Checkbox',
+            'attach1' => 'Attachment 1 Field',
+            'attach2' => 'Attachment 2 Field',
+            'attach3' => 'Attachment 3 Field',
+            'name' => 'Proposer Name Field',
+            'phone' => 'Proposer Phone Field',
+            'email' => 'Proposer Email Field',
+            'address' => 'Proposer Address Field',
+            'signatures' => 'Signatures Attachment Field',
+            'age_conf' => 'Age Confirmation Checkbox',
+            'agreement' => 'Agreement Checkbox',
+            'completed' => 'Completed Checkbox'
+        );
+
+        foreach ($configurable_fields as $field_id => $default_label_part) {
+            add_settings_field( "pb_{$field_id}_label", __($default_label_part . ' Label', 'participace-projekty'), array( &$this, "field_pb_field_label_callback"), $this->pb_form_settings_key, 'section_pb_form_fields', array( 'id' => $field_id ) );
+            add_settings_field( "pb_{$field_id}_enabled", __($default_label_part . ' Enabled', 'participace-projekty'), array( &$this, "field_pb_field_enabled_callback"), $this->pb_form_settings_key, 'section_pb_form_fields', array( 'id' => $field_id ) );
+            // For 'agreement', mandatory is always true and not configurable via UI, but its label (which includes the terms URL) is.
+            if ($field_id !== 'agreement') {
+                 add_settings_field( "pb_{$field_id}_mandatory", __($default_label_part . ' Mandatory', 'participace-projekty'), array( &$this, "field_pb_field_mandatory_callback"), $this->pb_form_settings_key, 'section_pb_form_fields', array( 'id' => $field_id ) );
+            }
+        }
+        
+        add_settings_field( 'pb_terms_url', __('Terms & Conditions URL', 'participace-projekty'), array( &$this, 'field_pb_terms_url_callback' ), $this->pb_form_settings_key, 'section_pb_form_fields' );
+    }
+
+    // Generic callback for text input (labels, URLs)
+    function field_pb_field_label_callback( $args ) {
+        $field_id = $args['id'];
+        $option_name = "pb_{$field_id}_label";
+        $value = isset($this->pb_form_settings[$option_name]) ? esc_attr($this->pb_form_settings[$option_name]) : '';
+        // Special handling for agreement label to show the URL placeholder
+        if ($field_id === 'agreement') {
+            printf('<input type="text" name="%s[%s]" value="%s" class="regular-text" /><p class="description">%s</p>',
+                $this->pb_form_settings_key,
+                $option_name,
+                $value,
+                __('Use %s where the Terms & Conditions URL should appear.', 'participace-projekty')
+            );
+        } else {
+            printf('<input type="text" name="%s[%s]" value="%s" class="regular-text" />', $this->pb_form_settings_key, $option_name, $value);
+        }
+    }
+
+    // Generic callback for checkbox (enabled/mandatory)
+    function field_pb_field_enabled_callback( $args ) {
+        $field_id = $args['id'];
+        $option_name = "pb_{$field_id}_enabled";
+        $checked = isset($this->pb_form_settings[$option_name]) && $this->pb_form_settings[$option_name] ? 'checked="checked"' : '';
+        printf('<input type="checkbox" name="%s[%s]" value="1" %s />', $this->pb_form_settings_key, $option_name, $checked);
+    }
+
+    function field_pb_field_mandatory_callback( $args ) {
+        $field_id = $args['id'];
+        $option_name = "pb_{$field_id}_mandatory";
+        $checked = isset($this->pb_form_settings[$option_name]) && $this->pb_form_settings[$option_name] ? 'checked="checked"' : '';
+        printf('<input type="checkbox" name="%s[%s]" value="1" %s />', $this->pb_form_settings_key, $option_name, $checked);
+    }
+    
+    function field_pb_terms_url_callback() {
+        $value = isset($this->pb_form_settings['pb_terms_url']) ? esc_url($this->pb_form_settings['pb_terms_url']) : '';
+        printf('<input type="url" name="%s[pb_terms_url]" value="%s" class="regular-text" placeholder="https://example.com/terms" />', $this->pb_form_settings_key, $value);
+    }
+
+} // End class ImcSettingsPage
 ?>

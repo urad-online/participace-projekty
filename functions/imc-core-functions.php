@@ -343,7 +343,7 @@ function imc_show_issue_message($post_id, $current_user){
 
 		if (get_post_status($post_id) == 'pending') {
 			return $moderationMessage;
-		} else if (!pb_user_can_edit($post_id, $current_user)) {
+		} else if (!pb_user_can_edit($post_id, $current_user)) { // Ensure pb_user_can_edit is available or use appropriate logic
 			return $editMessage;
 		}
 
@@ -360,16 +360,30 @@ function imc_show_issue_message($post_id, $current_user){
  */
 
 function imc_user_can_edit($post_id, $current_user) {
+	// This function seems more restrictive than pb_user_can_edit.
+	// pb_user_can_edit allows editing in the first TWO statuses,
+	// while this one allows editing only in the very FIRST status.
+	// For the participatory budgeting frontend, pb_user_can_edit is likely more appropriate.
+	// This function's usage should be reviewed. If it's specific to a different
+	// admin-side or backend logic, its name or comments should clarify that.
+	// If it's redundant with pb_user_can_edit for all practical purposes in the plugin,
+	// it could be a candidate for removal after thorough checking.
 
 	$status_terms = get_terms( 'imcstatus' , array( 'hide_empty' => 0 , 'orderby' => 'id', 'order' => 'ASC') );
+	if (empty($status_terms)) {
+		return false; // No statuses defined
+	}
 	$first_status = $status_terms[0]->term_id;
 
 	// Issue is not current user's
 	$my_issue = get_post($post_id);
-	$author_id = intval($my_issue ->post_author, 10); // Author's id of current #post
+	if (!$my_issue) {
+		return false; // Post not found
+	}
+	$author_id = intval($my_issue->post_author, 10); // Author's id of current #post
 
 	if($author_id == $current_user) {
-		return getCurrentImcStatusID($post_id) == $first_status ? true : false;
+		return getCurrentImcStatusID($post_id) == $first_status;
 	}
 
 	return false;

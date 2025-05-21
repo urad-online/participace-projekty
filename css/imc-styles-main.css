@@ -168,21 +168,25 @@ a.imc-LinkStyle:active {
 }
 
 .imc-CardLayoutStyle {
-    padding: 14px;
+    padding: 18px; /* Increased padding */
     background-color:rgb(255,255,255);
-    border-radius: 1px;
-    box-shadow:0 2px 2px rgba(0,0,0,0.23);
-    margin-bottom: 16px;
+    border-radius: 4px; /* Slightly more rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.05); /* Softer, more modern shadow */
+    margin-bottom: 20px; /* Increased margin */
 }
 
 .imc-ListLayoutStyle {
-    padding: 14px;
+    padding: 18px; /* Increased padding */
     background-color:rgb(255,255,255);
+    border-bottom: 1px solid #eee; /* Lighter border for list items */
+}
+
+.imc-ListLayoutStyle:last-child {
+    border-bottom: none; /* Remove border for the last item */
 }
 
 
 .imc-ListItemMainInfoStyle {
-    /*height: 88px;*/
     width: auto;
 }
 
@@ -581,52 +585,63 @@ a.imc-BlockLevelLinkStyle:focus {
 }
 
 .imc-OverviewTileStyle {
-    height: 426px;
-    padding: 0;
-    margin: 14px;
-
+    /* height: 426px; Removed fixed height for flexibility */
+    padding: 0; /* Padding will be handled by imc-CardLayoutStyle inside */
+    margin: 16px; /* Consistent margin */
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column;
+    background-color: #fff; /* Ensure background for shadow visibility */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease-in-out;
 }
+
+.imc-OverviewTileStyle:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+}
+
 
 @media only screen and (min-width: 1140px) {
     .imc-OverviewTileStyle:nth-child(odd) {
         float:left;
-        margin-left: 14px;
-        margin-right: 7px;
+        margin-left: 16px; /* Adjusted for new margin */
+        margin-right: 8px;
     }
 
     .imc-OverviewTileStyle:nth-child(even) {
         float:right;
-        margin-left: 7px;
-        margin-right: 14px;
+        margin-left: 8px;
+        margin-right: 16px; /* Adjusted for new margin */
     }
 
     .imc-OverviewTileStyle {
-        width: calc(50% - 1.4em);
+        width: calc(50% - 24px); /* Adjusted width calculation based on new margins (16+8)/2 = 12px per element effectively for spacing */
         max-width: none;
-        margin-top: 6px;
+        margin-top: 8px; /* Adjusted */
     }
 }
 
 .imc-OverviewFilteringBarStyle {
     width: 100%;
     position: relative;
-
+    margin-bottom: 20px; /* Added margin */
 }
 
 .imc-OverviewTileImageStyle {
-    min-height: 260px;
-    min-width: 100%;
-    max-height: 260px;
+    min-height: 220px; /* Slightly reduced height */
+    max-height: 220px;
     text-align: center;
     overflow: hidden;
     position: relative;
-    border-bottom: 1px solid rgba(0,0,0,0.12);
+    border-bottom: 1px solid #eee; /* Lighter border */
+    border-top-left-radius: 4px; /* Rounded corners for image container */
+    border-top-right-radius: 4px;
 }
 
 
 .imc-OverviewTileImageStyle img.wp-post-image {
     position: absolute;
-    min-height: 260px;
+    min-height: 100%; /* Ensure image covers the area */
     min-width: 100%;
     left: 50%;
     top: 50%;
@@ -636,21 +651,24 @@ a.imc-BlockLevelLinkStyle:focus {
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    object-fit: cover; /* Ensure image covers, might crop */
 }
 
 
 .imc-OverviewListImageStyle {
-    min-height: 90px;
-    min-width: 100%;
+    min-height: 80px; /* Adjusted */
+    max-height: 100px;
+    width: 100px; /* Give a fixed width for list view images */
     text-align: center;
     overflow: hidden;
     position: relative;
+    border-radius: 3px; /* Rounded corners for list images */
 }
 
 
 .imc-OverviewListImageStyle img.wp-post-image {
     position: absolute;
-    min-height: 130px;
+    min-height: 100%;
     min-width: 100%;
     left: 50%;
     top: 50%;
@@ -660,22 +678,22 @@ a.imc-BlockLevelLinkStyle:focus {
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    object-fit: cover;
 }
 
 .imc-OverviewInfoBubbleImageStyle {
-    min-height: 200px;
-    min-width: 100%;
-    max-height: 180px;
+    min-height: 150px; /* Adjusted */
+    max-height: 150px;
     text-align: center;
     overflow: hidden;
     position: relative;
-    border: none;
-    margin-bottom: 4px;
+    border-radius: 3px;
+    margin-bottom: 8px; /* Added margin */
 }
 
 .imc-OverviewInfoBubbleImageStyle img.wp-post-image {
     position: absolute;
-    min-height: 180px;
+    min-height: 100%;
     min-width: 100%;
     left: 50%;
     top: 50%;
@@ -685,133 +703,151 @@ a.imc-BlockLevelLinkStyle:focus {
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    object-fit: cover;
 }
 
 .imc-OverviewTileEditButtonStyle {
-    height: 25px;
+    height: auto; /* Let icon size dictate */
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 10px; /* Adjusted spacing */
+    right: 10px;
     z-index: 9;
+    background-color: rgba(255,255,255,0.7); /* Slight background for better visibility */
+    border-radius: 50%;
+    padding: 4px;
 }
 
 .imc-OverviewListEditButtonStyle {
-    height: 25px;
+    height: auto;
     z-index: 9;
-
+    /* Styling for list edit button can be similar if needed */
 }
 
 .imc-OverviewGridMyIssueIconStyle {
     position: absolute;
-    top: 18px;
-    right: 12px;
+    top: 10px; /* Adjusted spacing */
+    right: 10px; /* Adjusted spacing */
     z-index: 9;
+    /* Similar styling to edit button if needed */
 }
 
 .imc-OverviewListMyIssueIconStyle {
-    padding-top: 12px;
+    padding-top: 8px; /* Adjusted */
 }
 
 .imc-OverviewGridNoPhotoWrapperStyle {
-    height: 260px;
+    height: 220px; /* Match image style */
     width: 100%;
     margin: 0 auto;
-    display: inline-block;
-    vertical-align:middle;
+    display: flex; /* Use flex for centering */
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0; /* Placeholder background */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .imc-OverviewListNoPhotoWrapperStyle {
-    max-height: 160px;
-    max-width: 160px;
+    max-height: 100px; /* Match image style */
+    max-width: 100px;
     height: 100%;
     width: 100%;
     margin: 0 auto;
-    vertical-align:middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border-radius: 3px;
 }
 
 .imc-OverviewTileIdStyle {
     font-family: 'Roboto Slab', serif;
-    font-size: 14px;
+    font-size: 12px; /* Slightly smaller */
     font-weight: 600;
-    background: rgba(0,0,0,.54);
+    background: rgba(0,0,0,.6); /* Darker for better contrast */
     color: white;
-    padding: 4px 8px 4px 8px;
+    padding: 3px 7px; /* Adjusted padding */
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 5px; /* Adjusted spacing */
+    left: 5px;
+    border-radius: 3px;
 }
 
 .imc-OverviewTileVotesStyle {
     font-family: 'Roboto Slab', serif;
-    font-size: 14px;
+    font-size: 12px; /* Slightly smaller */
     font-weight: 700;
-    background: rgba(0,0,0,0.54);
+    background: rgba(0,0,0,.6); /* Darker for better contrast */
     color: white;
-    padding: 4px 8px 4px 8px;
+    padding: 3px 7px; /* Adjusted padding */
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 5px; /* Adjusted spacing */
+    right: 5px;
+    border-radius: 3px;
 }
 
 
 .imc-OverviewTileDetailsStyle {
-    padding: 14px;
-
+    padding: 16px; /* Consistent padding */
+    flex-grow: 1; /* Allow this section to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .imc-OverviewTileIdStyle i,
 .imc-OverviewTileVotesStyle i {
-    vertical-align: -3px;
-    margin-right: 3px;
-    margin-left: 3px;
+    vertical-align: -2px; /* Fine-tune alignment */
+    margin-right: 4px; /* Spacing */
+    margin-left: 0;
 }
 
 .imc-OverviewTileTitleStyle {
-    white-space: nowrap;
-    display: inline-block;
+    white-space: normal; /* Allow wrapping */
+    display: block; /* Changed from inline-block */
     font-weight: 500;
-    font-size: 18px;
-    line-height: 120%;
-    margin-bottom: 6px;
+    font-size: 1.1em; /* Slightly larger */
+    line-height: 1.3; /* Improved line height */
+    margin-bottom: 8px; /* Increased margin */
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 100%;
+    /* max-height: 2.6em; Removed to allow wrapping, control with line-clamp if needed */
+    /* -webkit-line-clamp: 2; Requires display: -webkit-box; and -webkit-box-orient: vertical; */
 }
 
 .imc-OverviewListTitleStyle {
-    white-space: nowrap;
-    display: inline-block;
+    white-space: normal; /* Allow wrapping */
+    display: block;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 120%;
-    margin: 0 auto;
+    font-size: 1.1em;
+    line-height: 1.3;
+    margin: 0 0 5px 0; /* Added bottom margin */
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 100%;
+    /* max-height: 2.6em; */
 }
 
 .imc-OverviewTileSectionStyle {
     width: 100%;
-    display:inline-block;
+    display:block; /* Changed from inline-block */
     margin: 0 auto;
+    margin-top: auto; /* Push to bottom if tile has variable height */
 }
 
 .imc-OverviewCatNameStyle {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: #212121;
-    color: rgba(0,0,0,0.87);
-    font-size: 14px;
-    line-height: 27px;
+    color: #555; /* Slightly lighter */
+    font-size: 0.9em; /* Adjusted size */
+    line-height: 1.5; /* Improved line height */
 }
 
 .imc-OverviewListCatNameStyle {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: #212121;
-    font-size: 14px;
-    color: rgba(0,0,0,0.87);
-    padding: 2px 0 0 0;
+    color: #555;
+    font-size: 0.9em;
+    padding: 2px 0 4px 0; /* Adjusted padding */
 }
 
 .imc-OverviewGridCatNameStyle {
@@ -820,15 +856,14 @@ a.imc-BlockLevelLinkStyle:focus {
     text-overflow: ellipsis;
     display:inline-block;
     width: auto;
-    max-width: 85%;
-    max-width: calc(100% - 4em);
+    max-width: calc(100% - 30px); /* Ensure space for icon */
 }
 
 .imc-OverviewListTextNoWrapStyle {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    display:inline-block;
+    display:block; /* Changed for better control */
     width: 100%;
 }
 
@@ -836,47 +871,49 @@ a.imc-BlockLevelLinkStyle:focus {
     font-family: 'Roboto', sans-serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 14px;
-    color: #757575;
-    color: rgba(0,0,0,0.54);
-    line-height: 120%;
+    font-size: 0.9em; /* Adjusted size */
+    color: #666; /* Slightly lighter */
+    line-height: 1.4; /* Improved line height */
+    margin-top: 4px; /* Added margin */
 }
 
 .imc-OverviewGridStepCircleStyle {
-    width: 20px;
-    height: 20px;
-    margin: 2px;
-    background-color: #eeeeee;
-    border-bottom: 1px solid #888888;
+    width: 18px; /* Adjusted size */
+    height: 18px;
+    margin: 1px; /* Adjusted margin */
+    background-color: #f0f0f0; /* Lighter placeholder */
+    border: 1px solid #ddd; /* Lighter border */
+    box-shadow: none; /* Removed bottom border for cleaner look */
 }
 
 .imc-OverviewListStepCircleStyle {
-    width: 16px;
-    height: 16px;
-    margin: 2px;
-    background-color: #eeeeee;
-    border-bottom: 1px solid #888888;
-    vertical-align: -4px;
+    width: 14px; /* Adjusted size */
+    height: 14px;
+    margin: 1px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    vertical-align: -3px; /* Adjusted alignment */
 }
 
 .imc-OverviewGridStepLabelStyle {
     font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 120%;
-    padding: 0 4px 0 4px;
+    font-weight: 600; /* Slightly less bold */
+    font-size: 0.8em; /* Adjusted size */
+    line-height: 1.4;
+    padding: 0 5px; /* Adjusted padding */
 }
 
 .imc-OverviewListStepLabelStyle {
     font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 120%;
-    padding: 0 17px 0 0;
+    font-weight: 600;
+    font-size: 0.75em; /* Adjusted size */
+    line-height: 1.4;
+    padding: 0 10px 0 0; /* Adjusted padding */
 }
 
 .imc-OverviewHeaderNavStyle {
-    height: 60px;
+    height: auto; /* Allow content to define height */
+    padding: 8px 0; /* Add some padding */
 }
 
 .imc-OverviewNavUlStyle {
@@ -887,81 +924,84 @@ a.imc-BlockLevelLinkStyle:focus {
 }
 
 .imc-OverviewNavUlStyle:first-child {
-    margin-left: 8px;
+    margin-left: 0; /* Remove specific margin */
 }
 
 .imc-OverviewNavUlStyle li {
-    height: 60px;
-    margin: 0 0 0 5px;
-    display: inline-block;
+    height: auto; /* Adjust to content */
+    margin: 0 4px; /* Consistent margin */
+    display: inline-flex; /* Use flex for alignment */
+    align-items: center;
 }
 
 .imc-OverviewNavUlStyle li a, .cs-select {
-    display: block;
-    float: left;
-    height: 60px;
+    display: inline-flex; /* Align items inside link/select wrapper */
+    align-items: center;
+    /* float: left; Removed float */
+    height: auto; /* Adjust to content */
+    padding: 8px 12px; /* Added padding */
 }
 
-.imc-OverviewNavUlStyle li a {
+/* .imc-OverviewNavUlStyle li a {
     padding: 0 8px 0 8px;
     margin: 0 4px 0 4px;
-}
+} */ /* Replaced by padding on <a> itself */
 
 .imc-AdminMsgsStyle {
-    -webkit-transform: translateZ(0);
+    /* -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
-    transform: translateZ(0);
+    transform: translateZ(0); */ /* Removed for potentially crisper rendering on some systems */
     cursor: pointer;
-
 }
 
 .imc-AdminMsgsTooltipStyle {
-    background: #181512;
+    background: #333; /* Darker background */
     bottom: 100%;
     color: #fff;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduced margin */
     opacity: 0;
-    padding: 20px;
+    padding: 10px 15px; /* Adjusted padding */
     pointer-events: none;
-    -webkit-transform: translateY(10px);
-    -ms-transform: translateY(10px);
-    transform: translateY(10px);
-    transition: all .25s ease-out;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-    border-radius: 3px;
-    text-align: center;
+    -webkit-transform: translateY(5px); /* Reduced transform */
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
+    transition: all .2s ease-out; /* Faster transition */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); /* Modern shadow */
+    border-radius: 4px; /* Consistent rounding */
+    text-align: left; /* More standard for tooltips */
     font-family: 'Roboto', sans-serif;
-    font-style: italic;
+    font-style: normal; /* Not italic by default */
     font-weight: 400;
-    font-size: 14px;
+    font-size: 0.85em; /* Adjusted size */
+    line-height: 1.4;
 }
 
 .imc-AdminMsgsGridTooltipStyle {
     display: block;
-    right: -5px;
+    right: 0; /* Align to edge */
     position: absolute;
-    max-width: 200px;
+    max-width: 220px; /* Slightly wider */
 }
 
-.imc-AdminMsgsGridTooltipStyle :before {
-    bottom: -20px;
+.imc-AdminMsgsGridTooltipStyle:before { /* Arrow base */
+    bottom: -10px; /* Adjusted for new margin-bottom */
     content: " ";
     display: block;
-    height: 20px;
+    height: 10px; /* Reduced height */
     left: 0;
     position: absolute;
     width: 100%;
 }
 
-.imc-AdminMsgsGridTooltipStyle :after {
-    border-left: solid transparent 10px;
-    border-right: solid transparent 10px;
-    border-top: solid #181512 10px;
-    bottom: -10px;
-    right: 5px;
+.imc-AdminMsgsGridTooltipStyle:after { /* Arrow pointer */
+    border-left: solid transparent 8px; /* Adjusted size */
+    border-right: solid transparent 8px;
+    border-top: solid #333 8px; /* Match new background */
+    bottom: -8px; /* Adjusted position */
+    right: 10px; /* Position arrow */
     content: " ";
     height: 0;
-    margin-left: -13px;
+    margin-left: -8px;
     position: absolute;
     width: 0;
 }
@@ -969,34 +1009,23 @@ a.imc-BlockLevelLinkStyle:focus {
 
 .imc-AdminMsgsListTooltipStyle {
     display: block;
-    left: 50px;
-    bottom: -25px;
+    left: auto; /* Let it be positioned by parent */
+    right: 0; /* Example: align to the right of the icon */
+    bottom: 100%; /* Position above the icon */
+    margin-bottom: 5px; /* Space between icon and tooltip */
     position: absolute;
-    max-height: 80px;
-    min-width: 400px;
+    min-width: 250px; /* Adjusted min-width */
+    max-width: 300px; /* Added max-width */
 }
 
-.imc-AdminMsgsListTooltipStyle :before {
-    bottom: -20px;
-    content: " ";
-    display: block;
-    height: 20px;
-    left: 0;
-    position: absolute;
-    width: 100%;
+.imc-AdminMsgsListTooltipStyle:before {
+    /* Similar adjustments as GridTooltip if arrow is desired */
+    display:none; /* Removing arrow for list view for simplicity, can be added back */
 }
 
-.imc-AdminMsgsListTooltipStyle :after {
-    border-left: solid transparent 10px;
-    border-right: solid transparent 10px;
-    border-top: solid #181512 10px;
-    bottom: -10px;
-    right: 5px;
-    content: " ";
-    height: 0;
-    margin-left: -13px;
-    position: absolute;
-    width: 0;
+.imc-AdminMsgsListTooltipStyle:after {
+   /* Similar adjustments as GridTooltip if arrow is desired */
+   display:none;
 }
 
 
@@ -1008,7 +1037,7 @@ a.imc-BlockLevelLinkStyle:focus {
     transform: translateY(0px);
 }
 
-/* IE can just show/hide with no transition */
+/* IE can just show/hide with no transition - Kept for compatibility */
 .lte8 .imc-AdminMsgsStyle .imc-AdminMsgsTooltipStyle {
     display: none;
 }
@@ -1019,17 +1048,20 @@ a.imc-BlockLevelLinkStyle:focus {
 
 .imc-MapMarkerWrapStyle {
     position: absolute;
-    margin-top: -44px;
-    margin-left: -20px;
+    margin-top: -40px; /* Adjusted for new marker size potentially */
+    margin-left: -18px; /* Adjusted for new marker size */
     cursor: pointer;
 }
 
 .imc-MapMarkerBaseStyle {
-    width:38px;
-    height: 38px;
+    width:36px; /* Slightly smaller */
+    height: 36px;
     position: relative;
-    border-radius: 4px;
-    box-shadow:0 2px 2px rgba(0,0,0,0.23);
+    border-radius: 50%; /* Circular marker base */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Softer shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .imc-MapMarkerBaseStyle:after, .imc-MapMarkerBaseStyle:before {
@@ -1043,73 +1075,77 @@ a.imc-BlockLevelLinkStyle:focus {
     pointer-events: none;
 }
 
-.imc-MapMarkerBaseOwnedStyle:after {
+.imc-MapMarkerBaseOwnedStyle:after { /* Arrow color for owned marker */
     border-color: rgba(136, 183, 213, 0);
-    border-top-color: #1ABC9C;
-    border-width: 6px;
-    margin-left: -6px;
+    border-top-color: #1ABC9C; /* Theme color */
+    border-width: 7px; /* Adjusted arrow size */
+    margin-left: -7px;
 }
 
-.imc-MapMarkerBaseDefaultStyle:after {
+.imc-MapMarkerBaseDefaultStyle:after { /* Arrow color for default marker */
     border-color: rgba(136, 183, 213, 0);
-    border-top-color: white;
-    border-width: 6px;
-    margin-left: -6px;
+    border-top-color: white; /* Default color */
+    border-width: 7px;
+    margin-left: -7px;
 }
 
-.imc-MapMarkerBaseStyle:before {
+.imc-MapMarkerBaseStyle:before { /* Arrow shadow */
     border-color: rgba(194, 225, 245, 0);
-    border-top-color: rgba(0, 0, 0, 0.16);
-    border-width: 8px;
+    border-top-color: rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    border-width: 8px; /* Shadow slightly larger than arrow */
     margin-left: -8px;
 }
 
-.imc-MarkerCatStyle {
-    width: 24px;
-    vertical-align: -18px;
+.imc-MarkerCatStyle { /* Icon inside marker */
+    width: 20px; /* Adjusted icon size */
+    height: 20px;
+    /* vertical-align: -18px; Removed, flex handles alignment */
 }
 
 .imc-NavSelectedStyle {
-    background: #1ABC9C;
+    background: #1ABC9C; /* Keep theme color */
+    border-radius: 3px; /* Added rounding */
 }
 
-.imc-NavSelectedStyle i {
-    color: white;
+.imc-NavSelectedStyle i, .imc-NavSelectedStyle span { /* Ensure text also changes color */
+    color: white !important;
 }
 
 .imc-InfoWindowStyle {
     overflow: hidden;
-    box-shadow:0 2px 2px rgba(0,0,0,0.23);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Softer shadow */
+    border-radius: 4px; /* Rounded corners for infowindow */
     margin: 0 auto;
     padding: 0;
-    min-height: 100%;
+    min-height: auto; /* Let content define height */
 }
 
 .imc-InfoWindowInnerStyle {
-    height: 100%;
+    height: auto;
+    padding: 10px; /* Added padding */
 }
 
 .imc-InfoWindowTitleStyle {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1.0em; /* Relative size */
+    margin-bottom: 5px; /* Spacing */
 }
 
 .imc-EditCatBlockStyle {
-    padding-top: 12px;
-    line-height: 27px;
+    padding-top: 8px; /* Reduced padding */
+    line-height: 1.5; /* Improved line height */
 }
 
 .imc-EditCatNameStyle {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: #212121;
-    color: rgba(0,0,0,0.87);
-    font-size: 16px;
+    color: #333; /* Darker for readability */
+    font-size: 1.0em; /* Relative size */
 }
 
 .imc-CommentsFormWrapperStyle .comment-respond {
     background-color: transparent;
-    padding: 20px 0;
+    padding: 15px 0; /* Adjusted padding */
 }
 
 .imc-CommentsFormWrapperStyle .comment-respond .comment-reply-title {
@@ -1118,92 +1154,95 @@ a.imc-BlockLevelLinkStyle:focus {
 
 .imc-CommentsFormWrapperStyle .comment-count {
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 0.9em; /* Adjusted size */
     font-weight: 600;
-    color: #757575;
-    color: rgba(0,0,0,0.54);
+    color: #555; /* Slightly lighter */
     float: left;
-    margin: 0 0 12px;
+    margin: 0 0 10px; /* Adjusted margin */
 }
 
 .imc-CommentsFormWrapperStyle .logged-in-as {
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 0.9em;
     font-weight: 600;
-    color: #757575;
-    color: rgba(0,0,0,0.54);
+    color: #555;
     float: right;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
 }
 
 .imc-CommentsFormWrapperStyle .comment-form-comment {
-    margin: 0 0 12px;
+    margin: 0 0 10px;
 }
 
 .imc-CommentsCounterStyle {
-    padding-top: 12px;
+    padding-top: 10px;
 }
 
 
 .imc-CommentIconStyle {
-    height: 100%;
-    width: 100%;
+    /* height: 100%; Removed fixed percentage height */
+    /* width: 100%; Removed fixed percentage width */
+    max-width: 40px; /* Set max size */
+    max-height: 40px;
     border: none;
-    border-radius: 2px;
-
+    border-radius: 50%; /* Circular icons */
 }
 
 .imc-CommentAuthorStyle {
     font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-    color: #212121;
-    color: rgba(0,0,0,0.87);
-    font-size: 14px;
+    font-weight: 500; /* Standard weight */
+    color: #333;
+    font-size: 0.95em; /* Adjusted */
 }
 
 .imc-CommentMetaStyle {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: #757575;
-    color: rgba(0,0,0,0.54);
-    font-size: 14px;
+    color: #777; /* Lighter for meta */
+    font-size: 0.8em; /* Smaller */
 }
 
 .imc-CommentDetailsStyle {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: #212121;
-    color: rgba(0,0,0,0.87);
-    font-size: 14px;
-    line-height: 160%;
+    color: #444; /* Slightly lighter than author */
+    font-size: 0.9em;
+    line-height: 1.6; /* Improved line height */
     word-wrap: break-word;
 }
 
 .imc-CommentStyle {
-    padding:  12px 12px 0 12px;
+    padding:  10px 0; /* Adjusted padding, removed side padding if full width */
+    border-bottom: 1px solid #f0f0f0; /* Subtle separator */
+}
+.imc-CommentStyle:last-child {
+    border-bottom: none;
 }
 
+
 .imc-CommentPending {
-    background-color: rgba(0,0,0,0.06);
-    opacity: 0.6;
+    background-color: #fff9e6; /* Light yellow for pending */
+    opacity: 0.8; /* Slight opacity */
+    padding: 10px !important; /* Ensure padding is visible */
+    border-radius: 3px;
 }
 
 .imc-CommentPendingLabelStyle {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 0.85em;
     font-style: italic;
-
+    color: #c09853; /* Amber color for pending text */
 }
 
 /* Reusable components */
 
 .imc-AlignIconToButton {
-    vertical-align: -6px;
+    vertical-align: -5px; /* Adjusted for better alignment */
 }
 
 .imc-Separator {
-    margin-bottom: 40px;
+    margin-bottom: 30px; /* Slightly reduced */
 }
 
 .imc-circle {
@@ -1216,44 +1255,41 @@ a.imc-BlockLevelLinkStyle:focus {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-style: italic;
-    font-size: 24px;
+    font-size: 1.2em; /* Adjusted size */
     padding:0;
-    margin: 12px 0 12px 0;
-    line-height: 120%;
+    margin: 15px 0; /* Adjusted margin */
+    line-height: 1.4; /* Improved line height */
 }
 
 .imc-EmptyStateIconStyle {
-    color: #E0E0E0;
-    color: rgba(0,0,0,0.12);
+    color: #ddd; /* Lighter hint color */
+    font-size: 4em; /* Larger icon for empty state */
 }
 
 .imc-GiveWhitespaceStyle {
-    padding: 80px 0 80px 0;
+    padding: 60px 20px; /* Adjusted padding, ensure side padding for smaller screens */
 }
 
 .imc-HorizontalSeparator {
     background: 0;
     border: 0;
-    border-bottom: 1px solid #E0E0E0;
-    border-bottom: 1px solid rgba(0,0,0,0.12);
+    border-bottom: 1px solid #eee; /* Lighter separator */
     padding: 0;
-    margin: 0 0 4px 0;
+    margin: 0 0 8px 0; /* Increased bottom margin */
 }
 
 .imc-HorizontalWhitespaceSeparator {
     background: 0;
     border: 0;
-    border-bottom: 1px solid #E0E0E0;
-    border-bottom: 1px solid rgba(0,0,0,0.12);
-    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px; /* Increased margin */
     margin-top: 0;
 }
 
 .imc-ListHorizontalSeparator {
     background: 0;
     border: 0;
-    border-bottom: 1px solid #C4C4C4;
-    border-bottom: 1px solid rgba(0,0,0,0.23);
+    border-bottom: 1px solid #ddd; /* Lighter */
     margin: 0 auto;
 }
 
@@ -1261,15 +1297,15 @@ a.imc-BlockLevelLinkStyle:focus {
     display: block;
     position: relative;
     width: 100%;
-    padding-top: 12px;
-    padding-bottom: 24px;
+    padding: 20px 0; /* Increased padding */
 }
 
 .img-PaginationLabelStyle {
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    font-size: 16px;
-    line-height: 120%;
+    font-size: 1.0em; /* Adjusted size */
+    line-height: 1.4;
+    margin-bottom: 10px; /* Added margin */
 }
 
 nav.imc-PaginationStyle {
@@ -1281,7 +1317,6 @@ nav.imc-PaginationStyle {
 }
 
 nav.imc-PaginationStyle ul {
-    /*list-style-type: none;*/
     list-style: none;
     margin: 0 auto;
     padding: 0;
@@ -1291,39 +1326,32 @@ nav.imc-PaginationStyle ul {
 
 nav.imc-PaginationStyle ul li {
     text-align: center;
-    float: left;
+    float: left; /* Keep float for inline-block behavior */
     display: inline;
     background-color:rgb(255,255,255);
     width: auto;
-    height: 32px;
-    border: 1px solid #C4C4C4;
-    border: 1px solid rgba(0,0,0,0.3);
-    border-radius: 2px;
-    margin: 0 4px 0 4px;
+    height: 36px; /* Increased height */
+    border: 1px solid #ccc; /* Slightly darker border for better definition */
+    border-radius: 3px; /* Rounded corners */
+    margin: 0 3px; /* Adjusted margin */
     font-family:'Roboto', sans-serif;
-    font-size: 18px;
-    line-height: 32px;
+    font-size: 1.0em; /* Adjusted size */
+    line-height: 34px; /* Adjusted for new height */
     overflow:hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 nav.imc-PaginationStyle ul li span, nav.imc-PaginationStyle ul li a {
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    padding: 0 10px 0 10px;
-
+    padding: 0 12px; /* Increased padding */
 }
-
-/*nav.imc-PaginationStyle ul li span {
-    color: #757575;
-    color: rgba(0,0,0,0.54);
-}*/
 
 nav.imc-PaginationStyle ul li .current {
     color: white;
-    background: #D6D6D6;
-    background: rgba(0,0,0,0.16);
-    font-size: 18px;
+    background: #1ABC9C; /* Theme color for current */
+    border-color: #1ABC9C; /* Match background */
     font-family: 'Roboto', sans-serif;
 }
 
@@ -1336,24 +1364,23 @@ nav.imc-PaginationStyle ul li a, nav.imc-PaginationStyle ul li a:link, nav.imc-P
 }
 
 nav.imc-PaginationStyle ul li a:hover, nav.imc-PaginationStyle ul li a.prev:hover, nav.imc-PaginationStyle ul li a.next:hover {
-    background-color: #1ABC9C;
+    background-color: #16a085; /* Darker shade on hover */
     color: white;
     outline: none;
     text-decoration: none;
-    border-radius:0 ;
+    border-color: #16a085;
 }
 
 nav.imc-PaginationStyle ul li a i {
-    vertical-align: -5px;
+    vertical-align: -4px; /* Adjusted alignment */
 }
 
 .imc-OverviewFilteringLabelStyle {
     font-family: 'Roboto', sans-serif;
-    font-size:14px;
+    font-size:0.9em; /* Adjusted */
     font-style:italic;
-    line-height:120%;
-    color: #757575;
-    color:rgba(0,0,0,0.54);
+    line-height:1.4;
+    color: #666; /* Slightly lighter */
 }
 
 label.imc-OverviewFilteringPanelLabelStyle {
@@ -1361,12 +1388,12 @@ label.imc-OverviewFilteringPanelLabelStyle {
 }
 
 .imc-OverviewFilteringPanelLabelStyle {
-    padding: 0 16px 0 0;
+    padding: 0 16px; /* Adjusted padding */
 }
 
 .imc-OverviewFilteringPanelLabelStyle span {
     font-family: 'Roboto', sans-serif;
-    line-height: 60px;
+    line-height: 50px; /* Reduced height */
     color: #1ABC9C;
     font-weight: 500;
     padding-left: 16px;
@@ -1377,49 +1404,53 @@ label.imc-OverviewFilteringPanelLabelStyle {
 }
 
 .imc-OverviewFilteringPanelLabelStyle i {
-    line-height: 60px;
-    color: #C4C4C4;
-    color: rgba(0,0,0,0.23);
+    line-height: 50px; /* Reduced height */
+    color: #bbb; /* Lighter icon */
 }
 
 
 .imc-DrawerContentsStyle {
-    padding: 24px;
+    padding: 20px; /* Adjusted padding */
 }
 
 .imc-DrawerButtonRowStyle {
-    padding-bottom: 12px;
+    padding-bottom: 10px; /* Adjusted padding */
 }
 
 .imc-DrawerButtonRowStyle button {
-    margin-right: 24px;
+    margin-right: 15px; /* Adjusted margin */
 }
 
 /** TOOLS **/
 
 .imc-TextOverflowEllipsis {
     text-overflow: ellipsis;
+    white-space: nowrap; /* Needed for ellipsis to work */
+    overflow: hidden;
 }
+
 
 .imc-FlexParent {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: center; /* Or other as needed */
+    align-items: flex-start; /* Default alignment */
 }
 
 .imc-FlexChild {
     flex: 1;
-
+    /* Add margin/padding as needed for spacing between children */
 }
 
 .imc-JustifyText {
     text-align: justify;
-    text-justify: auto;
+    text-justify: inter-word; /* Better justification */
 }
 
-.imc-HideOverflowEllipsis {
+.imc-HideOverflowEllipsis { /* This class name seems redundant with .imc-TextOverflowEllipsis if used for same purpose */
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .imc-OverflowHidden {
@@ -1441,10 +1472,10 @@ label.imc-OverviewFilteringPanelLabelStyle {
 
 .imc-DisplayInlineBlock {
     display: inline-block;
-    padding-bottom:  6px;
+    padding-bottom:  8px; /* Increased padding */
 }
 
-/* Hide sections */
+/* Hide sections - Kept as is, review if specific changes needed */
 @media (max-width: 400px) {
     .imc-hidden-xs {
         display: none !important;
