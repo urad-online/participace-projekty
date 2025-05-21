@@ -132,6 +132,55 @@ add_filter( 'manage_edit-imc_issues_sortable_columns', 'imcplus_sortablecol_byca
 add_filter( 'manage_edit-imc_issues_sortable_columns', 'imcplus_sortablecol_bystatus' );
 add_filter( 'manage_edit-imc_issues_sortable_columns', 'imcplus_sortablecol_byauthor' );
 
+// Save term names to meta fields for sorting
+add_action( 'save_post_imc_issues', 'imcplus_save_taxonomy_sort_keys', 10, 2 );
+
+function imcplus_save_taxonomy_sort_keys( $post_id, $post ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    // Save imccategory sort key
+    $terms_category = wp_get_post_terms( $post_id, 'imccategory', array( 'fields' => 'names' ) );
+    if ( ! empty( $terms_category ) && ! is_wp_error( $terms_category ) ) {
+        update_post_meta( $post_id, 'imccategory_sort_key', $terms_category[0] );
+    } else {
+        update_post_meta( $post_id, 'imccategory_sort_key', '' );
+    }
+
+    // Save imcstatus sort key
+    $terms_status = wp_get_post_terms( $post_id, 'imcstatus', array( 'fields' => 'names' ) );
+    if ( ! empty( $terms_status ) && ! is_wp_error( $terms_status ) ) {
+        update_post_meta( $post_id, 'imcstatus_sort_key', $terms_status[0] );
+    } else {
+        update_post_meta( $post_id, 'imcstatus_sort_key', '' );
+    }
+}
+
+// Modify query for custom taxonomy sorting
+add_action( 'pre_get_posts', 'imcplus_custom_sort_pre_get_posts' );
+
+function imcplus_custom_sort_pre_get_posts( $query ) {
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    if ( $query->get( 'post_type' ) === 'imc_issues' ) {
+        $orderby = $query->get( 'orderby' );
+
+        if ( $orderby === 'imccategory' ) {
+            $query->set( 'meta_key', 'imccategory_sort_key' );
+            $query->set( 'orderby', 'meta_value' );
+        } elseif ( $orderby === 'imcstatus' ) {
+            $query->set( 'meta_key', 'imcstatus_sort_key' );
+            $query->set( 'orderby', 'meta_value' );
+        }
+    }
+}
+
 
 /************************************************************************************************************************/
 
@@ -235,14 +284,14 @@ function imcplus_filtercol_byauthor_add(){
 			'show_option_all'   => __('Show All Authors' , 'participace-projekty'),
 			'orderby'           => 'display_name',
 			'order'             => 'ASC',
-			'name'              => 'aurthor_admin_filter',
+			'name'              => 'author_admin_filter',
 			'who'               => 'authors',
 			'include_selected'  => true
 		);
 		//determine if we have selected a user to be filtered by already
-		if(isset($_GET['aurthor_admin_filter'])){
+		if(isset($_GET['author_admin_filter'])){
 			//set the selected value to the value of the author
-			$user_args['selected'] = intval(sanitize_text_field($_GET['aurthor_admin_filter']), 10);
+			$user_args['selected'] = intval(sanitize_text_field($_GET['author_admin_filter']), 10);
 		}
 
 		//display the users as a drop down
@@ -261,10 +310,10 @@ function imcplus_filtercol_byauthor_impl($query){
 	//if we are currently on the edit screen of the post type listings
 	if($pagenow == 'edit.php' && $post_type == 'imc_issues'){
 
-		if(isset($_GET['aurthor_admin_filter'])){
+		if(isset($_GET['author_admin_filter'])){
 
 			//set the query variable for 'author' to the desired value
-			$author_id = sanitize_text_field($_GET['aurthor_admin_filter']);
+			$author_id = sanitize_text_field($_GET['author_admin_filter']);
 
 			//if the author is not 0 (meaning all)
 			if($author_id != 0){
